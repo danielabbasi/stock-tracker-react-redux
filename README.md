@@ -46,7 +46,7 @@ Application allows you to select a specific stock and see information pertaining
   - Have US Market Stock Exchange Stats (e.g NASDAQ, DJIA, S&P)
   - Have a favourites section with user's favourite stocks
 
-### Non-Functional styling Requirements
+### Non-Functional Requirements
 
 - Stock change in price must be:
   - Red if a decrease in price
