@@ -4,7 +4,7 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      response: [],
+      response: false,
       endpoint: "http://127.0.0.1:5000"
     };
   }
@@ -19,7 +19,7 @@ class App extends Component {
     console.log(response);
     return (
         <div >
-          {response}
+          <ul>{ Object.keys(response).map((key, index) => (<li key={index}>{response[key]}</li>)) }</ul>
         </div>
     );
   }

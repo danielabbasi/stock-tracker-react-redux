@@ -31,7 +31,8 @@ const getApiAndEmit = async socket => {
       const res = await axios.get(
         "https://sandbox.iexapis.com/stable/stock/AAPL/quote?token=Tpk_139c39f1edae43fc8e5ab12451d30f4c"
       ); 
-      socket.emit("FromAPI", JSON.stringify(res.data)); // Emitting a new message. It will be consumed by the client
+    //   console.log(res.data.symbol);
+      socket.emit("FromAPI", res.data); // Emitting a new message. It will be consumed by the client
     } catch (error) {
       console.error(`Error: ${error.code}`);
     }
