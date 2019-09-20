@@ -16,7 +16,9 @@ class App extends Component {
   }
   render() {
     const { response } = this.state;
-    console.log(response);
+    const properties = ["previousClose", "high", "low", "previousVolume", "marketCap", "open", "week52High", "week52Low", "avgTotalVolume"]
+    console.log(Object.keys(response));
+
     return (
         <div >
           <ul>{ Object.keys(response).map((key, index) => (<li key={index}>{response[key]}</li>)) }</ul>

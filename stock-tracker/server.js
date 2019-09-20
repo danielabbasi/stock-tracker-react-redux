@@ -29,13 +29,28 @@ server.listen(port, () => console.log(`Listening on port ${port}`));
 const getApiAndEmit = async socket => {
     try {
       const res = await axios.get(
-        "https://sandbox.iexapis.com/stable/stock/AAPL/quote?token=Tpk_139c39f1edae43fc8e5ab12451d30f4c"
+        "https://cloud.iexapis.com/stable/stock/AAPL/quote?token=sk_dd6836ca1e944b129d969b57482a7c64"
       ); 
-    //   console.log(res.data.symbol);
+      changeNullValues(res.data)
+        // console.log(res.data);
       socket.emit("FromAPI", res.data); // Emitting a new message. It will be consumed by the client
     } catch (error) {
       console.error(`Error: ${error.code}`);
     }
   };
+
+  const changeNullValues = (data) => {
+    Object.keys(data).forEach((key) => {
+        if(data[key] === null) {
+            data[key] = 'N/A'
+        }
+    })
+  } 
+
+//   Object.keys(res.data).forEach((key) => {
+//     if(res.data[key] === null) {
+//         res.data[key] = 'N/A'
+//     }
+// })
 
   
