@@ -17,11 +17,11 @@ class App extends Component {
   render() {
     const { response } = this.state;
     const properties = ["previousClose", "high", "low", "previousVolume", "marketCap", "open", "week52High", "week52Low", "avgTotalVolume"]
-    console.log(Object.keys(response));
+    console.log(response);
 
     return (
         <div >
-          <ul>{ Object.keys(response).map((key, index) => (<li key={index}>{response[key]}</li>)) }</ul>
+          <ul>{ Object.keys(response).map((key, index) => (<li key={index}>{key}: {response[key]}</li>)) }</ul>
         </div>
     );
   }

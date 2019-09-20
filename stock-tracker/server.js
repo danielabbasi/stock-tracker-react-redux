@@ -24,8 +24,6 @@ io.on("connection", socket => {
 
 server.listen(port, () => console.log(`Listening on port ${port}`));
 
-
-
 const getApiAndEmit = async socket => {
     try {
       const res = await axios.get(
@@ -43,6 +41,8 @@ const getApiAndEmit = async socket => {
     Object.keys(data).forEach((key) => {
         if(data[key] === null) {
             data[key] = 'N/A'
+        } else if (data[key] === true) {
+            data[key] = 'true'
         }
     })
   } 
