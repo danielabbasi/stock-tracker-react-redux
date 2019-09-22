@@ -5,24 +5,50 @@ class App extends Component {
     super();
     this.state = {
       response: false,
-      endpoint: "http://127.0.0.1:5000"
+      endpoint: "http://127.0.0.1:5000",
+      symbol: ""
     };
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
   componentDidMount() {
     const { endpoint } = this.state;
     const socket = socketIOClient(endpoint);
-    console.log(this.data)
     socket.on("FromAPI", data => this.setState({ response: data }));
   }
+
+  handleChange(event) {
+    this.setState({symbol: event.target.value});
+    console.log(this.state.symbol)
+  }
+
+  handleSubmit(event) {
+    // event.preventDefault();
+    const socket = socketIOClient(this.state.endpoint);
+    socket.emit("symbol", this.state.symbol)
+  }
+
   render() {
     const { response } = this.state;
     const properties = ["previousClose", "high", "low", "previousVolume", "marketCap", "open", "week52High", "week52Low", "avgTotalVolume"]
-    console.log(response);
 
     return (
-        <div >
-          <ul>{ Object.keys(response).map((key, index) => (<li key={index}>{key}: {response[key]}</li>)) }</ul>
-        </div>
+      <>
+      <div>
+        <form onSubmit={this.handleSubmit}>
+          <label>
+            Name:
+          <input type="text" value={this.state.symbol} onChange={this.handleChange} />
+          </label>
+          <input type="submit" value="Submit" />
+        </form>
+      </div>
+
+      <div>
+        <ul>{Object.keys(response).map((key, index) => (<li key={index}>{key}: {response[key]}</li>))}</ul>
+      </div>
+      </>
+
     );
   }
 }
