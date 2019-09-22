@@ -11,12 +11,15 @@ const server = http.createServer(app);
 const io = socketIo(server); 
 let companySymbol;
 let interval;
+
 io.on("connection", socket => {
   console.log("New client connected");
   if (interval) {
     clearInterval(interval);
   }
-  interval = setInterval(() => getApiAndEmit(socket), 1000);
+  if (companySymbol) {
+      interval = setInterval(() => getApiAndEmit(socket), 1000);
+  }
   socket.on("symbol", function(symbol) {
       console.log("hello")
       companySymbol = symbol;

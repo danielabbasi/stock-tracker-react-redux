@@ -14,12 +14,15 @@ class App extends Component {
   componentDidMount() {
     const { endpoint } = this.state;
     const socket = socketIOClient(endpoint);
+    console.log(this.state.symbol);
+
     socket.on("FromAPI", data => this.setState({ response: data }));
+
   }
 
   handleChange(event) {
-    this.setState({symbol: event.target.value});
-    console.log(this.state.symbol)
+    this.setState({ symbol: event.target.value });
+    // console.log(this.state.symbol)
   }
 
   handleSubmit(event) {
@@ -34,19 +37,19 @@ class App extends Component {
 
     return (
       <>
-      <div>
-        <form onSubmit={this.handleSubmit}>
-          <label>
-            Name:
+        <div>
+          <form onSubmit={this.handleSubmit}>
+            <label>
+              Name:
           <input type="text" value={this.state.symbol} onChange={this.handleChange} />
-          </label>
-          <input type="submit" value="Submit" />
-        </form>
-      </div>
+            </label>
+            <input type="submit" value="Submit" />
+          </form>
+        </div>
 
-      <div>
-        <ul>{Object.keys(response).map((key, index) => (<li key={index}>{key}: {response[key]}</li>))}</ul>
-      </div>
+        <div>
+          <ul>{Object.keys(response).map((key, index) => (<li key={index}>{key}: {response[key]}</li>))}</ul>
+        </div>
       </>
 
     );
