@@ -16,13 +16,12 @@ io.on("connection", socket => {
   if (interval) {
     clearInterval(interval);
   }
-  socket.on("symbol", function (symbol) {
+  socket.on("symbol", (symbol) => {
     companySymbol = symbol;
     console.log(companySymbol);
+    clearInterval(interval);
     interval = setInterval(() => getApiAndEmit(socket), 1000);
   })
-  // if (companySymbol) {
-  // }
   socket.on("disconnect", () => {
     console.log("Client disconnected");
   });
