@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 const SearchBar = ({addSymbol}) => {
-  const [symbol, setSymbol] = useState("");
+  let symbol;
   const handleSubmit = (e) => {
     e.preventDefault();
     addSymbol(symbol)
@@ -10,7 +10,7 @@ const SearchBar = ({addSymbol}) => {
     <form onSubmit={handleSubmit}>
       <label>
         Name:
-          <input type="text" value={symbol} onChange={(e) => setSymbol(e.target.value)} />
+          <input type="text" value={symbol} onChange={(e) => symbol = e.target.value} />
       </label>
       <input type="submit" value="Submit" />
     </form>
