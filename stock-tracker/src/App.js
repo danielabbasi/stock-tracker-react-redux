@@ -14,15 +14,12 @@ class App extends Component {
   componentDidMount() {
     const { endpoint } = this.state;
     const socket = socketIOClient(endpoint);
-    console.log(this.state.symbol);
-
     socket.on("FromAPI", data => this.setState({ response: data }));
 
   }
 
   handleChange(event) {
     this.setState({ symbol: event.target.value });
-    // console.log(this.state.symbol)
   }
 
   handleSubmit(event) {
