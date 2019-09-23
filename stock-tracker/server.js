@@ -16,13 +16,12 @@ io.on("connection", socket => {
   if (interval) {
     clearInterval(interval);
   }
-  socket.on("symbol", function (symbol) {
+  socket.on("symbol", (symbol) => {
     companySymbol = symbol;
     console.log(companySymbol);
-  })
-  if (companySymbol) {
+    clearInterval(interval);
     interval = setInterval(() => getApiAndEmit(socket), 1000);
-  }
+  })
   socket.on("disconnect", () => {
     console.log("Client disconnected");
   });
@@ -40,6 +39,7 @@ const getApiAndEmit = async socket => {
     )
     changeNullValues(res.data)
     stockData = {
+      companyName: res.data.companyName,
       previousClose: res.data.previousClose,
       high: res.data.high,
       low: res.data.low,
