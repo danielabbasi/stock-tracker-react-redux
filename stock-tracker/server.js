@@ -17,10 +17,11 @@ io.on("connection", socket => {
     clearInterval(interval);
   }
   socket.on("symbol", (symbol) => {
-    companySymbol = symbol;
-    console.log(companySymbol);
-    clearInterval(interval);
-    interval = setInterval(() => getApiAndEmit(socket), 1000);
+    if (symbol !== '') {
+      companySymbol = symbol;
+      clearInterval(interval);
+      interval = setInterval(() => getApiAndEmit(socket), 1000);
+    }
   })
   socket.on("disconnect", () => {
     console.log("Client disconnected");
@@ -55,7 +56,6 @@ const getApiAndEmit = async socket => {
       earningsPerShare: eps.data,
       ytdChange: res.data.ytdChange
     }
-
     socket.emit("FromAPI", stockData); // Emitting a new message. It will be consumed by the client
   } catch (error) {
     console.error(`Error: ${error}`);

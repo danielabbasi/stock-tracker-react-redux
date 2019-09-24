@@ -1,31 +1,32 @@
-import React, { useState, useEffect } from "react";
-import SearchBar from "./form";
+import React, { useEffect, useCallback } from "react";
+import SearchBar from "./SearchBar";
+import { Provider, useSelector, useDispatch } from 'react-redux';
+import { store, addResponseAction } from './redux';
 
 const io = require('socket.io-client')
 const socket = io('http://127.0.0.1:5000')
 
 function App() {
-  const [response, setResponse] = useState(false);
-  const [symbol, setSymbol] = useState("")
-
-  const addSymbol = (symbol) => {
-    setSymbol(symbol)
-    socket.emit("symbol", symbol)
-  }
+  const response = useSelector((state) => state.response)
+  const symbol = useSelector((state) => state.symbol)
+  const dispatch = useDispatch()
+  const addResponse = useCallback((response) => dispatch(addResponseAction(response)), [dispatch])
 
   useEffect(() => {
+    socket.emit("symbol", symbol)
     socket.on("FromAPI", data => {
-      setResponse(data)
+      addResponse(data)
     })
-    console.log(symbol);
-    console.log(response)
-  }, [symbol])
+  }, [addResponse, symbol])
+
   return (
     <>
-      <SearchBar addSymbol={addSymbol}/>
-      <div>
-        <ul>{Object.keys(response).map((key, index) => (<li key={index}>{key}: {response[key]}</li>))}</ul>
-      </div>
+      <Provider store={store}>
+        <SearchBar />
+        <div>
+          <ul>{Object.keys(response).map((key, index) => (<li key={index}>{key}: {response[key]}</li>))}</ul>
+        </div>
+      </Provider>
     </>
   );
 }
