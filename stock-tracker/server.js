@@ -16,9 +16,11 @@ io.on("connection", socket => {
   if (interval) {
     clearInterval(interval);
   }
+  // getCompaniesFromAPI(socket)
   socket.on("symbol", (symbol) => {
     if (symbol !== '') {
       companySymbol = symbol;
+      console.log(companySymbol)
       clearInterval(interval);
       interval = setInterval(() => getApiAndEmit(socket), 1000);
     }
@@ -29,6 +31,17 @@ io.on("connection", socket => {
 });
 
 server.listen(port, () => console.log(`Listening on port ${port}`));
+
+const getCompaniesFromAPI = async socket => {
+  try {
+    const res = await axios.get(
+      'https://api.iextrading.com/1.0/ref-data/symbols'
+    )
+    socket.emit("companies", res.data)
+  } catch (error) {
+    console.error(`Error: ${error}`);
+  }
+}
 
 const getApiAndEmit = async socket => {
   try {
