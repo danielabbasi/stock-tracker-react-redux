@@ -1,5 +1,6 @@
 import React, { useEffect, useCallback } from "react";
 import SearchBar from "./SearchBar";
+import KeyStats from "./keyStats";
 import { Provider, useSelector, useDispatch } from 'react-redux';
 import { store, addResponseAction, addCompaniesAction } from './redux';
 
@@ -33,9 +34,7 @@ function App() {
     <>
       <Provider store={store}>
         <SearchBar />
-        <div>
-          <ul>{Object.keys(response).map((key, index) => (<li key={index}>{key}: {response[key]}</li>))}</ul>
-        </div>
+        <KeyStats/>
       </Provider>
     </>
   );
