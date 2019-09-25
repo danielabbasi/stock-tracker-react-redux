@@ -53,6 +53,7 @@ const getApiAndEmit = async socket => {
     )
     changeNullValues(res.data)
     stockData = {
+      symbol: res.data.symbol,
       companyName: res.data.companyName,
       previousClose: res.data.previousClose,
       high: res.data.high,
