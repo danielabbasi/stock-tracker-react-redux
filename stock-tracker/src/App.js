@@ -1,5 +1,6 @@
 import React, { useEffect, useCallback } from "react";
 import SearchBar from "./SearchBar";
+import KeyStats from "./keyStats";
 import { Provider, useSelector, useDispatch } from 'react-redux';
 import { store, addResponseAction, addCompaniesAction } from './redux';
 
@@ -13,8 +14,6 @@ function App() {
   const dispatch = useDispatch()
   const addResponse = useCallback((response) => dispatch(addResponseAction(response)), [dispatch])
   const addCompanies = useCallback((companies) => dispatch(addCompaniesAction(companies)), [dispatch])
-
-
   
   useEffect(() => {
     if (companies === false) {
@@ -33,9 +32,7 @@ function App() {
     <>
       <Provider store={store}>
         <SearchBar />
-        <div>
-          <ul>{Object.keys(response).map((key, index) => (<li key={index}>{key}: {response[key]}</li>))}</ul>
-        </div>
+        <KeyStats/>
       </Provider>
     </>
   );
