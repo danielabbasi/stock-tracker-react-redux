@@ -2,8 +2,9 @@ import { createStore } from 'redux';
 
 const initialState = {
     response: false,
-    symbol: "",
-    companies: false
+    symbol: "AAPL",
+    companies: false,
+    chartData: false
 }
 
 function reducer( state, action ) {
@@ -22,6 +23,11 @@ function reducer( state, action ) {
             return {
                 ...state,
                 companies: action.payload
+            }
+        case 'ADD_CHARTDATA':
+            return {
+                ...state,
+                chartData: action.payload
             }
         default:
             return state
@@ -47,5 +53,10 @@ export const addSymbolAction = (symbol) => ({
 export const addCompaniesAction = (companies) => ({
     type: 'ADD_SYMBOL',
     payload: companies
+})
+
+export const addChartDataAction = (chartData) => ({
+    type: 'ADD_CHARTDATA',
+    payload: chartData
 })
 
