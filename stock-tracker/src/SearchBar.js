@@ -17,6 +17,7 @@ const SearchBar = () => {
     }
   }
   return (
+    // add data
     <input placeholder={response ? `${response.companyName} (${response.symbol})` : ""} type="text" value={symbol} onChange={(e) => setSymbol(e.target.value)} onKeyPress={handleSubmit} />
   )
 }
