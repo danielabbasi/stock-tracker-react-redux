@@ -8,7 +8,6 @@ const app = express();
 app.use(index);
 const server = http.createServer(app);
 const io = socketIo(server);
-let companySymbol;
 let interval;
 
 io.on("connection", socket => {
@@ -17,12 +16,12 @@ io.on("connection", socket => {
     clearInterval(interval);
   }
   // getCompaniesFromAPI(socket)
-  socket.on("symbol", (symbol) => {
-    if (symbol !== '') {
-      companySymbol = symbol;
-      console.log(companySymbol)
+  socket.on("symbol", (stockSymbol) => {
+    if (stockSymbol !== '') {
+      console.log(stockSymbol)
+      
       clearInterval(interval);
-      interval = setInterval(() => getApiAndEmit(socket), 1000);
+      interval = setInterval(() => getApiAndEmit(socket, stockSymbol), 5000);
     }
   })
   socket.on("disconnect", () => {
@@ -32,26 +31,29 @@ io.on("connection", socket => {
 
 server.listen(port, () => console.log(`Listening on port ${port}`));
 
-const getCompaniesFromAPI = async socket => {
-  try {
-    const res = await axios.get(
-      'https://api.iextrading.com/1.0/ref-data/symbols'
-    )
-    socket.emit("companies", res.data)
-  } catch (error) {
-    console.error(`Error: ${error}`);
-  }
-}
+// const getCompaniesFromAPI = async socket => {
+//   try {
+//     const res = await axios.get(
+//       'https://api.iextrading.com/1.0/ref-data/symbols'
+//     )
+//     socket.emit("companies", res.data)
+//   } catch (error) {
+//     console.error(`Error: ${error}`);
+//   }
+// }
 
-const getApiAndEmit = async socket => {
+const getApiAndEmit = async (socket, stockSymbol) => {
   try {
     const resPromise = axios.get(
-      `https://sandbox.iexapis.com/stable/stock/${companySymbol}/quote?token=Tpk_139c39f1edae43fc8e5ab12451d30f4c`
+      `https://sandbox.iexapis.com/stable/stock/${stockSymbol}/quote?token=Tpk_139c39f1edae43fc8e5ab12451d30f4c`
     );
     const epsPromise = axios.get(
-      `https://sandbox.iexapis.com/stable/stock/${companySymbol}/earnings/1/actualEPS?token=Tpk_139c39f1edae43fc8e5ab12451d30f4c`
+      `https://sandbox.iexapis.com/stable/stock/${stockSymbol}/earnings/1/actualEPS?token=Tpk_139c39f1edae43fc8e5ab12451d30f4c`
     )
-    const [res, eps] = await Promise.all([resPromise, epsPromise])
+    const chartDataPromise = axios.get(
+      'https://sandbox.iexapis.com/stable/stock/AAPL/chart/1m?token=Tpk_139c39f1edae43fc8e5ab12451d30f4c'
+    )
+    const [res, eps, chartData] = await Promise.all([resPromise, epsPromise, chartDataPromise])
     changeNullValues(res.data,eps.data)
 
     const {symbol, companyName, previousClose, high, low, previousVolume, marketCap, peRatio, open, week52High, week52Low, avgTotalVolume, ytdChange } = res.data
@@ -74,6 +76,7 @@ const getApiAndEmit = async socket => {
       earningsPerShare: eps.data,
       ytdChange
     }
+    console.log(chartData);
     socket.emit("FromAPI", stockData); // Emitting a new message. It will be consumed by the client
   } catch (error) {
     console.error(`Error: ${error}`);
