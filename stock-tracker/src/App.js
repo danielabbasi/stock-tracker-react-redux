@@ -3,6 +3,7 @@ import SearchBar from "./SearchBar";
 import KeyStats from "./keyStats";
 import { Provider, useSelector, useDispatch } from 'react-redux';
 import { store, addResponseAction, addCompaniesAction } from './redux';
+import './App.css';
 
 const io = require('socket.io-client')
 const socket = io('http://127.0.0.1:5000')
