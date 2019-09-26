@@ -64,3 +64,30 @@ h3{
   font-size: 2em;
   padding: 0.5vw
 }
+
+
+.headerBtn {
+  color: white;
+  border: none;
+  background-color: inherit;
+  font-size: 0.8vw;
+  margin: 0 0.5vw;
+}
+.quotesBtn{
+  background-color: lightskyblue
+}
+.headerContainer{
+  display: inline-grid;
+  width: 100%;
+  grid-template-columns: 3fr 1fr
+}
+.logo{
+  width: 10vw;
+  grid-column: 1;
+}
+.HeaderBtns{
+  float: right;
+  margin-top: 10%;
+  margin-right: 20px;
+  grid-column: 2
+}

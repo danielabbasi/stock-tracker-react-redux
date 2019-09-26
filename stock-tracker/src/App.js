@@ -1,5 +1,5 @@
 import React, { useEffect, useCallback } from "react";
-import SearchBar from "./SearchBar";
+import Header from "./Header";
 import KeyStats from "./keyStats";
 import { Provider, useSelector, useDispatch } from 'react-redux';
 import { store, addResponseAction, addCompaniesAction } from './redux';
@@ -31,7 +31,7 @@ function App() {
   return (
     <>
       <Provider store={store}>
-        <SearchBar />
+        <Header />
         <KeyStats/>
       </Provider>
     </>
