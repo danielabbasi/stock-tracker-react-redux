@@ -45,30 +45,34 @@ const getCompaniesFromAPI = async socket => {
 
 const getApiAndEmit = async socket => {
   try {
-    const res = await axios.get(
+    const resPromise = axios.get(
       `https://sandbox.iexapis.com/stable/stock/${companySymbol}/quote?token=Tpk_139c39f1edae43fc8e5ab12451d30f4c`
     );
-    const eps = await axios.get(
+    const epsPromise = axios.get(
       `https://sandbox.iexapis.com/stable/stock/${companySymbol}/earnings/1/actualEPS?token=Tpk_139c39f1edae43fc8e5ab12451d30f4c`
     )
-    changeNullValues(res.data)
+    const [res, eps] = await Promise.all([resPromise, epsPromise])
+    changeNullValues(res.data,eps.data)
+
+    const {symbol, companyName, previousClose, high, low, previousVolume, marketCap, peRatio, open, week52High, week52Low, avgTotalVolume, ytdChange } = res.data
+
     stockData = {
-      symbol: res.data.symbol,
-      companyName: res.data.companyName,
-      previousClose: res.data.previousClose,
-      high: res.data.high,
-      low: res.data.low,
-      dayRange: res.data.low + '-' + res.data.high,
-      previousVolume: res.data.previousVolume,
-      marketCap: res.data.marketCap,
-      peRatio: res.data.peRatio,
-      open: res.data.open,
-      week52High: res.data.week52High,
-      week52Low: res.data.week52Low,
-      week52Range: res.data.week52Low + '-' + res.data.week52High,
-      avgTotalVolume: res.data.avgTotalVolume,
+      symbol,
+      companyName,
+      previousClose,
+      high,
+      low,
+      dayRange: low + '-' + high,
+      previousVolume,
+      marketCap,
+      peRatio,
+      open,
+      week52High,
+      week52Low,
+      week52Range: week52Low + '-' + week52High,
+      avgTotalVolume,
       earningsPerShare: eps.data,
-      ytdChange: res.data.ytdChange
+      ytdChange
     }
     socket.emit("FromAPI", stockData); // Emitting a new message. It will be consumed by the client
   } catch (error) {

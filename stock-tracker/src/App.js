@@ -14,8 +14,6 @@ function App() {
   const dispatch = useDispatch()
   const addResponse = useCallback((response) => dispatch(addResponseAction(response)), [dispatch])
   const addCompanies = useCallback((companies) => dispatch(addCompaniesAction(companies)), [dispatch])
-
-
   
   useEffect(() => {
     if (companies === false) {
