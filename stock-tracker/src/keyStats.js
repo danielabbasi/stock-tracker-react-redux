@@ -53,7 +53,6 @@ const KeyStats = () => {
                     <p className="keyStats-value">{response ? response.ytdChange + "%" : ""}</p>
                 </li>
             </ul>
-            {/* <ul>{Object.keys(response).map((key, index) => (<li key={index}>{key}: {response[key]}</li>))}</ul> */}
         </div>
         </>
     )
