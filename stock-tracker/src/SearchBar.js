@@ -17,8 +17,14 @@ const SearchBar = () => {
     }
   }
   return (
-    // add data
-    <input placeholder={response ? `${response.companyName} (${response.symbol})` : ""} type="text" value={symbol} onChange={(e) => setSymbol(e.target.value)} onKeyPress={handleSubmit} />
+    <div className="searchDisplay">
+    <input className="searchBar" placeholder={response ? `${response.companyName} (${response.symbol})` : ""} type="text" value={symbol} onChange={(e) => setSymbol(e.target.value)} onKeyPress={handleSubmit} />
+    <div className="priceDisplay">
+      <h3>{response.latestPrice}</h3>
+      <h3>{response.change}</h3>
+      <h3>{response.changePercent}</h3>
+    </div>
+    </div>
   )
 }
 export default SearchBar;

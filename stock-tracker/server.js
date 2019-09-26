@@ -54,9 +54,12 @@ const getApiAndEmit = async socket => {
     const [res, eps] = await Promise.all([resPromise, epsPromise])
     changeNullValues(res.data,eps.data)
 
-    const {symbol, companyName, previousClose, high, low, previousVolume, marketCap, peRatio, open, week52High, week52Low, avgTotalVolume, ytdChange } = res.data
+    const {latestPrice, change, changePercent, symbol, companyName, previousClose, high, low, previousVolume, marketCap, peRatio, open, week52High, week52Low, avgTotalVolume, ytdChange } = res.data
 
     stockData = {
+      latestPrice,
+      change,
+      changePercent,
       symbol,
       companyName,
       previousClose,
