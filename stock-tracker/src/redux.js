@@ -2,7 +2,7 @@ import { createStore } from 'redux';
 
 const initialState = {
     response: false,
-    symbol: "",
+    symbol: "AAPL",
     companies: false,
     chartData: false
 }

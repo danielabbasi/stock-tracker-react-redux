@@ -38,7 +38,7 @@ function App() {
       <Provider store={store}>
         <SearchBar />
         <KeyStats/>
-        <Chart/>
+        <Chart id="chartDiv"/>
       </Provider>
     </>
   );
