@@ -51,7 +51,7 @@ const getApiAndEmit = async (socket, stockSymbol) => {
       `https://sandbox.iexapis.com/stable/stock/${stockSymbol}/earnings/1/actualEPS?token=Tpk_139c39f1edae43fc8e5ab12451d30f4c`
     )
     const chartDataPromise = axios.get(
-      'https://sandbox.iexapis.com/stable/stock/AAPL/chart/1m?token=Tpk_139c39f1edae43fc8e5ab12451d30f4c'
+      `https://sandbox.iexapis.com/stable/stock/${stockSymbol}/chart/1m?token=Tpk_139c39f1edae43fc8e5ab12451d30f4c`
     )
     const [res, eps, chartData] = await Promise.all([resPromise, epsPromise, chartDataPromise])
     changeNullValues(res.data,eps.data)
@@ -77,7 +77,6 @@ const getApiAndEmit = async (socket, stockSymbol) => {
       ytdChange
     }
     const chart = chartData.data.map(data => ({close: data.close, date: data.date }))
-    // console.log(chart);
     socket.emit("FromAPI", stockData, chart); // Emitting a new message. It will be consumed by the client
   } catch (error) {
     console.error(`Error: ${error}`);

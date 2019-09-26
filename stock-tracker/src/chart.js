@@ -11,8 +11,7 @@ const Chart = () => {
                     width={1000}
                     height={400}
                     data={chartData}
-                    margin={{ top: 5, right: 20, left: 10, bottom: 5 }}
-                >
+                    margin={{ top: 5, right: 20, left: 10, bottom: 5 }}>
                     <CartesianGrid stroke="#f5f5f5" strokeDasharray="3 3" />
                     <XAxis dataKey="date" />
                     <YAxis orientation="right"/>
