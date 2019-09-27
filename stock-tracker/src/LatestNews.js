@@ -2,29 +2,22 @@ import React from "react";
 import { useSelector } from "react-redux";
 
 const LatestNews = () => {
+  function timeDifference(current, previous) {
+    const msPerMinute = 60 * 1000;
+    const msPerHour = msPerMinute * 60;
+    const msPerDay = msPerHour * 24;
+    const msPerMonth = msPerDay * 30;
+    const msPerYear = msPerDay * 365;
 
-    function timeDifference(current, previous) {
+    const elapsed = current - previous;
 
-        const msPerMinute = 60 * 1000;
-        const msPerHour = msPerMinute * 60;
-        const msPerDay = msPerHour * 24;
-        const msPerMonth = msPerDay * 30;
-    
-        const elapsed = current - previous;
-    
-        if (elapsed < msPerHour) {
-             return Math.round(elapsed/msPerMinute) + 'min ago';   
-        }
-    
-        else if (elapsed < msPerDay ) {
-             return Math.round(elapsed/msPerHour ) + 'h ago';   
-        }
-    
-        else if (elapsed < msPerMonth) {
-            return 'approximately ' + Math.round(elapsed/msPerDay) + 'd ago';   
-        }
-    }
-    const currentTime = Date.now();
+    return (elapsed < msPerHour) ? Math.round(elapsed / msPerMinute) + "min ago"
+    : (elapsed < msPerDay) ? Math.round(elapsed / msPerHour) + "h ago"
+    : (elapsed < msPerMonth) ? Math.round(elapsed / msPerDay) + "d ago"
+    : (elapsed < msPerYear) ? Math.round(elapsed / msPerMonth) + "mos ago"
+    : ""
+  }
+  const currentTime = Date.now();
 
   const latestNews = useSelector(state => state.latestNews);
   const newsDisplay = latestNews.map((news, index) => (

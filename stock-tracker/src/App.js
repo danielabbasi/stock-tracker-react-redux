@@ -39,9 +39,9 @@ function App() {
     <>
       <Provider store={store}>
         <Header />
-        <LatestNews/>
-        <KeyStats/>
         <Chart id="chartDiv"/>
+        <KeyStats/>
+        <LatestNews/>
       </Provider>
     </>
   );
