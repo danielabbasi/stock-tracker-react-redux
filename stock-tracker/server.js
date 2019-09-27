@@ -17,7 +17,10 @@ io.on("connection", socket => {
     if (stockSymbol !== '') {
       console.log(stockSymbol)
       clearInterval(interval);
-      interval = setInterval(() => getApiAndEmit(socket, stockSymbol), 5000);
+      socket.on("chartTime", (chartTime) => {
+        console.log(chartTime)
+        interval = setInterval(() => getApiAndEmit(socket, stockSymbol, chartTime), 5000);
+      })
     }
   })
   socket.on("disconnect", () => {
@@ -39,7 +42,7 @@ server.listen(port, () => console.log(`Listening on port ${port}`));
 //   }
 // }
 
-const getApiAndEmit = async (socket, stockSymbol) => {
+const getApiAndEmit = async (socket, stockSymbol, chartTime) => {
   try {
     const resPromise = axios.get(
       `https://sandbox.iexapis.com/stable/stock/${stockSymbol}/quote?token=Tpk_139c39f1edae43fc8e5ab12451d30f4c`
@@ -48,12 +51,12 @@ const getApiAndEmit = async (socket, stockSymbol) => {
       `https://sandbox.iexapis.com/stable/stock/${stockSymbol}/earnings/1/actualEPS?token=Tpk_139c39f1edae43fc8e5ab12451d30f4c`
     )
     const chartDataPromise = axios.get(
-      `https://sandbox.iexapis.com/stable/stock/${stockSymbol}/chart/1m?token=Tpk_139c39f1edae43fc8e5ab12451d30f4c`
+      `https://sandbox.iexapis.com/stable/stock/${stockSymbol}/chart/${chartTime}?token=Tpk_139c39f1edae43fc8e5ab12451d30f4c`
     )
     const [res, eps, chartData] = await Promise.all([resPromise, epsPromise, chartDataPromise])
-    changeNullValues(res.data,eps.data)
+    changeNullValues(res.data, eps.data)
 
-    const {latestPrice, change, changePercent, symbol, companyName, previousClose, high, low, previousVolume, marketCap, peRatio, open, week52High, week52Low, avgTotalVolume, ytdChange } = res.data
+    const { latestPrice, change, changePercent, symbol, companyName, previousClose, high, low, previousVolume, marketCap, peRatio, open, week52High, week52Low, avgTotalVolume, ytdChange } = res.data
 
     stockData = {
       latestPrice,
@@ -76,7 +79,7 @@ const getApiAndEmit = async (socket, stockSymbol) => {
       earningsPerShare: eps.data,
       ytdChange
     }
-    const chart = chartData.data.map(data => ({close: data.close, date: data.date }))
+    const chart = chartData.data.map(data => ({ close: data.close, date: data.date }))
     socket.emit("FromAPI", stockData, chart); // Emitting a new message. It will be consumed by the client
   } catch (error) {
     console.error(`Error: ${error}`);

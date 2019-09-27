@@ -12,6 +12,8 @@ const socket = io('http://127.0.0.1:5000')
 function App() {
   const symbol = useSelector((state) => state.symbol)
   const companies = useSelector((state) => state.companies)
+  const chartTime = useSelector((state) => state.chartTime)
+
 
   const dispatch = useDispatch()
   const addResponse = useCallback((response) => dispatch(addResponseAction(response)), [dispatch])
@@ -32,6 +34,10 @@ function App() {
       addChartData(chart)
     })
   }, [addResponse, symbol, addCompanies, companies, addChartData])
+
+  useEffect(() => {
+    socket.emit("chartTime", chartTime)
+  }, [chartTime])
 
   return (
     <>

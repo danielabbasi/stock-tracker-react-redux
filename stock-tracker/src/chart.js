@@ -1,20 +1,23 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { useDispatch, useSelector } from 'react-redux';
 import { addChartTimeAction } from './redux';
 
 const Chart = () => {
     const chartData = useSelector((state) => state.chartData)
+    const dispatch = useDispatch()
+    const onClick = (e) => {
+        dispatch(addChartTimeAction(e.target.value))
+    }
     return (
         <>
             <h2>Stock Chart</h2>
-            <button>1D</button>
-            <button>5D</button>
-            <button>1M</button>
-            <button>1Y</button>
-            <button>5Y</button>
-            <button>MAX</button>
+            <button value="1D" onClick={onClick}>1D</button>
+            <button value="5D" onClick={onClick}>5D</button>
+            <button value="1M" onClick={onClick}>1M</button>
+            <button value="1Y" onClick={onClick}>1Y</button>
+            <button value="5Y" onClick={onClick}>5Y</button>
+            <button value="MAX"onClick={onClick}>MAX</button>
             <AreaChart
                 width={1000}
                 height={400}
