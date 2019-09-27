@@ -1,13 +1,12 @@
 import React, { useState, useCallback } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { addSymbolAction } from './redux';
 import logo from './logo.png'
 
-const Header = () => {
+const Header = ({response}) => {
   const [symbol, setSymbol] = useState("")
   const dispatch = useDispatch()
   const addSymbol = useCallback((symbol) => dispatch(addSymbolAction(symbol)), [dispatch])
-  const response = useSelector((state) => state.response);
 
   const handleSubmit = (e) => {
     if (e.key === 'Enter') {

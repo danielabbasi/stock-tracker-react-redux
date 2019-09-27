@@ -1,10 +1,9 @@
 import React from 'react';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { addChartTimeAction } from './redux';
 
-const Chart = () => {
-    const chartData = useSelector((state) => state.chartData)
+const Chart = ({chartData}) => {
     const dispatch = useDispatch()
     const onClick = (e) => {
         dispatch(addChartTimeAction(e.target.value))
