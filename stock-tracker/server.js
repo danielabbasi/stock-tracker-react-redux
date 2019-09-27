@@ -8,23 +8,20 @@ const app = express();
 app.use(index);
 const server = http.createServer(app);
 const io = socketIo(server);
-let interval;
 
 io.on("connection", socket => {
   console.log("New client connected");
-  if (interval) {
-    clearInterval(interval);
-  }
+  let interval;
   // getCompaniesFromAPI(socket)
   socket.on("symbol", (stockSymbol) => {
     if (stockSymbol !== '') {
       console.log(stockSymbol)
-      
       clearInterval(interval);
       interval = setInterval(() => getApiAndEmit(socket, stockSymbol), 5000);
     }
   })
   socket.on("disconnect", () => {
+    clearInterval(interval);
     console.log("Client disconnected");
   });
 });
