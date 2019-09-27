@@ -4,7 +4,8 @@ const initialState = {
     response: false,
     symbol: "AAPL",
     companies: false,
-    chartData: false
+    chartData: false,
+    latestNews: false
 }
 
 function reducer( state, action ) {
@@ -29,6 +30,11 @@ function reducer( state, action ) {
                 ...state,
                 chartData: action.payload
             }
+            case 'ADD_NEWS':
+                return {
+                ...state,
+                latestNews: action.payload
+                }
         default:
             return state
     }
@@ -58,5 +64,10 @@ export const addCompaniesAction = (companies) => ({
 export const addChartDataAction = (chartData) => ({
     type: 'ADD_CHARTDATA',
     payload: chartData
+})
+
+export const addLatestNewsAction = (latestNews) => ({
+    type: 'ADD_NEWS',
+    payload: latestNews
 })
 

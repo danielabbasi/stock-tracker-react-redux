@@ -54,7 +54,7 @@ const getApiAndEmit = async (socket, stockSymbol) => {
       `https://sandbox.iexapis.com/stable/stock/${stockSymbol}/chart/1m?token=Tpk_139c39f1edae43fc8e5ab12451d30f4c`
     )
     const latestNewsPromise = axios.get(
-      `https://cloud.iexapis.com/stable/stock/${stockSymbol}/news/last/1?token=pk_9be28da235714828a592abf7395e810f`
+      `https://cloud.iexapis.com/stable/stock/${stockSymbol}/news/last/5?token=pk_9be28da235714828a592abf7395e810f`
     )
 
     const [res, eps, chartData, latestNews] = await Promise.all([resPromise, epsPromise, chartDataPromise, latestNewsPromise])
@@ -85,10 +85,14 @@ const getApiAndEmit = async (socket, stockSymbol) => {
     }
     const chart = chartData.data.map(data => ({close: data.close, date: data.date }))
 
-    const news = latestNews.data.map(data => ({headline: data.headline, datetime: data.datetime, source: data.source}))
-
-    //console.log(news)
-    socket.emit("FromAPI", stockData, chart); // Emitting a new message. It will be consumed by the client
+    // const news = latestNews.data.map(data => ({headline: data.headline, datetime: data.datetime, source: data.source}))
+    const news = {
+      headline: latestNews.data[0].headline,
+      datetime: latestNews.data[0].datetime,
+      source: latestNews.data[0].source
+    }
+    console.log("***", news)
+    socket.emit("FromAPI", stockData, chart, news); // Emitting a new message. It will be consumed by the client
   } catch (error) {
     console.error(`Error: ${error}`);
   }

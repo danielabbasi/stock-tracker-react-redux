@@ -2,8 +2,9 @@ import React, { useEffect, useCallback } from "react";
 import Header from "./Header";
 import KeyStats from "./keyStats";
 import Chart from "./chart";
+import LatestNews from "./LatestNews";
 import { Provider, useSelector, useDispatch } from 'react-redux';
-import { store, addResponseAction, addCompaniesAction, addChartDataAction } from './redux';
+import { store, addResponseAction, addCompaniesAction, addChartDataAction, addLatestNewsAction } from './redux';
 import './App.css';
 
 const io = require('socket.io-client')
@@ -17,7 +18,7 @@ function App() {
   const addResponse = useCallback((response) => dispatch(addResponseAction(response)), [dispatch])
   const addCompanies = useCallback((companies) => dispatch(addCompaniesAction(companies)), [dispatch])
   const addChartData = useCallback((chartData) => dispatch(addChartDataAction(chartData)), [dispatch])
-
+  const addNewsData = useCallback((latestNews) => dispatch(addLatestNewsAction(latestNews)), [dispatch])
   
   useEffect(() => {
     // if (companies === false) {
@@ -27,11 +28,12 @@ function App() {
     //   })
     // }
     socket.emit("symbol", symbol)
-    socket.on("FromAPI", (data, chart) => {
+    socket.on("FromAPI", (data, chart, news) => {
       addResponse(data)
       addChartData(chart)
+      addNewsData(news)
     })
-  }, [addResponse, symbol, addCompanies, companies, addChartData])
+  }, [addResponse, symbol, addCompanies, companies, addChartData, addNewsData]);
 
   return (
     <>
@@ -39,6 +41,7 @@ function App() {
         <Header />
         <KeyStats/>
         <Chart id="chartDiv"/>
+        <LatestNews/>
       </Provider>
     </>
   );
