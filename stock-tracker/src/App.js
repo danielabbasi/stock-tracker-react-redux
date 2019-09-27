@@ -33,7 +33,7 @@ function App() {
       addResponse(data)
       addChartData(chart)
     })
-  }, [addResponse, symbol, addCompanies, companies, addChartData])
+  }, [addResponse, symbol, addCompanies, companies, addChartData, chartTime])
 
   useEffect(() => {
     socket.emit("chartTime", symbol, chartTime)
