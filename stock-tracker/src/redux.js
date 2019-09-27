@@ -4,7 +4,7 @@ const initialState = {
     response: false,
     symbol: "AAPL",
     companies: false,
-    chartData: false,
+    chartData: [],
     chartTime: "5Y"
 }
 

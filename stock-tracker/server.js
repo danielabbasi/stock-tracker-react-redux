@@ -12,22 +12,29 @@ const io = socketIo(server);
 io.on("connection", socket => {
   console.log("New client connected");
   let interval;
+  let stockSymbol
   // getCompaniesFromAPI(socket)
-  socket.on("symbol", (stockSymbol) => {
-    if (stockSymbol !== '') {
-      console.log(stockSymbol)
+  socket.on("symbol", (stockSymbol, chartTime) => {
+    console.log("interval " + interval)
+    if (interval) {
+      console.log("symbol " + stockSymbol)
+      console.log("hello")
       clearInterval(interval);
-      socket.on("chartTime", (chartTime) => {
-        console.log(chartTime)
-        interval = setInterval(() => getApiAndEmit(socket, stockSymbol, chartTime), 5000);
-      })
     }
+    getApiAndEmit(socket, stockSymbol, chartTime)
+    interval = setInterval(() => getApiAndEmit(socket, stockSymbol, chartTime), 5000);
+  })
+  socket.on("chartTime", (stockSymbol, chartTime) => {
+    getApiAndEmit(socket, stockSymbol, chartTime)
+    console.log(chartTime)
   })
   socket.on("disconnect", () => {
     clearInterval(interval);
     console.log("Client disconnected");
   });
 });
+
+
 
 server.listen(port, () => console.log(`Listening on port ${port}`));
 

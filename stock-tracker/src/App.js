@@ -2,8 +2,8 @@ import React, { useEffect, useCallback } from "react";
 import Header from "./Header";
 import KeyStats from "./keyStats";
 import Chart from "./chart";
-import { Provider, useSelector, useDispatch } from 'react-redux';
-import { store, addResponseAction, addCompaniesAction, addChartDataAction } from './redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { addResponseAction, addCompaniesAction, addChartDataAction } from './redux';
 import './App.css';
 
 const io = require('socket.io-client')
@@ -28,7 +28,7 @@ function App() {
     //     console.log(companies)
     //   })
     // }
-    socket.emit("symbol", symbol)
+    socket.emit("symbol", symbol, chartTime)
     socket.on("FromAPI", (data, chart) => {
       addResponse(data)
       addChartData(chart)
@@ -36,16 +36,14 @@ function App() {
   }, [addResponse, symbol, addCompanies, companies, addChartData])
 
   useEffect(() => {
-    socket.emit("chartTime", chartTime)
+    socket.emit("chartTime", symbol, chartTime)
   }, [chartTime])
 
   return (
     <>
-      <Provider store={store}>
         <Header />
         <KeyStats/>
         <Chart id="chartDiv"/>
-      </Provider>
     </>
   );
 }

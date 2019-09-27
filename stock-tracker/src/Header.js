@@ -20,7 +20,7 @@ const Header = () => {
   return (
     <>
     <div className="headerContainer">
-      <img className="logo" src={logo}/>
+      <img className="logo" alt="logo" src={logo}/>
       <div className="HeaderBtns">
         <button className="headerBtn quotesBtn">QUOTES</button>
         <button className="headerBtn">MARKETS</button>
