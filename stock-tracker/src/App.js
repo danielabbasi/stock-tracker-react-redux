@@ -2,18 +2,15 @@ import React, { useEffect, useCallback } from "react";
 import Header from "./Header";
 import KeyStats from "./keyStats";
 import Chart from "./chart";
-import LatestNews from "./LatestNews";
-import { Provider, useSelector, useDispatch } from 'react-redux';
-import { store, addResponseAction, addCompaniesAction, addChartDataAction, addLatestNewsAction } from './redux';
+import LatestNews from './LatestNews';
+import { useSelector, useDispatch } from 'react-redux';
+import { addResponseAction, addCompaniesAction, addChartDataAction, addLatestNewsAction } from './redux';
 import './App.css';
-
 const io = require('socket.io-client')
 const socket = io('http://127.0.0.1:5000')
 
 function App() {
-  const symbol = useSelector((state) => state.symbol)
-  const companies = useSelector((state) => state.companies)
-
+  const state = useSelector((state) => state)
   const dispatch = useDispatch()
   const addResponse = useCallback((response) => dispatch(addResponseAction(response)), [dispatch])
   const addCompanies = useCallback((companies) => dispatch(addCompaniesAction(companies)), [dispatch])
@@ -27,22 +24,24 @@ function App() {
     //     console.log(companies)
     //   })
     // }
-    socket.emit("symbol", symbol)
+    socket.emit("symbol", state.symbol, state.chartTime)
     socket.on("FromAPI", (data, chart, news) => {
       addResponse(data)
       addChartData(chart)
       addNewsData(news)
     })
-  }, [addResponse, symbol, addCompanies, companies, addChartData, addNewsData]);
+  }, [addResponse, state.symbol, addCompanies, state.companies, addChartData, state.chartTime])
+
+  useEffect(() => {
+    socket.emit("chartTime", state.symbol, state.chartTime)
+  }, [state.chartTime, state.symbol])
 
   return (
     <>
-      <Provider store={store}>
-        <Header />
-        <Chart id="chartDiv"/>
-        <KeyStats/>
-        <LatestNews/>
-      </Provider>
+        <Header response={state.response}/>
+        <KeyStats response={state.response}/>
+        <Chart chartData={state.chartData} id="chartDiv"/>
+        <LatestNews latestNews={state.latestNews} />
     </>
   );
 }

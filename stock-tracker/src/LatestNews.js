@@ -1,7 +1,6 @@
 import React from "react";
-import { useSelector } from "react-redux";
 
-const LatestNews = () => {
+const LatestNews = ({ latestNews }) => {
   function timeDifference(current, previous) {
     const msPerMinute = 60 * 1000;
     const msPerHour = msPerMinute * 60;
@@ -19,7 +18,6 @@ const LatestNews = () => {
   }
   const currentTime = Date.now();
 
-  const latestNews = useSelector(state => state.latestNews);
   const newsDisplay = latestNews.map((news, index) => (
     <div key={index}>
       <p className="newsHeadline">{news.headline}</p>

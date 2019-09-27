@@ -4,8 +4,9 @@ const initialState = {
     response: false,
     symbol: "AAPL",
     companies: false,
-    chartData: false,
-    latestNews: []
+    latestNews: [],
+    chartData: [],
+    chartTime: "5Y"
 }
 
 function reducer( state, action ) {
@@ -35,6 +36,11 @@ function reducer( state, action ) {
                 ...state,
                 latestNews: action.payload
                 }
+        case 'ADD_CHARTTIME':
+            return {
+                ...state,
+                chartTime: action.payload
+            }
         default:
             return state
     }
@@ -70,4 +76,7 @@ export const addLatestNewsAction = (latestNews) => ({
     type: 'ADD_NEWS',
     payload: latestNews
 })
-
+export const addChartTimeAction = (chartTime) => ({
+    type: 'ADD_CHARTTIME',
+    payload: chartTime
+})

@@ -8,23 +8,26 @@ const app = express();
 app.use(index);
 const server = http.createServer(app);
 const io = socketIo(server);
-let interval;
 
 io.on("connection", socket => {
   console.log("New client connected");
-  if (interval) {
-    clearInterval(interval);
-  }
+  let interval;
   // getCompaniesFromAPI(socket)
-  socket.on("symbol", (stockSymbol) => {
-    if (stockSymbol !== '') {
-      console.log(stockSymbol)
-      
+  socket.on("symbol", (stockSymbol, chartTime) => {
+    console.log("interval " + interval)
+    if (interval) {
+      console.log("symbol " + stockSymbol)
       clearInterval(interval);
-      interval = setInterval(() => getApiAndEmit(socket, stockSymbol), 5000);
     }
+    getApiAndEmit(socket, stockSymbol, chartTime)
+    interval = setInterval(() => getApiAndEmit(socket, stockSymbol, chartTime), 5000);
+  })
+  socket.on("chartTime", (stockSymbol, chartTime) => {
+    getApiAndEmit(socket, stockSymbol, chartTime)
+    console.log(chartTime)
   })
   socket.on("disconnect", () => {
+    clearInterval(interval);
     console.log("Client disconnected");
   });
 });
@@ -42,7 +45,7 @@ server.listen(port, () => console.log(`Listening on port ${port}`));
 //   }
 // }
 
-const getApiAndEmit = async (socket, stockSymbol) => {
+const getApiAndEmit = async (socket, stockSymbol, chartTime) => {
   try {
     const resPromise = axios.get(
       `https://sandbox.iexapis.com/stable/stock/${stockSymbol}/quote?token=Tpk_139c39f1edae43fc8e5ab12451d30f4c`
@@ -51,7 +54,7 @@ const getApiAndEmit = async (socket, stockSymbol) => {
       `https://sandbox.iexapis.com/stable/stock/${stockSymbol}/earnings/1/actualEPS?token=Tpk_139c39f1edae43fc8e5ab12451d30f4c`
     )
     const chartDataPromise = axios.get(
-      `https://sandbox.iexapis.com/stable/stock/${stockSymbol}/chart/1m?token=Tpk_139c39f1edae43fc8e5ab12451d30f4c`
+      `https://sandbox.iexapis.com/stable/stock/${stockSymbol}/chart/${chartTime}?token=Tpk_139c39f1edae43fc8e5ab12451d30f4c`
     )
     const latestNewsPromise = axios.get(
       `https://cloud.iexapis.com/stable/stock/${stockSymbol}/news/last/5?token=pk_9be28da235714828a592abf7395e810f`
@@ -60,7 +63,7 @@ const getApiAndEmit = async (socket, stockSymbol) => {
     const [res, eps, chartData, latestNews] = await Promise.all([resPromise, epsPromise, chartDataPromise, latestNewsPromise])
     changeNullValues(res.data,eps.data)
 
-    const {latestPrice, change, changePercent, symbol, companyName, previousClose, high, low, previousVolume, marketCap, peRatio, open, week52High, week52Low, avgTotalVolume, ytdChange } = res.data
+    const { latestPrice, change, changePercent, symbol, companyName, previousClose, high, low, previousVolume, marketCap, peRatio, open, week52High, week52Low, avgTotalVolume, ytdChange } = res.data
 
     stockData = {
       latestPrice,
@@ -83,11 +86,9 @@ const getApiAndEmit = async (socket, stockSymbol) => {
       earningsPerShare: eps.data,
       ytdChange
     }
-    const chart = chartData.data.map(data => ({close: data.close, date: data.date }))
 
     const news = latestNews.data.map(data => ({headline: data.headline, datetime: data.datetime, source: data.source}))
-
-    console.log(news)
+    const chart = chartData.data.map(data => ({ close: data.close, date: data.date }))
     socket.emit("FromAPI", stockData, chart, news); // Emitting a new message. It will be consumed by the client
   } catch (error) {
     console.error(`Error: ${error}`);
