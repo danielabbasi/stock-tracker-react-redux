@@ -85,13 +85,13 @@ const getApiAndEmit = async (socket, stockSymbol) => {
     }
     const chart = chartData.data.map(data => ({close: data.close, date: data.date }))
 
-    // const news = latestNews.data.map(data => ({headline: data.headline, datetime: data.datetime, source: data.source}))
-    const news = {
-      headline: latestNews.data[0].headline,
-      datetime: latestNews.data[0].datetime,
-      source: latestNews.data[0].source
-    }
-    console.log("***", news)
+    const news = latestNews.data.map(data => ({headline: data.headline, datetime: data.datetime, source: data.source}))
+    // const news = {
+    //   headline: latestNews.data[0].headline,
+    //   datetime: latestNews.data[0].datetime,
+    //   source: latestNews.data[0].source
+    // }
+    console.log()
     socket.emit("FromAPI", stockData, chart, news); // Emitting a new message. It will be consumed by the client
   } catch (error) {
     console.error(`Error: ${error}`);

@@ -5,7 +5,7 @@ const initialState = {
     symbol: "AAPL",
     companies: false,
     chartData: false,
-    latestNews: false
+    latestNews: []
 }
 
 function reducer( state, action ) {
