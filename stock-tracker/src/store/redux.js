@@ -17,12 +17,12 @@ const logger = store => (next) => (action) => {
             return result
     }
 
-//const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 export const store = createStore(
     reducer,
     initialState,
-    compose(
+    composeEnhancers(
         applyMiddleware(logger)
     )
 );
