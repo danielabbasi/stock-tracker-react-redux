@@ -1,7 +1,7 @@
 import React from 'react';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
 import { useDispatch } from 'react-redux';
-import { addChartTimeAction } from './redux';
+import { addChartTimeAction } from '../store/actions';
 
 const Chart = ({chartData}) => {
     const dispatch = useDispatch()

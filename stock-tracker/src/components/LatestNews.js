@@ -11,9 +11,9 @@ const LatestNews = ({ latestNews }) => {
     const elapsed = current - previous;
 
     return (elapsed < msPerHour) ? Math.round(elapsed / msPerMinute) + "min ago"
-    : (elapsed < msPerDay) ? Math.round(elapsed / msPerHour) + "h ago"
-    : (elapsed < msPerMonth) ? Math.round(elapsed / msPerDay) + "d ago"
-    : (elapsed < msPerYear) ? Math.round(elapsed / msPerMonth) + "mos ago"
+    : (elapsed < msPerDay) ? Math.round(elapsed / msPerHour) + "hrs ago"
+    : (elapsed < msPerMonth) ? Math.round(elapsed / msPerDay) + "days ago"
+    : (elapsed < msPerYear) ? Math.round(elapsed / msPerMonth) + "months ago"
     : ""
   }
   const currentTime = Date.now();

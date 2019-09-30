@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
-import { addSymbolAction } from './redux';
-import logo from './logo.png'
+import { addSymbolAction } from '../store/actions';
+import logo from '../assets/logo.png';
 
 const Header = ({response}) => {
   const [symbol, setSymbol] = useState("")
