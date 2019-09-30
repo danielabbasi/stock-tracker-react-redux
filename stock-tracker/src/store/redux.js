@@ -5,7 +5,6 @@ import {
   addCompaniesAction,
   addChartDataAction,
   addLatestNewsAction,
-  addChartTimeAction
 } from "./actions";
 
 const io = require("socket.io-client");
@@ -20,8 +19,7 @@ const initialState = {
   chartTime: "5Y"
 };
 
-const logger = store => next => action => {
-
+const stockMiddleware = store => next => action => {
   if (action.type === "ADD_SYMBOL") {
     next(action)
     socket.emit("symbol", store.getState().symbol, store.getState().chartTime);
@@ -36,14 +34,15 @@ const logger = store => next => action => {
       store.dispatch(addChartDataAction(store.getState().chartData))
   }
   const result = next(action);
-
   return result;
 };
+
+// TODO: CREATE INITIAL STARTUP MIDDLEWARE
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 export const store = createStore(
   reducer,
   initialState,
-  composeEnhancers(applyMiddleware(logger))
+  composeEnhancers(applyMiddleware(stockMiddleware))
 );
