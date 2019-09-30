@@ -14,17 +14,18 @@ io.on("connection", socket => {
   let interval;
   // getCompaniesFromAPI(socket)
   socket.on("symbol", (stockSymbol, chartTime) => {
-    console.log("interval " + interval)
+    // console.log("interval " + interval)
     if (interval) {
-      console.log("symbol " + stockSymbol)
+      // console.log("symbol " + stockSymbol)
       clearInterval(interval);
     }
+    console.log("symbol condition " +chartTime)
     getApiAndEmit(socket, stockSymbol, chartTime)
     interval = setInterval(() => getApiAndEmit(socket, stockSymbol, chartTime), 5000);
   })
   socket.on("chartTime", (stockSymbol, chartTime) => {
     getApiAndEmit(socket, stockSymbol, chartTime)
-    console.log(chartTime)
+    console.log("chartTime condition " + chartTime)
   })
   socket.on("disconnect", () => {
     clearInterval(interval);
@@ -86,6 +87,7 @@ const getApiAndEmit = async (socket, stockSymbol, chartTime) => {
       earningsPerShare: eps.data,
       ytdChange
     }
+    console.log("getAPI AND EMIT " + chartTime)
 
     const news = latestNews.data.map(data => ({headline: data.headline, datetime: data.datetime, source: data.source}))
     const chart = chartData.data.map(data => ({ close: data.close, date: data.date }))
