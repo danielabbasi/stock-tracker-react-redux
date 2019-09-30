@@ -23,21 +23,16 @@ const initialState = {
 const logger = store => next => action => {
 
   if (action.type === "ADD_SYMBOL") {
-
     next(action)
-
     socket.emit("symbol", store.getState().symbol, store.getState().chartTime);
     socket.on("FromAPI", (data, chart, news) => {
       store.dispatch(addResponseAction(data));
       store.dispatch(addChartDataAction(chart));
       store.dispatch(addLatestNewsAction(news));
-      console.log("SYMBOL CHART TIME " + store.getState().chartTime)
     });
   } else if (action.type === "ADD_CHARTTIME") {
       next(action)
       socket.emit("chartTime", store.getState().symbol, store.getState().chartTime)
-      console.log("CHART TIME ", store.getState().chartTime)
-      console.log("CHART DATA ", store.getState().chartData)
       store.dispatch(addChartDataAction(store.getState().chartData))
   }
   const result = next(action);
