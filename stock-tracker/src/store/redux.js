@@ -10,23 +10,19 @@ const initialState = {
     chartTime: "5Y"
 }
 
-const logger = store => {
-    return next => {
-        return action => {
+const logger = store => (next) => (action) => {
             console.log('[Middleware] Dispatching', action);
             const result = next(action);
             console.log('[Middleware], next state', store.getState());
             return result
-        }
     }
-};
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+//const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 export const store = createStore(
     reducer,
     initialState,
-    composeEnhancers(
+    compose(
         applyMiddleware(logger)
     )
 );
