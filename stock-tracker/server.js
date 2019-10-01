@@ -12,7 +12,7 @@ const io = socketIo(server);
 io.on("connection", socket => {
   console.log("New client connected");
   let interval;
-  getCompaniesFromAPI(socket) // COMPANIES !
+  getCompaniesFromAPI(socket)
   socket.on("symbol", (stockSymbol, chartTime) => {
     if (interval) {
       console.log("symbol " + stockSymbol)
@@ -39,12 +39,25 @@ const getCompaniesFromAPI = async socket => {
     const res = await axios.get(
       'https://api.iextrading.com/1.0/ref-data/symbols'
     )
-    const companies = res.data.map(data => ({name: data.name, symbol: data.symbol}))
+    const companies = res.data.map(data => ({ name: data.name, symbol: data.symbol }))
     socket.emit("companies", companies)
   } catch (error) {
     console.log("companies error ")
     console.error(`Error: ${error}`);
   }
+}
+
+const getCompanyOverviewAndEmit = async (socket, stockSymbol) => {
+  try {
+    const companyOverviewPromise = axios.get(
+      `https://sandbox.iexapis.com/stable/stock/${stockSymbol}/company?token=Tpk_139c39f1edae43fc8e5ab12451d30f4c`)
+      
+    
+    } catch {
+    console.log("company overview error ")
+    console.error(`Error: ${error}`);
+  }
+
 }
 
 const getApiAndEmit = async (socket, stockSymbol, chartTime) => {
@@ -62,11 +75,10 @@ const getApiAndEmit = async (socket, stockSymbol, chartTime) => {
       `https://cloud.iexapis.com/stable/stock/${stockSymbol}/news/last/5?token=pk_9be28da235714828a592abf7395e810f`
     )
 
-    const [res, eps, chartData, latestNews] = await Promise.all([resPromise, epsPromise, chartDataPromise, latestNewsPromise])
-    changeNullValues(res.data,eps.data)
+    const [res, eps, chartData, latestNews, companyOverview] = await Promise.all([resPromise, epsPromise, chartDataPromise, latestNewsPromise, companyOverviewPromise])
+    changeNullValues(res.data, eps.data)
 
     const { latestPrice, change, changePercent, symbol, companyName, previousClose, high, low, previousVolume, marketCap, peRatio, open, week52High, week52Low, avgTotalVolume, ytdChange } = res.data
-
     stockData = {
       latestPrice,
       change,
@@ -89,8 +101,10 @@ const getApiAndEmit = async (socket, stockSymbol, chartTime) => {
       ytdChange
     }
 
-    const news = latestNews.data.map(data => ({headline: data.headline, datetime: data.datetime, source: data.source}))
+    const news = latestNews.data.map(data => ({ headline: data.headline, datetime: data.datetime, source: data.source }))
     const chart = chartData.data.map(data => ({ close: data.close, date: data.date }))
+    console.log(companyOverview.data)
+   
     socket.emit("FromAPI", stockData, chart, news); // Emitting a new message. It will be consumed by the client
   } catch (error) {
     console.log("stock data error ")

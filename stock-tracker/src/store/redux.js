@@ -5,7 +5,8 @@ import {
   addCompaniesAction,
   addChartDataAction,
   addLatestNewsAction,
-  initialStartupAction
+  initialStartupAction,
+  addCompanyOverviewAction
 } from "./actions";
 
 const io = require("socket.io-client");
@@ -17,17 +18,20 @@ const initialState = {
   companies: false,
   latestNews: [],
   chartData: [],
-  chartTime: "5Y"
+  chartTime: "5Y", 
+  companyOverview: false
 };
 
 const stockMiddleware = store => next => action => {
   if (action.type === "ADD_SYMBOL") {
     next(action)
     socket.emit("symbol", store.getState().symbol, store.getState().chartTime);
-    socket.on("FromAPI", (data, chart, news) => {
+    socket.on("FromAPI", (data, chart, news, overview) => {
       store.dispatch(addResponseAction(data));
       store.dispatch(addChartDataAction(chart));
       store.dispatch(addLatestNewsAction(news));
+      store.dispatch(addCompanyOverviewAction(overview))
+      console.log(store.getState().companyOverview)
     });
   } else if (action.type === "ADD_CHARTTIME") {
       next(action)
