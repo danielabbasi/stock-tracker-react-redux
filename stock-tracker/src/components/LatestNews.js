@@ -1,5 +1,5 @@
 import React from "react";
-import {useSelector} from 'react-redux'
+import { useSelector } from 'react-redux'
 
 const LatestNews = () => {
   function timeDifference(current, previous) {
@@ -10,10 +10,10 @@ const LatestNews = () => {
     const msPerYear = msPerDay * 365;
     const elapsed = current - previous;
     return (elapsed < msPerHour) ? Math.round(elapsed / msPerMinute) + "min ago"
-    : (elapsed < msPerDay) ? Math.round(elapsed / msPerHour) + "hrs ago"
-    : (elapsed < msPerMonth) ? Math.round(elapsed / msPerDay) + "days ago"
-    : (elapsed < msPerYear) ? Math.round(elapsed / msPerMonth) + "months ago"
-    : ""
+      : (elapsed < msPerDay) ? Math.round(elapsed / msPerHour) + "hrs ago"
+        : (elapsed < msPerMonth) ? Math.round(elapsed / msPerDay) + "days ago"
+          : (elapsed < msPerYear) ? Math.round(elapsed / msPerMonth) + "months ago"
+            : ""
   }
   const latestNews = useSelector((state) => state.latestNews)
   const currentTime = Date.now();

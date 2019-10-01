@@ -1,5 +1,5 @@
-export function reducer( state, action ) {
-    switch(action.type){
+export function reducer(state, action) {
+    switch (action.type) {
         case 'ADD_RESPONSE':
             return {
                 ...state,
@@ -25,11 +25,11 @@ export function reducer( state, action ) {
                 ...state,
                 chartData: action.payload
             }
-            case 'ADD_NEWS':
-                return {
+        case 'ADD_NEWS':
+            return {
                 ...state,
                 latestNews: action.payload
-                }
+            }
         case 'ADD_CHARTTIME':
             return {
                 ...state,

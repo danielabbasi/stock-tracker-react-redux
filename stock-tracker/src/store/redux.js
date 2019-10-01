@@ -18,7 +18,7 @@ const initialState = {
   companies: false,
   latestNews: [],
   chartData: [],
-  chartTime: "5Y", 
+  chartTime: "5Y",
   companyOverview: false
 };
 
@@ -39,25 +39,25 @@ const stockMiddleware = store => next => action => {
       store.dispatch(addChartDataAction(chartData))
     })
   } else if (action.type === "ADD_CHARTTIME") {
-      next(action)
-      socket.emit("chartTime", store.getState().symbol, store.getState().chartTime)
-      store.dispatch(addChartDataAction(store.getState().chartData))
+    next(action)
+    socket.emit("chartTime", store.getState().symbol, store.getState().chartTime)
+    store.dispatch(addChartDataAction(store.getState().chartData))
   }
   const result = next(action);
   return result;
 };
 
-  const initialStartupMiddlware = store => next => action => {
-    if (action.type === "INITIAL_STARTUP") {
-      next(action)
-      console.log("Application has started ")
-      socket.on("companies", (companies) => {
-        store.dispatch(addCompaniesAction(companies))
-      })
-    }
-    const result = next(action)
-    return result
+const initialStartupMiddlware = store => next => action => {
+  if (action.type === "INITIAL_STARTUP") {
+    next(action)
+    console.log("Application has started ")
+    socket.on("companies", (companies) => {
+      store.dispatch(addCompaniesAction(companies))
+    })
   }
+  const result = next(action)
+  return result
+}
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
