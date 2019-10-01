@@ -16,6 +16,9 @@ const Header = ({response}) => {
       setSymbol('');
     }
   }
+  const changeNo = Math.abs(Math.round(response.change*100)/100) || "";
+  const changePercentNo = Math.abs(Math.round(response.changePercent*100)/100) || "";
+
   return (
     <>
     <div className="headerContainer">
@@ -30,8 +33,8 @@ const Header = ({response}) => {
         <input className="searchBar" placeholder={response ? `${response.companyName} (${response.symbol})` : ""} type="text" value={symbol} onChange={(e) => setSymbol(e.target.value)} onKeyPress={handleSubmit} />
         <div className="priceDisplay">
           <h3>{response.latestPrice}</h3>
-          <h3>{response.change}</h3>
-          <h3>{response.changePercent}</h3>
+          <h3 className={(response.change < 0) ? "priceDecrease" : "priceIncrease"}>{changeNo}</h3>
+          <h3 className={(response.changePercent < 0) ? "priceDecrease" : "priceIncrease"}>{changePercentNo}</h3>
         </div>
       </div>
     </>
