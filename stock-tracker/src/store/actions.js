@@ -26,3 +26,5 @@ export const addChartTimeAction = (chartTime) => ({
     type: 'ADD_CHARTTIME',
     payload: chartTime
 })
+
+export const initialStartupAction = () => ({ type: "INITIAL_STARTUP"} )

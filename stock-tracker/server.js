@@ -12,7 +12,7 @@ const io = socketIo(server);
 io.on("connection", socket => {
   console.log("New client connected");
   let interval;
-  // getCompaniesFromAPI(socket)
+  getCompaniesFromAPI(socket) // COMPANIES !
   socket.on("symbol", (stockSymbol, chartTime) => {
     if (interval) {
       console.log("symbol " + stockSymbol)
@@ -34,16 +34,17 @@ io.on("connection", socket => {
 
 server.listen(port, () => console.log(`Listening on port ${port}`));
 
-// const getCompaniesFromAPI = async socket => {
-//   try {
-//     const res = await axios.get(
-//       'https://api.iextrading.com/1.0/ref-data/symbols'
-//     )
-//     socket.emit("companies", res.data)
-//   } catch (error) {
-//     console.error(`Error: ${error}`);
-//   }
-// }
+const getCompaniesFromAPI = async socket => {
+  try {
+    const res = await axios.get(
+      'https://api.iextrading.com/1.0/ref-data/symbols'
+    )
+    socket.emit("companies", res.data)
+  } catch (error) {
+    console.log("companies error ")
+    console.error(`Error: ${error}`);
+  }
+}
 
 const getApiAndEmit = async (socket, stockSymbol, chartTime) => {
   try {
@@ -91,6 +92,7 @@ const getApiAndEmit = async (socket, stockSymbol, chartTime) => {
     const chart = chartData.data.map(data => ({ close: data.close, date: data.date }))
     socket.emit("FromAPI", stockData, chart, news); // Emitting a new message. It will be consumed by the client
   } catch (error) {
+    console.log("stock data error ")
     console.error(`Error: ${error}`);
   }
 };

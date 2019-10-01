@@ -5,6 +5,7 @@ import {
   addCompaniesAction,
   addChartDataAction,
   addLatestNewsAction,
+  initialStartupAction
 } from "./actions";
 
 const io = require("socket.io-client");
@@ -37,12 +38,30 @@ const stockMiddleware = store => next => action => {
   return result;
 };
 
+
 // TODO: CREATE INITIAL STARTUP MIDDLEWARE
+  const initialStartupMiddlware = store => next => action => {
+    if (action.type === "INITIAL_STARTUP") {
+      next(action)
+      console.log("Application has started ")
+      socket.on("companies", (companies) => {
+        store.dispatch(addCompaniesAction(companies))
+        console.log(companies)
+        console.log("companies store " + store.getState().companies)
+  
+      })
+      console.log("companies store " + store.getState().companies)
+    }
+    const result = next(action)
+    return result
+  }
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 export const store = createStore(
   reducer,
   initialState,
-  composeEnhancers(applyMiddleware(stockMiddleware))
+  composeEnhancers(applyMiddleware(initialStartupMiddlware, stockMiddleware))
 );
+
+store.dispatch(initialStartupAction());
