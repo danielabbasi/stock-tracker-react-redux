@@ -12,19 +12,22 @@ const io = socketIo(server);
 io.on("connection", socket => {
   console.log("New client connected");
   let interval;
-  getCompaniesFromAPI(socket) // COMPANIES !
+  getCompaniesFromAPI(socket)
   socket.on("symbol", (stockSymbol, chartTime) => {
     if (interval) {
       console.log("symbol " + stockSymbol)
       clearInterval(interval);
     }
-    getApiAndEmit(socket, stockSymbol, chartTime)
-    interval = setInterval(() => getApiAndEmit(socket, stockSymbol, chartTime), 5000);
+    getStockDataAndEmit(socket, stockSymbol)
+    getCompanyOverviewAndEmit(socket, stockSymbol)
+    getNewsDataAndEmit(socket, stockSymbol)
+    getChartDataAndEmit(socket, stockSymbol, chartTime)
+    interval = setInterval(() => getStockDataAndEmit(socket, stockSymbol), 5000);
   })
   socket.on("chartTime", (stockSymbol, chartTime) => {
-    getApiAndEmit(socket, stockSymbol, chartTime)
+    getChartDataAndEmit(socket, stockSymbol, chartTime)
     clearInterval(interval)
-    interval = setInterval(() => getApiAndEmit(socket, stockSymbol, chartTime), 5000);
+    interval = setInterval(() => getChartDataAndEmit(socket, stockSymbol, chartTime), 5000);
   })
   socket.on("disconnect", () => {
     clearInterval(interval);
@@ -39,7 +42,7 @@ const getCompaniesFromAPI = async socket => {
     const res = await axios.get(
       'https://api.iextrading.com/1.0/ref-data/symbols'
     )
-    const companies = res.data.map(data => ({name: data.name, symbol: data.symbol}))
+    const companies = res.data.map(data => ({ name: data.name, symbol: data.symbol }))
     socket.emit("companies", companies)
   } catch (error) {
     console.log("companies error ")
@@ -47,7 +50,49 @@ const getCompaniesFromAPI = async socket => {
   }
 }
 
-const getApiAndEmit = async (socket, stockSymbol, chartTime) => {
+const getCompanyOverviewAndEmit = async (socket, stockSymbol) => {
+  try {
+    const companyOverview = await axios.get(
+      `https://sandbox.iexapis.com/stable/stock/${stockSymbol}/company?token=Tpk_139c39f1edae43fc8e5ab12451d30f4c`)
+      const { companyName, symbol, website, description } = companyOverview.data
+      const overview = {
+        companyName,
+        symbol,
+        website,
+        description
+      }
+      socket.emit("CompanyOverview", overview)
+    } catch {
+    console.log("company overview error ")
+    console.error(`Error: ${error}`);
+  }
+}
+
+const getNewsDataAndEmit = async (socket, stockSymbol) => {
+  try {
+    const latestNews = await axios.get(
+      `https://cloud.iexapis.com/stable/stock/${stockSymbol}/news/last/5?token=pk_9be28da235714828a592abf7395e810f`
+    )
+    const news = latestNews.data.map(data => ({ headline: data.headline, datetime: data.datetime, source: data.source })) 
+    socket.emit("LatestNews", news)
+  } catch {
+    console.error(`News Error: ${error}`)
+  }
+}
+
+const getChartDataAndEmit = async (socket, stockSymbol, chartTime) => {
+  try {
+    const chartData = await axios.get(
+      `https://sandbox.iexapis.com/stable/stock/${stockSymbol}/chart/${chartTime}?token=Tpk_139c39f1edae43fc8e5ab12451d30f4c`
+    )
+    const chart = chartData.data.map(data => ({ close: data.close, date: data.date }))
+    socket.emit("ChartData", chart)
+  } catch {
+    console.error(`Chart Data Error: ${error}`)
+  }
+}
+
+const getStockDataAndEmit = async (socket, stockSymbol) => {
   try {
     const resPromise = axios.get(
       `https://sandbox.iexapis.com/stable/stock/${stockSymbol}/quote?token=Tpk_139c39f1edae43fc8e5ab12451d30f4c`
@@ -55,18 +100,10 @@ const getApiAndEmit = async (socket, stockSymbol, chartTime) => {
     const epsPromise = axios.get(
       `https://sandbox.iexapis.com/stable/stock/${stockSymbol}/earnings/1/actualEPS?token=Tpk_139c39f1edae43fc8e5ab12451d30f4c`
     )
-    const chartDataPromise = axios.get(
-      `https://sandbox.iexapis.com/stable/stock/${stockSymbol}/chart/${chartTime}?token=Tpk_139c39f1edae43fc8e5ab12451d30f4c`
-    )
-    const latestNewsPromise = axios.get(
-      `https://cloud.iexapis.com/stable/stock/${stockSymbol}/news/last/5?token=pk_9be28da235714828a592abf7395e810f`
-    )
-
-    const [res, eps, chartData, latestNews] = await Promise.all([resPromise, epsPromise, chartDataPromise, latestNewsPromise])
-    changeNullValues(res.data,eps.data)
+    const [res, eps] = await Promise.all([resPromise, epsPromise])
+    changeNullValues(res.data, eps.data)
 
     const { latestPrice, change, changePercent, symbol, companyName, previousClose, high, low, previousVolume, marketCap, peRatio, open, week52High, week52Low, avgTotalVolume, ytdChange } = res.data
-
     stockData = {
       latestPrice,
       change,
@@ -88,13 +125,9 @@ const getApiAndEmit = async (socket, stockSymbol, chartTime) => {
       earningsPerShare: eps.data,
       ytdChange
     }
-
-    const news = latestNews.data.map(data => ({headline: data.headline, datetime: data.datetime, source: data.source}))
-    const chart = chartData.data.map(data => ({ close: data.close, date: data.date }))
-    socket.emit("FromAPI", stockData, chart, news); // Emitting a new message. It will be consumed by the client
+    socket.emit("StockData", stockData); // Emitting a new message. It will be consumed by the client
   } catch (error) {
-    console.log("stock data error ")
-    console.error(`Error: ${error}`);
+    console.error(`Stock Error: ${error}`);
   }
 };
 

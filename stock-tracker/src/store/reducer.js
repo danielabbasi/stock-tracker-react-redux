@@ -15,6 +15,11 @@ export function reducer( state, action ) {
                 ...state,
                 companies: action.payload
             }
+        case 'ADD_COMPANY_OVERVIEW':
+            return {
+                ...state,
+                companyOverview: action.payload
+            }
         case 'ADD_CHARTDATA':
             return {
                 ...state,

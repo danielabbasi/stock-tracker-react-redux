@@ -13,6 +13,11 @@ export const addCompaniesAction = (companies) => ({
     payload: companies
 })
 
+export const addCompanyOverviewAction = (companyOverview) => ({
+    type: 'ADD_COMPANY_OVERVIEW',
+    payload: companyOverview
+})
+
 export const addChartDataAction = (chartData) => ({
     type: 'ADD_CHARTDATA',
     payload: chartData
