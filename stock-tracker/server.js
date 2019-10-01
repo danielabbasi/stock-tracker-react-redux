@@ -125,7 +125,7 @@ const getStockDataAndEmit = async (socket, stockSymbol) => {
       earningsPerShare: eps.data,
       ytdChange
     }
-    socket.emit("FromAPI", stockData); // Emitting a new message. It will be consumed by the client
+    socket.emit("StockData", stockData); // Emitting a new message. It will be consumed by the client
   } catch (error) {
     console.error(`Stock Error: ${error}`);
   }

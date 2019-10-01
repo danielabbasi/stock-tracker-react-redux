@@ -26,7 +26,7 @@ const stockMiddleware = store => next => action => {
   if (action.type === "ADD_SYMBOL") {
     next(action)
     socket.emit("symbol", store.getState().symbol, store.getState().chartTime);
-    socket.on("FromAPI", (data) => {
+    socket.on("StockData", (data) => {
       store.dispatch(addResponseAction(data));
     });
     socket.on("CompanyOverview", (overview) => {
@@ -37,7 +37,6 @@ const stockMiddleware = store => next => action => {
     })
     socket.on("ChartData", (chartData) => {
       store.dispatch(addChartDataAction(chartData))
-      console.log(store.getState().chartData)
     })
   } else if (action.type === "ADD_CHARTTIME") {
       next(action)
