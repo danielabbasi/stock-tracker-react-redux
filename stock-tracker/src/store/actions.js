@@ -9,7 +9,7 @@ export const addSymbolAction = (symbol) => ({
 })
 
 export const addCompaniesAction = (companies) => ({
-    type: 'ADD_SYMBOL',
+    type: 'ADD_COMPANIES',
     payload: companies
 })
 

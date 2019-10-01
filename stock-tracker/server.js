@@ -39,7 +39,8 @@ const getCompaniesFromAPI = async socket => {
     const res = await axios.get(
       'https://api.iextrading.com/1.0/ref-data/symbols'
     )
-    socket.emit("companies", res.data)
+    const companies = res.data.map(data => ({name: data.name, symbol: data.symbol}))
+    socket.emit("companies", companies)
   } catch (error) {
     console.log("companies error ")
     console.error(`Error: ${error}`);

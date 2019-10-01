@@ -13,7 +13,7 @@ const socket = io("http://127.0.0.1:5000");
 
 const initialState = {
   response: false,
-  symbol: "AAPL",
+  symbol: "",
   companies: false,
   latestNews: [],
   chartData: [],
@@ -38,19 +38,13 @@ const stockMiddleware = store => next => action => {
   return result;
 };
 
-
-// TODO: CREATE INITIAL STARTUP MIDDLEWARE
   const initialStartupMiddlware = store => next => action => {
     if (action.type === "INITIAL_STARTUP") {
       next(action)
       console.log("Application has started ")
       socket.on("companies", (companies) => {
         store.dispatch(addCompaniesAction(companies))
-        console.log(companies)
-        console.log("companies store " + store.getState().companies)
-  
       })
-      console.log("companies store " + store.getState().companies)
     }
     const result = next(action)
     return result
