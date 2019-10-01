@@ -31,5 +31,9 @@ export const addChartTimeAction = (chartTime) => ({
     type: 'ADD_CHARTTIME',
     payload: chartTime
 })
+export const addTopPeersAction = (topPeers) => ({
+    type: 'ADD_TOP_PEERS',
+    payload: topPeers
+})
 
 export const initialStartupAction = () => ({ type: "INITIAL_STARTUP" })

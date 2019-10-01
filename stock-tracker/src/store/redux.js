@@ -6,7 +6,8 @@ import {
   addChartDataAction,
   addLatestNewsAction,
   initialStartupAction,
-  addCompanyOverviewAction
+  addCompanyOverviewAction,
+  addTopPeersAction
 } from "./actions";
 
 const io = require("socket.io-client");
@@ -19,7 +20,8 @@ const initialState = {
   latestNews: [],
   chartData: [],
   chartTime: "5Y",
-  companyOverview: false
+  companyOverview: false,
+  topPeers: []
 };
 
 const stockMiddleware = store => next => action => {
@@ -37,6 +39,9 @@ const stockMiddleware = store => next => action => {
     })
     socket.on("ChartData", (chartData) => {
       store.dispatch(addChartDataAction(chartData))
+    })
+    socket.on("TopPeers", (peers) => {
+      store.dispatch(addTopPeersAction(peers))
     })
   } else if (action.type === "ADD_CHARTTIME") {
     next(action)
