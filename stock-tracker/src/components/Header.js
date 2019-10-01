@@ -19,6 +19,11 @@ const Header = ({response}) => {
   const changeNo = Math.abs(Math.round(response.change*100)/100) || "";
   const changePercentNo = Math.abs(Math.round(response.changePercent*100)/100) || "";
 
+  const marketStatus = response.isUSMarketOpen ? "Market Open" : "Market Closed"
+  console.log("time update", response.latestTime,
+    response.latestUpdate,
+    response.isUSMarketOpen)
+
   return (
     <>
     <div className="headerContainer">
@@ -35,6 +40,10 @@ const Header = ({response}) => {
           <h3>{response.latestPrice}</h3>
           <h3 className={(response.change < 0) ? "priceDecrease" : "priceIncrease"}>{changeNo}</h3>
           <h3 className={(response.changePercent < 0) ? "priceDecrease" : "priceIncrease"}>{changePercentNo}</h3>
+        </div>
+        <div>
+          <p>Real time price as of {response.latestUpdate} {response.latestTime}</p>
+          <p>{marketStatus}</p>
         </div>
       </div>
     </>

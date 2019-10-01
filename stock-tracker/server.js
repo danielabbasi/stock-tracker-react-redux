@@ -103,7 +103,7 @@ const getStockDataAndEmit = async (socket, stockSymbol) => {
     const [res, eps] = await Promise.all([resPromise, epsPromise])
     changeNullValues(res.data, eps.data)
 
-    const { latestPrice, change, changePercent, symbol, companyName, previousClose, high, low, previousVolume, marketCap, peRatio, open, week52High, week52Low, avgTotalVolume, ytdChange } = res.data
+    const { latestPrice, change, changePercent, symbol, companyName, previousClose, high, low, previousVolume, marketCap, peRatio, open, week52High, week52Low, avgTotalVolume, ytdChange, latestTime, latestUpdate, isUSMarketOpen } = res.data
     stockData = {
       latestPrice,
       change,
@@ -123,7 +123,10 @@ const getStockDataAndEmit = async (socket, stockSymbol) => {
       week52Range: week52Low + '-' + week52High,
       avgTotalVolume,
       earningsPerShare: eps.data,
-      ytdChange
+      ytdChange,
+      latestTime,
+      latestUpdate,
+      isUSMarketOpen
     }
     socket.emit("FromAPI", stockData); // Emitting a new message. It will be consumed by the client
   } catch (error) {
