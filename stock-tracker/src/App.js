@@ -9,11 +9,11 @@ import './App.css';
 function App() {
   return (
     <>
-        <Header/>
-        <KeyStats/>
-        <Chart id="chartDiv"/>
-        <LatestNews/>
-        <Overview/>
+      <Header />
+      <KeyStats />
+      <Chart id="chartDiv" />
+      <LatestNews />
+      <Overview />
     </>
   );
 }

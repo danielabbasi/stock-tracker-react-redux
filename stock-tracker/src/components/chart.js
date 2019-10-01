@@ -17,7 +17,7 @@ const Chart = () => {
             <button value="1M" onClick={onClick}>1M</button>
             <button value="1Y" onClick={onClick}>1Y</button>
             <button value="5Y" onClick={onClick}>5Y</button>
-            <button value="MAX"onClick={onClick}>MAX</button>
+            <button value="MAX" onClick={onClick}>MAX</button>
             <AreaChart
                 width={1000}
                 height={400}

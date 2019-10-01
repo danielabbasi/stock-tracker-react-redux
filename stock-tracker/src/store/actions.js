@@ -32,4 +32,4 @@ export const addChartTimeAction = (chartTime) => ({
     payload: chartTime
 })
 
-export const initialStartupAction = () => ({ type: "INITIAL_STARTUP"} )
+export const initialStartupAction = () => ({ type: "INITIAL_STARTUP" })

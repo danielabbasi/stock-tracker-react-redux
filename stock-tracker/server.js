@@ -54,15 +54,17 @@ const getCompanyOverviewAndEmit = async (socket, stockSymbol) => {
   try {
     const companyOverview = await axios.get(
       `https://sandbox.iexapis.com/stable/stock/${stockSymbol}/company?token=Tpk_139c39f1edae43fc8e5ab12451d30f4c`)
-      const { companyName, symbol, website, description } = companyOverview.data
-      const overview = {
-        companyName,
-        symbol,
-        website,
-        description
-      }
-      socket.emit("CompanyOverview", overview)
-    } catch {
+    const { companyName, symbol, exchange, industry, website, description } = companyOverview.data
+    const overview = {
+      companyName,
+      symbol,
+      exchange,
+      industry,
+      website,
+      description
+    }
+    socket.emit("CompanyOverview", overview)
+  } catch {
     console.log("company overview error ")
     console.error(`Error: ${error}`);
   }
@@ -73,7 +75,7 @@ const getNewsDataAndEmit = async (socket, stockSymbol) => {
     const latestNews = await axios.get(
       `https://cloud.iexapis.com/stable/stock/${stockSymbol}/news/last/5?token=pk_9be28da235714828a592abf7395e810f`
     )
-    const news = latestNews.data.map(data => ({ headline: data.headline, datetime: data.datetime, source: data.source })) 
+    const news = latestNews.data.map(data => ({ headline: data.headline, datetime: data.datetime, source: data.source }))
     socket.emit("LatestNews", news)
   } catch {
     console.error(`News Error: ${error}`)
@@ -100,9 +102,12 @@ const getStockDataAndEmit = async (socket, stockSymbol) => {
     const epsPromise = axios.get(
       `https://sandbox.iexapis.com/stable/stock/${stockSymbol}/earnings/1/actualEPS?token=Tpk_139c39f1edae43fc8e5ab12451d30f4c`
     )
-    const [res, eps] = await Promise.all([resPromise, epsPromise])
+    const dividendsPromise = axios.get(
+      `https://sandbox.iexapis.com/stable/stock/${stockSymbol}/dividends/1y?token=Tpk_139c39f1edae43fc8e5ab12451d30f4c`
+    )
+    const [res, eps, dividends] = await Promise.all([resPromise, epsPromise, dividendsPromise])
     changeNullValues(res.data, eps.data)
-
+    const currency = dividends.data[0].currency
     const { latestPrice, change, changePercent, symbol, companyName, previousClose, high, low, previousVolume, marketCap, peRatio, open, week52High, week52Low, avgTotalVolume, ytdChange } = res.data
     stockData = {
       latestPrice,
@@ -123,7 +128,8 @@ const getStockDataAndEmit = async (socket, stockSymbol) => {
       week52Range: week52Low + '-' + week52High,
       avgTotalVolume,
       earningsPerShare: eps.data,
-      ytdChange
+      ytdChange,
+      currency
     }
     socket.emit("StockData", stockData); // Emitting a new message. It will be consumed by the client
   } catch (error) {
