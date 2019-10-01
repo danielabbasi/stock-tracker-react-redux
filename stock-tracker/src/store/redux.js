@@ -26,13 +26,19 @@ const stockMiddleware = store => next => action => {
   if (action.type === "ADD_SYMBOL") {
     next(action)
     socket.emit("symbol", store.getState().symbol, store.getState().chartTime);
-    socket.on("FromAPI", (data, chart, news, overview) => {
+    socket.on("FromAPI", (data) => {
       store.dispatch(addResponseAction(data));
-      store.dispatch(addChartDataAction(chart));
-      store.dispatch(addLatestNewsAction(news));
-      store.dispatch(addCompanyOverviewAction(overview))
-      console.log(store.getState().companyOverview)
     });
+    socket.on("CompanyOverview", (overview) => {
+      store.dispatch(addCompanyOverviewAction(overview))
+    });
+    socket.on("LatestNews", (news) => {
+      store.dispatch(addLatestNewsAction(news))
+    })
+    socket.on("ChartData", (chartData) => {
+      store.dispatch(addChartDataAction(chartData))
+      console.log(store.getState().chartData)
+    })
   } else if (action.type === "ADD_CHARTTIME") {
       next(action)
       socket.emit("chartTime", store.getState().symbol, store.getState().chartTime)
