@@ -22,6 +22,7 @@ io.on("connection", socket => {
     getCompanyOverviewAndEmit(socket, stockSymbol)
     getNewsDataAndEmit(socket, stockSymbol)
     getChartDataAndEmit(socket, stockSymbol, chartTime)
+    getTopPeersAndEmit(socket, stockSymbol)
     interval = setInterval(() => getStockDataAndEmit(socket, stockSymbol), 5000);
   })
   socket.on("chartTime", (stockSymbol, chartTime) => {
@@ -91,6 +92,17 @@ const getChartDataAndEmit = async (socket, stockSymbol, chartTime) => {
     socket.emit("ChartData", chart)
   } catch {
     console.error(`Chart Data Error: ${error}`)
+  }
+}
+
+const getTopPeersAndEmit = async (socket, stockSymbol) => {
+  try {
+    const topPeers = await axios.get(
+      `https://sandbox.iexapis.com/stable/stock/${stockSymbol}/peers?token=Tpk_139c39f1edae43fc8e5ab12451d30f4c`
+    )
+    socket.emit("TopPeers", topPeers.data)
+  } catch {
+    console.error(`Top Peers Error: ${error}`)
   }
 }
 

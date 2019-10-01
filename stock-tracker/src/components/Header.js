@@ -19,8 +19,6 @@ const Header = () => {
   }
   const changeNo = Math.abs(Math.round(response.change * 100) / 100) || "";
   const changePercentNo = Math.abs(Math.round(response.changePercent * 100) / 100) || "";
-  console.log(overview)
-
   return (
     <>
       <div className="headerContainer">

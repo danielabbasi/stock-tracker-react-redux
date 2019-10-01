@@ -35,6 +35,11 @@ export function reducer(state, action) {
                 ...state,
                 chartTime: action.payload
             }
+        case 'ADD_TOP_PEERS':
+            return {
+                ...state,
+                topPeers: action.payload
+            }
         default:
             return state
     }
