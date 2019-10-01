@@ -16,9 +16,9 @@ const Header = ({response}) => {
       setSymbol('');
     }
   }
-  const changeNo = Math.abs(response.change) || "";
-  const changePercentNo = Math.abs(response.changePercent) || "";
-  console.log("change-", response.change, "change%-", response.changePercent)
+  const changeNo = Math.abs(Math.round(response.change*100)/100) || "";
+  const changePercentNo = Math.abs(Math.round(response.changePercent*100)/100) || "";
+
   return (
     <>
     <div className="headerContainer">
