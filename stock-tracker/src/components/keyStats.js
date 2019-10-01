@@ -1,6 +1,8 @@
 import React from 'react';
+import {useSelector} from 'react-redux';
 
-const KeyStats = ({response}) => {
+const KeyStats = () => {
+    const response = useSelector((state) => state.response)
     return (
         <>
         <h2>KEY STATS</h2>
