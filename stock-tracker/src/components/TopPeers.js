@@ -6,7 +6,7 @@ const TopPeers = () => {
     return (
         <div>
             <h3>Top Peers</h3>
-            <ul>{peers.map(data => <li>{data}</li>)} </ul>
+            <ul>{peers.map((data, index) => <li key={index}>{data}</li>)} </ul>
         </div>
     )
 }
