@@ -2,6 +2,7 @@ import React, { useState, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addSymbolAction } from '../store/actions';
 import logo from '../assets/logo.png';
+const moment = require('moment');
 
 const Header = () => {
   const [symbol, setSymbol] = useState("")
@@ -17,8 +18,15 @@ const Header = () => {
       setSymbol('');
     }
   }
-  const changeNo = Math.abs(Math.round(response.change * 100) / 100) || "";
-  const changePercentNo = Math.abs(Math.round(response.changePercent * 100) / 100) || "";
+  const changeNo = Math.abs(Math.round(response.change*100)/100) || "";
+  const changePercentNo = Math.abs(Math.round(response.changePercent*100)/100) || "";
+
+  const marketStatus = response 
+  ? response.isUSMarketOpen ? "Market Open" : "Market Closed"
+  : "";
+  const formatedTime = moment(response.latestUpdate).format('hh:mm A')
+  const realTimeDisplay = response ? `Real time price as of ${response.latestTime} ${formatedTime}` : ""
+
   return (
     <>
       <div className="headerContainer">
@@ -35,6 +43,11 @@ const Header = () => {
           <h3>{response.latestPrice}</h3>
           <h3 className={(response.change < 0) ? "priceDecrease" : "priceIncrease"}>{changeNo}</h3>
           <h3 className={(response.changePercent < 0) ? "priceDecrease" : "priceIncrease"}>{changePercentNo}</h3>
+        </div>
+        {realTimeDisplay}
+        <div>
+          <p></p>
+          <p>{marketStatus}</p>
         </div>
       </div>
       <div>
