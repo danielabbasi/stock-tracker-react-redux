@@ -125,8 +125,6 @@ const getStockDataAndEmit = async (socket, stockSymbol) => {
     } else {
       currency = dividends.data[0].currency
     }
-    const { latestPrice, change, changePercent, symbol, companyName, previousClose, high, low, previousVolume, marketCap, peRatio, open, week52High, week52Low, avgTotalVolume, ytdChange } = res.data
-
     const { latestPrice, change, changePercent, symbol, companyName, previousClose, high, low, previousVolume, marketCap, peRatio, open, week52High, week52Low, avgTotalVolume, ytdChange, latestTime, latestUpdate, isUSMarketOpen } = res.data
     stockData = {
       latestPrice,
