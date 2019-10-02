@@ -10,16 +10,15 @@ import './App.css';
 
 function App() {
   return (
-    <><div className="wrapper">
-      <Header className="header" />
-      <Chart className="chart" />
-      <KeyStats className="keystats"/>
-      <LatestNews className="latestnews" />
-      <Overview className="overview" />
-      <TopPeers className="toppeers" />
-      <Footer className="footer" />
+    <div className="wrapper">
+      <Header/>
+      <Chart/>
+      <KeyStats/>
+      <LatestNews/>
+      <Overview/>
+      <TopPeers/>
+      <Footer/>
     </div>
-    </>
   );
 }
 export default App;

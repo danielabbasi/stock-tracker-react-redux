@@ -25,7 +25,7 @@ const LatestNews = () => {
     </div>
   ));
   return (
-    <div>
+    <div className="latestnews">
       <h3>Latest news</h3>
       {newsDisplay}
     </div>
