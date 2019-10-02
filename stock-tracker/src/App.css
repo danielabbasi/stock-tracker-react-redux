@@ -6,3 +6,27 @@
 .keystats {
   grid-area: keystats
 }
+
+.header {
+  grid-area: header
+}
+
+.chart {
+  grid-area: chart
+}
+
+.latestnews {
+  grid-area: latestnews
+}
+
+.overview {
+  grid-area: overview
+}
+
+.toppeers {
+  grid-area: toppeers
+}
+
+.footer {
+  grid-area: footer
+}
