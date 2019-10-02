@@ -126,6 +126,8 @@ const getStockDataAndEmit = async (socket, stockSymbol) => {
       currency = dividends.data[0].currency
     }
     const { latestPrice, change, changePercent, symbol, companyName, previousClose, high, low, previousVolume, marketCap, peRatio, open, week52High, week52Low, avgTotalVolume, ytdChange } = res.data
+
+    const { latestPrice, change, changePercent, symbol, companyName, previousClose, high, low, previousVolume, marketCap, peRatio, open, week52High, week52Low, avgTotalVolume, ytdChange, latestTime, latestUpdate, isUSMarketOpen } = res.data
     stockData = {
       latestPrice,
       change,
@@ -146,7 +148,10 @@ const getStockDataAndEmit = async (socket, stockSymbol) => {
       avgTotalVolume,
       earningsPerShare: eps.data,
       ytdChange,
-      currency
+      currency,
+      latestTime,
+      latestUpdate,
+      isUSMarketOpen
     }
     socket.emit("StockData", stockData); // Emitting a new message. It will be consumed by the client
   } catch (error) {
