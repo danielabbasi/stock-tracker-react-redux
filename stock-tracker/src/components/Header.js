@@ -18,8 +18,14 @@ const Header = () => {
       setSymbol('');
     }
   }
-  const changeNo = Math.abs(Math.round(response.change * 100) / 100) || "";
-  const changePercentNo = Math.abs(Math.round(response.changePercent * 100) / 100) || "";
+  const changeNo = Math.abs(Math.round(response.change*100)/100) || "";
+  const changePercentNo = Math.abs(Math.round(response.changePercent*100)/100) || "";
+
+  const marketStatus = response 
+  ? response.isUSMarketOpen ? "Market Open" : "Market Closed"
+  : "";
+  const formatedTime = moment(response.latestUpdate).format('hh:mm A')
+  const realTimeDisplay = response ? `Real time price as of ${response.latestTime} ${formatedTime}` : ""
 
   return (
     <div className="header">
@@ -37,6 +43,11 @@ const Header = () => {
           <h3>{response.latestPrice}</h3>
           <h3 className={(response.change < 0) ? "priceDecrease" : "priceIncrease"}><Icon type={(response.change < 0) ? "arrow-down" : "arrow-up"} />{changeNo}</h3>
           <h3 className={(response.changePercent < 0) ? "priceDecrease" : "priceIncrease"}>{changePercentNo}</h3>
+        </div>
+        {realTimeDisplay}
+        <div>
+          <p></p>
+          <p>{marketStatus}</p>
         </div>
       </div>
       <div>
