@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux'
 const Overview = () => {
     const overview = useSelector((state) => state.companyOverview)
     return (
-        <div>
+        <div className="overview">
             <h3>Company Overview</h3>
             <h2>{overview.companyName}</h2>
             <p>{overview.website}</p>

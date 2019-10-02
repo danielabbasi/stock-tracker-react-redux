@@ -1,6 +1,13 @@
 .wrapper {
   display: grid;
-  grid-template-columns: 1 fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 20px;
+  grid-template-areas: 
+  "header header header"
+  "chart chart latestnews"
+  "keystats keystats overview"
+  ". . toppeers"
+  "footer footer footer"
 }
 
 .keystats {
@@ -30,3 +37,4 @@
 .footer {
   grid-area: footer
 }
+

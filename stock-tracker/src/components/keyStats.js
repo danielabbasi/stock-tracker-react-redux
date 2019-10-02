@@ -4,10 +4,8 @@ import { useSelector } from 'react-redux';
 const KeyStats = () => {
     const response = useSelector((state) => state.response)
     return (
-        <>
+            <div className="keystats">
             <h2>KEY STATS</h2>
-            <div className="keyStatsContainer">
-
                 <ul className="keyStats-li1">
                     <li>
                         <p className="keyStats-name">Previous Close</p>
@@ -53,7 +51,6 @@ const KeyStats = () => {
                     </li>
                 </ul>
             </div>
-        </>
     )
 }
 export default KeyStats;

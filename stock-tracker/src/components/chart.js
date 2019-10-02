@@ -10,7 +10,7 @@ const Chart = () => {
         dispatch(addChartTimeAction(e.target.value))
     }
     return (
-        <>
+        <div className="chart">
             <h2>Stock Chart</h2>
             <button value="1D" onClick={onClick}>1D</button>
             <button value="5D" onClick={onClick}>5D</button>
@@ -29,7 +29,7 @@ const Chart = () => {
                 <Tooltip />
                 <Area type='monotone' dataKey='close' stroke='#0e0e0f' fill='#374B7D' />
             </AreaChart>
-        </>
+        </div>
     )
 }
 export default Chart;

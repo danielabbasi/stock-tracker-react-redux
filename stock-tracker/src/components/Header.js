@@ -20,7 +20,7 @@ const Header = () => {
   const changeNo = Math.abs(Math.round(response.change * 100) / 100) || "";
   const changePercentNo = Math.abs(Math.round(response.changePercent * 100) / 100) || "";
   return (
-    <>
+    <div className="header">
       <div className="headerContainer">
         <img className="logo" alt="logo" src={logo} />
         <div className="HeaderBtns">
@@ -38,12 +38,12 @@ const Header = () => {
         </div>
       </div>
       <div>
-      {/* TODO: STYLE INTO NICE BOXES HORIZONTAL */}
-        <p>{overview.exchange}</p> 
+        {/* TODO: STYLE INTO NICE BOXES HORIZONTAL */}
+        <p>{overview.exchange}</p>
         <p>{overview.industry}</p>
         <p>{response.currency}</p>
       </div>
-    </>
+    </div>
   )
 }
 export default Header;
