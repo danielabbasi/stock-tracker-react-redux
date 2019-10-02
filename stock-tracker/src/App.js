@@ -5,17 +5,20 @@ import Chart from "./components/chart";
 import LatestNews from './components/LatestNews';
 import Overview from './components/Overview';
 import TopPeers from './components/TopPeers'
+import Footer from './components/Footer'
 import './App.css';
 
 function App() {
   return (
-    <>
-      <Header />
-      <KeyStats />
-      <Chart id="chartDiv" />
-      <LatestNews />
-      <Overview />
-      <TopPeers/>
+    <><div className="wrapper">
+      <Header className="header" />
+      <Chart className="chart" />
+      <KeyStats className="keystats"/>
+      <LatestNews className="latestnews" />
+      <Overview className="overview" />
+      <TopPeers className="toppeers" />
+      <Footer className="footer" />
+    </div>
     </>
   );
 }

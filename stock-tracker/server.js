@@ -118,8 +118,14 @@ const getStockDataAndEmit = async (socket, stockSymbol) => {
       `https://sandbox.iexapis.com/stable/stock/${stockSymbol}/dividends/1y?token=Tpk_139c39f1edae43fc8e5ab12451d30f4c`
     )
     const [res, eps, dividends] = await Promise.all([resPromise, epsPromise, dividendsPromise])
+    let currency
     changeNullValues(res.data, eps.data)
-    const currency = dividends.data[0].currency
+    if (dividends.data[0] === undefined) {
+      currency = ''
+    } else {
+      currency = dividends.data[0].currency
+    }
+    const { latestPrice, change, changePercent, symbol, companyName, previousClose, high, low, previousVolume, marketCap, peRatio, open, week52High, week52Low, avgTotalVolume, ytdChange } = res.data
 
     const { latestPrice, change, changePercent, symbol, companyName, previousClose, high, low, previousVolume, marketCap, peRatio, open, week52High, week52Low, avgTotalVolume, ytdChange, latestTime, latestUpdate, isUSMarketOpen } = res.data
     stockData = {
