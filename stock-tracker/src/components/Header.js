@@ -20,7 +20,9 @@ const Header = ({response}) => {
   const changeNo = Math.abs(Math.round(response.change*100)/100) || "";
   const changePercentNo = Math.abs(Math.round(response.changePercent*100)/100) || "";
 
-  const marketStatus = response.isUSMarketOpen ? "Market Open" : "Market Closed"
+  const marketStatus = response 
+  ? response.isUSMarketOpen ? "Market Open" : "Market Closed"
+  : "";
   const formatedTime = moment(response.latestUpdate).format('hh:mm A')
   const realTimeDisplay = response ? `Real time price as of ${response.latestTime} ${formatedTime}` : ""
 
