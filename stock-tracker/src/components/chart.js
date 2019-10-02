@@ -1,5 +1,5 @@
 import React from 'react';
-import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, ReferenceLine, Label } from 'recharts';
 import { useDispatch, useSelector } from 'react-redux';
 import { addChartTimeAction } from '../store/actions';
 
@@ -8,6 +8,10 @@ const Chart = () => {
     const chartData = useSelector((state) => state.chartData)
     const onClick = (e) => {
         dispatch(addChartTimeAction(e.target.value))
+    }
+    let latestValue
+    if (chartData[chartData.length - 1] !== undefined) {
+        latestValue = chartData[chartData.length - 1].close
     }
     return (
         <div className="chart">
@@ -31,6 +35,8 @@ const Chart = () => {
                     </defs>
                     <XAxis dataKey="date" />
                     <YAxis orientation="right" />
+                    <ReferenceLine y={latestValue} isFront={true} label={{ position: 'right', value: latestValue, fill: 'orange', fontSize: 14, }} stroke="orange" strokeDasharray="3 3" />
+                    <Label value={latestValue} stroke="black" position="right" />
                     <Tooltip />
                     <Area type='monotone' dataKey='close' stroke='#73b3ef' fillOpacity={1} fill='url(#colorUv)' />
                 </AreaChart>
