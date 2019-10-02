@@ -35,6 +35,7 @@
 }
 
 .footer {
-  grid-area: footer
+  grid-area: footer;
+  background-color: #09266d
 }
 
