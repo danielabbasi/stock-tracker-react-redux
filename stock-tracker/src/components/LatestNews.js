@@ -1,8 +1,9 @@
 import React from "react";
+import { useSelector } from 'react-redux';
 const moment = require('moment');
 
-const LatestNews = ({ latestNews }) => {
-
+const LatestNews = () => {
+  const latestNews = useSelector((state) => state.latestNews)
   const newsDisplay = latestNews.map((news, index) => (
     <div key={index}>
       <p className="newsHeadline">{news.headline}</p>
