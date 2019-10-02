@@ -2,6 +2,7 @@ import React, { useState, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addSymbolAction } from '../store/actions';
 import logo from '../assets/logo.png';
+import { Icon } from 'antd';
 
 const Header = () => {
   const [symbol, setSymbol] = useState("")
@@ -19,6 +20,7 @@ const Header = () => {
   }
   const changeNo = Math.abs(Math.round(response.change * 100) / 100) || "";
   const changePercentNo = Math.abs(Math.round(response.changePercent * 100) / 100) || "";
+
   return (
     <>
       <div className="headerContainer">
@@ -33,7 +35,7 @@ const Header = () => {
         <input className="searchBar" placeholder={response ? `${response.companyName} (${response.symbol})` : ""} type="text" value={symbol} onChange={(e) => setSymbol(e.target.value)} onKeyPress={handleSubmit} />
         <div className="priceDisplay">
           <h3>{response.latestPrice}</h3>
-          <h3 className={(response.change < 0) ? "priceDecrease" : "priceIncrease"}>{changeNo}</h3>
+          <h3 className={(response.change < 0) ? "priceDecrease" : "priceIncrease"}><Icon type={(response.change < 0) ? "arrow-down" : "arrow-up"} />{changeNo}</h3>
           <h3 className={(response.changePercent < 0) ? "priceDecrease" : "priceIncrease"}>{changePercentNo}</h3>
         </div>
       </div>
