@@ -2,6 +2,8 @@ import React, { useState, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addSymbolAction } from '../store/actions';
 import logo from '../assets/logo.png';
+import { Icon } from 'antd';
+const moment = require('moment');
 
 const Header = () => {
   const [symbol, setSymbol] = useState("")
@@ -17,10 +19,17 @@ const Header = () => {
       setSymbol('');
     }
   }
-  const changeNo = Math.abs(Math.round(response.change * 100) / 100) || "";
-  const changePercentNo = Math.abs(Math.round(response.changePercent * 100) / 100) || "";
+  const changeNo = Math.abs(Math.round(response.change*100)/100) || "";
+  const changePercentNo = Math.abs(Math.round(response.changePercent*100)/100) || "";
+
+  const marketStatus = response 
+  ? response.isUSMarketOpen ? "Market Open" : "Market Closed"
+  : "";
+  const formatedTime = moment(response.latestUpdate).format('hh:mm A')
+  const realTimeDisplay = response ? `Real time price as of ${response.latestTime} ${formatedTime}` : ""
+
   return (
-    <>
+    <div className="header">
       <div className="headerContainer">
         <img className="logo" alt="logo" src={logo} />
         <div className="HeaderBtns">
@@ -33,17 +42,22 @@ const Header = () => {
         <input className="searchBar" placeholder={response ? `${response.companyName} (${response.symbol})` : ""} type="text" value={symbol} onChange={(e) => setSymbol(e.target.value)} onKeyPress={handleSubmit} />
         <div className="priceDisplay">
           <h3>{response.latestPrice}</h3>
-          <h3 className={(response.change < 0) ? "priceDecrease" : "priceIncrease"}>{changeNo}</h3>
+          <h3 className={(response.change < 0) ? "priceDecrease" : "priceIncrease"}><Icon type={(response.change < 0) ? "arrow-down" : "arrow-up"} />{changeNo}</h3>
           <h3 className={(response.changePercent < 0) ? "priceDecrease" : "priceIncrease"}>{changePercentNo}</h3>
+        </div>
+        {realTimeDisplay}
+        <div>
+          <p></p>
+          <p>{marketStatus}</p>
         </div>
       </div>
       <div>
-      {/* TODO: STYLE INTO NICE BOXES HORIZONTAL */}
-        <p>{overview.exchange}</p> 
+        {/* TODO: STYLE INTO NICE BOXES HORIZONTAL */}
+        <p>{overview.exchange}</p>
         <p>{overview.industry}</p>
         <p>{response.currency}</p>
       </div>
-    </>
+    </div>
   )
 }
 export default Header;
