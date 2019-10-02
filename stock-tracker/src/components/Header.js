@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addSymbolAction } from '../store/actions';
 import logo from '../assets/logo.png';
 import { Icon } from 'antd';
+const moment = require('moment');
 
 const Header = () => {
   const [symbol, setSymbol] = useState("")
