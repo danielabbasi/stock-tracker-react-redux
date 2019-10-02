@@ -2,6 +2,7 @@ import React, { useState, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { addSymbolAction } from '../store/actions';
 import logo from '../assets/logo.png';
+const moment = require('moment');
 
 const Header = ({response}) => {
   const [symbol, setSymbol] = useState("")
@@ -20,9 +21,7 @@ const Header = ({response}) => {
   const changePercentNo = Math.abs(Math.round(response.changePercent*100)/100) || "";
 
   const marketStatus = response.isUSMarketOpen ? "Market Open" : "Market Closed"
-  console.log("time update", response.latestTime,
-    response.latestUpdate,
-    response.isUSMarketOpen)
+  const formatedTime = moment(response.latestUpdate).format('hh:mm A')
 
   return (
     <>
@@ -42,7 +41,7 @@ const Header = ({response}) => {
           <h3 className={(response.changePercent < 0) ? "priceDecrease" : "priceIncrease"}>{changePercentNo}</h3>
         </div>
         <div>
-          <p>Real time price as of {response.latestUpdate} {response.latestTime}</p>
+          <p>Real time price as of {response.latestTime} {formatedTime}</p>
           <p>{marketStatus}</p>
         </div>
       </div>
