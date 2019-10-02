@@ -22,6 +22,7 @@ const Header = ({response}) => {
 
   const marketStatus = response.isUSMarketOpen ? "Market Open" : "Market Closed"
   const formatedTime = moment(response.latestUpdate).format('hh:mm A')
+  const realTimeDisplay = response ? `Real time price as of ${response.latestTime} ${formatedTime}` : ""
 
   return (
     <>
@@ -40,8 +41,9 @@ const Header = ({response}) => {
           <h3 className={(response.change < 0) ? "priceDecrease" : "priceIncrease"}>{changeNo}</h3>
           <h3 className={(response.changePercent < 0) ? "priceDecrease" : "priceIncrease"}>{changePercentNo}</h3>
         </div>
+        {realTimeDisplay}
         <div>
-          <p>Real time price as of {response.latestTime} {formatedTime}</p>
+          <p></p>
           <p>{marketStatus}</p>
         </div>
       </div>
