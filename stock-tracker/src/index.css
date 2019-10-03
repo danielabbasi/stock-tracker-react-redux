@@ -31,6 +31,21 @@ body {
     monospace;
 } */
 
+a:link {
+  color: white;
+  text-decoration: none;
+}
+
+a:hover {
+  color: darkgoldenrod;
+  text-decoration: none;
+}
+
+a:visited {
+  color: none;
+  text-decoration: none;
+}
+
 input{
   background: inherit;
   font-size: 2em;
@@ -38,6 +53,7 @@ input{
   color: white;
   margin-left: 5%;
   border: none;
+  width: 90%
 }
 
 h5{

@@ -7,6 +7,7 @@ const KeyStats = () => {
         <div className="keystats">
             <h3>KEY STATS</h3>
             <table className="keystatsDisplay">
+                <tbody>
                     <tr>
                         <td className="keyStats-name">Previous Close</td>
                         <td className="keyStats-value">{response.previousClose}</td>
@@ -37,8 +38,9 @@ const KeyStats = () => {
                         <td className="keyStats-name">Dividend & Yield</td>
                         <td className="keyStats-value">{response ? response.ytdChange + "%" : ""}</td>
                     </tr>
-                </table>
-            </div>
+                </tbody>
+            </table>
+        </div>
     )
 }
 export default KeyStats;
