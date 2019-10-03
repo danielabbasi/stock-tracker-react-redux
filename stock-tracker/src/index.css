@@ -13,28 +13,7 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
-.keyStats-li1, .keyStats-li2 {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-}
-.keyStats-name{
-  float: left
-}
-.keyStats-value {
 
-  float: right
-}
-.keyStatsContainer{
-  display: flex;
-  flex-direction: row
-}
-.keyStats-li1{
-  flex-grow: 1
-}
-.keyStats-li2{
-  flex-grow: 1
-}
 input{
   font-size: 2em;
   font-weight: 300;
@@ -92,8 +71,18 @@ h3{
   grid-column: 2
 }
 .priceIncrease{
-  color: lime
+  color: geen
 }
 .priceDecrease{
   color: red
+}
+.keystats{
+  /* background-color: pink */
+}
+.keyStats-name{
+ /* color: red */
+}
+.keyStats-value {
+/* background-color: aquamarine; */
+text-align: end;
 }
