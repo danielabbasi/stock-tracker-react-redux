@@ -59,6 +59,9 @@ h5{
 .hideIcon{
   display: none
 }
+.hidden {
+  display: none !important
+}
 h3{
   color: var(--heading-color);
   font-weight: 100;
