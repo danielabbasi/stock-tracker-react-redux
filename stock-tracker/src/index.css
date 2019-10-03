@@ -133,3 +133,18 @@ text-align: end;
   padding: 3px;
   font-size: 0.8vw;
 }
+.realTime{
+  font-size:  0.8vw;
+  color: var(--text-blue);
+  display: inline;
+}
+.marketStatus{
+  font-size: 0.9vw;
+  display: inline;
+  margin-left: 10px;
+}
+.marketStatusDisplay{
+  padding: 0 1.5vw;
+  text-align: end;
+  margin-block-start: 1.3vw;
+}
