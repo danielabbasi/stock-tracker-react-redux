@@ -76,8 +76,12 @@ h3{
 .priceDecrease{
   color: red
 }
-.keystats{
-  /* background-color: pink */
+.keystatsDisplay{
+  width: 100%;
+  padding: 0 2vw;
+}
+td{
+  padding: 0 15px
 }
 .keyStats-name{
  /* color: red */

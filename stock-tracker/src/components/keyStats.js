@@ -4,8 +4,9 @@ import { useSelector } from 'react-redux';
 const KeyStats = () => {
     const response = useSelector((state) => state.response)
     return (
-            <div>
-                <table className="keystats">
+            <div className="keystats">
+                <h2>KEY STATS</h2>
+                <table className="keystatsDisplay">
                     <tr>
                         <td className="keyStats-name">Previous Close</td>
                         <td className="keyStats-value">{response.previousClose}</td>
