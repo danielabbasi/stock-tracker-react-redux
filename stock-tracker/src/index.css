@@ -6,6 +6,7 @@
 --text-yellow: rgb(182, 154, 61);
 --text-white: rgb(255, 255, 255);
 --text-blue: rgb(100, 152, 182);
+--footer-blue: #042B6C;
 }
 
 @font-face {
@@ -225,4 +226,32 @@ z-index: 1;
 .toppeers ul li{
   display: inline;
   padding: 0 0.7vw 0 0;
+}
+.green{
+  color: green
+}
+.red{
+  color: red
+}
+.footer{
+  background-color: var(--footer-blue);
+  margin: 0 -3vw;
+  display: grid;
+  grid-template-areas: 
+  "footer1 footer3"
+  "footer2 footer4"
+}
+.footer1{
+  grid-area: footer1
+}
+.footer2{
+  grid-area: footer2;
+  letter-spacing: 1px
+}
+.footer3{
+  grid-area: footer3
+}
+.footer4{
+  grid-area: footer4;
+  letter-spacing: 1px
 }
