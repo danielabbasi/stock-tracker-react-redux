@@ -7,7 +7,8 @@ import {
   addLatestNewsAction,
   initialStartupAction,
   addCompanyOverviewAction,
-  addTopPeersAction
+  addTopPeersAction,
+  addSymbolAction
 } from "./actions";
 
 const io = require("socket.io-client");
@@ -56,6 +57,7 @@ const initialStartupMiddlware = store => next => action => {
     socket.on("companies", (companies) => {
       store.dispatch(addCompaniesAction(companies))
     })
+    store.dispatch(addSymbolAction("AAPL"))
   }
   const result = next(action)
   return result
