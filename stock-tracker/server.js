@@ -76,7 +76,7 @@ const getNewsDataAndEmit = async (socket, stockSymbol) => {
     const latestNews = await axios.get(
       `${HOST}/stable/stock/${stockSymbol}/news/last/5?token=${TOKEN}`
     )
-    const news = latestNews.data.map(data => ({ headline: data.headline, datetime: data.datetime, source: data.source }))
+    const news = latestNews.data.map(data => ({ headline: data.headline, datetime: data.datetime, source: data.source, url: data.url }))
     socket.emit("LatestNews", news)
   } catch {
     console.error(`News Error: ${error}`)

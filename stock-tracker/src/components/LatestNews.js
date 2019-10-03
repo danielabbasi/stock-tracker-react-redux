@@ -6,7 +6,7 @@ const LatestNews = () => {
   const latestNews = useSelector((state) => state.latestNews)
   const newsDisplay = latestNews.map((news, index) => (
     <div key={index}>
-      <p className="newsHeadline">{news.headline}</p>
+      <p className="newsHeadline"> <a href={news.url}>{news.headline}</a></p>
       <p className="newsTime">{moment(news.datetime).fromNow()}</p>
       <p className="newsSource">- {news.source}</p>
     </div>

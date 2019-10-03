@@ -7,7 +7,7 @@ const Overview = () => {
         <div className="overview">
             <h3>COMPANY OVERVIEW</h3>
             <h2>{overview.companyName} ({overview.symbol})</h2>
-            <p>{overview.website}</p>
+            <p> <a href={overview.website}>{overview.website}</a></p>
             <p>{overview.description}</p>
         </div>
     )
