@@ -1,7 +1,10 @@
 import React from 'react';
+// import 'antd/dist/antd.css';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, ReferenceLine, Label } from 'recharts';
 import { useDispatch, useSelector } from 'react-redux';
 import { addChartTimeAction } from '../store/actions';
+import { Button } from 'antd';
+const ButtonGroup = Button.Group;
 
 const Chart = () => {
     const dispatch = useDispatch()
@@ -15,12 +18,15 @@ const Chart = () => {
     }
     return (
         <div className="chart">
-            <button value="1D" onClick={onClick}>1D</button>
-            <button value="5D" onClick={onClick}>5D</button>
-            <button value="1M" onClick={onClick}>1M</button>
-            <button value="1Y" onClick={onClick}>1Y</button>
-            <button value="5Y" onClick={onClick}>5Y</button>
-            <button value="MAX" onClick={onClick}>MAX</button>
+            <ButtonGroup>
+            <Button type="link" ghost value="1D" onClick={onClick}>1D</Button>
+            <Button ghost>Ghost</Button>
+            <Button value="5D" onClick={onClick}>5D</Button>
+            <Button value="1M" onClick={onClick}>1M</Button>
+            <Button value="1Y" onClick={onClick}>1Y</Button>
+            <Button value="5Y" onClick={onClick}>5Y</Button>
+            <Button value="MAX" onClick={onClick}>MAX</Button>
+            </ButtonGroup>
             <ResponsiveContainer>
                 <AreaChart
                     data={chartData}
