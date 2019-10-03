@@ -22,8 +22,9 @@ const Header = () => {
       setSymbol('');
     }
   }
-  const changeNo = Math.abs(Math.round(response.change*100)/100) || "";
-  const changePercentNo = Math.abs(Math.round(response.changePercent*100)/100) || "";
+  const changeNo = response.change === 0 ? "0" : Math.abs(Math.round(response.change*100)/100);
+  const changePercentNo = Math.abs((response.changePercent*100).toFixed(2));
+
 
   const marketStatus = response 
   ? response.isUSMarketOpen ? "Market Open" : "Market Closed"
@@ -46,8 +47,14 @@ const Header = () => {
       <div className="priceDisplay">
         <p className="smallIcon">{response ? "$" : ""}</p>
         <h4>{response.latestPrice}</h4>
-        <h4 className={(response.change < 0) ? "priceDecrease" : "priceIncrease"}><Icon className={response ? "smallIcon" : "hideIcon"} type={(response.change < 0) ? "arrow-down" : "arrow-up"} />{changeNo}</h4>
-        <h4 className={(response.changePercent < 0) ? "priceDecrease" : "priceIncrease"}>{changePercentNo}</h4>
+        <h4 className={response 
+        ? (response.change < 0) ? "priceDecrease" : "priceIncrease"
+        : "hidden"}>
+        <Icon className={response ? "smallIcon" : "hideIcon"} type={(response.change < 0) ? "arrow-down" : "arrow-up"} />{changeNo}</h4>
+        <h4 className={response 
+          ? (response.changePercent < 0) ? "priceDecrease" : "priceIncrease"
+        : "hidden"}>
+        {changePercentNo}</h4>
         <p className={(response.changePercent < 0) ? "smallIcon priceDecrease" : "smallIcon priceIncrease"}>{response ? "%" : ""}</p>
       </div>
       <div className="currencyDisplay">
