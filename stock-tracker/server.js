@@ -128,7 +128,7 @@ const getStockDataAndEmit = async (socket, stockSymbol) => {
     )
     const [res, eps, dividends] = await Promise.all([resPromise, epsPromise, dividendsPromise])
     changeNullValues(res.data, eps.data)
-    const currency = dividends.data[0] && dividends.data[0].currency || undefined; // if first arguement is trufy and second condition is trufy then set current, if not then set undefined
+    const currency = dividends.data[0] && dividends.data[0].currency || undefined; // if first arguement is trufy and second condition is trufy then set current, if not then set undefined 
     const { latestPrice, change, changePercent, symbol, companyName, previousClose, high, low, previousVolume, marketCap, peRatio, open, week52High, week52Low, avgTotalVolume, ytdChange, latestTime, latestUpdate, isUSMarketOpen } = res.data
     const stockData = {
       latestPrice,
