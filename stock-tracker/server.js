@@ -8,39 +8,32 @@ const app = express();
 app.use(index);
 const server = http.createServer(app);
 const io = socketIo(server);
-
 const day = 86400000
 const halfDay = day / 2
-// interval object
-// functionm delay interval
+
+function callNowAndInterval(fn, interval, ...args) { // calls function with extra arguements passed and returns interval
+  fn(...args)
+  return setInterval(() => fn(...args), interval)
+}
 
 io.on("connection", socket => {
+  const intervals = {}
   console.log("New client connected");
-  let interval;
   getCompaniesFromAPI(socket)
   socket.on("symbol", (stockSymbol, chartTime) => {
-    if (interval) {
-      console.log("symbol " + stockSymbol)
-      clearInterval(interval);
-    }
-    getStockDataAndEmit(socket, stockSymbol)
-    getCompanyOverviewAndEmit(socket, stockSymbol)
-    getNewsDataAndEmit(socket, stockSymbol)
-    getChartDataAndEmit(socket, stockSymbol, chartTime)
-    getTopPeersAndEmit(socket, stockSymbol)
-    setInterval(() => getCompanyOverviewAndEmit(socket, stockSymbol), day)
-    setInterval(() => getNewsDataAndEmit(socket, stockSymbol), day)
-    setInterval(() => getChartDataAndEmit(socket, stockSymbol, chartTime), halfDay)
-    setInterval(() => getTopPeersAndEmit(socket, stockSymbol), day)
-    interval = setInterval(() => getStockDataAndEmit(socket, stockSymbol), 5000);
+    Object.values(intervals).forEach(clearInterval)
+    intervals.stock = callNowAndInterval(getStockDataAndEmit, 5000, socket, stockSymbol)
+    intervals.overview = callNowAndInterval(getCompanyOverviewAndEmit, day, socket, stockSymbol)
+    intervals.news = callNowAndInterval(getNewsDataAndEmit, day, socket, stockSymbol)
+    intervals.chartData = callNowAndInterval(getChartDataAndEmit, halfDay, socket, stockSymbol, chartTime)
+    intervals.peers = callNowAndInterval(getTopPeersAndEmit, day, socket, stockSymbol)
   })
   socket.on("chartTime", (stockSymbol, chartTime) => {
-    getChartDataAndEmit(socket, stockSymbol, chartTime)
-    clearInterval(interval)
-    interval = setInterval(() => getChartDataAndEmit(socket, stockSymbol, chartTime), halfDay);
+    clearInterval(intervals.chartData)
+    intervals.chartData = callNowAndInterval(getChartDataAndEmit, halfDay, socket, stockSymbol, chartTime)
   })
   socket.on("disconnect", () => {
-    clearInterval(interval);
+    Object.values(intervals).forEach(clearInterval)
     console.log("Client disconnected");
   });
 });
@@ -55,8 +48,7 @@ const getCompaniesFromAPI = async socket => {
     const companies = res.data.map(data => ({ name: data.name, symbol: data.symbol }))
     socket.emit("companies", companies)
   } catch (error) {
-    console.log("companies error ")
-    console.error(`Error: ${error}`);
+    console.error(`Companies Error: ${error}`);
   }
 }
 
@@ -75,8 +67,7 @@ const getCompanyOverviewAndEmit = async (socket, stockSymbol) => {
     }
     socket.emit("CompanyOverview", overview)
   } catch {
-    console.log("company overview error ")
-    console.error(`Error: ${error}`);
+    console.error(`Company Overview Error: ${error}`);
   }
 }
 
