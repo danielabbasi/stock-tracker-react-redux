@@ -9,6 +9,11 @@ app.use(index);
 const server = http.createServer(app);
 const io = socketIo(server);
 
+const day = 86400000
+const halfDay = day / 2
+// interval object
+// functionm delay interval
+
 io.on("connection", socket => {
   console.log("New client connected");
   let interval;
@@ -23,12 +28,16 @@ io.on("connection", socket => {
     getNewsDataAndEmit(socket, stockSymbol)
     getChartDataAndEmit(socket, stockSymbol, chartTime)
     getTopPeersAndEmit(socket, stockSymbol)
+    setInterval(() => getCompanyOverviewAndEmit(socket, stockSymbol), day)
+    setInterval(() => getNewsDataAndEmit(socket, stockSymbol), day)
+    setInterval(() => getChartDataAndEmit(socket, stockSymbol, chartTime), halfDay)
+    setInterval(() => getTopPeersAndEmit(socket, stockSymbol), day)
     interval = setInterval(() => getStockDataAndEmit(socket, stockSymbol), 5000);
   })
   socket.on("chartTime", (stockSymbol, chartTime) => {
     getChartDataAndEmit(socket, stockSymbol, chartTime)
     clearInterval(interval)
-    interval = setInterval(() => getChartDataAndEmit(socket, stockSymbol, chartTime), 5000);
+    interval = setInterval(() => getChartDataAndEmit(socket, stockSymbol, chartTime), halfDay);
   })
   socket.on("disconnect", () => {
     clearInterval(interval);
@@ -118,15 +127,10 @@ const getStockDataAndEmit = async (socket, stockSymbol) => {
       `https://sandbox.iexapis.com/stable/stock/${stockSymbol}/dividends/1y?token=Tpk_139c39f1edae43fc8e5ab12451d30f4c`
     )
     const [res, eps, dividends] = await Promise.all([resPromise, epsPromise, dividendsPromise])
-    let currency
     changeNullValues(res.data, eps.data)
-    if (dividends.data[0] === undefined) {
-      currency = ''
-    } else {
-      currency = dividends.data[0].currency
-    }
+    const currency = dividends.data[0] && dividends.data[0].currency || undefined; // if first arguement is trufy and second condition is trufy then set current, if not then set undefined 
     const { latestPrice, change, changePercent, symbol, companyName, previousClose, high, low, previousVolume, marketCap, peRatio, open, week52High, week52Low, avgTotalVolume, ytdChange, latestTime, latestUpdate, isUSMarketOpen } = res.data
-    stockData = {
+    const stockData = {
       latestPrice,
       change,
       changePercent,
