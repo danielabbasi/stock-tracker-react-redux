@@ -8,34 +8,39 @@ const app = express();
 app.use(index);
 const server = http.createServer(app);
 const io = socketIo(server);
+
 const day = 86400000
 const halfDay = day / 2
-const HOST = 'https://sandbox.iexapis.com'
-const TOKEN = 'Tpk_139c39f1edae43fc8e5ab12451d30f4c'
-
-function callNowAndInterval(fn, interval, ...args) { // calls function with extra arguements passed and returns interval
-  fn(...args)
-  return setInterval(() => fn(...args), interval)
-}
+// interval object
+// functionm delay interval
 
 io.on("connection", socket => {
-  const intervals = {}
   console.log("New client connected");
+  let interval;
   getCompaniesFromAPI(socket)
   socket.on("symbol", (stockSymbol, chartTime) => {
-    Object.values(intervals).forEach(clearInterval)
-    intervals.stock = callNowAndInterval(getStockDataAndEmit, 5000, socket, stockSymbol)
-    intervals.overview = callNowAndInterval(getCompanyOverviewAndEmit, day, socket, stockSymbol)
-    intervals.news = callNowAndInterval(getNewsDataAndEmit, day, socket, stockSymbol)
-    intervals.chartData = callNowAndInterval(getChartDataAndEmit, halfDay, socket, stockSymbol, chartTime)
-    intervals.peers = callNowAndInterval(getTopPeersAndEmit, day, socket, stockSymbol)
+    if (interval) {
+      console.log("symbol " + stockSymbol)
+      clearInterval(interval);
+    }
+    getStockDataAndEmit(socket, stockSymbol)
+    getCompanyOverviewAndEmit(socket, stockSymbol)
+    getNewsDataAndEmit(socket, stockSymbol)
+    getChartDataAndEmit(socket, stockSymbol, chartTime)
+    getTopPeersAndEmit(socket, stockSymbol)
+    setInterval(() => getCompanyOverviewAndEmit(socket, stockSymbol), day)
+    setInterval(() => getNewsDataAndEmit(socket, stockSymbol), day)
+    setInterval(() => getChartDataAndEmit(socket, stockSymbol, chartTime), halfDay)
+    setInterval(() => getTopPeersAndEmit(socket, stockSymbol), day)
+    interval = setInterval(() => getStockDataAndEmit(socket, stockSymbol), 5000);
   })
   socket.on("chartTime", (stockSymbol, chartTime) => {
-    clearInterval(intervals.chartData)
-    intervals.chartData = callNowAndInterval(getChartDataAndEmit, halfDay, socket, stockSymbol, chartTime)
+    getChartDataAndEmit(socket, stockSymbol, chartTime)
+    clearInterval(interval)
+    interval = setInterval(() => getChartDataAndEmit(socket, stockSymbol, chartTime), halfDay);
   })
   socket.on("disconnect", () => {
-    Object.values(intervals).forEach(clearInterval)
+    clearInterval(interval);
     console.log("Client disconnected");
   });
 });
@@ -50,14 +55,15 @@ const getCompaniesFromAPI = async socket => {
     const companies = res.data.map(data => ({ name: data.name, symbol: data.symbol }))
     socket.emit("companies", companies)
   } catch (error) {
-    console.error(`Companies Error: ${error}`);
+    console.log("companies error ")
+    console.error(`Error: ${error}`);
   }
 }
 
 const getCompanyOverviewAndEmit = async (socket, stockSymbol) => {
   try {
     const companyOverview = await axios.get(
-      `${HOST}/stable/stock/${stockSymbol}/company?token=${TOKEN}`)
+      `https://sandbox.iexapis.com/stable/stock/${stockSymbol}/company?token=Tpk_139c39f1edae43fc8e5ab12451d30f4c`)
     const { companyName, symbol, exchange, industry, website, description } = companyOverview.data
     const overview = {
       companyName,
@@ -69,14 +75,15 @@ const getCompanyOverviewAndEmit = async (socket, stockSymbol) => {
     }
     socket.emit("CompanyOverview", overview)
   } catch {
-    console.error(`Company Overview Error: ${error}`);
+    console.log("company overview error ")
+    console.error(`Error: ${error}`);
   }
 }
 
 const getNewsDataAndEmit = async (socket, stockSymbol) => {
   try {
     const latestNews = await axios.get(
-      `${HOST}/stable/stock/${stockSymbol}/news/last/5?token=${TOKEN}`
+      `https://cloud.iexapis.com/stable/stock/${stockSymbol}/news/last/5?token=pk_9be28da235714828a592abf7395e810f`
     )
     const news = latestNews.data.map(data => ({ headline: data.headline, datetime: data.datetime, source: data.source }))
     socket.emit("LatestNews", news)
@@ -88,7 +95,7 @@ const getNewsDataAndEmit = async (socket, stockSymbol) => {
 const getChartDataAndEmit = async (socket, stockSymbol, chartTime) => {
   try {
     const chartData = await axios.get(
-      `${HOST}/stable/stock/${stockSymbol}/chart/${chartTime}?token=${TOKEN}`
+      `https://sandbox.iexapis.com/stable/stock/${stockSymbol}/chart/${chartTime}?token=Tpk_139c39f1edae43fc8e5ab12451d30f4c`
     )
     const chart = chartData.data.map(data => ({ close: data.close, date: data.date }))
     socket.emit("ChartData", chart)
@@ -100,7 +107,7 @@ const getChartDataAndEmit = async (socket, stockSymbol, chartTime) => {
 const getTopPeersAndEmit = async (socket, stockSymbol) => {
   try {
     const topPeers = await axios.get(
-      `${HOST}/stable/stock/${stockSymbol}/peers?token=${TOKEN}`
+      `https://sandbox.iexapis.com/stable/stock/${stockSymbol}/peers?token=Tpk_139c39f1edae43fc8e5ab12451d30f4c`
     )
     socket.emit("TopPeers", topPeers.data)
   } catch {
@@ -111,13 +118,13 @@ const getTopPeersAndEmit = async (socket, stockSymbol) => {
 const getStockDataAndEmit = async (socket, stockSymbol) => {
   try {
     const resPromise = axios.get(
-      `${HOST}/stable/stock/${stockSymbol}/quote?token=${TOKEN}`
+      `https://sandbox.iexapis.com/stable/stock/${stockSymbol}/quote?token=Tpk_139c39f1edae43fc8e5ab12451d30f4c`
     );
     const epsPromise = axios.get(
-      `${HOST}/stable/stock/${stockSymbol}/earnings/1/actualEPS?token=${TOKEN}`
+      `https://sandbox.iexapis.com/stable/stock/${stockSymbol}/earnings/1/actualEPS?token=Tpk_139c39f1edae43fc8e5ab12451d30f4c`
     )
     const dividendsPromise = axios.get(
-      `${HOST}/stable/stock/${stockSymbol}/dividends/1y?token=${TOKEN}`
+      `https://sandbox.iexapis.com/stable/stock/${stockSymbol}/dividends/1y?token=Tpk_139c39f1edae43fc8e5ab12451d30f4c`
     )
     const [res, eps, dividends] = await Promise.all([resPromise, epsPromise, dividendsPromise])
     changeNullValues(res.data, eps.data)
