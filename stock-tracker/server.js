@@ -8,36 +8,38 @@ const app = express();
 app.use(index);
 const server = http.createServer(app);
 const io = socketIo(server);
+const day = 86400000
+const halfDay = day / 2
+const HOST = 'https://sandbox.iexapis.com'
+const TOKEN = 'Tpk_139c39f1edae43fc8e5ab12451d30f4c'
+
+function callNowAndInterval(fn, interval, ...args) { // calls function with extra arguements passed and returns interval
+  fn(...args)
+  return setInterval(() => fn(...args), interval)
+}
 
 io.on("connection", socket => {
+  const intervals = {}
   console.log("New client connected");
-  let interval;
   getCompaniesFromAPI(socket)
   socket.on("symbol", (stockSymbol, chartTime) => {
-    if (interval) {
-      console.log("symbol " + stockSymbol)
-      clearInterval(interval);
-    }
-    getStockDataAndEmit(socket, stockSymbol)
-    getCompanyOverviewAndEmit(socket, stockSymbol)
-    getNewsDataAndEmit(socket, stockSymbol)
-    getChartDataAndEmit(socket, stockSymbol, chartTime)
-    getTopPeersAndEmit(socket, stockSymbol)
-    interval = setInterval(() => getStockDataAndEmit(socket, stockSymbol), 5000);
+    Object.values(intervals).forEach(clearInterval)
+    intervals.stock = callNowAndInterval(getStockDataAndEmit, 5000, socket, stockSymbol)
+    intervals.overview = callNowAndInterval(getCompanyOverviewAndEmit, day, socket, stockSymbol)
+    intervals.news = callNowAndInterval(getNewsDataAndEmit, day, socket, stockSymbol)
+    intervals.chartData = callNowAndInterval(getChartDataAndEmit, halfDay, socket, stockSymbol, chartTime)
+    intervals.peers = callNowAndInterval(getTopPeersAndEmit, day, socket, stockSymbol)
   })
   socket.on("chartTime", (stockSymbol, chartTime) => {
-    getChartDataAndEmit(socket, stockSymbol, chartTime)
-    clearInterval(interval)
-    interval = setInterval(() => getChartDataAndEmit(socket, stockSymbol, chartTime), 5000);
+    clearInterval(intervals.chartData)
+    intervals.chartData = callNowAndInterval(getChartDataAndEmit, halfDay, socket, stockSymbol, chartTime)
   })
   socket.on("disconnect", () => {
-    clearInterval(interval);
+    Object.values(intervals).forEach(clearInterval)
     console.log("Client disconnected");
   });
 });
-
 server.listen(port, () => console.log(`Listening on port ${port}`));
-
 const getCompaniesFromAPI = async socket => {
   try {
     const res = await axios.get(
@@ -46,15 +48,14 @@ const getCompaniesFromAPI = async socket => {
     const companies = res.data.map(data => ({ name: data.name, symbol: data.symbol }))
     socket.emit("companies", companies)
   } catch (error) {
-    console.log("companies error ")
-    console.error(`Error: ${error}`);
+    console.error(`Companies Error: ${error}`);
   }
 }
 
 const getCompanyOverviewAndEmit = async (socket, stockSymbol) => {
   try {
     const companyOverview = await axios.get(
-      `https://sandbox.iexapis.com/stable/stock/${stockSymbol}/company?token=Tpk_139c39f1edae43fc8e5ab12451d30f4c`)
+      `${HOST}/stable/stock/${stockSymbol}/company?token=${TOKEN}`)
     const { companyName, symbol, exchange, industry, website, description } = companyOverview.data
     const overview = {
       companyName,
@@ -66,15 +67,14 @@ const getCompanyOverviewAndEmit = async (socket, stockSymbol) => {
     }
     socket.emit("CompanyOverview", overview)
   } catch {
-    console.log("company overview error ")
-    console.error(`Error: ${error}`);
+    console.error(`Company Overview Error: ${error}`);
   }
 }
 
 const getNewsDataAndEmit = async (socket, stockSymbol) => {
   try {
     const latestNews = await axios.get(
-      `https://cloud.iexapis.com/stable/stock/${stockSymbol}/news/last/5?token=pk_9be28da235714828a592abf7395e810f`
+      `${HOST}/stable/stock/${stockSymbol}/news/last/5?token=${TOKEN}`
     )
     const news = latestNews.data.map(data => ({ headline: data.headline, datetime: data.datetime, source: data.source }))
     socket.emit("LatestNews", news)
@@ -86,7 +86,7 @@ const getNewsDataAndEmit = async (socket, stockSymbol) => {
 const getChartDataAndEmit = async (socket, stockSymbol, chartTime) => {
   try {
     const chartData = await axios.get(
-      `https://sandbox.iexapis.com/stable/stock/${stockSymbol}/chart/${chartTime}?token=Tpk_139c39f1edae43fc8e5ab12451d30f4c`
+      `${HOST}/stable/stock/${stockSymbol}/chart/${chartTime}?token=${TOKEN}`
     )
     const chart = chartData.data.map(data => ({ close: data.close, date: data.date }))
     socket.emit("ChartData", chart)
@@ -98,7 +98,7 @@ const getChartDataAndEmit = async (socket, stockSymbol, chartTime) => {
 const getTopPeersAndEmit = async (socket, stockSymbol) => {
   try {
     const topPeers = await axios.get(
-      `https://sandbox.iexapis.com/stable/stock/${stockSymbol}/peers?token=Tpk_139c39f1edae43fc8e5ab12451d30f4c`
+      `${HOST}/stable/stock/${stockSymbol}/peers?token=${TOKEN}`
     )
     socket.emit("TopPeers", topPeers.data)
   } catch {
@@ -109,24 +109,16 @@ const getTopPeersAndEmit = async (socket, stockSymbol) => {
 const getStockDataAndEmit = async (socket, stockSymbol) => {
   try {
     const resPromise = axios.get(
-      `https://sandbox.iexapis.com/stable/stock/${stockSymbol}/quote?token=Tpk_139c39f1edae43fc8e5ab12451d30f4c`
-    );
+      `${HOST}/stable/stock/${stockSymbol}/quote?token=${TOKEN}`)
     const epsPromise = axios.get(
-      `https://sandbox.iexapis.com/stable/stock/${stockSymbol}/earnings/1/actualEPS?token=Tpk_139c39f1edae43fc8e5ab12451d30f4c`
-    )
+      `${HOST}/stable/stock/${stockSymbol}/earnings/1/actualEPS?token=${TOKEN}`)
     const dividendsPromise = axios.get(
-      `https://sandbox.iexapis.com/stable/stock/${stockSymbol}/dividends/1y?token=Tpk_139c39f1edae43fc8e5ab12451d30f4c`
-    )
+      `${HOST}/stable/stock/${stockSymbol}/dividends/1y?token=${TOKEN}`)
     const [res, eps, dividends] = await Promise.all([resPromise, epsPromise, dividendsPromise])
-    let currency
     changeNullValues(res.data, eps.data)
-    if (dividends.data[0] === undefined) {
-      currency = ''
-    } else {
-      currency = dividends.data[0].currency
-    }
+    const currency = dividends.data[0] && dividends.data[0].currency || undefined; // if first arguement is trufy and second condition is trufy then set current, if not then set undefined 
     const { latestPrice, change, changePercent, symbol, companyName, previousClose, high, low, previousVolume, marketCap, peRatio, open, week52High, week52Low, avgTotalVolume, ytdChange, latestTime, latestUpdate, isUSMarketOpen } = res.data
-    stockData = {
+    const stockData = {
       latestPrice,
       change,
       changePercent,

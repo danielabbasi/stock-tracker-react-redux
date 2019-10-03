@@ -5,8 +5,8 @@ const Overview = () => {
     const overview = useSelector((state) => state.companyOverview)
     return (
         <div className="overview">
-            <h3>Company Overview</h3>
-            <h2>{overview.companyName}</h2>
+            <h3>COMPANY OVERVIEW</h3>
+            <h2>{overview.companyName} ({overview.symbol})</h2>
             <p>{overview.website}</p>
             <p>{overview.description}</p>
         </div>

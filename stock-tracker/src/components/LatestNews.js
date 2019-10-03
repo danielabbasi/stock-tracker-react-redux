@@ -8,14 +8,14 @@ const LatestNews = () => {
     <div key={index}>
       <p className="newsHeadline">{news.headline}</p>
       <p className="newsTime">{moment(news.datetime).fromNow()}</p>
-      <p className="newsSource">{news.source}</p>
+      <p className="newsSource">- {news.source}</p>
     </div>
   ));
 
   
   return (
     <div className="latestnews">
-      <h3>Latest news</h3>
+      <h3>LATEST NEWS</h3>
       {newsDisplay}
     </div>
   );

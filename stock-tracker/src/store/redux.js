@@ -7,7 +7,8 @@ import {
   addLatestNewsAction,
   initialStartupAction,
   addCompanyOverviewAction,
-  addTopPeersAction
+  addTopPeersAction,
+  addSymbolAction
 } from "./actions";
 
 const io = require("socket.io-client");
@@ -25,8 +26,8 @@ const initialState = {
 };
 
 const stockMiddleware = store => next => action => {
+  const result = next(action)
   if (action.type === "ADD_SYMBOL") {
-    next(action)
     socket.emit("symbol", store.getState().symbol, store.getState().chartTime);
     socket.on("StockData", (data) => {
       store.dispatch(addResponseAction(data));
@@ -44,21 +45,19 @@ const stockMiddleware = store => next => action => {
       store.dispatch(addTopPeersAction(peers))
     })
   } else if (action.type === "ADD_CHARTTIME") {
-    next(action)
     socket.emit("chartTime", store.getState().symbol, store.getState().chartTime)
     store.dispatch(addChartDataAction(store.getState().chartData))
   }
-  const result = next(action);
   return result;
 };
 
 const initialStartupMiddlware = store => next => action => {
   if (action.type === "INITIAL_STARTUP") {
-    next(action)
     console.log("Application has started ")
     socket.on("companies", (companies) => {
       store.dispatch(addCompaniesAction(companies))
     })
+    store.dispatch(addSymbolAction("AAPL"))
   }
   const result = next(action)
   return result
