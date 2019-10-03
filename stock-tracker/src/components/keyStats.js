@@ -5,7 +5,7 @@ const KeyStats = () => {
     const response = useSelector((state) => state.response)
     return (
             <div className="keystats">
-                <h2>KEY STATS</h2>
+                <h3>KEY STATS</h3>
                 <table className="keystatsDisplay">
                     <tr>
                         <td className="keyStats-name">Previous Close</td>

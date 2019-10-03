@@ -3,7 +3,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addSymbolAction } from '../store/actions';
 import logo from '../assets/logo.png';
 import { Icon } from 'antd';
+import '../Header.css';
+
 const moment = require('moment');
+
 
 const Header = () => {
   const [symbol, setSymbol] = useState("")
@@ -30,33 +33,33 @@ const Header = () => {
 
   return (
     <div className="header">
-      <div className="headerContainer">
-        <img className="logo" alt="logo" src={logo} />
-        <div className="HeaderBtns">
-          <button className="headerBtn quotesBtn">QUOTES</button>
-          <button className="headerBtn">MARKETS</button>
-          <button className="headerBtn">WATCHLIST</button>
-        </div>
+      <img className="logo" alt="logo" src={logo} />
+      <div className="headerBtns">
+        <button className="headerBtn quotesBtn">QUOTES</button>
+        <button className="headerBtn">MARKETS</button>
+        <button className="headerBtn">WATCHLIST</button>
       </div>
       <div className="searchDisplay">
-        <input className="searchBar" placeholder={response ? `${response.companyName} (${response.symbol})` : ""} type="text" value={symbol} onChange={(e) => setSymbol(e.target.value)} onKeyPress={handleSubmit} />
-        <div className="priceDisplay">
-          <h3>{response.latestPrice}</h3>
-          <h3 className={(response.change < 0) ? "priceDecrease" : "priceIncrease"}><Icon type={(response.change < 0) ? "arrow-down" : "arrow-up"} />{changeNo}</h3>
-          <h3 className={(response.changePercent < 0) ? "priceDecrease" : "priceIncrease"}>{changePercentNo}</h3>
-        </div>
-        {realTimeDisplay}
-        <div>
-          <p></p>
-          <p>{marketStatus}</p>
-        </div>
+        <h5><Icon className="searchIcon" type="search" /></h5>
+        <input className="searchBar" placeholder={response ? `${response.companyName}(${response.symbol})` : ""} type="text" value={symbol} onChange={(e) => setSymbol(e.target.value)} onKeyPress={handleSubmit} />
       </div>
-      <div>
-        {/* TODO: STYLE INTO NICE BOXES HORIZONTAL */}
+      <div className="priceDisplay">
+        <p className="smallIcon">{response ? "$" : ""}</p>
+        <h4>{response.latestPrice}</h4>
+        <h4 className={(response.change < 0) ? "priceDecrease" : "priceIncrease"}><Icon className={response ? "smallIcon" : "hideIcon"} type={(response.change < 0) ? "arrow-down" : "arrow-up"} />{changeNo}</h4>
+        <h4 className={(response.changePercent < 0) ? "priceDecrease" : "priceIncrease"}>{changePercentNo}</h4>
+        <p className={(response.changePercent < 0) ? "smallIcon priceDecrease" : "smallIcon priceIncrease"}>{response ? "%" : ""}</p>
+      </div>
+      <div className="currencyDisplay">
+      {/* TODO: STYLE INTO NICE BOXES HORIZONTAL */}
         <p>{overview.exchange}</p>
         <p>{overview.industry}</p>
         <p>{response.currency}</p>
-      </div>
+    </div>
+    <div className="marketStatusDisplay">
+      <p className="realTime">{realTimeDisplay}</p>
+      <p className="marketStatus">{marketStatus}</p>
+    </div>
     </div>
   )
 }

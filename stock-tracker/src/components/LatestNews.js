@@ -15,7 +15,7 @@ const LatestNews = () => {
   
   return (
     <div className="latestnews">
-      <h3>Latest news</h3>
+      <h3>LATEST NEWS</h3>
       {newsDisplay}
     </div>
   );

@@ -15,7 +15,6 @@ const Chart = () => {
     }
     return (
         <div className="chart">
-            <h2>Stock Chart</h2>
             <button value="1D" onClick={onClick}>1D</button>
             <button value="5D" onClick={onClick}>5D</button>
             <button value="1M" onClick={onClick}>1M</button>

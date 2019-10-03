@@ -1,77 +1,107 @@
+:root {
+  --bg-color-light: #012356;
+  --bg-color-dark: #01132D;
+  --heading-color: rgb(53, 143, 216);
+  --quotes-color: #0042A0;
+  --text-yellow: rgb(182, 154, 61);
+  --text-white: rgb(255, 255, 255);
+  --text-blue: rgb(100, 152, 182);
+}
+
 body {
-  background-color: #0E1D44;
+  background-image: linear-gradient(to right, var(--bg-color-light), var(--bg-color-dark));
   color: white;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+  margin: 0 3vw;
+  font-family: Arial, Helvetica, sans-serif;
+
+  /* font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  -moz-osx-font-smoothing: grayscale; */
 }
 
-code {
+/* code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
-}
+} */
 
 input{
+  background: inherit;
   font-size: 2em;
   font-weight: 300;
   color: white;
   margin-left: 5%;
   border: none;
-  background-color: #0E1D44
 }
-.searchDisplay{
-  display: flex;
-  flex-direction: row;
-  border-bottom: 2px solid #6D95DC;
+
+h5{
+  display: inline;
+  color: var(--heading-color);
+  font-size: 1.7vw;
+}
+.searchDisplay, .priceDisplay{
+  border-bottom: 2px solid var(--heading-color);
 }
 .searchBar{
-  flex-grow: 1;
-  float: left
+  margin: 0;
 }
-.priceDisplay{
-  float: right;
-  display: flex;
-  flex-direction: row;
+::placeholder {
+  font-weight: 300;
+  color: var(--text-white);
+  font-weight: lighter
 }
-::placeholder, h3 {
-  font-weight: 300
+.smallIcon{
+  font-size: 1vw;
+  vertical-align: top;
+  margin: 0.3vw 0 0;
+}
+.hideIcon{
+  display: none
 }
 h3{
-  font-size: 2em;
-  padding: 0.5vw
+  color: var(--heading-color);
+  font-weight: 100;
+  border-bottom: 2px solid var(--heading-color)
 }
-
-
+.headerBtns{
+  margin: 2vw 0;
+  text-align: end;
+}
 .headerBtn {
   color: white;
   border: none;
   background-color: inherit;
   font-size: 0.8vw;
-  margin: 0 0.5vw;
+  margin: 0 0.8vw;
+  padding: 0.5vw;
+  color: var(--text-blue);
+  border-radius: 10%;
 }
+
 .quotesBtn{
-  background-color: lightskyblue
-}
-.headerContainer{
-  display: inline-grid;
-  width: 100%;
-  grid-template-columns: 3fr 1fr
+  background-color: var(--quotes-color);
+  color: var(--text-white)
 }
 .logo{
   width: 10vw;
-  grid-column: 1;
+  margin-top: 1.5vw
 }
-.HeaderBtns{
-  float: right;
-  margin-top: 10%;
-  margin-right: 20px;
-  grid-column: 2
+.priceDisplay{
+  padding: 0 1.5vw;
+  text-align: end;
+}
+.priceDisplay h4 {
+  display: inline-block;
+  margin: 0 0.5vw;
+  font-size: 2.5vw;
+  font-weight: 100;
+}
+.priceDisplay p {
+  display: inline-block;
 }
 .priceIncrease{
-  color: geen
+  color: green
 }
 .priceDecrease{
   color: red
@@ -84,9 +114,7 @@ td{
   padding: 0 15px
 }
 .keyStats-name{
- /* color: red */
 }
 .keyStats-value {
-/* background-color: aquamarine; */
 text-align: end;
 }
