@@ -132,9 +132,11 @@ color: green
 .priceDecrease{
 color: red
 }
+.keystats{
+padding: 0 2vw;
+}
 .keystatsDisplay{
 width: 100%;
-padding: 0 2vw;
 border-spacing: 0;
 }
 td{
@@ -143,11 +145,12 @@ padding: 0 15px
 .keyStats-name{
   color: var(--text-blue);
   border-bottom: 1px solid var(--text-blue);
-  padding: 10px 0;
+  padding: 1.3vw 0;
 }
 .keyStats-value {
 text-align: end;
 border-bottom: 1px solid var(--text-blue);
+padding: 0;
 }
 .currencyDisplay{
 margin-block-start: 1.3vw;
@@ -215,3 +218,11 @@ margin-right: 6%;
 z-index: 1;
 }
 
+.toppeers ul{
+  list-style: none;
+  padding: 0;
+}
+.toppeers ul li{
+  display: inline;
+  padding: 0 0.7vw 0 0;
+}
