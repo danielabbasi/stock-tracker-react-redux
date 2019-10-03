@@ -148,3 +148,13 @@ text-align: end;
   text-align: end;
   margin-block-start: 1.3vw;
 }
+.latestNews{
+}
+.newsHeadline{
+}
+.newsTime, .newsSource{
+  display: inline;
+  color: var(--text-blue);
+  font-size: 0.8vw;
+  margin-right: 0.4vw
+}
