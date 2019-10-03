@@ -57,8 +57,7 @@ const Header = () => {
         {changePercentNo}</h4>
         <p className={(response.changePercent < 0) ? "smallIcon priceDecrease" : "smallIcon priceIncrease"}>{response ? "%" : ""}</p>
       </div>
-      <div className="currencyDisplay">
-      {/* TODO: STYLE INTO NICE BOXES HORIZONTAL */}
+      <div className={response ? "currencyDisplay" : "hidden"}>
         <p>{overview.exchange}</p>
         <p>{overview.industry}</p>
         <p>{response.currency}</p>

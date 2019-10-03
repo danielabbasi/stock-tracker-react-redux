@@ -75,8 +75,8 @@ h3{
   color: white;
   border: none;
   background-color: inherit;
-  font-size: 0.8vw;
-  margin: 0 0.8vw;
+  font-size: 1.1vw;
+  margin: 0 1.2vw;
   padding: 0.5vw;
   color: var(--text-blue);
   border-radius: 10%;
@@ -120,4 +120,16 @@ td{
 }
 .keyStats-value {
 text-align: end;
+}
+.currencyDisplay{
+  margin-block-start: 1.3vw;
+}
+.currencyDisplay p {
+  display: inline;
+  color: var(--text-white);
+  background-color: var(--heading-color);
+  border-radius: 5%;
+  margin: 0.3vw;
+  padding: 3px;
+  font-size: 0.8vw;
 }
