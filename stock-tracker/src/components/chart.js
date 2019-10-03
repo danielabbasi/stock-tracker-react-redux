@@ -1,32 +1,27 @@
-import React from 'react';
-// import 'antd/dist/antd.css';
+import React, {useState} from 'react';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, ReferenceLine, Label } from 'recharts';
 import { useDispatch, useSelector } from 'react-redux';
 import { addChartTimeAction } from '../store/actions';
-import { Button } from 'antd';
-const ButtonGroup = Button.Group;
 
 const Chart = () => {
     const dispatch = useDispatch()
     const chartData = useSelector((state) => state.chartData)
+    const [current, setCurrent] = useState('5Y')
     const onClick = (e) => {
         dispatch(addChartTimeAction(e.target.value))
+        setCurrent(e.target.value)
     }
-    let latestValue
-    if (chartData[chartData.length - 1] !== undefined) {
-        latestValue = chartData[chartData.length - 1].close
-    }
+    const latestValue = chartData[chartData.length - 1] !== undefined ? chartData[chartData.length - 1].close : ''
     return (
         <div className="chart">
-            <ButtonGroup>
-            <Button type="link" ghost value="1D" onClick={onClick}>1D</Button>
-            <Button ghost>Ghost</Button>
-            <Button value="5D" onClick={onClick}>5D</Button>
-            <Button value="1M" onClick={onClick}>1M</Button>
-            <Button value="1Y" onClick={onClick}>1Y</Button>
-            <Button value="5Y" onClick={onClick}>5Y</Button>
-            <Button value="MAX" onClick={onClick}>MAX</Button>
-            </ButtonGroup>
+            <div className="graph_btn_div">
+                <button className={current === "1D" ? "active_btn" : "inactive_btn"} value="1D" onClick={onClick}>1D</button>
+                <button className={current === "5D" ? "active_btn" : "inactive_btn"} value="5D" onClick={onClick}>5D</button>
+                <button className={current === "1M" ? "active_btn" : "inactive_btn"} value="1M" onClick={onClick}>1M</button>
+                <button className={current === "1Y" ? "active_btn" : "inactive_btn"} value="1Y" onClick={onClick}>1Y</button>
+                <button className={current === "5Y" ? "active_btn" : "inactive_btn"} value="5Y" onClick={onClick}>5Y</button>
+                <button className={current === "MAX" ? "active_btn" : "inactive_btn"} value="MAX" onClick={onClick}>MAX</button>
+            </div>
             <ResponsiveContainer>
                 <AreaChart
                     data={chartData}
