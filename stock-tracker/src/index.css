@@ -160,6 +160,9 @@ grid-template-areas: "keystatsDisplay1 keystatsDisplay2"
     "keystatsDisplay1"
     "keystatsDisplay2"
   }
+  .keystatsDisplay1, .keystatsDisplay2{
+    margin:0
+  }
 }
 .space{
 width: 0.5vw
