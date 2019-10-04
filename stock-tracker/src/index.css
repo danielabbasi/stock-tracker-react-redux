@@ -123,13 +123,33 @@ color: green
 .priceDecrease{
 color: red
 }
-.keystats{
+.keystatsGrid{
 padding: 0 2vw;
+display: grid;
+grid-template-rows: 1fr 1fr;
+grid-template-areas: "keystatsDisplay1 keystatsDisplay2"
 }
-.keystatsDisplay{
-width: 100%;
-border-spacing: 0;
+.keystatsDisplay1{
+  grid-area: keystatsDisplay1;
+  margin-right: 1.5vw;
+  border-spacing: 0;
+  }
+.keystatsDisplay2{
+  grid-area: keystatsDisplay2;
+  margin-left: 1.5vw;
+  border-spacing: 0;
 }
+@media (max-width: 1000px){
+  .keystatsGrid{
+    grid-template-areas: 
+    "keystatsDisplay1"
+    "keystatsDisplay2"
+  }
+}
+.space{
+width: 0.5vw
+}
+
 td{
 padding: 0 15px
 }
