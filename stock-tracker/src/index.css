@@ -7,6 +7,7 @@
 --text-white: rgb(255, 255, 255);
 --text-blue: rgb(100, 152, 182);
 --footer-blue: #042B6C;
+--text-font-size: 1.25vw;
 }
 
 @font-face {
@@ -27,7 +28,6 @@ text-decoration: none;
 }
 
 a:hover {
-color: darkgoldenrod;
 text-decoration: none;
 }
 
@@ -59,6 +59,7 @@ margin: 0;
 }
 ::placeholder {
 font-weight: 300;
+font-size: 2.5vw;
 color: var(--text-white);
 font-weight: lighter;
 font-family: Lato-Regular;
@@ -136,11 +137,13 @@ padding: 0 15px
   color: var(--text-blue);
   border-bottom: 1px solid var(--text-blue);
   padding: 1.3vw 0;
+  font-size: var(--text-font-size)
 }
 .keyStats-value {
 text-align: end;
 border-bottom: 1px solid var(--text-blue);
 padding: 0;
+font-size: var(--text-font-size)
 }
 .currencyDisplay{
 margin-block-start: 1.3vw;
@@ -170,7 +173,7 @@ text-align: end;
 margin-block-start: 1.3vw;
 }
 .newsHeadline{
-font-size: 1.3vw;
+font-size: var(--text-font-size);
 margin: 1vw 0 0;
 }
 .firstNews a{
@@ -215,6 +218,7 @@ z-index: 1;
 .toppeers ul li{
   display: inline;
   padding: 0 0.7vw 0 0;
+  font-size: var(--text-font-size)
 }
 .green{
   color: green
@@ -223,6 +227,7 @@ z-index: 1;
   color: red
 }
 .footer{
+  font-size: var(--text-font-size);
   background-color: var(--footer-blue);
   margin: 0 -3vw;
   display: grid;
@@ -247,4 +252,14 @@ z-index: 1;
   grid-area: footer4;
   letter-spacing: 1px;
   padding: 0 2vw
+}
+.overviewCompany{
+  font-size: 1.7vw;
+}
+.overviewWeb{
+font-size: 1vw;
+font-style: italic
+}
+.overviewText{
+font-size: var(--text-font-size)
 }

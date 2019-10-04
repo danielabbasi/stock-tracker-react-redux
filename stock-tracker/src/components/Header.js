@@ -104,7 +104,7 @@ const Header = () => {
       <div className={response ? "currencyDisplay" : "hidden"}>
         <p className="curDisplayP">{overview.exchange}</p>
         <p className="curDisplayP">{overview.industry}</p>
-        <p classname={response.currency ? "curDisplayP" : "hidden"}>
+        <p className={response.currency ? "curDisplayP" : "hidden"}>
           {response.currency}
         </p>
       </div>
