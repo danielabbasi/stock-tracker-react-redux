@@ -1,35 +1,40 @@
 :root {
-  --bg-color-light: #012356;
-  --bg-color-dark: #01132D;
-  --heading-color: rgb(53, 143, 216);
-  --quotes-color: #0042A0;
-  --text-yellow: rgb(182, 154, 61);
-  --text-white: rgb(255, 255, 255);
-  --text-blue: rgb(100, 152, 182);
+--bg-color-light: #012356;
+--bg-color-dark: #01132D;
+--heading-color: rgb(53, 143, 216);
+--quotes-color: #0042A0;
+--text-yellow: rgb(182, 154, 61);
+--text-white: rgb(255, 255, 255);
+--text-blue: rgb(100, 152, 182);
+--footer-blue: #042B6C;
+--text-font-size: 1.25vw;
 }
 
 @font-face {
-  font-family: Lato-Regular;
-  src: url(./assets/Lato-Regular.ttf);
+font-family: Lato-Regular;
+src: url(./assets/Lato-Regular.ttf);
 }
 
 body {
-  background-image: linear-gradient(to right, var(--bg-color-light), var(--bg-color-dark));
-  color: white;
-  margin: 0 3vw;
-  font-family: Lato-Regular;
-
-  /* font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale; */
+background-image: linear-gradient(to right, var(--bg-color-light), var(--bg-color-dark));
+color: white;
+margin: 0 3vw;
+font-family: Lato-Regular;
 }
 
-/* code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
-} */
+a:link {
+color: white;
+text-decoration: none;
+}
+
+a:hover {
+text-decoration: none;
+}
+
+a:visited {
+color: none;
+text-decoration: none;
+}
 
 a:link {
   color: white;
@@ -48,161 +53,248 @@ a:visited {
 
 input{
   background: inherit;
-  font-size: 2em;
+  font-size: 2.5vw;
   font-weight: 300;
   color: white;
   margin-left: 5%;
   border: none;
-  width: 90%
+  width: 90%;
 }
 
 h5{
-  display: inline;
-  color: var(--heading-color);
-  font-size: 1.7vw;
+display: inline;
+color: var(--heading-color);
+font-size: 1.7vw;
 }
 .searchDisplay, .priceDisplay{
-  border-bottom: 2px solid var(--heading-color);
+border-bottom: 2px solid var(--heading-color);
 }
 .searchBar{
-  margin: 0;
+margin: 0;
 }
 ::placeholder {
-  font-weight: 300;
-  color: var(--text-white);
-  font-weight: lighter;
-  font-family: Lato-Regular;
+font-weight: 300;
+font-size: 2.5vw;
+color: var(--text-white);
+font-weight: lighter;
+font-family: Lato-Regular;
 }
 .smallIcon{
-  font-size: 1vw;
-  vertical-align: top;
-  margin: 0.3vw 0 0;
+font-size: 1vw;
+vertical-align: top;
+margin: 0.3vw 0 0;
 }
 .hideIcon{
-  display: none
+display: none
 }
 .hidden {
-  display: none !important
+display: none !important
 }
 h3{
-  color: var(--heading-color);
-  font-weight: 100;
-  border-bottom: 2px solid var(--heading-color)
+color: var(--heading-color);
+font-weight: 100;
+border-bottom: 2px solid var(--heading-color)
 }
 .headerBtns{
-  margin: 2vw 0;
-  text-align: end;
+margin: 2vw 0;
+text-align: end;
 }
 .headerBtn {
-  color: white;
-  border: none;
-  background-color: inherit;
-  font-size: 1.1vw;
-  margin: 0 1.2vw;
-  padding: 0.5vw;
-  color: var(--text-blue);
-  border-radius: 10%;
+color: white;
+border: none;
+background-color: inherit;
+font-size: 1.1vw;
+margin: 0 1.2vw;
+padding: 0.5vw;
+color: var(--text-blue);
+border-radius: 10%;
 }
 
 .quotesBtn{
-  background-color: var(--quotes-color);
-  color: var(--text-white)
+background-color: var(--quotes-color);
+color: var(--text-white)
 }
 .logo{
-  width: 10vw;
-  margin-top: 1.5vw
+width: 10vw;
+margin-top: 1.5vw
 }
 .priceDisplay{
-  padding: 0 1.5vw;
-  text-align: end;
-  font-family: Lato-Regular;
+padding: 0 1.5vw;
+text-align: end;
+font-family: Lato-Regular;
 }
 .priceDisplay h4 {
-  display: inline-block;
-  margin: 0 0.5vw;
-  font-size: 2.5vw;
-  font-weight: 20;
+display: inline-block;
+margin: 0 0.5vw;
+font-size: 2.5vw;
+font-weight: 20;
 }
 .priceDisplay p {
-  display: inline-block;
+display: inline-block;
 }
 .priceIncrease{
-  color: green
+color: green
 }
 .priceDecrease{
-  color: red
+color: red
 }
-.keystatsDisplay{
-  width: 100%;
-  padding: 0 2vw;
+.keystatsGrid{
+padding: 0 2vw;
+display: grid;
+grid-template-rows: 1fr 1fr;
+grid-template-areas: "keystatsDisplay1 keystatsDisplay2"
 }
+.keystatsDisplay1{
+  grid-area: keystatsDisplay1;
+  margin-right: 1.5vw;
+  border-spacing: 0;
+  }
+.keystatsDisplay2{
+  grid-area: keystatsDisplay2;
+  margin-left: 1.5vw;
+  border-spacing: 0;
+}
+@media (max-width: 1000px){
+  .keystatsGrid{
+    grid-template-areas: 
+    "keystatsDisplay1"
+    "keystatsDisplay2"
+  }
+}
+.space{
+width: 0.5vw
+}
+
 td{
-  padding: 0 15px
+padding: 0 15px
 }
 .keyStats-name{
+  color: var(--text-blue);
+  border-bottom: 1px solid var(--text-blue);
+  padding: 1.3vw 0;
+  font-size: var(--text-font-size)
 }
 .keyStats-value {
 text-align: end;
+border-bottom: 1px solid var(--text-blue);
+padding: 0;
+font-size: var(--text-font-size)
 }
 .currencyDisplay{
-  margin-block-start: 1.3vw;
+margin-block-start: 1.3vw;
 }
-.currencyDisplay p {
-  display: inline;
-  color: var(--text-white);
-  background-color: var(--heading-color);
-  border-radius: 5%;
-  margin: 0.3vw;
-  padding: 3px;
-  font-size: 0.8vw;
+.curDisplayP {
+display: inline;
+color: var(--text-white);
+background-color: var(--heading-color);
+border-radius: 5%;
+margin: 0.3vw;
+padding: 3px;
+font-size: 0.8vw;
 }
 .realTime{
-  font-size:  0.8vw;
-  color: var(--text-blue);
-  display: inline;
+font-size: 0.8vw;
+color: var(--text-blue);
+display: inline;
 }
 .marketStatus{
-  font-size: 0.9vw;
-  display: inline;
-  margin-left: 10px;
+font-size: 0.9vw;
+display: inline;
+margin-left: 10px;
 }
 .marketStatusDisplay{
-  padding: 0 1.5vw;
-  text-align: end;
-  margin-block-start: 1.3vw;
-}
-.latestNews{
+padding: 0 1.5vw;
+text-align: end;
+margin-block-start: 1.3vw;
 }
 .newsHeadline{
+font-size: var(--text-font-size);
+margin: 1vw 0 0;
+}
+.firstNews a{
+color: var(--text-yellow)
 }
 .newsTime, .newsSource{
-  display: inline;
-  color: var(--text-blue);
-  font-size: 0.8vw;
-  margin-right: 0.4vw
+display: inline;
+color: var(--text-blue);
+font-size: 0.8vw;
+margin-right: 0.4vw
 }
 
 .inactive_btn {
-  background: none;
-  color: var(--text-blue);
-  border: none;
-  font-family: Lato-Regular;
+background: none;
+color: var(--text-blue);
+border: none;
+font-family: Lato-Regular;
 }
 
 .inactive_btn:hover {
-  color: white;
+color: white;
 }
 
 .active_btn {
-  background: none;
-  color: white;
-  border: none;
-  font-family: Lato-Regular;
+background: none;
+color: white;
+border: none;
+font-family: Lato-Regular;
 }
 
 .graph_btn_div {
-  float: right;
-  position: relative;
-  margin-right: 6%;
-  z-index: 1;
+float: right;
+position: relative;
+margin-right: 6%;
+z-index: 1;
+}
+
+.toppeers ul{
+  list-style: none;
+  padding: 0;
+}
+.toppeers ul li{
+  display: inline;
+  padding: 0 0.7vw 0 0;
+  font-size: var(--text-font-size)
+}
+.green{
+  color: green
+}
+.red{
+  color: red
+}
+.footer{
+  font-size: var(--text-font-size);
+  background-color: var(--footer-blue);
+  margin: 0 -3vw;
+  display: grid;
+  grid-template-areas: 
+  "footer1 footer3"
+  "footer2 footer4"
+}
+.footer1{
+  grid-area: footer1;
+  padding: 0 2vw
+}
+.footer2{
+  grid-area: footer2;
+  letter-spacing: 1px;
+  padding: 0 2vw
+}
+.footer3{
+  grid-area: footer3;
+  padding: 0 2vw
+}
+.footer4{
+  grid-area: footer4;
+  letter-spacing: 1px;
+  padding: 0 2vw
+}
+.overviewCompany{
+  font-size: 1.7vw;
+}
+.overviewWeb{
+font-size: 1vw;
+font-style: italic
+}
+.overviewText{
+font-size: var(--text-font-size)
 }

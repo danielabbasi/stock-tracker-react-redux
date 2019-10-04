@@ -6,9 +6,9 @@ const Overview = () => {
     return (
         <div className="overview">
             <h3>COMPANY OVERVIEW</h3>
-            <h2>{overview.companyName} ({overview.symbol})</h2>
+            <h2 className={overview ? "overviewCompany" : "hidden"}>{overview.companyName} ({overview.symbol})</h2>
             <p> <a href={overview.website}>{overview.website}</a></p>
-            <p>{overview.description}</p>
+            <p className="overviewText">{overview.description}</p>
         </div>
     )
 }
