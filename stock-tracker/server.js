@@ -10,8 +10,8 @@ const server = http.createServer(app);
 const io = socketIo(server);
 const day = 86400000;
 const halfDay = day / 2;
-const HOST = "https://sandbox.iexapis.com";
-const TOKEN = "Tpk_139c39f1edae43fc8e5ab12451d30f4c";
+const HOST = "https://cloud.iexapis.com";
+const TOKEN = "sk_dd6836ca1e944b129d969b57482a7c64";
 
 function callNowAndInterval(fn, interval, ...args) {
   // calls function with extra arguements passed and returns interval
@@ -130,7 +130,7 @@ const getNewsDataAndEmit = async (socket, stockSymbol) => {
 const getChartDataAndEmit = async (socket, stockSymbol, chartTime) => {
   try {
     const chartData = await axios.get(
-      `${HOST}/stable/stock/${stockSymbol}/chart/${chartTime}?token=${TOKEN}`
+      `https://sandbox.iexapis.com/stable/stock/${stockSymbol}/chart/${chartTime}?token=Tpk_139c39f1edae43fc8e5ab12451d30f4c`
     );
     const chart = chartData.data.map(data => ({
       close: data.close,
@@ -145,7 +145,7 @@ const getChartDataAndEmit = async (socket, stockSymbol, chartTime) => {
 const getTopPeersAndEmit = async (socket, stockSymbol) => {
   try {
     const topPeers = await axios.get(
-      `${HOST}/stable/stock/${stockSymbol}/peers?token=${TOKEN}`
+      `https://sandbox.iexapis.com/stable/stock/${stockSymbol}/peers?token=Tpk_139c39f1edae43fc8e5ab12451d30f4c`
     );
     socket.emit("TopPeers", topPeers.data);
   } catch (error) {
@@ -156,13 +156,13 @@ const getTopPeersAndEmit = async (socket, stockSymbol) => {
 const getStockDataAndEmit = async (socket, stockSymbol) => {
   try {
     const resPromise = axios.get(
-      `${HOST}/stable/stock/${stockSymbol}/quote?token=${TOKEN}`
+      `https://sandbox.iexapis.com//stable/stock/${stockSymbol}/quote?token=Tpk_139c39f1edae43fc8e5ab12451d30f4c`
     );
     const epsPromise = axios.get(
-      `${HOST}/stable/stock/${stockSymbol}/earnings/1/actualEPS?token=${TOKEN}`
+      `https://sandbox.iexapis.com//stable/stock/${stockSymbol}/earnings/1/actualEPS?token=Tpk_139c39f1edae43fc8e5ab12451d30f4c`
     );
     const dividendsPromise = axios.get(
-      `${HOST}/stable/stock/${stockSymbol}/dividends/1y?token=${TOKEN}`
+      `https://sandbox.iexapis.com//stable/stock/${stockSymbol}/dividends/1y?token=Tpk_139c39f1edae43fc8e5ab12451d30f4c`
     );
     const [res, eps, dividends] = await Promise.all([
       resPromise,
@@ -218,6 +218,7 @@ const getStockDataAndEmit = async (socket, stockSymbol) => {
       latestUpdate,
       isUSMarketOpen
     };
+    console.log("Stock data is being sent")
     socket.emit("StockData", stockData); // Emitting a new message. It will be consumed by the client
   } catch (error) {
     console.error(`Stock Error: ${error}`);
