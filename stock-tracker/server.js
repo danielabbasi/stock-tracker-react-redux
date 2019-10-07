@@ -22,9 +22,9 @@ function callNowAndInterval(fn, interval, ...args) {
 io.on("connection", socket => {
   const intervals = {};
   console.log("New client connected");
-  const companies = getCompaniesFromAPI(socket);
+  const stockCompanies = getCompaniesFromAPI(socket);
   socket.on("search", (searchInput) => {
-    getSearchInputAndFilter(socket, searchInput, companies)
+    getSearchInputAndFilter(socket, searchInput, stockCompanies)
   })
   socket.on("symbol", (stockSymbol, chartTime) => {
     Object.values(intervals).forEach(clearInterval);
@@ -229,10 +229,13 @@ const getStockDataAndEmit = async (socket, stockSymbol) => {
   }
 };
 
-const getSearchInputAndFilter = async (socket, searchInput, companies) => {
+const getSearchInputAndFilter = async (socket, searchInput, stockCompanies) => {
   try {
-    console.log(searchInput)
-    console.log(companies)
+    const companies = await stockCompanies
+    const c = companies.map(data => ({symbol: data.symbol, name: data.name}))
+    let suggestions = c.filter( (company) => company.symbol.toLowerCase().indexOf(searchInput.toLowerCase()) !== -1 ).slice(0,10)
+    console.log(suggestions)
+    // socket.emit("symbol")
   } catch (error) {
     console.error(`Search Error: ${error}`);
   }
