@@ -40,6 +40,11 @@ export function reducer(state, action) {
                 ...state,
                 topPeers: action.payload
             }
+        case 'ADD_SEARCH_INPUT':
+            return {
+                ...state,
+                searchInput: action.payload
+            }
         default:
             return state
     }

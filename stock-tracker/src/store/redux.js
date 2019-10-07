@@ -22,7 +22,8 @@ const initialState = {
   chartData: [],
   chartTime: "5Y",
   companyOverview: false,
-  topPeers: []
+  topPeers: [],
+  searchInput: ''
 };
 
 const stockMiddleware = store => next => action => {
@@ -47,6 +48,8 @@ const stockMiddleware = store => next => action => {
   } else if (action.type === "ADD_CHARTTIME") {
     socket.emit("chartTime", store.getState().symbol, store.getState().chartTime)
     store.dispatch(addChartDataAction(store.getState().chartData))
+  } else if (action.type === "ADD_SEARCH_INPUT"){
+    console.log(store.getState().searchInput)
   }
   return result;
 };

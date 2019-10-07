@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addSymbolAction } from "../store/actions";
+import { addSymbolAction, addSearchInputAction } from "../store/actions";
 import logo from "../assets/logo.png";
 import { Icon } from "antd";
 import "../Header.css";
@@ -13,6 +13,9 @@ const Header = () => {
   const addSymbol = useCallback(symbol => dispatch(addSymbolAction(symbol)), [
     dispatch
   ]);
+  const addSearchInput = useCallback(searchInput => dispatch(addSearchInputAction(searchInput)), [
+    dispatch
+  ]);
   const response = useSelector(state => state.response);
   const overview = useSelector(state => state.companyOverview);
   const handleSubmit = e => {
@@ -23,6 +26,12 @@ const Header = () => {
       setSymbol("");
     }
   };
+
+  const onChange = e => {
+    setSymbol(e.target.value)
+    addSearchInput(e.target.value)
+  }
+
   const changeNo =
     response.change === 0
       ? "0"
@@ -58,7 +67,7 @@ const Header = () => {
           }
           type="text"
           value={symbol}
-          onChange={e => setSymbol(e.target.value)}
+          onChange={onChange}
           onKeyPress={handleSubmit}
         />
       </div>
