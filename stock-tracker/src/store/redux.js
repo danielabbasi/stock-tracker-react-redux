@@ -50,6 +50,7 @@ const stockMiddleware = store => next => action => {
     store.dispatch(addChartDataAction(store.getState().chartData))
   } else if (action.type === "ADD_SEARCH_INPUT"){
     console.log(store.getState().searchInput)
+    socket.emit("search", store.getState().searchInput)
   }
   return result;
 };

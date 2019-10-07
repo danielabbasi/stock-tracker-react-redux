@@ -22,7 +22,10 @@ function callNowAndInterval(fn, interval, ...args) {
 io.on("connection", socket => {
   const intervals = {};
   console.log("New client connected");
-  getCompaniesFromAPI(socket);
+  const companies = getCompaniesFromAPI(socket);
+  socket.on("search", (searchInput) => {
+    getSearchInputAndFilter(socket, searchInput, companies)
+  })
   socket.on("symbol", (stockSymbol, chartTime) => {
     Object.values(intervals).forEach(clearInterval);
     intervals.stock = callNowAndInterval(
@@ -83,6 +86,7 @@ const getCompaniesFromAPI = async socket => {
       symbol: data.symbol
     }));
     socket.emit("companies", companies);
+    return companies
   } catch (error) {
     console.error(`Companies Error: ${error}`);
   }
@@ -224,6 +228,15 @@ const getStockDataAndEmit = async (socket, stockSymbol) => {
     console.error(`Stock Error: ${error}`);
   }
 };
+
+const getSearchInputAndFilter = async (socket, searchInput, companies) => {
+  try {
+    console.log(searchInput)
+    console.log(companies)
+  } catch (error) {
+    console.error(`Search Error: ${error}`);
+  }
+}
 
 const changeNullValues = data => {
   Object.keys(data).forEach(key => {
