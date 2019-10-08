@@ -68,6 +68,12 @@ font-size: 1.7vw;
 }
 .searchDisplay, .priceDisplay{
 border-bottom: 2px solid var(--heading-color);
+position: relative;
+}
+.suggestion_list {
+  position: absolute;
+  background-color: #042B6C;
+  list-style-type: none;
 }
 .searchBar{
 margin: 0;

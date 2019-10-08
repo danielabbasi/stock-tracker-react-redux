@@ -8,7 +8,8 @@ import {
   initialStartupAction,
   addCompanyOverviewAction,
   addTopPeersAction,
-  addSymbolAction
+  addSymbolAction,
+  addSuggestionsAction
 } from "./actions";
 
 const io = require("socket.io-client");
@@ -23,7 +24,8 @@ const initialState = {
   chartTime: "5Y",
   companyOverview: false,
   topPeers: [],
-  searchInput: ''
+  searchInput: '',
+  suggestions: false
 };
 
 const stockMiddleware = store => next => action => {
@@ -49,8 +51,10 @@ const stockMiddleware = store => next => action => {
     socket.emit("chartTime", store.getState().symbol, store.getState().chartTime)
     store.dispatch(addChartDataAction(store.getState().chartData))
   } else if (action.type === "ADD_SEARCH_INPUT"){
-    console.log(store.getState().searchInput)
     socket.emit("search", store.getState().searchInput)
+    socket.on("suggestions", (suggestions) => {
+      store.dispatch(addSuggestionsAction(suggestions))
+    })
   }
   return result;
 };

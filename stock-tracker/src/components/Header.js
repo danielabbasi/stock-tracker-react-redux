@@ -1,14 +1,16 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addSymbolAction, addSearchInputAction } from "../store/actions";
 import logo from "../assets/logo.png";
 import { Icon } from "antd";
 import "../Header.css";
+import Select from 'react-select';
 
 const moment = require("moment");
 
 const Header = () => {
   const [symbol, setSymbol] = useState("");
+  const [open, setOpen] = useState(false)
   const dispatch = useDispatch();
   const addSymbol = useCallback(symbol => dispatch(addSymbolAction(symbol)), [
     dispatch
@@ -18,6 +20,7 @@ const Header = () => {
   ]);
   const response = useSelector(state => state.response);
   const overview = useSelector(state => state.companyOverview);
+  const suggestions = useSelector(state => state.suggestions)
   const handleSubmit = e => {
     if (e.key === "Enter") {
       e.preventDefault();
@@ -31,6 +34,16 @@ const Header = () => {
     setSymbol(e.target.value)
     addSearchInput(e.target.value)
   }
+
+  useEffect(() => {
+    setOpen(suggestions !== 0)
+  }, [suggestions])
+
+  const getSuggestions = suggestions ? suggestions.map(data => {
+    return (
+      <li value={data.symbol} key={data.symbol}> {`${data.name} (${data.symbol})`} </li>
+    )
+  }) : ''
 
   const changeNo =
     response.change === 0
@@ -70,6 +83,7 @@ const Header = () => {
           onChange={onChange}
           onKeyPress={handleSubmit}
         />
+        <ul className='suggestion_list' style={{display: open ? 'block' : 'none'}}>{getSuggestions}</ul>
       </div>
       <div className="priceDisplay">
         <p className="smallIcon">{response ? "$" : ""}</p>
