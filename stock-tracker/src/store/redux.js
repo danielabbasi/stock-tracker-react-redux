@@ -22,7 +22,8 @@ const initialState = {
   chartData: [],
   chartTime: "5Y",
   companyOverview: false,
-  topPeers: []
+  topPeers: [].keysloading,
+  loading: true
 };
 
 const stockMiddleware = store => next => action => {
