@@ -74,6 +74,11 @@ position: relative;
   position: absolute;
   background-color: #042B6C;
   list-style-type: none;
+  z-index: 1;
+}
+.suggestion_list_item:hover {
+  color: darkgoldenrod;
+  cursor: pointer;
 }
 .searchBar{
 margin: 0;

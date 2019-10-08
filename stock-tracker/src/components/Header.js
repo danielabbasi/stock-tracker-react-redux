@@ -4,7 +4,6 @@ import { addSymbolAction, addSearchInputAction } from "../store/actions";
 import logo from "../assets/logo.png";
 import { Icon } from "antd";
 import "../Header.css";
-import Select from 'react-select';
 
 const moment = require("moment");
 
@@ -35,13 +34,20 @@ const Header = () => {
     addSearchInput(e.target.value)
   }
 
+  const onClick = e => {
+    console.log(e.target.id)
+    addSymbol(e.target.id)
+    setOpen(false)
+    setSymbol("")
+  }
+
   useEffect(() => {
     setOpen(suggestions !== 0)
   }, [suggestions])
 
   const getSuggestions = suggestions ? suggestions.map(data => {
     return (
-      <li value={data.symbol} key={data.symbol}> {`${data.name} (${data.symbol})`} </li>
+      <li className='suggestion_list_item' onClick={onClick} id={data.symbol} key={data.symbol}> {`${data.name} (${data.symbol})`} </li>
     )
   }) : ''
 
@@ -82,8 +88,9 @@ const Header = () => {
           value={symbol}
           onChange={onChange}
           onKeyPress={handleSubmit}
+          // onKeyDown={onKeyDown}
         />
-        <ul className='suggestion_list' style={{display: open ? 'block' : 'none'}}>{getSuggestions}</ul>
+        <ul tabIndex="0" className='suggestion_list' style={{display: open ? 'block' : 'none'}}>{getSuggestions}</ul>
       </div>
       <div className="priceDisplay">
         <p className="smallIcon">{response ? "$" : ""}</p>
