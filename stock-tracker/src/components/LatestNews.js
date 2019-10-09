@@ -5,6 +5,7 @@ const moment = require("moment");
 
 const LatestNews = () => {
   const latestNews = useSelector(state => state.latestNews);
+  const loading = useSelector(state => state.loading)
   const newsDisplay = latestNews.map((news, index) => (
     <div key={index}>
       <p className={index === 0 ? "firstNews newsHeadline" : "newsHeadline"}>
@@ -16,7 +17,7 @@ const LatestNews = () => {
     </div>
   ));
 
-if(!latestNews.length) {
+if(loading > 0 && !latestNews.length) {
   return(
     <div className="latestnews">
       <Loading/>
