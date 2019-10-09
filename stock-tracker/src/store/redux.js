@@ -24,6 +24,7 @@ const initialState = {
   chartTime: "5Y",
   companyOverview: false,
   topPeers: [],
+  loading: 0,
   searchInput: '',
   suggestions: false
 };

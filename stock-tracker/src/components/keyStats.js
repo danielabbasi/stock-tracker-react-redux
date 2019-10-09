@@ -1,8 +1,19 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import Loading from "./loading";
 
 const KeyStats = () => {
   const response = useSelector(state => state.response);
+  const loading = useSelector(state => state.loading);
+
+  if(loading > 0 && !response){
+  return(
+    <div className="keystats">
+    <h3>KEY STATS</h3>
+    <Loading/>
+    </div>   
+  )
+  } else {
   return (
     <div className="keystats">
       <h3>KEY STATS</h3>
@@ -60,6 +71,6 @@ const KeyStats = () => {
         </table>
       </div>
     </div>
-  );
+  );}
 };
 export default KeyStats;

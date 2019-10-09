@@ -4,10 +4,12 @@ import KeyStats from "./components/keyStats";
 import Chart from "./components/chart";
 import LatestNews from './components/LatestNews';
 import Overview from './components/Overview';
-import TopPeers from './components/TopPeers'
-import Footer from './components/Footer'
+import TopPeers from './components/TopPeers';
+import Footer from './components/Footer';
 import './App.css';
 import { useSelector } from 'react-redux'
+import Loading from "./components/loading";
+
 
 function App() {
   const symbol = useSelector((state) => state.symbol)
