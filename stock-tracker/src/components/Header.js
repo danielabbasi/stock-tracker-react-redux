@@ -1,6 +1,6 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addSymbolAction } from "../store/actions";
+import { addSymbolAction, addSearchInputAction } from "../store/actions";
 import logo from "../assets/logo.png";
 import { Icon } from "antd";
 import "../Header.css";
@@ -9,12 +9,17 @@ const moment = require("moment");
 
 const Header = () => {
   const [symbol, setSymbol] = useState("");
+  const [open, setOpen] = useState(false)
   const dispatch = useDispatch();
   const addSymbol = useCallback(symbol => dispatch(addSymbolAction(symbol)), [
     dispatch
   ]);
+  const addSearchInput = useCallback(searchInput => dispatch(addSearchInputAction(searchInput)), [
+    dispatch
+  ]);
   const response = useSelector(state => state.response);
   const overview = useSelector(state => state.companyOverview);
+  const suggestions = useSelector(state => state.suggestions)
   const handleSubmit = e => {
     if (e.key === "Enter") {
       e.preventDefault();
@@ -23,6 +28,29 @@ const Header = () => {
       setSymbol("");
     }
   };
+
+  const onChange = e => {
+    setSymbol(e.target.value)
+    addSearchInput(e.target.value)
+  }
+
+  const onClick = e => {
+    console.log(e.target.id)
+    addSymbol(e.target.id)
+    setOpen(false)
+    setSymbol("")
+  }
+
+  useEffect(() => {
+    setOpen(suggestions !== 0)
+  }, [suggestions])
+
+  const getSuggestions = suggestions ? suggestions.map(data => {
+    return (
+      <li className='suggestion_list_item' onClick={onClick} id={data.symbol} key={data.symbol}> {`${data.name} (${data.symbol})`} </li>
+    )
+  }) : ''
+
   const changeNo =
     response.change === 0
       ? "0"
@@ -58,9 +86,11 @@ const Header = () => {
           }
           type="text"
           value={symbol}
-          onChange={e => setSymbol(e.target.value)}
+          onChange={onChange}
           onKeyPress={handleSubmit}
+          // onKeyDown={onKeyDown}
         />
+        <ul tabIndex="0" className='suggestion_list' style={{display: open ? 'block' : 'none'}}>{getSuggestions}</ul>
       </div>
       <div className="priceDisplay">
         <p className="smallIcon">{response ? "$" : ""}</p>

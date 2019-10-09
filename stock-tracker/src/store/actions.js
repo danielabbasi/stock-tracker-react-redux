@@ -35,5 +35,13 @@ export const addTopPeersAction = (topPeers) => ({
     type: 'ADD_TOP_PEERS',
     payload: topPeers
 })
+export const addSearchInputAction = (searchInput) => ({
+    type: 'ADD_SEARCH_INPUT',
+    payload: searchInput
+})
+export const addSuggestionsAction = (suggestions) => ({
+    type: 'ADD_SUGGESTIONS',
+    payload: suggestions
+})
 
 export const initialStartupAction = () => ({ type: "INITIAL_STARTUP" })

@@ -40,11 +40,21 @@ export function reducer(state, action) {
                 ...state,
                 topPeers: action.payload
             }
-        case 'LOADING':
+        case 'ADD_SEARCH_INPUT':
             return {
                 ...state,
-                loading: action.payload
+                searchInput: action.payload
             }
+        case 'ADD_SUGGESTIONS':
+            return {
+                ...state,
+                suggestions: action.payload
+            }
+        case 'LOADING':
+                return {
+                    ...state,
+                    loading: action.payload
+                }
         default:
             return state
     }
