@@ -16,13 +16,20 @@ const LatestNews = () => {
     </div>
   ));
 
-  return (
+if(!latestNews.length) {
+  return(
     <div className="latestnews">
-    <Loading/>
+      <Loading/>
+    </div>
+  ) 
+} else {
+  return(
+    <div className="latestnews">
       <h3>LATEST NEWS</h3>
       {newsDisplay}
     </div>
-  );
+    )
+  }
 };
 
 export default LatestNews;
