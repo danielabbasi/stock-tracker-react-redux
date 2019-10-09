@@ -2,16 +2,26 @@ import React, {useState} from 'react';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, ReferenceLine, Label } from 'recharts';
 import { useDispatch, useSelector } from 'react-redux';
 import { addChartTimeAction } from '../store/actions';
+import Loading from "./loading"
 
 const Chart = () => {
     const dispatch = useDispatch()
     const chartData = useSelector((state) => state.chartData)
+    const loading = useSelector(state => state.loading);
     const [current, setCurrent] = useState('5Y')
     const onClick = (e) => {
         dispatch(addChartTimeAction(e.target.value))
         setCurrent(e.target.value)
     }
     const latestValue = chartData[chartData.length - 1] !== undefined ? chartData[chartData.length - 1].close : ''
+    
+    if(loading > 0 && !chartData.length){
+        return(
+            <div className="chart">
+                <Loading/>
+            </div>
+        )
+    } else{
     return (
         <div className="chart">
             <div className="graph_btn_div">
@@ -42,6 +52,6 @@ const Chart = () => {
                 </AreaChart>
             </ResponsiveContainer>
         </div>
-    )
+    )}
 }
 export default Chart;
