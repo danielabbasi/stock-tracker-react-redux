@@ -7,19 +7,32 @@ import Overview from './components/Overview';
 import TopPeers from './components/TopPeers';
 import Footer from './components/Footer';
 import './App.css';
+import { useSelector } from 'react-redux'
 import Loading from "./components/loading";
 
+
 function App() {
+  const symbol = useSelector((state) => state.symbol)
+  if (symbol === '') {
+    return (
+      <div className="wrapper_default">
+        <Header />
+        <span className="content"></span>
+        <Footer />
+      </div>
+    )
+  }
+  
   return (
     <div className="wrapper">
-      <Header/>
-      <Chart/>
-      <KeyStats/>
-      <LatestNews/>
-      <Overview/>
-      <TopPeers/>
-      <Footer/>
+      <Header />
+      <Chart />
+      <KeyStats />
+      <LatestNews />
+      <Overview />
+      <TopPeers />
+      <Footer />
     </div>
-  );
+  )
 }
 export default App;

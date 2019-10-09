@@ -51,7 +51,7 @@ const stockMiddleware = store => next => action => {
   } else if (action.type === "ADD_CHARTTIME") {
     socket.emit("chartTime", store.getState().symbol, store.getState().chartTime)
     store.dispatch(addChartDataAction(store.getState().chartData))
-  } else if (action.type === "ADD_SEARCH_INPUT"){
+  } else if (action.type === "ADD_SEARCH_INPUT") {
     socket.emit("search", store.getState().searchInput)
     socket.on("suggestions", (suggestions) => {
       store.dispatch(addSuggestionsAction(suggestions))
@@ -66,7 +66,6 @@ const initialStartupMiddlware = store => next => action => {
     socket.on("companies", (companies) => {
       store.dispatch(addCompaniesAction(companies))
     })
-    store.dispatch(addSymbolAction("AAPL"))
   }
   const result = next(action)
   return result
