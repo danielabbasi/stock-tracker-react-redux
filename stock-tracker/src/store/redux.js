@@ -22,7 +22,7 @@ const initialState = {
   chartData: [],
   chartTime: "5Y",
   companyOverview: false,
-  topPeers: [].keysloading,
+  topPeers: [],
   loading: true
 };
 

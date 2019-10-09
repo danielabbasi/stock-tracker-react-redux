@@ -1,5 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import Loading from './loading';
 const moment = require("moment");
 
 const LatestNews = () => {
@@ -17,6 +18,7 @@ const LatestNews = () => {
 
   return (
     <div className="latestnews">
+    <Loading/>
       <h3>LATEST NEWS</h3>
       {newsDisplay}
     </div>

@@ -40,6 +40,11 @@ export function reducer(state, action) {
                 ...state,
                 topPeers: action.payload
             }
+        case 'LOADING':
+            return {
+                ...state,
+                loading: action.payload
+            }
         default:
             return state
     }
