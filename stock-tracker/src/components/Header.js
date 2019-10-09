@@ -1,15 +1,16 @@
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useState, useCallback, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addSymbolAction, addSearchInputAction } from "../store/actions";
 import logo from "../assets/logo.png";
 import { Icon } from "antd";
 import "../Header.css";
-
 const moment = require("moment");
 
 const Header = () => {
   const [symbol, setSymbol] = useState("");
   const [open, setOpen] = useState(false)
+  const dropdownRef = useRef(null)
+  const searchRef = useRef(null)
   const dispatch = useDispatch();
   const addSymbol = useCallback(symbol => dispatch(addSymbolAction(symbol)), [
     dispatch
@@ -25,6 +26,7 @@ const Header = () => {
       e.preventDefault();
       if (symbol.trim() === "") return;
       addSymbol(symbol);
+      setOpen(false)
       setSymbol("");
     }
   };
@@ -35,10 +37,19 @@ const Header = () => {
   }
 
   const onClick = e => {
-    console.log(e.target.id)
     addSymbol(e.target.id)
     setOpen(false)
     setSymbol("")
+  }
+
+  const handleBlur = () => {
+    requestAnimationFrame(() => {
+      if (!dropdownRef.current.contains(document.activeElement) && !searchRef.current.contains(document.activeElement)) {
+        setOpen(false)
+      } else {
+        searchRef.current.focus()
+      }
+    })
   }
 
   useEffect(() => {
@@ -88,9 +99,10 @@ const Header = () => {
           value={symbol}
           onChange={onChange}
           onKeyPress={handleSubmit}
-          // onKeyDown={onKeyDown}
+          onBlur={handleBlur}
+          ref={searchRef}
         />
-        <ul tabIndex="0" className='suggestion_list' style={{display: open ? 'block' : 'none'}}>{getSuggestions}</ul>
+        <ul ref={dropdownRef} tabIndex="0" className='suggestion_list' style={{ display: open ? 'block' : 'none' }}>{getSuggestions}</ul>
       </div>
       <div className="priceDisplay">
         <p className="smallIcon">{response ? "$" : ""}</p>
