@@ -1,28 +1,67 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addSymbolAction } from "../store/actions";
+import { addSymbolAction, addSearchInputAction } from "../store/actions";
 import logo from "../assets/logo.png";
 import { Icon } from "antd";
 import "../Header.css";
-
 const moment = require("moment");
 
 const Header = () => {
   const [symbol, setSymbol] = useState("");
+  const [open, setOpen] = useState(false)
+  const dropdownRef = useRef(null)
+  const searchRef = useRef(null)
   const dispatch = useDispatch();
   const addSymbol = useCallback(symbol => dispatch(addSymbolAction(symbol)), [
     dispatch
   ]);
+  const addSearchInput = useCallback(searchInput => dispatch(addSearchInputAction(searchInput)), [
+    dispatch
+  ]);
   const response = useSelector(state => state.response);
   const overview = useSelector(state => state.companyOverview);
+  const suggestions = useSelector(state => state.suggestions)
   const handleSubmit = e => {
     if (e.key === "Enter") {
       e.preventDefault();
       if (symbol.trim() === "") return;
       addSymbol(symbol);
+      setOpen(false)
       setSymbol("");
     }
   };
+
+  const onChange = e => {
+    setSymbol(e.target.value)
+    addSearchInput(e.target.value)
+  }
+
+  const onClick = e => {
+    addSymbol(e.target.id)
+    setOpen(false)
+    setSymbol("")
+  }
+
+  const handleBlur = () => {
+    requestAnimationFrame(() => {
+      if (!dropdownRef.current.contains(document.activeElement) && !searchRef.current.contains(document.activeElement)) {
+        setOpen(false)
+      } else {
+        searchRef.current.focus()
+      }
+    })
+  }
+
+  useEffect(() => {
+    setOpen(suggestions !== 0)
+  }, [suggestions])
+
+  const getSuggestions = suggestions ? suggestions.map(data => {
+    return (
+      <li className='suggestion_list_item' onClick={onClick} id={data.symbol} key={data.symbol}> {`${data.name} (${data.symbol})`} </li>
+    )
+  }) : ''
+
   const changeNo =
     response.change === 0
       ? "0"
@@ -58,9 +97,12 @@ const Header = () => {
           }
           type="text"
           value={symbol}
-          onChange={e => setSymbol(e.target.value)}
+          onChange={onChange}
           onKeyPress={handleSubmit}
+          onBlur={handleBlur}
+          ref={searchRef}
         />
+        <ul ref={dropdownRef} tabIndex="0" className='suggestion_list' style={{ display: open ? 'block' : 'none' }}>{getSuggestions}</ul>
       </div>
       <div className="priceDisplay">
         <p className="smallIcon">{response ? "$" : ""}</p>

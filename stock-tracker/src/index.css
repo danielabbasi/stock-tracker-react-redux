@@ -68,6 +68,17 @@ font-size: 1.7vw;
 }
 .searchDisplay, .priceDisplay{
 border-bottom: 2px solid var(--heading-color);
+position: relative;
+}
+.suggestion_list {
+  position: absolute;
+  background-color: #042B6C;
+  list-style-type: none;
+  z-index: 1;
+}
+.suggestion_list_item:hover {
+  color: darkgoldenrod;
+  cursor: pointer;
 }
 .searchBar{
 margin: 0;
@@ -267,7 +278,7 @@ z-index: 1;
 .footer{
   font-size: var(--text-font-size);
   background-color: var(--footer-blue);
-  margin: 0 -3vw;
+  /* margin: 0 -3vw; */
   display: grid;
   grid-template-areas: 
   "footer1 footer3"

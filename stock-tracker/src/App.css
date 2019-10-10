@@ -1,3 +1,8 @@
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
 .wrapper {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -9,6 +14,16 @@
   "keystats keystats overview"
   ". . toppeers"
   "footer footer footer"
+}
+
+.wrapper_default {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.content {
+  flex: 1 0 auto;
 }
 
 .keystats {
@@ -37,6 +52,7 @@
 
 .footer {
   grid-area: footer;
+  flex-shrink: 0;
 }
 
 @media (max-width: 1000px) {
