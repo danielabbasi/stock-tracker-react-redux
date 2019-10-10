@@ -24,13 +24,13 @@ const Chart = () => {
     } else{
     return (
         <div className="chart">
-            <div className="graph_btn_div">
-                <button className={current === "1D" ? "active_btn" : "inactive_btn"} value="1D" onClick={onClick}>1D</button>
-                <button className={current === "5D" ? "active_btn" : "inactive_btn"} value="5D" onClick={onClick}>5D</button>
-                <button className={current === "1M" ? "active_btn" : "inactive_btn"} value="1M" onClick={onClick}>1M</button>
-                <button className={current === "1Y" ? "active_btn" : "inactive_btn"} value="1Y" onClick={onClick}>1Y</button>
-                <button className={current === "5Y" ? "active_btn" : "inactive_btn"} value="5Y" onClick={onClick}>5Y</button>
-                <button className={current === "MAX" ? "active_btn" : "inactive_btn"} value="MAX" onClick={onClick}>MAX</button>
+            <div className="chart__graph_btn">
+                <button className={current === "1D" ? "chart__graph_btn--active" : "chart__graph_btn--inactive"} value="1D" onClick={onClick}>1D</button>
+                <button className={current === "5D" ? "chart__graph_btn--active" : "chart__graph_btn--inactive"} value="5D" onClick={onClick}>5D</button>
+                <button className={current === "1M" ? "chart__graph_btn--active" : "chart__graph_btn--inactive"} value="1M" onClick={onClick}>1M</button>
+                <button className={current === "1Y" ? "chart__graph_btn--active" : "chart__graph_btn--inactive"} value="1Y" onClick={onClick}>1Y</button>
+                <button className={current === "5Y" ? "chart__graph_btn--active" : "chart__graph_btn--inactive"} value="5Y" onClick={onClick}>5Y</button>
+                <button className={current === "MAX" ? "chart__graph_btn--active" : "chart__graph_btn--inactive"} value="MAX" onClick={onClick}>MAX</button>
             </div>
             <ResponsiveContainer>
                 <AreaChart

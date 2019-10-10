@@ -8,59 +8,73 @@ const moment = require("moment");
 
 const Header = () => {
   const [symbol, setSymbol] = useState("");
-  const [open, setOpen] = useState(false)
-  const dropdownRef = useRef(null)
-  const searchRef = useRef(null)
+  const [open, setOpen] = useState(false);
+  const dropdownRef = useRef(null);
+  const searchRef = useRef(null);
   const dispatch = useDispatch();
   const addSymbol = useCallback(symbol => dispatch(addSymbolAction(symbol)), [
     dispatch
   ]);
-  const addSearchInput = useCallback(searchInput => dispatch(addSearchInputAction(searchInput)), [
-    dispatch
-  ]);
+  const addSearchInput = useCallback(
+    searchInput => dispatch(addSearchInputAction(searchInput)),
+    [dispatch]
+  );
   const response = useSelector(state => state.response);
   const overview = useSelector(state => state.companyOverview);
-  const suggestions = useSelector(state => state.suggestions)
+  const suggestions = useSelector(state => state.suggestions);
   const handleSubmit = e => {
     if (e.key === "Enter") {
       e.preventDefault();
       if (symbol.trim() === "") return;
       addSymbol(symbol);
-      setOpen(false)
+      setOpen(false);
       setSymbol("");
     }
   };
 
   const onChange = e => {
-    setSymbol(e.target.value)
-    addSearchInput(e.target.value)
-  }
+    setSymbol(e.target.value);
+    addSearchInput(e.target.value);
+  };
 
   const onClick = e => {
-    addSymbol(e.target.id)
-    setOpen(false)
-    setSymbol("")
-  }
+    addSymbol(e.target.id);
+    setOpen(false);
+    setSymbol("");
+  };
 
   const handleBlur = () => {
     requestAnimationFrame(() => {
-      if (!dropdownRef.current.contains(document.activeElement) && !searchRef.current.contains(document.activeElement)) {
-        setOpen(false)
+      if (
+        !dropdownRef.current.contains(document.activeElement) &&
+        !searchRef.current.contains(document.activeElement)
+      ) {
+        setOpen(false);
       } else {
-        searchRef.current.focus()
+        searchRef.current.focus();
       }
-    })
-  }
+    });
+  };
 
   useEffect(() => {
-    setOpen(suggestions !== 0)
-  }, [suggestions])
+    setOpen(suggestions !== 0);
+  }, [suggestions]);
 
-  const getSuggestions = suggestions ? suggestions.map(data => {
-    return (
-      <li className='suggestion_list_item' onClick={onClick} id={data.symbol} key={data.symbol}> {`${data.name} (${data.symbol})`} </li>
-    )
-  }) : ''
+  const getSuggestions = suggestions
+    ? suggestions.map(data => {
+        return (
+          <li
+            className="search_display__suggestion_list__item"
+            onClick={onClick}
+            id={data.symbol}
+            key={data.symbol}
+          >
+            {" "}
+            {`${data.name} (${data.symbol})`}{" "}
+          </li>
+        );
+      })
+    : "";
 
   const changeNo =
     response.change === 0
@@ -80,18 +94,18 @@ const Header = () => {
 
   return (
     <div className="header">
-      <img className="logo" alt="logo" src={logo} />
-      <div className="headerBtns">
-        <button className="headerBtn quotesBtn">QUOTES</button>
-        <button className="headerBtn">MARKETS</button>
-        <button className="headerBtn">WATCHLIST</button>
+      <img className="header__logo" alt="logo" src={logo} />
+      <div className="header__btns">
+        <button className="header__btns__btn quotes_btn">QUOTES</button>
+        <button className="header__btns__btn">MARKETS</button>
+        <button className="header__btns__btn">WATCHLIST</button>
       </div>
-      <div className="searchDisplay">
+      <div className="search_display">
         <h5>
-          <Icon className="searchIcon" type="search" />
+          <Icon className="search_display__icon" type="search" />
         </h5>
         <input
-          className="searchBar"
+          className="search_display__search_bar"
           placeholder={
             response ? `${response.companyName}(${response.symbol})` : ""
           }
@@ -102,22 +116,29 @@ const Header = () => {
           onBlur={handleBlur}
           ref={searchRef}
         />
-        <ul ref={dropdownRef} tabIndex="0" className='suggestion_list' style={{ display: open ? 'block' : 'none' }}>{getSuggestions}</ul>
+        <ul
+          ref={dropdownRef}
+          tabIndex="0"
+          className="search_display__suggestion_list"
+          style={{ display: open ? "block" : "none" }}
+        >
+          {getSuggestions}
+        </ul>
       </div>
-      <div className="priceDisplay">
-        <p className="smallIcon">{response ? "$" : ""}</p>
+      <div className="price_display">
+        <p className="price_display__small_icon">{response ? "$" : ""}</p>
         <h4>{response.latestPrice}</h4>
         <h4
           className={
             response
               ? response.change < 0
-                ? "priceDecrease"
-                : "priceIncrease"
+                ? "price_display--decrease"
+                : "price_display--increase"
               : "hidden"
           }
         >
           <Icon
-            className={response ? "smallIcon" : "hideIcon"}
+            className="price_display__small_icon"
             type={response.change < 0 ? "arrow-down" : "arrow-up"}
           />
           {changeNo}
@@ -126,8 +147,8 @@ const Header = () => {
           className={
             response
               ? response.changePercent < 0
-                ? "priceDecrease"
-                : "priceIncrease"
+                ? "price_display--decrease"
+                : "price_display--increase"
               : "hidden"
           }
         >
@@ -136,23 +157,23 @@ const Header = () => {
         <p
           className={
             response.changePercent < 0
-              ? "smallIcon priceDecrease"
-              : "smallIcon priceIncrease"
+              ? "price_display__small_icon price_display--decrease"
+              : "price_display__small_icon price_display--increase"
           }
         >
           {response ? "%" : ""}
         </p>
       </div>
-      <div className={response ? "currencyDisplay" : "hidden"}>
-        <p className="curDisplayP">{overview.exchange}</p>
-        <p className="curDisplayP">{overview.industry}</p>
-        <p className={response.currency ? "curDisplayP" : "hidden"}>
+      <div className={response ? "currency_display" : "hidden"}>
+        <p className="currency_display__item">{overview.exchange}</p>
+        <p className="currency_display__item">{overview.industry}</p>
+        <p className={response.currency ? "currency_display__item" : "hidden"}>
           {response.currency}
         </p>
       </div>
-      <div className="marketStatusDisplay">
-        <p className="realTime">{realTimeDisplay}</p>
-        <p className="marketStatus">{marketStatus}</p>
+      <div className="market_status_display">
+        <p className="market_status_display__real_time">{realTimeDisplay}</p>
+        <p className="market_status_display__real_time__status">{marketStatus}</p>
       </div>
     </div>
   );

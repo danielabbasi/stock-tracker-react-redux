@@ -8,14 +8,14 @@ const TopPeers = () => {
 
     if(loading > 0 && !peers.length) {
         return(        
-        <div className="toppeers">
+        <div className="top_peers">
             <h3>TOP PEERS</h3>
             <Loading/>
         </div>
         )
     } else {
         return (
-            <div className="toppeers">
+            <div className="top_peers">
                 <h3>TOP PEERS</h3>
                 <ul>{peers.map((data, index) => <li key={index}>{data}</li>)} </ul>
             </div>

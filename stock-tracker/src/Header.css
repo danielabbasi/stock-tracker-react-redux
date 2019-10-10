@@ -6,23 +6,23 @@
     "searchDisplay priceDisplay"
     "currencyDisplay marketStatusDisplay"
 }
-.logo {
+.header__logo {
     grid-area: logo
   }
 
-.headerBtns {
+.header__btns {
     grid-area: headerBtns;
   }
-.searchDisplay {
+.search_display {
     grid-area: searchDisplay
   }
 
-.priceDisplay {
+.price_display {
     grid-area: priceDisplay
 }
-.currencyDisplay {
+.currency_display {
     grid-area: currencyDisplay
 }
-.marketStatusDisplay {
+.market_status_display {
     grid-area: marketStatusDisplay
 }
