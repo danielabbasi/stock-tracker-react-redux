@@ -24,14 +24,13 @@ const LatestNews = () => {
         <Loading />
       </div>
     );
-  } else {
-    return (
-      <div className="latestnews">
-        <h3>LATEST NEWS</h3>
-        {newsDisplay}
-      </div>
-    );
   }
+  return (
+    <div className="latestnews">
+      <h3>LATEST NEWS</h3>
+      {newsDisplay}
+    </div>
+  );
 };
 
 export default LatestNews;

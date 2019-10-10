@@ -6,24 +6,19 @@ const TopPeers = () => {
   const peers = useSelector(state => state.topPeers);
   const loading = useSelector(state => state.loading);
 
-  if (loading > 0 && !peers.length) {
-    return (
-      <div className="top_peers">
-        <h3>TOP PEERS</h3>
+  return (
+    <div className="top_peers">
+      <h3>TOP PEERS</h3>
+      {loading > 0 && !peers.length ? (
         <Loading />
-      </div>
-    );
-  } else {
-    return (
-      <div className="top_peers">
-        <h3>TOP PEERS</h3>
+      ) : (
         <ul>
           {peers.map((data, index) => (
             <li key={index}>{data}</li>
-          ))}{" "}
+          ))}
         </ul>
-      </div>
-    );
-  }
+      )}
+    </div>
+  );
 };
 export default TopPeers;

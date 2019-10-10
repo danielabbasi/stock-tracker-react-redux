@@ -6,7 +6,7 @@ import LatestNews from "./components/LatestNews";
 import Overview from "./components/Overview";
 import TopPeers from "./components/TopPeers";
 import Footer from "./components/Footer";
-import "./App.css";
+import "./assets/styles/App.css";
 import { useSelector } from "react-redux";
 
 function App() {
@@ -20,7 +20,6 @@ function App() {
       </div>
     );
   }
-
   return (
     <div className="wrapper">
       <Header />

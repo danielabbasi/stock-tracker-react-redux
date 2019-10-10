@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addSymbolAction, addSearchInputAction } from "../store/actions";
 import logo from "../assets/logo.png";
 import { Icon } from "antd";
-import "../Header.css";
+import "../assets/styles/Header.css";
 const moment = require("moment");
 
 const Header = () => {
@@ -60,7 +60,7 @@ const Header = () => {
     setOpen(suggestions !== 0);
   }, [suggestions]);
 
-  const getSuggestions = suggestions
+  const suggestionItems = suggestions
     ? suggestions.map(data => {
         return (
           <li
@@ -116,14 +116,15 @@ const Header = () => {
           onBlur={handleBlur}
           ref={searchRef}
         />
-        <ul
-          ref={dropdownRef}
-          tabIndex="0"
-          className="search_display__suggestion_list"
-          style={{ display: open ? "block" : "none" }}
-        >
-          {getSuggestions}
-        </ul>
+        {open && (
+          <ul
+            ref={dropdownRef}
+            tabIndex="-1"
+            className="search_display__suggestion_list"
+          >
+            {suggestionItems}
+          </ul>
+        )}
       </div>
       <div className="price_display">
         <p className="price_display__small_icon">{response ? "$" : ""}</p>
