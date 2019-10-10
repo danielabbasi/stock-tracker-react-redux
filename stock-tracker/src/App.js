@@ -8,8 +8,6 @@ import TopPeers from './components/TopPeers';
 import Footer from './components/Footer';
 import './App.css';
 import { useSelector } from 'react-redux'
-import Loading from "./components/loading";
-
 
 function App() {
   const symbol = useSelector((state) => state.symbol)

@@ -1,6 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { Icon, Spin } from 'antd';
+import { Icon } from 'antd';
+import Spin from 'antd/es/spin'
 
 const Loading = () => {
     const loading = useSelector(state => state.loading);
@@ -10,7 +11,7 @@ const Loading = () => {
     // const loadingIcon = <Icon type="loading" style={{ fontSize: 24 }} spin />;
 return(
     <div>
-        <p>loading</p>
+        <Icon type="sync" spin />
     </div>
 )
 }
