@@ -173,7 +173,9 @@ const Header = () => {
       </div>
       <div className="market_status_display">
         <p className="market_status_display__real_time">{realTimeDisplay}</p>
-        <p className="market_status_display__real_time__status">{marketStatus}</p>
+        <p className="market_status_display__real_time__status">
+          {marketStatus}
+        </p>
       </div>
     </div>
   );

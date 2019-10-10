@@ -20,7 +20,7 @@ function App() {
       </div>
     )
   }
-  
+
   return (
     <div className="wrapper">
       <Header />

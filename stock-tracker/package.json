@@ -41,5 +41,10 @@
   },
   "devDependencies": {
     "nodemon": "^1.19.2"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged"
+    }
   }
 }
