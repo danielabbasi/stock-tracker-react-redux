@@ -7,7 +7,6 @@ import Overview from './components/Overview';
 import TopPeers from './components/TopPeers';
 import Footer from './components/Footer';
 import './App.css';
-import Loading from "./components/loading";
 
 function App() {
   return (
