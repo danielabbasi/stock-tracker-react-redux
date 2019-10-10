@@ -66,21 +66,21 @@ display: inline;
 color: var(--heading-color);
 font-size: 1.7vw;
 }
-.searchDisplay, .priceDisplay{
+.search_display, .price_display{
 border-bottom: 2px solid var(--heading-color);
 position: relative;
 }
-.suggestion_list {
+.search_display__suggestion_list {
   position: absolute;
   background-color: #042B6C;
   list-style-type: none;
   z-index: 1;
 }
-.suggestion_list_item:hover {
+.search_display__suggestion_list__item:hover {
   color: darkgoldenrod;
   cursor: pointer;
 }
-.searchBar{
+.search_display__search_bar{
 margin: 0;
 }
 ::placeholder {
@@ -90,13 +90,10 @@ color: var(--text-white);
 font-weight: lighter;
 font-family: Lato-Regular;
 }
-.smallIcon{
+.price_display__small_icon{
 font-size: 1vw;
 vertical-align: top;
 margin: 0.3vw 0 0;
-}
-.hideIcon{
-display: none
 }
 .hidden {
 display: none !important
@@ -106,11 +103,11 @@ color: var(--heading-color);
 font-weight: 100;
 border-bottom: 2px solid var(--heading-color)
 }
-.headerBtns{
+.header__btns{
 margin: 2vw 0;
 text-align: end;
 }
-.headerBtn {
+.header__btns__btn {
 color: white;
 border: none;
 background-color: inherit;
@@ -121,57 +118,57 @@ color: var(--text-blue);
 border-radius: 10%;
 }
 
-.quotesBtn{
+.quotes_btn{
 background-color: var(--quotes-color);
 color: var(--text-white)
 }
-.logo{
+.header__logo{
 width: 10vw;
 margin-top: 1.5vw
 }
-.priceDisplay{
+.price_display{
 padding: 0 1.5vw;
 text-align: end;
 font-family: Lato-Regular;
 }
-.priceDisplay h4 {
+.price_display h4 {
 display: inline-block;
 margin: 0 0.5vw;
 font-size: 2.5vw;
 font-weight: 20;
 }
-.priceDisplay p {
+.price_display p {
 display: inline-block;
 }
-.priceIncrease{
+.price_display--increase{
 color: green
 }
-.priceDecrease{
+.price_display--decrease{
 color: red
 }
-.keystatsGrid{
+.keystats__grid{
 padding: 0 2vw;
 display: grid;
 grid-template-rows: 1fr 1fr;
 grid-template-areas: "keystatsDisplay1 keystatsDisplay2"
 }
-.keystatsDisplay1{
+.keystats__grid__display1{
   grid-area: keystatsDisplay1;
   margin-right: 1.5vw;
   border-spacing: 0;
   }
-.keystatsDisplay2{
+.keystats__grid__display2{
   grid-area: keystatsDisplay2;
   margin-left: 1.5vw;
   border-spacing: 0;
 }
 @media (max-width: 1000px){
-  .keystatsGrid{
+  .keystats__grid{
     grid-template-areas: 
     "keystatsDisplay1"
     "keystatsDisplay2"
   }
-  .keystatsDisplay1, .keystatsDisplay2{
+  .keystats__grid__display1, .keystats__grid__display2{
     margin:0
   }
 }
@@ -182,22 +179,22 @@ width: 0.5vw
 td{
 padding: 0 15px
 }
-.keyStats-name{
+.keystats__grid__display1__name{
   color: var(--text-blue);
   border-bottom: 1px solid var(--text-blue);
   padding: 1.3vw 0;
   font-size: var(--text-font-size)
 }
-.keyStats-value {
+.keystats__grid__display1__value {
 text-align: end;
 border-bottom: 1px solid var(--text-blue);
 padding: 0;
 font-size: var(--text-font-size)
 }
-.currencyDisplay{
+.currency_display{
 margin-block-start: 1.3vw;
 }
-.curDisplayP {
+.currency_display__item {
 display: inline;
 color: var(--text-white);
 background-color: var(--heading-color);
@@ -206,17 +203,17 @@ margin: 0.3vw;
 padding: 3px;
 font-size: 0.8vw;
 }
-.realTime{
+.market_status_display__real_time{
 font-size: 0.8vw;
 color: var(--text-blue);
 display: inline;
 }
-.marketStatus{
+.market_status_display__real_time__status{
 font-size: 0.9vw;
 display: inline;
 margin-left: 10px;
 }
-.marketStatusDisplay{
+.market_status_display{
 padding: 0 1.5vw;
 text-align: end;
 margin-block-start: 1.3vw;
@@ -235,36 +232,35 @@ font-size: 0.8vw;
 margin-right: 0.4vw
 }
 
-.inactive_btn {
+.chart__graph_btn {
+float: right;
+position: relative;
+margin-right: 6%;
+z-index: 1;
+}
+.chart__graph_btn--inactive {
 background: none;
 color: var(--text-blue);
 border: none;
 font-family: Lato-Regular;
 }
 
-.inactive_btn:hover {
+.chart__graph_btn--inactive:hover {
 color: white;
 }
 
-.active_btn {
+.chart__graph_btn--active {
 background: none;
 color: white;
 border: none;
 font-family: Lato-Regular;
 }
 
-.graph_btn_div {
-float: right;
-position: relative;
-margin-right: 6%;
-z-index: 1;
-}
-
-.toppeers ul{
+.top_peers ul{
   list-style: none;
   padding: 0;
 }
-.toppeers ul li{
+.top_peers ul li{
   display: inline;
   padding: 0 0.7vw 0 0;
   font-size: var(--text-font-size)
