@@ -1,13 +1,15 @@
 import React from "react";
-import '../loading.css';
+import "../assets/styles/loading.css";
 
 const Loading = () => {
-
-return(
+  return (
     <div>
-        <div class="lds-ripple"><div></div><div></div></div>
+      <div class="lds-ripple">
+        <div></div>
+        <div></div>
+      </div>
     </div>
-)
-}
+  );
+};
 
 export default Loading;

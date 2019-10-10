@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import Loading from './loading';
+import Loading from "./loading";
 const moment = require("moment");
 
 const LatestNews = () => {
@@ -17,21 +17,20 @@ const LatestNews = () => {
     </div>
   ));
 
-if(loading > 0 && !latestNews.length) {
-  return(
-    <div className="latestnews">
-      <h3>LATEST NEWS</h3>
-      <Loading/>
-    </div>
-  ) 
-} else {
-  return(
+  if (loading > 0 && !latestNews.length) {
+    return (
+      <div className="latestnews">
+        <h3>LATEST NEWS</h3>
+        <Loading />
+      </div>
+    );
+  }
+  return (
     <div className="latestnews">
       <h3>LATEST NEWS</h3>
       {newsDisplay}
     </div>
-    )
-  }
+  );
 };
 
 export default LatestNews;

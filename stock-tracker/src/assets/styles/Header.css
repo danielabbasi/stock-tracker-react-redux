@@ -1,0 +1,28 @@
+.header {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-template-areas:
+    "logo headerBtns"
+    "searchDisplay priceDisplay"
+    "currencyDisplay marketStatusDisplay";
+}
+.header__logo {
+  grid-area: logo;
+}
+
+.header__btns {
+  grid-area: headerBtns;
+}
+.search_display {
+  grid-area: searchDisplay;
+}
+
+.price_display {
+  grid-area: priceDisplay;
+}
+.currency_display {
+  grid-area: currencyDisplay;
+}
+.market_status_display {
+  grid-area: marketStatusDisplay;
+}
