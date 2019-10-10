@@ -9,7 +9,6 @@ import Footer from './components/Footer';
 import './App.css';
 import { useSelector } from 'react-redux'
 
-
 function App() {
   const symbol = useSelector((state) => state.symbol)
   if (symbol === '') {
