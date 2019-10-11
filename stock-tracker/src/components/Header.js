@@ -116,15 +116,14 @@ const Header = () => {
           onBlur={handleBlur}
           ref={searchRef}
         />
-        {open && (
-          <ul
-            ref={dropdownRef}
-            tabIndex="-1"
-            className="search_display__suggestion_list"
-          >
-            {suggestionItems}
-          </ul>
-        )}
+        <ul
+          ref={dropdownRef}
+          tabIndex="-1"
+          className="search_display__suggestion_list"
+          style={{ display: open ? "block" : "none" }}
+        >
+          {suggestionItems}
+        </ul>
       </div>
       <div className="price_display">
         <p className="price_display__small_icon">{response ? "$" : ""}</p>
