@@ -148,6 +148,7 @@ const Chart = () => {
             stroke="#73b3ef"
             fillOpacity={1}
             fill="url(#colorUv)"
+            connectNulls
           />
         </AreaChart>
       </ResponsiveContainer>

@@ -1,6 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import Loading from "./loading";
+import TopPeers from "./TopPeers";
 
 const Overview = () => {
   const overview = useSelector(state => state.companyOverview);
@@ -32,9 +33,12 @@ const Overview = () => {
         </h2>
         <p>
           {" "}
-          <a className="overview__web" href={overview.website}>{overview.website}</a>
+          <a className="overview__web" href={overview.website}>
+            {overview.website}
+          </a>
         </p>
         <p className="overview__text">{overview.description}</p>
+        <TopPeers />
       </div>
     );
   }
