@@ -117,7 +117,7 @@ const Chart = () => {
               <stop offset="95%" stopColor="#73b3ef" stopOpacity={0} />
             </linearGradient>
           </defs>
-          <XAxis dataKey="date" />
+          <XAxis className="chart__date" dataKey="date" />
           <YAxis orientation="right" />
           <ReferenceLine
             y={latestValue}
