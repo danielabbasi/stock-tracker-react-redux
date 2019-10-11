@@ -11,8 +11,12 @@
 }
 
 @font-face {
-  font-family: Lato-Regular;
-  src: url(../Lato-Regular.ttf);
+  font-family: Helvetica-light;
+  src: url(../Helvetica-Light.ttf);
+}
+@font-face {
+  font-family: Helvetica-bold;
+  src: url(../Helvetica-Bold.ttf);
 }
 
 body {
@@ -22,8 +26,7 @@ body {
     var(--bg-color-dark)
   );
   color: white;
-  margin: 0 3vw;
-  font-family: Lato-Regular;
+  font-family: Helvetica-light;
 }
 
 a:link {
@@ -93,7 +96,7 @@ h5 {
   font-size: 2.5vw;
   color: var(--text-white);
   font-weight: lighter;
-  font-family: Lato-Regular;
+  font-family: Helvetica-light;
 }
 .price_display__small_icon {
   font-size: 1vw;
@@ -104,6 +107,7 @@ h5 {
   display: none !important;
 }
 h3 {
+  font-family: Helvetica-bold;
   font-size: 15px;
   color: var(--heading-color);
   font-weight: 100;
@@ -117,9 +121,9 @@ h3 {
   color: white;
   border: none;
   background-color: inherit;
-  font-size: 1.1vw;
+  font-size: 10px;
   margin: 0 1.2vw;
-  padding: 0.5vw;
+  padding: 0.3vw 0.5vw;
   color: var(--text-blue);
   border-radius: 10%;
 }
@@ -135,7 +139,7 @@ h3 {
 .price_display {
   padding: 0 1.5vw;
   text-align: end;
-  font-family: Lato-Regular;
+  font-family: Helvetica-light;
 }
 .price_display h4 {
   display: inline-block;
@@ -153,9 +157,8 @@ h3 {
   color: red;
 }
 .keystats__grid {
-  padding: 0 2vw;
   display: grid;
-  grid-template-rows: 1fr 1fr;
+  grid-template-rows: 1fr;
   grid-template-areas: "keystatsDisplay1 keystatsDisplay2";
 }
 .keystats__grid__display1 {
@@ -183,13 +186,10 @@ h3 {
   width: 0.5vw;
 }
 
-td {
-  padding: 0 15px;
-}
 .keystats__grid__display1__name {
   color: var(--text-blue);
   border-bottom: 1px solid var(--text-blue);
-  padding: 1.3vw 0;
+  padding: 0.9vw 0;
   font-size: var(--text-font-size);
 }
 .keystats__grid__display1__value {
@@ -250,7 +250,7 @@ td {
   background: none;
   color: var(--text-blue);
   border: none;
-  font-family: Lato-Regular;
+  font-family: Helvetica-light;
 }
 
 .chart__graph_btn--inactive:hover {
@@ -261,7 +261,7 @@ td {
   background: none;
   color: white;
   border: none;
-  font-family: Lato-Regular;
+  font-family: Helvetica-light;
 }
 
 .top_peers ul {
@@ -282,7 +282,7 @@ td {
 .footer {
   font-size: var(--text-font-size);
   background-color: var(--footer-blue);
-  /* margin: 0 -3vw; */
+  margin: 0 -3vw;
   display: grid;
   grid-template-areas:
     "footer1 footer3"
@@ -315,6 +315,8 @@ td {
 }
 .overview__text {
   font-size: var(--text-font-size);
+  height: 130px;
+  overflow-y: scroll;
 }
 .chart__date {
   font-size: 5px;
