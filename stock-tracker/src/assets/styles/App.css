@@ -15,6 +15,7 @@ body {
     "keystats keystats overview"
     ". . toppeers"
     "footer footer footer";
+  margin: 0 3vw;
 }
 
 .wrapper_default {

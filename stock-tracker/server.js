@@ -241,7 +241,7 @@ const getSearchInputAndFilter = async (socket, searchInput, stockCompanies) => {
     const companies = await stockCompanies
     const c = companies.map(data => ({symbol: data.symbol, name: data.name}))
     let suggestions = c.filter( (company) => company.symbol.toLowerCase().indexOf(searchInput.toLowerCase()) !== -1 ).slice(0,10)
-    console.log(suggestions)
+    
     socket.emit("suggestions", suggestions)
   } catch (error) {
     console.error(`Search Error: ${error}`);
