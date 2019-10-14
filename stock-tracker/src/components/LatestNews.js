@@ -8,12 +8,12 @@ const LatestNews = () => {
   const loading = useSelector(state => state.loading);
   const newsDisplay = latestNews.map((news, index) => (
     <div key={index}>
-      <p className={index === 0 ? "firstNews newsHeadline" : "newsHeadline"}>
+      <p className={index === 0 ? "first_news news_headline" : "news_headline"}>
         {" "}
         <a href={news.url}>{news.headline}</a>
       </p>
-      <p className="newsTime">{moment(news.datetime).fromNow()}</p>
-      <p className="newsSource">- {news.source}</p>
+      <p className="news_time">{moment(news.datetime).fromNow()}</p>
+      <p className="news_source">- {news.source}</p>
     </div>
   ));
   const error = useSelector(state => state.error.latestNews);
@@ -27,16 +27,16 @@ const LatestNews = () => {
   }
   if (loading > 0 && !latestNews.length) {
     return (
-      <div className="latestnews">
+      <div className="latest_news">
         <h3>LATEST NEWS</h3>
         <Loading />
       </div>
     );
   }
   return (
-    <div className="latestnews">
+    <div className="latest_news">
       <h3>LATEST NEWS</h3>
-      {newsDisplay}
+      <div className="latest_news__content">{newsDisplay}</div>
     </div>
   );
 };

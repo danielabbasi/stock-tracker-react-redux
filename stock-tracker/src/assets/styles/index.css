@@ -7,17 +7,17 @@
   --text-white: rgb(255, 255, 255);
   --text-blue: rgb(100, 152, 182);
   --footer-blue: #042b6c;
-  --text-font-size: 17px;
+  --text-font-size: 12px;
+  --heading-text: 'Lato', normal, 30px #beccdc;
+}
+#root{
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: space-between;
 }
 
-@font-face {
-  font-family: Helvetica-light;
-  src: url(../Helvetica-Light.ttf);
-}
-@font-face {
-  font-family: Helvetica-bold;
-  src: url(../Helvetica-Bold.ttf);
-}
+@import url('https://fonts.googleapis.com/css?family=Lato:300,300i,400,700,900&display=swap');
 
 body {
   background-image: linear-gradient(
@@ -26,8 +26,10 @@ body {
     var(--bg-color-dark)
   );
   color: white;
-  font-family: Helvetica-light;
-}
+  font-family: 'Lato', sans-serif;
+  font-style: normal;
+
+  }
 
 a:link {
   color: white;
@@ -60,12 +62,13 @@ a:visited {
 
 input {
   background: inherit;
-  font-size: 2.5vw;
+  font-size: 17px;
   font-weight: 300;
   color: white;
   margin-left: 5%;
   border: none;
-  width: 90%;
+  height: 100%;
+  /* width: 90%; */
 }
 
 h5 {
@@ -93,29 +96,32 @@ h5 {
 }
 ::placeholder {
   font-weight: 300;
-  font-size: 2.5vw;
+  font-size: 20px;
   color: var(--text-white);
   font-weight: lighter;
-  font-family: Helvetica-light;
+  font-family: 'Lato', sans-serif;
+  font-weight: 300;
 }
 .price_display__small_icon {
   font-size: 1vw;
   vertical-align: top;
-  margin: 0.3vw 0 0;
+  margin: 10px 0 0;
 }
 .hidden {
   display: none !important;
 }
 h3 {
-  font-family: Helvetica-bold;
-  font-size: 15px;
+  font-family: 'Lato', sans-serif;
+  font-weight: bold;
+  font-style: normal;
+  font-size: 16px;
   color: var(--heading-color);
-  font-weight: 100;
   border-bottom: 2px solid var(--heading-color);
-  margin-bottom: 0.6em;
+  margin-block-start: 0.5em;
+  margin-block-end: 0.5em;
 }
 .header__btns {
-  margin: 2vw 0;
+  margin: 20px 0 0;
   text-align: end;
 }
 .header__btns__btn {
@@ -124,7 +130,7 @@ h3 {
   background-color: inherit;
   font-size: 10px;
   margin: 0;
-  padding: 0.3vw 0.5vw;
+  padding: 5px 10px;
   color: var(--text-blue);
   border-radius: 10%;
 }
@@ -134,18 +140,18 @@ h3 {
   color: var(--text-white);
 }
 .header__logo {
-  width: 10vw;
-  margin-top: 1.5vw;
+  width: 130px;
+  /* margin-top: 20px; */
 }
 .price_display {
-  padding: 0 1.5vw;
+  /* padding: 0 30px; */
   text-align: end;
   font-family: Helvetica-light;
 }
 .price_display h4 {
   display: inline-block;
-  margin: 0 0.5vw;
-  font-size: 2.5vw;
+  margin: 0 10px;
+  font-size: 25px;
   font-weight: 20;
 }
 .price_display p {
@@ -164,12 +170,12 @@ h3 {
 }
 .keystats__grid__display1 {
   grid-area: keystatsDisplay1;
-  margin-right: 1.5vw;
+  margin-right: 1em;
   border-spacing: 0;
 }
 .keystats__grid__display2 {
   grid-area: keystatsDisplay2;
-  margin-left: 1.5vw;
+  margin-left: 1em;
   border-spacing: 0;
 }
 @media (max-width: 1000px) {
@@ -183,14 +189,14 @@ h3 {
     margin: 0;
   }
 }
-.space {
+/* .space {
   width: 0.5vw;
-}
+} */
 
 .keystats__grid__display1__name {
   color: var(--text-blue);
   border-bottom: 1px solid var(--text-blue);
-  padding: 0.9vw 0;
+  padding: 10px 0;
   font-size: var(--text-font-size);
 }
 .keystats__grid__display1__value {
@@ -200,45 +206,55 @@ h3 {
   font-size: var(--text-font-size);
 }
 .currency_display {
-  margin-block-start: 1.3vw;
+  margin-block-start: 10px;
 }
 .currency_display__item {
   display: inline;
   color: var(--text-white);
   background-color: var(--heading-color);
+
   border-radius: 5%;
-  margin: 0.3vw;
+  margin: 5px;
   padding: 3px;
   font-size: 0.8vw;
 }
 .market_status_display__real_time {
-  font-size: 0.8vw;
+  font-size: var(--text-font-size);
   color: var(--text-blue);
   display: inline;
 }
 .market_status_display__real_time__status {
-  font-size: 0.9vw;
+  font-size: var(--text-font-size);
   display: inline;
   margin-left: 10px;
 }
 .market_status_display {
-  padding: 0 1.5vw;
+  /* padding: 0 1.5vw; */
   text-align: end;
-  margin-block-start: 1.3vw;
+  margin-block-start: 10px;
 }
-.newsHeadline {
+.news_headline {
   font-size: var(--text-font-size);
-  margin: 1vw 0 0;
+  margin: 3px 0 0;
 }
-.firstNews a {
+.first_news a {
   color: var(--text-yellow);
 }
-.newsTime,
-.newsSource {
+.news_time,
+.news_source {
   display: inline;
   color: var(--text-blue);
   font-size: 14px;
-  margin-right: 0.4vw;
+  margin-right: 5px;
+}
+/* .latest_news{
+  margin-block-start: 0;
+  margin-block-end: 0.3em;
+} */
+.latest_news__content{
+  overflow-y: scroll ;
+  font-size: var(--text-font-size);
+  height: 85%;
 }
 
 .chart__graph_btn {
@@ -271,7 +287,7 @@ h3 {
 }
 .top_peers ul li {
   display: inline;
-  padding: 0 0.7vw 0 0;
+  padding: 0 7px 0 0;
   font-size: var(--text-font-size);
 }
 .green {
@@ -281,40 +297,45 @@ h3 {
   color: red;
 }
 .footer {
-  font-size: var(--text-font-size);
+  bottom: 0;
+  font-size: 8px;
   background-color: var(--footer-blue);
-  margin: 0 -30px;
   display: grid;
   grid-template-areas:
     "footer1 footer3"
     "footer2 footer4";
+  position: fixed;
+  right: 0;
+  left: 0;
+  margin-top: 10px
 }
+
 .footer1 {
   grid-area: footer1;
-  padding: 0 2vw;
 }
 .footer2 {
   grid-area: footer2;
   letter-spacing: 1px;
-  padding: 0 2vw;
 }
 .footer3 {
   grid-area: footer3;
-  padding: 0 2vw;
 }
 .footer4 {
   grid-area: footer4;
   letter-spacing: 1px;
-  padding: 0 2vw;
+}
+.footer1, .footer2, .footer3, .footer4{
+  padding: 0 10px;
+  margin: 6px;
 }
 .overview__company {
-  font-size: 1.7vw;
+  font-size: var(--text-font-size);
   margin-block-start: 0;
   margin-block-end: 0.3em;
 }
 
 .overview p {
-  margin: 0 0 1vw 0;
+  margin: 0 0 10px 0;
 }
 .overview__web {
   font-size: 12px;
@@ -325,6 +346,34 @@ h3 {
   height: 130px;
   overflow-y: scroll;
 }
+
 .chart__date {
   font-size: 5px;
+}
+@media (max-width: 1024px) {
+  .footer{
+    bottom: 0 !important;
+    position: sticky;
+    margin: 0 -10px -10px -10px;
+  }
+  }
+@media (max-width: 768px){
+  ::placeholder {
+    font-size: 16px;
+  }
+  .price_display h4 {
+    margin: 0 7px;
+    font-size: 16px;
+  }
+  .market_status_display__real_time{
+    font-size: 8px
+  }
+  .keystats{
+    margin-right: 0px !important;
+  }
+}
+@media (max-width: 425px){
+  .header__btns__btn{
+    font-size: 5px
+  }
 }
