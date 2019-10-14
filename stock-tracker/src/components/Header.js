@@ -60,21 +60,22 @@ const Header = () => {
     setOpen(suggestions !== 0);
   }, [suggestions]);
 
-  const suggestionItems = suggestions
-    ? suggestions.map(data => {
-        return (
-          <li
-            className="search_display__suggestion_list__item"
-            onClick={onClick}
-            id={data.symbol}
-            key={data.symbol}
-          >
-            {" "}
-            {`${data.name} (${data.symbol})`}{" "}
-          </li>
-        );
-      })
-    : "";
+  const suggestionItems =
+    suggestions.length > 0
+      ? suggestions.map(data => {
+          return (
+            <li
+              className="search_display__suggestion_list__item"
+              onClick={onClick}
+              id={data.symbol}
+              key={data.symbol}
+            >
+              <p className="search_display__suggestion_list__item__symbol">{`(${data.symbol}) `}</p>
+              {` ${data.name}`}
+            </li>
+          );
+        })
+      : "";
 
   const changeNo =
     response.change === 0
