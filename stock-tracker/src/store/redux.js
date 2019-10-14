@@ -8,7 +8,6 @@ import {
   initialStartupAction,
   addCompanyOverviewAction,
   addTopPeersAction,
-  addSymbolAction,
   addSuggestionsAction
 } from "./actions";
 
