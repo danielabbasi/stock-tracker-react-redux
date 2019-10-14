@@ -10,24 +10,26 @@ import { useSelector } from "react-redux";
 
 function App() {
   const symbol = useSelector(state => state.symbol);
-  if (symbol === "") {
-    return (
-      <div className="wrapper_default">
-        <Header />
-        <span className="content"></span>
-        <Footer />
-      </div>
-    );
-  }
+  // if (symbol === "") {
+  //   return (
+  //     <div className="wrapper_default">
+  //       <Header />
+  //       <span className="content"></span>
+  //       <Footer />
+  //     </div>
+  //   );
+  // }
   return (
+    <>
     <div className="wrapper">
       <Header />
       <Chart />
       <KeyStats />
       <LatestNews />
       <Overview />
-      <Footer />
     </div>
+      <Footer />
+</>
   );
 }
 export default App;
