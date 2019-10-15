@@ -82,7 +82,6 @@ const Header = () => {
       ? "0"
       : Math.abs(Math.round(response.change * 100) / 100);
   const changePercentNo = Math.abs((response.changePercent * 100).toFixed(2));
-
   const marketStatus = response
     ? response.isUSMarketOpen
       ? "Market Open"

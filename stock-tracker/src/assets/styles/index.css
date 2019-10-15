@@ -40,8 +40,6 @@
   height: 100vh;
 }
 
-@import url("https://fonts.googleapis.com/css?family=Lato:300,300i,400,700,900&display=swap");
-
 @font-face {
   font-family: Lato-Regular;
   src: url(../Lato-Regular.ttf);
@@ -239,7 +237,7 @@ h1 {
 .keystats__grid__display1__name {
   color: var(--label);
   border-bottom: solid 1px #54606d;
-  padding: 10px 0;
+  padding: 16px 0;
   font-family: Lato-Light;
   font-size: 14px;
 }
@@ -263,7 +261,7 @@ h1 {
 }
 .market_status_display__real_time {
   font-size: 14px;
-  color: var(--text-blue);
+  color: var(--label);
   display: inline;
 }
 .market_status_display__real_time__status {
@@ -346,9 +344,7 @@ h1 {
     var(--primary-5)
   );
   display: grid;
-  grid-template-areas:
-    "footer1 footer3"
-    "footer2 footer4";
+  grid-template-areas: "usMarket favorites";
   position: fixed;
   right: 0;
   left: 0;
@@ -363,19 +359,24 @@ h1 {
 .footer2 {
   grid-area: footer2;
   letter-spacing: 1px;
+  font-size: 14px;
+  letter-spacing: 3px;
 }
-.footer3 {
-  grid-area: footer3;
+.usMarket {
+  grid-area: usMarket;
+  font-size: 12px;
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+.favorites {
+  grid-area: favorites;
   font-size: 12px;
 }
-.footer4 {
-  grid-area: footer4;
-  letter-spacing: 1px;
+.footer__heading {
+  font-size: 14px;
+  font-family: Lato-Bold;
 }
 .footer1,
-.footer2,
-.footer3,
-.footer4 {
+.footer2 {
   padding: 0 10px;
   margin: 6px;
 }
