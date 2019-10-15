@@ -8,7 +8,7 @@ const TopPeers = () => {
 
   return (
     <div className="top_peers">
-      <h3>TOP PEERS</h3>
+      <h1>TOP PEERS</h1>
       {loading > 0 && !peers.length ? (
         <Loading />
       ) : (

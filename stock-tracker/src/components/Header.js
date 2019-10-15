@@ -139,10 +139,10 @@ const Header = () => {
           }
         >
           <Icon
-            className="price_display__small_icon"
+            className="price_display__arrow_icon"
             type={response.change < 0 ? "arrow-down" : "arrow-up"}
           />
-          {changeNo}
+          {changeNo} |
         </h4>
         <h4
           className={

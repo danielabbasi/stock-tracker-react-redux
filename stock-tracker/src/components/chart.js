@@ -18,7 +18,7 @@ const Chart = () => {
   const dispatch = useDispatch();
   const chartData = useSelector(state => state.chartData);
   const loading = useSelector(state => state.loading);
-  const [current, setCurrent] = useState("5Y");
+  const [current, setCurrent] = useState("1Y");
   const onClick = e => {
     dispatch(addChartTimeAction(e.target.value));
     setCurrent(e.target.value);
@@ -105,7 +105,7 @@ const Chart = () => {
           MAX
         </button>
       </div>
-      <ResponsiveContainer>
+      <ResponsiveContainer maxHeight="400px" minHeight="400px">
         <AreaChart
           data={chartData}
           margin={{ top: 5, right: 20, left: 10, bottom: 5 }}
@@ -129,7 +129,7 @@ const Chart = () => {
             label={{
               position: "right",
               value: latestValue,
-              fill: "#ffffff",
+              fill: "orange",
               fontSize: 14
             }}
             stroke="#e95656"

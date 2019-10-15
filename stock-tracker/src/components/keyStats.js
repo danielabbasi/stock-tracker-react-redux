@@ -9,14 +9,14 @@ const KeyStats = () => {
   if (loading > 0 && !response) {
     return (
       <div className="keystats">
-        <h3>KEY STATS</h3>
+        <h1>KEY STATS</h1>
         <Loading />
       </div>
     );
   }
   return (
     <div className="keystats">
-      <h3>KEY STATS</h3>
+      <h1>KEY STATS</h1>
       <div className="keystats__grid">
         <table className="keystats__grid__display1">
           <tbody>
@@ -87,7 +87,7 @@ const KeyStats = () => {
                 Dividend & Yield
               </td>
               <td className="keystats__grid__display1__value">
-                {response ? response.ytdChange + "%" : ""}
+                {response ? Math.abs(response.ytdChange.toFixed(2)) + "%" : ""}
               </td>
             </tr>
           </tbody>
