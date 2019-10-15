@@ -27,7 +27,13 @@ const initialState = {
   loading: 0,
   searchInput: "",
   suggestions: false,
-  error: false
+  error: {
+    companies: false,
+    companyOverview: false,
+    latestNews: false,
+    chartData: false,
+    topPeers: false
+  }
 };
 
 const stockMiddleware = store => next => action => {
