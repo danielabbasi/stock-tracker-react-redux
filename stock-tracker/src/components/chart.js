@@ -23,6 +23,7 @@ const Chart = () => {
     dispatch(addChartTimeAction(e.target.value));
     setCurrent(e.target.value);
   };
+  console.log(chartData);
   const latestValue =
     chartData[chartData.length - 1] !== undefined
       ? chartData[chartData.length - 1].close
