@@ -1,4 +1,4 @@
-export function reducer(state, action) {
+export default function reducer(state, action) {
   switch (action.type) {
     case "ADD_RESPONSE":
       return {
@@ -61,6 +61,8 @@ export function reducer(state, action) {
         ...state,
         suggestions: action.payload
       };
+    case "GET_ERROS":
+      return action.payload
     default:
       return state;
   }

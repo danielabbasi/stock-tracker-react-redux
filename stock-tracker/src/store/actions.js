@@ -45,3 +45,5 @@ export const addSuggestionsAction = suggestions => ({
 });
 
 export const initialStartupAction = () => ({ type: "INITIAL_STARTUP" });
+
+export const getErrorsAction = () => ({ type: "GET_ERRORS" })
