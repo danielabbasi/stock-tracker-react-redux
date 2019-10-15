@@ -28,14 +28,14 @@ const LatestNews = () => {
   if (loading > 0 && !latestNews.length) {
     return (
       <div className="latest_news">
-        <h3>LATEST NEWS</h3>
+        <h1>LATEST NEWS</h1>
         <Loading />
       </div>
     );
   }
   return (
     <div className="latest_news">
-      <h3>LATEST NEWS</h3>
+      <h1>LATEST NEWS</h1>
       <div className="latest_news__content">{newsDisplay}</div>
     </div>
   );

@@ -1,13 +1,14 @@
 .wrapper {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: minmax(100px, 38%) minmax(250px, max-content) max-content;
+  grid-auto-rows: max-content;
   grid-gap: 20px;
   grid-template-areas:
     "header header header"
     "chart chart latestnews"
     "keystats keystats overview";
   margin: 0 15%;
+  flex: 1 1;
 }
 
 .wrapper_default {
@@ -24,6 +25,7 @@
 .keystats {
   grid-area: keystats;
   margin-right: 38px;
+  margin-top: 18px;
 }
 
 .header {
@@ -40,6 +42,7 @@
 
 .overview {
   grid-area: overview;
+  margin-top: 18px;
 }
 
 .top_peers {

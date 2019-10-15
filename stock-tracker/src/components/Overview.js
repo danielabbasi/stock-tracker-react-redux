@@ -20,14 +20,14 @@ const Overview = () => {
   if (loading > 0 && !overview) {
     return (
       <div className="overview">
-        <h3>COMPANY OVERVIEW</h3>
+        <h1>COMPANY OVERVIEW</h1>
         <Loading />
       </div>
     );
   } else {
     return (
       <div className="overview">
-        <h3>COMPANY OVERVIEW</h3>
+        <h1>COMPANY OVERVIEW</h1>
         <h2 className={overview ? "overview__company" : "hidden"}>
           {overview.companyName} ({overview.symbol})
         </h2>

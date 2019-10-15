@@ -21,7 +21,7 @@ const initialState = {
   companies: false,
   latestNews: [],
   chartData: [],
-  chartTime: "5Y",
+  chartTime: "1Y",
   companyOverview: false,
   topPeers: [],
   loading: 0,
