@@ -7,7 +7,7 @@ const LatestNews = () => {
   const latestNews = useSelector(state => state.latestNews);
   const loading = useSelector(state => state.loading);
   const newsDisplay = latestNews.map((news, index) => (
-    <div key={index}>
+    <div className="news" key={index}>
       <p className={index === 0 ? "first_news news_headline" : "news_headline"}>
         {" "}
         <a href={news.url}>{news.headline}</a>

@@ -108,6 +108,9 @@ h5 {
   border-bottom: 2px solid var(--grid-header);
   position: relative;
 }
+.search_display__icon {
+  color: var(--highlight-1);
+}
 .search_display__suggestion_list {
   position: absolute;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
@@ -288,6 +291,10 @@ h1 {
   font-size: 14px;
   font-family: Lato-Light;
   margin-right: 5px;
+}
+
+.news {
+  margin-bottom: 20px;
 }
 
 .latest_news__content {

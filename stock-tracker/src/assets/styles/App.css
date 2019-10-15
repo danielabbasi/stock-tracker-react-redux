@@ -47,6 +47,7 @@
 
 .top_peers {
   grid-area: toppeers;
+  margin-top: 27px;
 }
 
 @media (max-width: 1024px) {
