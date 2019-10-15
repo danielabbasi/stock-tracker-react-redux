@@ -9,8 +9,7 @@ import {
   ADD_TOP_PEERS,
   ADD_SEARCH_INPUT,
   ADD_SUGGESTIONS,
-  INITIAL_STARTUP,
-  GET_ERRORS
+  REQUEST_ERROR
 } from "./actionTypes"
 
 export default function reducer(state, action) {
@@ -76,8 +75,27 @@ export default function reducer(state, action) {
         ...state,
         suggestions: action.payload
       };
-    case GET_ERRORS:
-      return action.payload
+    case REQUEST_ERROR:
+        // stock.error {
+        //   stockData: false,
+        //   companies: false,
+        //   companyOverview: false,
+        //   latestNews: false,
+        //   chartData: false,
+        //   topPeers: false
+        // }
+        // action.payload {requestName, message}
+
+      // const error = {...state.error};
+      // error[action.payload.requestName] = true;
+
+      return {
+        ...state,
+        error: {
+          ...state.error,
+          [action.payload.requestName]: true
+        }
+      }
     default:
       return state;
   }

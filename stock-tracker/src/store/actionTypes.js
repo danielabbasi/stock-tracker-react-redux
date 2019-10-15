@@ -9,4 +9,4 @@ export const ADD_TOP_PEERS = "ADD_TOP_PEERS";
 export const ADD_SEARCH_INPUT = "ADD_SEARCH_INPUT";
 export const ADD_SUGGESTIONS = "ADD_SUGGESTIONS";
 export const INITIAL_STARTUP = "INITIAL_STARTUP";
-export const GET_ERRORS = "GET_ERRORS";
+export const REQUEST_ERROR = "REQUEST_ERROR";

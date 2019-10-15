@@ -8,8 +8,8 @@ import {
   initialStartupAction,
   addCompanyOverviewAction,
   addTopPeersAction,
-  addSymbolAction,
-  addSuggestionsAction
+  addSuggestionsAction,
+  getErrorsAction
 } from "./actions";
 
 const io = require("socket.io-client");
@@ -28,6 +28,7 @@ const initialState = {
   searchInput: "",
   suggestions: false,
   error: {
+    stockData: false,
     companies: false,
     companyOverview: false,
     latestNews: false,
@@ -54,6 +55,9 @@ const stockMiddleware = store => next => action => {
     });
     socket.on("TopPeers", peers => {
       store.dispatch(addTopPeersAction(peers));
+    });
+    socket.on("StockError", error => {
+      store.dispatch(getErrorsAction("stockData", error))
     });
   } else if (action.type === "ADD_CHARTTIME") {
     socket.emit(

@@ -10,7 +10,7 @@ import {
   ADD_SEARCH_INPUT,
   ADD_SUGGESTIONS,
   INITIAL_STARTUP,
-  GET_ERRORS
+  REQUEST_ERROR
 } from "./actionTypes"
 
 export const addResponseAction = response => ({
@@ -61,7 +61,7 @@ export const addSuggestionsAction = suggestions => ({
 
 export const initialStartupAction = () => ({ type: INITIAL_STARTUP });
 
-export const getErrorsAction = error => ({ 
-  type: GET_ERRORS,
-  payload: error
+export const getErrorsAction = (requestName, message) => ({ 
+  type: REQUEST_ERROR,
+  payload: {requestName, message}
 })

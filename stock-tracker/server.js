@@ -86,11 +86,12 @@ const getCompaniesFromAPI = async socket => {
       symbol: data.symbol
     }));
     socket.emit("companies", companies);
-    return companies
+    return companies;
   } catch (error) {
     console.error(`Companies Error: ${error}`);
   }
 };
+
 
 const getCompanyOverviewAndEmit = async (socket, stockSymbol) => {
   try {
@@ -115,10 +116,10 @@ const getCompanyOverviewAndEmit = async (socket, stockSymbol) => {
     };
     socket.emit("CompanyOverview", overview);
   } catch (error) {
+    
     console.error(`Company Overview Error: ${error}`);
   }
 };
-
 const getNewsDataAndEmit = async (socket, stockSymbol) => {
   try {
     const latestNews = await axios.get(
@@ -225,6 +226,7 @@ const getStockDataAndEmit = async (socket, stockSymbol) => {
     console.log("Stock data is being sent")
     socket.emit("StockData", stockData); // Emitting a new message. It will be consumed by the client
   } catch (error) {
+    socket.emit("StockError", error);
     console.error(`Stock Error: ${error}`);
   }
 };

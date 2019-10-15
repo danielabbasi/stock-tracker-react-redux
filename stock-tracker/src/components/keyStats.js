@@ -14,6 +14,7 @@ const KeyStats = () => {
       </div>
     );
   }
+  console.log(response.earningsPerShare)
   return (
     <div className="keystats">
       <h3>KEY STATS</h3>
