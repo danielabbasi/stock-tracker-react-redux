@@ -86,9 +86,17 @@ const getCompaniesFromAPI = async socket => {
       symbol: data.symbol
     }));
     socket.emit("companies", companies);
+    dispatch({
+      type:GET_ERRORS,
+      payload: {}
+    })
     return companies
   } catch (error) {
     console.error(`Companies Error: ${error}`);
+    dispatch({
+      type:GET_ERRORS,
+      payload: error.response.data
+    })
   }
 };
 

@@ -26,7 +26,8 @@ const initialState = {
   topPeers: [],
   loading: 0,
   searchInput: "",
-  suggestions: false
+  suggestions: false,
+  error: false
 };
 
 const stockMiddleware = store => next => action => {
