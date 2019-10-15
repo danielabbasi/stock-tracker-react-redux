@@ -65,3 +65,4 @@ export const getErrorsAction = (requestName, message) => ({
   type: REQUEST_ERROR,
   payload: {requestName, message}
 })
+//message is not used

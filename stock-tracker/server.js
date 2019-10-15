@@ -88,6 +88,7 @@ const getCompaniesFromAPI = async socket => {
     socket.emit("companies", companies);
     return companies;
   } catch (error) {
+    socket.emit("CompaniesError", error);
     console.error(`Companies Error: ${error}`);
   }
 };
@@ -116,7 +117,7 @@ const getCompanyOverviewAndEmit = async (socket, stockSymbol) => {
     };
     socket.emit("CompanyOverview", overview);
   } catch (error) {
-    
+    socket.emit("CompanyOverviewError", error);
     console.error(`Company Overview Error: ${error}`);
   }
 };
@@ -128,6 +129,7 @@ const getNewsDataAndEmit = async (socket, stockSymbol) => {
     const news = latestNews.data.map(data => ({ headline: data.headline, datetime: data.datetime, source: data.source, url: data.url }))
     socket.emit("LatestNews", news)
   } catch {
+    socket.emit("LatestNewsError", error);
     console.error(`News Error: ${error}`)
   }
 };
@@ -143,6 +145,7 @@ const getChartDataAndEmit = async (socket, stockSymbol, chartTime) => {
     }));
     socket.emit("ChartData", chart);
   } catch (error) {
+    socket.emit("ChartDataError", error);
     console.error(`Chart Data Error: ${error}`);
   }
 };
@@ -154,6 +157,7 @@ const getTopPeersAndEmit = async (socket, stockSymbol) => {
     );
     socket.emit("TopPeers", topPeers.data);
   } catch (error) {
+    socket.emit("TopPeersError", error);
     console.error(`Top Peers Error: ${error}`);
   }
 };

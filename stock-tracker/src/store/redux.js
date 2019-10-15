@@ -59,6 +59,21 @@ const stockMiddleware = store => next => action => {
     socket.on("StockError", error => {
       store.dispatch(getErrorsAction("stockData", error))
     });
+    socket.on("CompaniesError", error => {
+      store.dispatch(getErrorsAction("companies", error))
+    });
+    socket.on("CompanyOverviewError", error => {
+      store.dispatch(getErrorsAction("companyOverview", error))
+    });
+    socket.on("LatestNewsError", error => {
+      store.dispatch(getErrorsAction("latestNews", error))
+    });
+    socket.on("ChartDataError", error => {
+      store.dispatch(getErrorsAction("chartData", error))
+    });
+    socket.on("TopPeersError", error => {
+      store.dispatch(getErrorsAction("topPeers", error))
+    })
   } else if (action.type === "ADD_CHARTTIME") {
     socket.emit(
       "chartTime",
