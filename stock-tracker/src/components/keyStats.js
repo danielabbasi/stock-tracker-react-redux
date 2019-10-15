@@ -5,6 +5,7 @@ import Loading from "./loading";
 const KeyStats = () => {
   const response = useSelector(state => state.response);
   const loading = useSelector(state => state.loading);
+  const error = useSelector(state => state.error);
 
   if (loading > 0 && !response) {
     return (
@@ -14,7 +15,9 @@ const KeyStats = () => {
       </div>
     );
   }
-  console.log(response.earningsPerShare)
+
+  console.log(error)
+  // console.log(response.earningsPerShare)
   return (
     <div className="keystats">
       <h3>KEY STATS</h3>

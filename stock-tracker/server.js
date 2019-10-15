@@ -96,6 +96,7 @@ const getCompaniesFromAPI = async socket => {
 
 const getCompanyOverviewAndEmit = async (socket, stockSymbol) => {
   try {
+    if(stockSymbol === "amzn") throw new Error('testing amzn error')
     const companyOverview = await axios.get(
       `${HOST}/stable/stock/${stockSymbol}/company?token=${TOKEN}`
     );
@@ -164,6 +165,7 @@ const getTopPeersAndEmit = async (socket, stockSymbol) => {
 
 const getStockDataAndEmit = async (socket, stockSymbol) => {
   try {
+    if(stockSymbol === "aapl") throw new Error('testing amzn error')
     const resPromise = axios.get(
       `${HOST}/stable/stock/${stockSymbol}/quote?token=${TOKEN}`
     );

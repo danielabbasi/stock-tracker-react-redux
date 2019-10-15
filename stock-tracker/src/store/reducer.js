@@ -75,27 +75,14 @@ export default function reducer(state, action) {
         ...state,
         suggestions: action.payload
       };
-    case REQUEST_ERROR:
-        // stock.error {
-        //   stockData: false,
-        //   companies: false,
-        //   companyOverview: false,
-        //   latestNews: false,
-        //   chartData: false,
-        //   topPeers: false
-        // }
-        // action.payload {requestName, message}
-
-      // const error = {...state.error};
-      // error[action.payload.requestName] = true;
-
-      return {
+    case REQUEST_ERROR: 
+      return ({
         ...state,
         error: {
           ...state.error,
           [action.payload.requestName]: true
         }
-      }
+      })
     default:
       return state;
   }
