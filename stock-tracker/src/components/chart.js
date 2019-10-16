@@ -27,6 +27,15 @@ const Chart = () => {
     chartData[chartData.length - 1] !== undefined
       ? chartData[chartData.length - 1].close
       : "";
+  const error = useSelector(state => state.error.chartData)
+
+  if(error) {
+    return(
+      <div className="chart error">
+        <p className="error__message">Error: Chart data can not be displayed</p>
+      </div>
+    )
+  }
 
   if (loading > 0 && !chartData.length) {
     return (

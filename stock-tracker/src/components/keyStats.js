@@ -5,6 +5,16 @@ import Loading from "./loading";
 const KeyStats = () => {
   const response = useSelector(state => state.response);
   const loading = useSelector(state => state.loading);
+  const error = useSelector(state => state.error.stockData);
+
+  if(error) {
+    return(
+      <div className="keystats error">
+      <h3>KEY STATS</h3>
+      <p className="error__message">Error: Key stats can not be displayed</p>
+    </div>
+    )
+  }
 
   if (loading > 0 && !response) {
     return (
@@ -14,6 +24,9 @@ const KeyStats = () => {
       </div>
     );
   }
+
+  console.log(error)
+  // console.log(response.earningsPerShare)
   return (
     <div className="keystats">
       <h3>KEY STATS</h3>

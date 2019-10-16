@@ -1,5 +1,5 @@
 import { createStore, applyMiddleware, compose } from "redux";
-import { reducer } from "./reducer";
+import reducer from "./reducer";
 import {
   addResponseAction,
   addCompaniesAction,
@@ -8,8 +8,8 @@ import {
   initialStartupAction,
   addCompanyOverviewAction,
   addTopPeersAction,
-  addSymbolAction,
-  addSuggestionsAction
+  addSuggestionsAction,
+  getErrorsAction
 } from "./actions";
 
 const io = require("socket.io-client");
@@ -26,7 +26,15 @@ const initialState = {
   topPeers: [],
   loading: 0,
   searchInput: "",
-  suggestions: false
+  suggestions: false,
+  error: {
+    stockData: false,
+    companies: false,
+    companyOverview: false,
+    latestNews: false,
+    chartData: false,
+    topPeers: false
+  }
 };
 
 const stockMiddleware = store => next => action => {
@@ -48,6 +56,24 @@ const stockMiddleware = store => next => action => {
     socket.on("TopPeers", peers => {
       store.dispatch(addTopPeersAction(peers));
     });
+    socket.on("StockError", error => {
+      store.dispatch(getErrorsAction("stockData", error))
+    });
+    socket.on("CompaniesError", error => {
+      store.dispatch(getErrorsAction("companies", error))
+    });
+    socket.on("CompanyOverviewError", error => {
+      store.dispatch(getErrorsAction("companyOverview", error))
+    });
+    socket.on("LatestNewsError", error => {
+      store.dispatch(getErrorsAction("latestNews", error))
+    });
+    socket.on("ChartDataError", error => {
+      store.dispatch(getErrorsAction("chartData", error))
+    });
+    socket.on("TopPeersError", error => {
+      store.dispatch(getErrorsAction("topPeers", error))
+    })
   } else if (action.type === "ADD_CHARTTIME") {
     socket.emit(
       "chartTime",

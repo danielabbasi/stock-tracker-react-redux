@@ -16,7 +16,15 @@ const LatestNews = () => {
       <p className="newsSource">- {news.source}</p>
     </div>
   ));
-
+  const error = useSelector(state => state.error.latestNews);
+  if(error){
+    return (
+      <div className="latestnews error">
+        <h3>LATEST NEWS</h3>
+        <p className="error__message">Error: Latest news can not be displayed</p>
+      </div>
+    )
+  }
   if (loading > 0 && !latestNews.length) {
     return (
       <div className="latestnews">

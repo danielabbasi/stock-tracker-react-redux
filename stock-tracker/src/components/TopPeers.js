@@ -5,6 +5,16 @@ import Loading from "./loading";
 const TopPeers = () => {
   const peers = useSelector(state => state.topPeers);
   const loading = useSelector(state => state.loading);
+  const error = useSelector(state => state.error.topPeers);
+
+  if(error){
+    return(
+      <div className="top_peers error">
+      <h3>TOP PEERS</h3>
+      <p className="error_message">Error: Top peers can not be displayed</p>
+      </div>
+    )
+  }
 
   return (
     <div className="top_peers">
