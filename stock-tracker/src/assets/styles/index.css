@@ -298,7 +298,7 @@ h1 {
 }
 
 .latest_news__content {
-  overflow-y: scroll;
+  overflow-y: auto;
   font-size: var(--text-font-size);
   height: 85%;
 }
@@ -417,7 +417,7 @@ a.overview__web:hover {
 .overview__text {
   font-size: var(--text-font-size);
   height: 130px;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 .chart__date {
