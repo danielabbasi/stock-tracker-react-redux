@@ -17,7 +17,7 @@ const Overview = () => {
 
   return (
     <div className="overview">
-      <h3>COMPANY OVERVIEW</h3>
+      <h1>COMPANY OVERVIEW</h1>
       {error ? (
         <p className="error__message">
           Error: Company overview can not be displayed
@@ -33,7 +33,8 @@ const Overview = () => {
             {" "}
             <a href={overview.website}>{website}</a>
           </p>
-          <p className="overviewText">{description}</p>
+          <p className="overview__text">{description}</p>
+          <TopPeers />
         </>
       )}
     </div>

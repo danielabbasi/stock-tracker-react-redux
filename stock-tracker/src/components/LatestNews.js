@@ -21,7 +21,7 @@ const LatestNews = () => {
 
   return (
     <div className="latestnews">
-      <h3>LATEST NEWS</h3>
+      <h1>LATEST NEWS</h1>
       {error ? (
         <p className="error__message">
           Error: Latest news can not be displayed
