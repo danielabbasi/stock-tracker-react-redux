@@ -18,12 +18,11 @@ const Chart = () => {
   const dispatch = useDispatch();
   const chartData = useSelector(state => state.chartData);
   const loading = useSelector(state => state.loading);
-  const [current, setCurrent] = useState("1Y");
+  const [current, setCurrent] = useState("5Y");
   const onClick = e => {
     dispatch(addChartTimeAction(e.target.value));
     setCurrent(e.target.value);
   };
-  console.log(chartData);
   const latestValue =
     chartData[chartData.length - 1] !== undefined
       ? chartData[chartData.length - 1].close
@@ -145,5 +144,6 @@ const Chart = () => {
 
       }
       </div>
+  )
 };
 export default Chart;
