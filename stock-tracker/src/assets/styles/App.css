@@ -20,14 +20,8 @@ body {
 }
 
 .wrapper_default {
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  margin: 0 15%;
-}
-
-.content {
   flex: 1 0 auto;
+  max-width: 1500px;
 }
 
 .keystats {

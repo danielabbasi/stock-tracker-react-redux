@@ -12,11 +12,12 @@ function App() {
   const symbol = useSelector(state => state.symbol);
   if (symbol === "") {
     return (
-      <div className="wrapper_default">
-        <Header />
-        <span className="content"></span>
+      <>
+        <div className="wrapper_default">
+          <Header />
+        </div>
         <Footer />
-      </div>
+      </>
     );
   }
   return (
