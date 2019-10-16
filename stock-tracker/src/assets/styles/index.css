@@ -269,13 +269,18 @@ h1 {
 }
 .market_status_display__real_time__status {
   display: inline;
-  margin-left: 10px;
   font-family: Lato-Light;
 }
 .market_status_display {
   text-align: end;
   margin-block-start: 10px;
   font-family: Lato-Regular;
+}
+
+.market_status__icon{
+  width: 20px;
+  display: inline-block;
+  padding: 0 5px;
 }
 .news_headline {
   font-size: var(--text-font-size);

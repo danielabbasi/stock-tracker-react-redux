@@ -4,6 +4,8 @@ import { addSymbolAction, addSearchInputAction } from "../store/actions";
 import logo from "../assets/logo.png";
 import { Icon } from "antd";
 import "../assets/styles/Header.css";
+import sun from "../assets/sun.png"
+import moon from "../assets/moon.png"
 const moment = require("moment");
 
 const Header = () => {
@@ -92,6 +94,12 @@ const Header = () => {
     ? `Real time price as of ${response.latestTime} ${formatedTime}`
     : "";
 
+    const statusIcon = response
+    ? marketStatus === "Market Open"
+      ? sun
+      : moon
+    : ""
+
   return (
     <div className="header">
       <img className="header__logo" alt="logo" src={logo} />
@@ -173,6 +181,7 @@ const Header = () => {
       </div>
       <div className="market_status_display">
         <p className="market_status_display__real_time">{realTimeDisplay}</p>
+        <img className="market_status__icon" src={statusIcon}/>
         <p className="market_status_display__real_time__status">
           {marketStatus}
         </p>
