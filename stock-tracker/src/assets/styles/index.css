@@ -277,7 +277,7 @@ h1 {
   font-family: Lato-Regular;
 }
 
-.market_status__icon{
+.market_status__icon {
   width: 20px;
   display: inline-block;
   padding: 0 5px;
@@ -299,13 +299,16 @@ h1 {
 }
 
 .news {
-  margin-bottom: 20px;
+  /* margin-bottom: 12px; */
+  flex: 1 1 auto;
 }
 
 .latest_news__content {
   overflow-y: auto;
   font-size: var(--text-font-size);
-  height: 85%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .chart__graph_btn {
@@ -348,7 +351,6 @@ h1 {
   color: var(--bad);
 }
 .footer {
-  bottom: 0;
   font-size: 8px;
   background-image: linear-gradient(
     to bottom,
@@ -357,10 +359,6 @@ h1 {
   );
   display: grid;
   grid-template-areas: "usMarket favorites";
-  position: fixed;
-  right: 0;
-  left: 0;
-  margin-top: 10px;
   flex: 0 0 auto;
 }
 

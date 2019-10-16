@@ -7,8 +7,16 @@
     "header header header"
     "chart chart latestnews"
     "keystats keystats overview";
-  margin: 0 15%;
+  max-width: 1500px;
+  margin: 0 auto;
   flex: 1 1;
+  padding: 0 10px;
+  box-sizing: border-box;
+  overflow: auto;
+}
+
+body {
+  margin: 0;
 }
 
 .wrapper_default {
@@ -24,8 +32,7 @@
 
 .keystats {
   grid-area: keystats;
-  margin-right: 38px;
-  margin-top: 18px;
+  margin: 18px 38px 0 0;
 }
 
 .header {
@@ -38,6 +45,7 @@
 
 .latest_news {
   grid-area: latestnews;
+  max-height: 400px;
 }
 
 .overview {
@@ -55,7 +63,7 @@
     margin: 0;
   }
 }
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .wrapper {
     grid-template-areas:
       "header header header"
