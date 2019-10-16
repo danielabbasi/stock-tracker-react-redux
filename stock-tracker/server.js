@@ -75,7 +75,7 @@ io.on("connection", socket => {
     console.info("Client disconnected");
   });
 });
-server.listen(port, "0.0.0.0");
+server.listen(port, () => console.info(`server is listening on port: ${port}`));
 const getCompaniesFromAPI = async socket => {
   try {
     const res = await axios.get(
