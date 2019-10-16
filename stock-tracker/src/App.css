@@ -1,0 +1,70 @@
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+.wrapper {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 2fr, 2fr, 1fr;
+  grid-gap: 20px;
+  grid-template-areas: 
+  "header header header"
+  "chart chart latestnews"
+  "keystats keystats overview"
+  ". . toppeers"
+  "footer footer footer"
+}
+
+.wrapper_default {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.content {
+  flex: 1 0 auto;
+}
+
+.keystats {
+  grid-area: keystats
+}
+
+.header {
+  grid-area: header
+}
+
+.chart {
+  grid-area: chart
+}
+
+.latestnews {
+  grid-area: latestnews
+}
+
+.overview {
+  grid-area: overview
+}
+
+.toppeers {
+  grid-area: toppeers
+}
+
+.footer {
+  grid-area: footer;
+  flex-shrink: 0;
+}
+
+@media (max-width: 1000px) {
+  .wrapper {
+    grid-template-areas: 
+    "header header header"
+    "chart chart chart"
+    "latestnews latestnews latestnews"
+    "keystats keystats keystats"
+    "overview overview overview"
+    "toppeers toppeers toppeers"
+    "footer footer footer "
+  }
+}
+

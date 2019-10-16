@@ -21,11 +21,11 @@ function callNowAndInterval(fn, interval, ...args) {
 
 io.on("connection", socket => {
   const intervals = {};
-  console.info("New client connected");
+  console.log("New client connected");
   const stockCompanies = getCompaniesFromAPI(socket);
-  socket.on("search", searchInput => {
-    getSearchInputAndFilter(socket, searchInput, stockCompanies);
-  });
+  socket.on("search", (searchInput) => {
+    getSearchInputAndFilter(socket, searchInput, stockCompanies)
+  })
   socket.on("symbol", (stockSymbol, chartTime) => {
     Object.values(intervals).forEach(clearInterval);
     intervals.stock = callNowAndInterval(
@@ -72,10 +72,10 @@ io.on("connection", socket => {
   });
   socket.on("disconnect", () => {
     Object.values(intervals).forEach(clearInterval);
-    console.info("Client disconnected");
+    console.log("Client disconnected");
   });
 });
-server.listen(port, () => console.info(`server is listening on port: ${port}`));
+server.listen(port, () => console.log(`Listening on port ${port}`));
 const getCompaniesFromAPI = async socket => {
   try {
     const res = await axios.get(
@@ -86,13 +86,11 @@ const getCompaniesFromAPI = async socket => {
       symbol: data.symbol
     }));
     socket.emit("companies", companies);
-    return companies;
+    return companies
   } catch (error) {
-    socket.emit("CompaniesError", error);
     console.error(`Companies Error: ${error}`);
   }
 };
-
 
 const getCompanyOverviewAndEmit = async (socket, stockSymbol) => {
   try {
@@ -117,24 +115,18 @@ const getCompanyOverviewAndEmit = async (socket, stockSymbol) => {
     };
     socket.emit("CompanyOverview", overview);
   } catch (error) {
-    socket.emit("CompanyOverviewError", error);
     console.error(`Company Overview Error: ${error}`);
   }
 };
+
 const getNewsDataAndEmit = async (socket, stockSymbol) => {
   try {
     const latestNews = await axios.get(
       `${HOST}/stable/stock/${stockSymbol}/news/last/5?token=${TOKEN}`
-    );
-    const news = latestNews.data.map(data => ({
-      headline: data.headline,
-      datetime: data.datetime,
-      source: data.source,
-      url: data.url
-    }));
-    socket.emit("LatestNews", news);
-  } catch (error){
-    socket.emit("LatestNewsError", error);
+    )
+    const news = latestNews.data.map(data => ({ headline: data.headline, datetime: data.datetime, source: data.source, url: data.url }))
+    socket.emit("LatestNews", news)
+  } catch {
     console.error(`News Error: ${error}`)
   }
 };
@@ -150,7 +142,6 @@ const getChartDataAndEmit = async (socket, stockSymbol, chartTime) => {
     }));
     socket.emit("ChartData", chart);
   } catch (error) {
-    socket.emit("ChartDataError", error);
     console.error(`Chart Data Error: ${error}`);
   }
 };
@@ -162,7 +153,6 @@ const getTopPeersAndEmit = async (socket, stockSymbol) => {
     );
     socket.emit("TopPeers", topPeers.data);
   } catch (error) {
-    socket.emit("TopPeersError", error);
     console.error(`Top Peers Error: ${error}`);
   }
 };
@@ -232,30 +222,25 @@ const getStockDataAndEmit = async (socket, stockSymbol) => {
       latestUpdate,
       isUSMarketOpen
     };
-    console.info("Stock data is being sent");
+    console.log("Stock data is being sent")
     socket.emit("StockData", stockData); // Emitting a new message. It will be consumed by the client
   } catch (error) {
-    socket.emit("StockError", error);
     console.error(`Stock Error: ${error}`);
   }
 };
 
 const getSearchInputAndFilter = async (socket, searchInput, stockCompanies) => {
   try {
-    console.log(searchInput);
-    const companies = await stockCompanies;
-    const c = companies.map(data => ({ symbol: data.symbol, name: data.name }));
-    let suggestions = c
-      .filter(
-        company =>
-          company.symbol.toLowerCase().indexOf(searchInput.toLowerCase()) !== -1
-      )
-      .slice(0, 10);
-    socket.emit("suggestions", suggestions);
+    console.log(searchInput)
+    const companies = await stockCompanies
+    const c = companies.map(data => ({symbol: data.symbol, name: data.name}))
+    let suggestions = c.filter( (company) => company.symbol.toLowerCase().indexOf(searchInput.toLowerCase()) !== -1 ).slice(0,10)
+    console.log(suggestions)
+    socket.emit("suggestions", suggestions)
   } catch (error) {
     console.error(`Search Error: ${error}`);
   }
-};
+}
 
 const changeNullValues = data => {
   Object.keys(data).forEach(key => {
