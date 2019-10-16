@@ -7,6 +7,11 @@ const KeyStats = () => {
   const loading = useSelector(state => state.loading);
   const error = useSelector(state => state.error.stockData);
 
+  const earningsPShare = typeof response.earningsPerShare === "object" 
+  ? "N/A"
+  // ? Object.values(response.earningsPerShare)
+  : response.earningsPerShare
+
   if(error) {
     return(
       <div className="keystats error">
@@ -25,8 +30,6 @@ const KeyStats = () => {
     );
   }
 
-  console.log(error)
-  // console.log(response.earningsPerShare)
   return (
     <div className="keystats">
       <h3>KEY STATS</h3>
@@ -92,7 +95,7 @@ const KeyStats = () => {
                 Earning Per Share
               </td>
               <td className="keystats__grid__display1__value">
-                {response.earningsPerShare}
+                {earningsPShare}
               </td>
             </tr>
             <tr>
