@@ -468,3 +468,10 @@ a.overview__web:hover {
     color-stop(0.86, var(--primary-5))
   );
 }
+.error{
+
+}
+.error__message{
+  color: #e95656;
+  margin: 10% 0 0 3%;
+}

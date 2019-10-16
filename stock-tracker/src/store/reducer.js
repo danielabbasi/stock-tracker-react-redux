@@ -29,7 +29,15 @@ export default function reducer(state, action) {
         latestNews: [],
         chartData: [],
         companyOverview: false,
-        topPeers: []
+        topPeers: [],
+        error: {
+          stockData: false,
+          companies: false,
+          companyOverview: false,
+          latestNews: false,
+          chartData: false,
+          topPeers: false
+        }
       };
     case ADD_COMPANIES:
       return {
@@ -75,7 +83,7 @@ export default function reducer(state, action) {
         ...state,
         suggestions: action.payload
       };
-    case REQUEST_ERROR: 
+    case REQUEST_ERROR: {
       return ({
         ...state,
         error: {
@@ -83,6 +91,7 @@ export default function reducer(state, action) {
           [action.payload.requestName]: true
         }
       })
+    }
     default:
       return state;
   }
