@@ -75,7 +75,29 @@ export default function reducer(state, action) {
         ...state,
         suggestions: action.payload
       };
-    case REQUEST_ERROR: 
+    case REQUEST_ERROR: {
+    //   const { requestName } = action.payload;
+    //   return ({
+    //     ...state,
+    //     error: {
+    //       ...state.error,
+    //       [requestName]: true,
+    //     }
+    //   })
+    // };
+        // stock.error {
+        //   stockData: false,
+        //   companies: false,
+        //   companyOverview: false,
+        //   latestNews: false,
+        //   chartData: false,
+        //   topPeers: false
+        // }
+        // action.payload {requestName, message}
+
+      // const error = {...state.error};
+      // error[action.payload.requestName] = true;
+
       return ({
         ...state,
         error: {
@@ -83,6 +105,7 @@ export default function reducer(state, action) {
           [action.payload.requestName]: true
         }
       })
+    }
     default:
       return state;
   }

@@ -12,28 +12,14 @@ const KeyStats = () => {
   // ? Object.values(response.earningsPerShare)
   : response.earningsPerShare
 
-  if(error) {
-    return(
-      <div className="keystats error">
-      <h3>KEY STATS</h3>
-      <p className="error__message">Error: Key stats can not be displayed</p>
-    </div>
-    )
-  }
-
-  if (loading > 0 && !response) {
-    return (
-      <div className="keystats">
-        <h3>KEY STATS</h3>
-        <Loading />
-      </div>
-    );
-  }
 
   return (
     <div className="keystats">
-      <h3>KEY STATS</h3>
-      <div className="keystats__grid">
+    <h3>KEY STATS</h3>
+    {error ? (<p className="error__message">Error: Key stats can not be displayed</p>)
+    :loading > 0 && !response ? ( <Loading /> )
+    :(
+<div className="keystats__grid">
         <table className="keystats__grid__display1">
           <tbody>
             <tr>
@@ -109,7 +95,11 @@ const KeyStats = () => {
           </tbody>
         </table>
       </div>
+          )}
     </div>
-  );
-};
+  )
+}
+
+
+
 export default KeyStats;
