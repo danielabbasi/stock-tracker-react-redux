@@ -29,7 +29,15 @@ export default function reducer(state, action) {
         latestNews: [],
         chartData: [],
         companyOverview: false,
-        topPeers: []
+        topPeers: [],
+        error: {
+          stockData: false,
+          companies: false,
+          companyOverview: false,
+          latestNews: false,
+          chartData: false,
+          topPeers: false
+        }
       };
     case ADD_COMPANIES:
       return {
@@ -76,28 +84,6 @@ export default function reducer(state, action) {
         suggestions: action.payload
       };
     case REQUEST_ERROR: {
-    //   const { requestName } = action.payload;
-    //   return ({
-    //     ...state,
-    //     error: {
-    //       ...state.error,
-    //       [requestName]: true,
-    //     }
-    //   })
-    // };
-        // stock.error {
-        //   stockData: false,
-        //   companies: false,
-        //   companyOverview: false,
-        //   latestNews: false,
-        //   chartData: false,
-        //   topPeers: false
-        // }
-        // action.payload {requestName, message}
-
-      // const error = {...state.error};
-      // error[action.payload.requestName] = true;
-
       return ({
         ...state,
         error: {
