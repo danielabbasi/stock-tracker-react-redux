@@ -12,6 +12,7 @@ const KeyStats = () => {
   // ? Object.values(response.earningsPerShare)
   : response.earningsPerShare
 
+
   return (
     <div className="keystats">
     <h3>KEY STATS</h3>
@@ -88,7 +89,7 @@ const KeyStats = () => {
                 Dividend & Yield
               </td>
               <td className="keystats__grid__display1__value">
-                {response ? Math.abs(response.ytdChange.toFixed(2)) + "%" : ""}
+                {response ? response.ytdChange + "%" : ""}
               </td>
             </tr>
           </tbody>

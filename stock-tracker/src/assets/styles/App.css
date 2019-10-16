@@ -1,35 +1,34 @@
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
 .wrapper {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-auto-rows: max-content;
-  grid-column-gap: 20px;
-  grid-row-gap: 10px;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 2fr, 2fr, 1fr;
+  grid-gap: 20px;
   grid-template-areas:
     "header header header"
     "chart chart latestnews"
-    "keystats keystats overview";
-  max-width: 1500px;
-  margin: 0 auto;
-  flex: 1 1;
-  padding: 0 10px;
-  box-sizing: border-box;
-  overflow: auto;
-  width: 100%;
-}
-
-body {
-  margin: 0;
+    "keystats keystats overview"
+    ". . toppeers"
+    "footer footer footer";
 }
 
 .wrapper_default {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.content {
   flex: 1 0 auto;
-  max-width: 1500px;
-  margin: 0;
 }
 
 .keystats {
   grid-area: keystats;
-  margin: 0 38px 0 0;
 }
 
 .header {
@@ -40,11 +39,8 @@ body {
   grid-area: chart;
 }
 
-.latest_news {
+.latestnews {
   grid-area: latestnews;
-  max-height: 400px;
-  display: flex;
-  flex-direction: column;
 }
 
 .overview {
@@ -53,15 +49,14 @@ body {
 
 .top_peers {
   grid-area: toppeers;
-  margin-top: 20px;
 }
 
-@media (max-width: 1024px) {
-  .wrapper {
-    margin: 0;
-  }
+.footer {
+  grid-area: footer;
+  flex-shrink: 0;
 }
-@media (max-width: 1024px) {
+
+@media (max-width: 1000px) {
   .wrapper {
     grid-template-areas:
       "header header header"
@@ -69,6 +64,7 @@ body {
       "latestnews latestnews latestnews"
       "keystats keystats keystats"
       "overview overview overview"
-      "toppeers toppeers toppeers";
+      "toppeers toppeers toppeers"
+      "footer footer footer ";
   }
 }
