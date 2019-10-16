@@ -13,7 +13,7 @@ import {
 } from "./actions";
 
 const io = require("socket.io-client");
-const socket = io("http://127.0.0.1:5000");
+const socket = io(`http://${window.location.hostname}:5000`);
 
 const initialState = {
   response: false,
@@ -21,7 +21,7 @@ const initialState = {
   companies: false,
   latestNews: [],
   chartData: [],
-  chartTime: "5Y",
+  chartTime: "1Y",
   companyOverview: false,
   topPeers: [],
   loading: 0,
@@ -57,23 +57,23 @@ const stockMiddleware = store => next => action => {
       store.dispatch(addTopPeersAction(peers));
     });
     socket.on("StockError", error => {
-      store.dispatch(getErrorsAction("stockData", error))
+      store.dispatch(getErrorsAction("stockData", error));
     });
     socket.on("CompaniesError", error => {
-      store.dispatch(getErrorsAction("companies", error))
+      store.dispatch(getErrorsAction("companies", error));
     });
     socket.on("CompanyOverviewError", error => {
-      store.dispatch(getErrorsAction("companyOverview", error))
+      store.dispatch(getErrorsAction("companyOverview", error));
     });
     socket.on("LatestNewsError", error => {
-      store.dispatch(getErrorsAction("latestNews", error))
+      store.dispatch(getErrorsAction("latestNews", error));
     });
     socket.on("ChartDataError", error => {
-      store.dispatch(getErrorsAction("chartData", error))
+      store.dispatch(getErrorsAction("chartData", error));
     });
     socket.on("TopPeersError", error => {
-      store.dispatch(getErrorsAction("topPeers", error))
-    })
+      store.dispatch(getErrorsAction("topPeers", error));
+    });
   } else if (action.type === "ADD_CHARTTIME") {
     socket.emit(
       "chartTime",

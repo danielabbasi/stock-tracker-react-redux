@@ -1,28 +1,30 @@
 .header {
   display: grid;
-  grid-template-columns: 2fr 1fr;
+  grid-template-columns: 2fr 1.5fr;
   grid-template-areas:
-    "logo headerBtns"
-    "searchDisplay priceDisplay"
-    "currencyDisplay marketStatusDisplay";
+    "header__logo header__btns"
+    "search_price_container search_price_container"
+    "currency_display market_status_display";
 }
 .header__logo {
-  grid-area: logo;
+  grid-area: header__logo;
 }
-
 .header__btns {
-  grid-area: headerBtns;
-}
-.search_display {
-  grid-area: searchDisplay;
-}
-
-.price_display {
-  grid-area: priceDisplay;
+  grid-area: header__btns;
 }
 .currency_display {
-  grid-area: currencyDisplay;
+  grid-area: currency_display;
 }
 .market_status_display {
-  grid-area: marketStatusDisplay;
+  grid-area: market_status_display;
+}
+@media (max-width: 425px) {
+  .header {
+    grid-template-columns: 1fr 2fr;
+  }
+}
+.header__search_price_container {
+  display: grid;
+  grid-area: search_price_container;
+  grid-template-columns: 2fr 1fr;
 }
