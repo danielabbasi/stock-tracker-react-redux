@@ -7,30 +7,19 @@ const KeyStats = () => {
   const loading = useSelector(state => state.loading);
   const error = useSelector(state => state.error.stockData);
 
-  if(error) {
-    return(
-      <div className="keystats error">
-      <h3>KEY STATS</h3>
-      <p className="error__message">Error: Key stats can not be displayed</p>
-    </div>
-    )
-  }
+  const earningsPShare = typeof response.earningsPerShare === "object" 
+  ? "N/A"
+  // ? Object.values(response.earningsPerShare)
+  : response.earningsPerShare
 
-  if (loading > 0 && !response) {
-    return (
-      <div className="keystats">
-        <h3>KEY STATS</h3>
-        <Loading />
-      </div>
-    );
-  }
 
-  console.log(error)
-  // console.log(response.earningsPerShare)
   return (
     <div className="keystats">
-      <h3>KEY STATS</h3>
-      <div className="keystats__grid">
+    <h3>KEY STATS</h3>
+    {error ? (<p className="error__message">Error: Key stats can not be displayed</p>)
+    :loading > 0 && !response ? ( <Loading /> )
+    :(
+<div className="keystats__grid">
         <table className="keystats__grid__display1">
           <tbody>
             <tr>
@@ -92,7 +81,7 @@ const KeyStats = () => {
                 Earning Per Share
               </td>
               <td className="keystats__grid__display1__value">
-                {response.earningsPerShare}
+                {earningsPShare}
               </td>
             </tr>
             <tr>
@@ -106,7 +95,11 @@ const KeyStats = () => {
           </tbody>
         </table>
       </div>
+          )}
     </div>
-  );
-};
+  )
+}
+
+
+
 export default KeyStats;

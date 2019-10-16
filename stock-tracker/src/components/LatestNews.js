@@ -16,29 +16,18 @@ const LatestNews = () => {
       <p className="newsSource">- {news.source}</p>
     </div>
   ));
-  const error = useSelector(state => state.error.latestNews);
-  if(error){
-    return (
-      <div className="latestnews error">
-        <h3>LATEST NEWS</h3>
-        <p className="error__message">Error: Latest news can not be displayed</p>
-      </div>
-    )
-  }
-  if (loading > 0 && !latestNews.length) {
-    return (
-      <div className="latestnews">
-        <h3>LATEST NEWS</h3>
-        <Loading />
-      </div>
-    );
-  }
-  return (
+  const errorValue = useSelector(state => state.error.latestNews);
+  const error = latestNews.length === 0 ? true : errorValue
+
+  return(
     <div className="latestnews">
-      <h3>LATEST NEWS</h3>
-      {newsDisplay}
+    <h3>LATEST NEWS</h3>
+    {error ? (<p className="error__message">Error: Latest news can not be displayed</p>)
+    :loading > 0 && !latestNews.length ? ( <Loading /> )
+    :newsDisplay
+    }
     </div>
-  );
+  )
 };
 
 export default LatestNews;

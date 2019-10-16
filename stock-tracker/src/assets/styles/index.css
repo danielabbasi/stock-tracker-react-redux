@@ -315,3 +315,10 @@ td {
 .overviewText {
   font-size: var(--text-font-size);
 }
+.error{
+
+}
+.error__message{
+  color: #e95656;
+  margin: 10% 0 0 3%;
+}
