@@ -1,12 +1,13 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import Loading from "./loading";
+import TopPeers from "./TopPeers";
 
 const Overview = () => {
   const overview = useSelector(state => state.companyOverview);
   const loading = useSelector(state => state.loading);
   const error = useSelector(state => state.error.companyOverview);
-
+  
   const description = overview.description === "0" ? "No company description to display" : overview.description
   const website = overview.website === "0" ? "No website to display" : overview.website
 

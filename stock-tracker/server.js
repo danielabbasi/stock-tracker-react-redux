@@ -21,11 +21,11 @@ function callNowAndInterval(fn, interval, ...args) {
 
 io.on("connection", socket => {
   const intervals = {};
-  console.log("New client connected");
+  console.info("New client connected");
   const stockCompanies = getCompaniesFromAPI(socket);
-  socket.on("search", (searchInput) => {
-    getSearchInputAndFilter(socket, searchInput, stockCompanies)
-  })
+  socket.on("search", searchInput => {
+    getSearchInputAndFilter(socket, searchInput, stockCompanies);
+  });
   socket.on("symbol", (stockSymbol, chartTime) => {
     Object.values(intervals).forEach(clearInterval);
     intervals.stock = callNowAndInterval(
@@ -72,10 +72,10 @@ io.on("connection", socket => {
   });
   socket.on("disconnect", () => {
     Object.values(intervals).forEach(clearInterval);
-    console.log("Client disconnected");
+    console.info("Client disconnected");
   });
 });
-server.listen(port, () => console.log(`Listening on port ${port}`));
+server.listen(port, () => console.info(`server is listening on port: ${port}`));
 const getCompaniesFromAPI = async socket => {
   try {
     const res = await axios.get(
@@ -227,7 +227,7 @@ const getStockDataAndEmit = async (socket, stockSymbol) => {
       latestUpdate,
       isUSMarketOpen
     };
-    console.log("Stock data is being sent")
+    console.info("Stock data is being sent");
     socket.emit("StockData", stockData); // Emitting a new message. It will be consumed by the client
   } catch (error) {
     socket.emit("StockError", error);
@@ -237,16 +237,20 @@ const getStockDataAndEmit = async (socket, stockSymbol) => {
 
 const getSearchInputAndFilter = async (socket, searchInput, stockCompanies) => {
   try {
-    console.log(searchInput)
-    const companies = await stockCompanies
-    const c = companies.map(data => ({symbol: data.symbol, name: data.name}))
-    let suggestions = c.filter( (company) => company.symbol.toLowerCase().indexOf(searchInput.toLowerCase()) !== -1 ).slice(0,10)
-    console.log(suggestions)
-    socket.emit("suggestions", suggestions)
+    console.log(searchInput);
+    const companies = await stockCompanies;
+    const c = companies.map(data => ({ symbol: data.symbol, name: data.name }));
+    let suggestions = c
+      .filter(
+        company =>
+          company.symbol.toLowerCase().indexOf(searchInput.toLowerCase()) !== -1
+      )
+      .slice(0, 10);
+    socket.emit("suggestions", suggestions);
   } catch (error) {
     console.error(`Search Error: ${error}`);
   }
-}
+};
 
 const changeNullValues = data => {
   Object.keys(data).forEach(key => {

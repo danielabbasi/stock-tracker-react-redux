@@ -13,7 +13,7 @@ import {
 } from "./actions";
 
 const io = require("socket.io-client");
-const socket = io("http://127.0.0.1:5000");
+const socket = io(`http://${window.location.hostname}:5000`);
 
 const initialState = {
   response: false,
@@ -21,7 +21,7 @@ const initialState = {
   companies: false,
   latestNews: [],
   chartData: [],
-  chartTime: "5Y",
+  chartTime: "1Y",
   companyOverview: false,
   topPeers: [],
   loading: 0,
