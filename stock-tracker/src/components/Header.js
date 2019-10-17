@@ -80,9 +80,9 @@ const Header = () => {
           </p>
         </div>
       <div className={response ? "currency_display" : "hidden"}>
-        <p className="currency_display__item">{overview.exchange}</p>
-        <p className="currency_display__item">{overview.industry}</p>
-        <p className={response.currency ? "currency_display__item" : "hidden"}>
+        <p className="currency_display__item currency_display__item__exchange">{overview.exchange}</p>
+        <p className="currency_display__item currency_display__item__industry">{overview.industry}</p>
+        <p className={response.currency ? "currency_display__item currency_display__item__currency" : "hidden"}>
           {response.currency}
         </p>
       </div>

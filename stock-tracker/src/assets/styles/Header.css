@@ -25,24 +25,14 @@
 .price_display{
   grid-area: price_display;
 }
-/* @media (max-width: 425px) {
-  .header {
+@media (max-width: 425px){
+  .header{
     grid-template-areas:
-    "search_display search_display"
-    " . currency_display"
-    "price_display";
+      "search_display search_display"
+      " . currency_display"
+      "price_display price_display"
   }
-
-  .header__btns, .market_status_display, .header__logo {
-    display: none
+  .header__logo, .header__btns, .market_status_display{
+    display: none;
   }
-
 }
-.header__search_price_container {
-  display: grid;
-  grid-area: search_price_container;
-  grid-template-columns: 2fr 1fr;
-
-} */
-/* .search_display{}
-.price_display{} */

@@ -455,16 +455,34 @@ a.overview__web:hover {
     font-size: 5vw;
   }
   .search_display__search_bar {
-    width: 343px;
+    width: 93%;
     height: 36px;
     border-radius: 10px;
     background-color: rgba(255, 255, 255, 0.12);
   }
-  .footer {
+  .footer, .currency_display__item__industry, .currency_display__item__currency {
     display: none
   }
+  .currency_display{
+    text-align: end;
+  }
+  .price_display__arrow_icon {
+    font-size: 15px;
+    top: -10px;
+  }
+  .price_display__small_icon {
+    font-size: 15px;
+    margin: 7px -5px 0;
+  }
+  ::placeholder {
+    font-weight: 300;
+    font-size: 30px;
+    padding-left: 10px
+  }
+  .price_display h4 {
+    font-size: 35px;
+  }
 }
-
 ::-webkit-scrollbar {
   width: 10px;
   background-color: var(--label);
