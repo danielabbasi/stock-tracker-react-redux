@@ -1,0 +1,13 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/node:10.16.3
+    steps:
+      - checkout
+      - run:
+          name: Install Dependancies
+          command: cd stock-tracker && npm ci
+      - run:
+          name: Run Tests
+          command: cd stock-tracker && npm run test
