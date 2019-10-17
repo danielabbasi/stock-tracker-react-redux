@@ -213,19 +213,97 @@ describe("testing state reducer", () => {
       ]);
     });
   });
-  describe('when given the "ADD_ERROR" action', () => {
+  describe('when given the "REQUEST_ERROR" action', () => {
     let initialState;
-    let newState;
-    beforeAll(() => {
+    beforeEach(() => {
       initialState = setupIntialState();
-      const action = {
-        type: REQUEST_ERROR,
-        payload: { requestName: "stockData", message: "stock error" }
-      };
-      newState = reducer(initialState, action);
     });
-    it("should update the suggestions state", () => {
-      expect(newState.error.stockData).toEqual(true);
+    describe("for the stock data", () => {
+      let newState;
+      let action;
+      beforeAll(() => {
+        action = {
+          type: REQUEST_ERROR,
+          payload: { requestName: "stockData", message: "stock error" }
+        };
+      });
+      it("should update the stock error state to be true", () => {
+        newState = reducer(initialState, action);
+        expect(newState.error.stockData).toEqual(true);
+      });
+    });
+    describe("for the companies data", () => {
+      let newState;
+      let action;
+      beforeAll(() => {
+        action = {
+          type: REQUEST_ERROR,
+          payload: { requestName: "companies", message: "companies error" }
+        };
+      });
+      it("should update the companies error state to true", () => {
+        newState = reducer(initialState, action);
+        expect(newState.error.companies).toEqual(true);
+      });
+    });
+    describe("for the companyOverview data", () => {
+      let newState;
+      let action;
+      beforeAll(() => {
+        action = {
+          type: REQUEST_ERROR,
+          payload: {
+            requestName: "companyOverview",
+            message: "companyOverview error"
+          }
+        };
+      });
+      it("should update the companyOverview error state to true", () => {
+        newState = reducer(initialState, action);
+        expect(newState.error.companyOverview).toEqual(true);
+      });
+    });
+    describe("for the latestNews data", () => {
+      let newState;
+      let action;
+      beforeAll(() => {
+        action = {
+          type: REQUEST_ERROR,
+          payload: { requestName: "latestNews", message: "latestNews error" }
+        };
+      });
+      it("should update the latestNews error state to true", () => {
+        newState = reducer(initialState, action);
+        expect(newState.error.latestNews).toEqual(true);
+      });
+    });
+    describe("for the chartData data", () => {
+      let newState;
+      let action;
+      beforeAll(() => {
+        action = {
+          type: REQUEST_ERROR,
+          payload: { requestName: "chartData", message: "chartData error" }
+        };
+      });
+      it("should update the chartData error state to true", () => {
+        newState = reducer(initialState, action);
+        expect(newState.error.chartData).toEqual(true);
+      });
+    });
+    describe("for the topPeers data", () => {
+      let newState;
+      let action;
+      beforeAll(() => {
+        action = {
+          type: REQUEST_ERROR,
+          payload: { requestName: "topPeers", message: "topPeers error" }
+        };
+      });
+      it("should update the topPeers error state to true", () => {
+        newState = reducer(initialState, action);
+        expect(newState.error.topPeers).toEqual(true);
+      });
     });
   });
 });
