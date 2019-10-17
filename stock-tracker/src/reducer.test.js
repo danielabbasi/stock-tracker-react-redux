@@ -12,7 +12,6 @@ import {
   ADD_SUGGESTIONS,
   REQUEST_ERROR
 } from "./store/actionTypes";
-import { newExpression } from "@babel/types";
 
 const setupIntialState = () => ({
   initialState: {
