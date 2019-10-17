@@ -2,7 +2,12 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/ruby:2.4.1
+      - image: circleci/node:10.16.3
     steps:
       - checkout
-      - run: echo "A first hello"
+      - run:
+          name: Install Dependancies
+          command: npm ci
+      - run:
+          name: Run Tests
+          command: npm run test
