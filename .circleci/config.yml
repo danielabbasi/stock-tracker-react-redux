@@ -6,9 +6,6 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Project Directory
-          command: cd stock-tracker
-      - run:
           name: Install Dependancies
           command: cd stock-tracker && npm ci
       - run:
