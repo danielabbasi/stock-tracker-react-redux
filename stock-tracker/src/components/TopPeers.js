@@ -1,11 +1,20 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useCallback } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Loading from "./loading";
+import { addSymbolAction } from "../store/actions";
 
 const TopPeers = () => {
   const peers = useSelector(state => state.topPeers);
   const loading = useSelector(state => state.loading);
   const error = useSelector(state => state.error.topPeers);
+  const dispatch = useDispatch();
+  const addSymbol = useCallback(symbol => dispatch(addSymbolAction(symbol)), [
+    dispatch
+  ]);
+
+  const handleClick = data => () => {
+    addSymbol(data);
+  }
 
   return (
     <div className="top_peers">
@@ -17,7 +26,7 @@ const TopPeers = () => {
       ) : (
         <ul>
           {peers.map((data, index) => (
-            <li key={index}>{data}</li>
+            <li onClick={handleClick(data)} key={index}>{data}</li>
           ))}
         </ul>
       )}
