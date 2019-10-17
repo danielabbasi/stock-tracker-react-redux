@@ -247,7 +247,9 @@ const getSearchInputAndFilter = async (socket, searchInput, stockCompanies) => {
     let suggestions = c
       .filter(
         company =>
-          company.symbol.toLowerCase().indexOf(searchInput.toLowerCase()) !== -1
+          company.symbol.toLowerCase().indexOf(searchInput.toLowerCase()) !==
+            -1 ||
+          company.name.toLowerCase().indexOf(searchInput.toLowerCase()) !== -1
       )
       .slice(0, 10);
     socket.emit("suggestions", suggestions);
