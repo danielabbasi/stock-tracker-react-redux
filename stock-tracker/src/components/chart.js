@@ -23,13 +23,11 @@ const Chart = () => {
     dispatch(addChartTimeAction(e.target.value));
     setCurrent(e.target.value);
   };
-  console.log(chartData);
   const latestValue =
     chartData[chartData.length - 1] !== undefined
       ? chartData[chartData.length - 1].close
       : "";
   const error = useSelector(state => state.error.chartData);
-
   return (
     <div className="chart">
       {error ? (
@@ -106,12 +104,12 @@ const Chart = () => {
               MAX
             </button>
           </div>
-          <ResponsiveContainer>
+          <ResponsiveContainer minHeight="380px" maxHeight="380px">
             <AreaChart
               data={chartData}
               margin={{ top: 5, right: 20, left: 10, bottom: 5 }}
             >
-              <CartesianGrid stroke="#f5f5f5" strokeDasharray="3 3" />
+              <CartesianGrid stroke="#f5f5f5" opacity="0.25" />
               <defs>
                 <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
                   <stop offset="5%" stopColor="#73b3ef" stopOpacity={0.8} />
