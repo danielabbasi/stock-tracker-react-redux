@@ -10,7 +10,7 @@ jobs:
           command: cd stock-tracker
       - run:
           name: Install Dependancies
-          command: npm ci
+          command: pwd && ls -a
       - run:
           name: Run Tests
           command: npm run test
