@@ -3,7 +3,7 @@
   grid-template-columns: 2fr 1.5fr;
   grid-template-areas:
     "header__logo header__btns"
-    "search_price_container search_price_container"
+    "search_display price_display"
     "currency_display market_status_display";
 }
 .header__logo {
@@ -18,13 +18,31 @@
 .market_status_display {
   grid-area: market_status_display;
 }
-@media (max-width: 425px) {
+.search_display{
+  grid-area: search_display;
+  
+}
+.price_display{
+  grid-area: price_display;
+}
+/* @media (max-width: 425px) {
   .header {
-    grid-template-columns: 1fr 2fr;
+    grid-template-areas:
+    "search_display search_display"
+    " . currency_display"
+    "price_display";
   }
+
+  .header__btns, .market_status_display, .header__logo {
+    display: none
+  }
+
 }
 .header__search_price_container {
   display: grid;
   grid-area: search_price_container;
   grid-template-columns: 2fr 1fr;
-}
+
+} */
+/* .search_display{}
+.price_display{} */

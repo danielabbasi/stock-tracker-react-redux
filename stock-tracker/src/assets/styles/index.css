@@ -106,7 +106,7 @@ h5 {
 .search_display,
 .price_display {
   border-bottom: 2px solid var(--grid-header);
-  position: relative;
+  /* position: relative; */
 }
 .search_display__icon {
   color: var(--highlight-1);
@@ -451,8 +451,17 @@ a.overview__web:hover {
   }
 }
 @media (max-width: 425px) {
-  .header__btns__btn {
-    font-size: 5px;
+  h5 {
+    font-size: 5vw;
+  }
+  .search_display__search_bar {
+    width: 343px;
+    height: 36px;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.12);
+  }
+  .footer {
+    display: none
   }
 }
 
@@ -472,8 +481,7 @@ a.overview__web:hover {
     color-stop(0.86, var(--primary-5))
   );
 }
-.error {
-}
+
 .error__message {
   color: #e95656;
   margin: 10% 0 0 3%;
