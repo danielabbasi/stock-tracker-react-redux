@@ -40,7 +40,7 @@ body {
   grid-area: chart;
 }
 
-.latest_news {
+.latestnews {
   grid-area: latestnews;
   max-height: 400px;
   display: flex;
