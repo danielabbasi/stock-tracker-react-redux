@@ -309,6 +309,11 @@ h1 {
   flex-direction: column;
 }
 
+.responsive_chart {
+  min-height: 380px;
+  max-height: 380px;
+}
+
 .chart__graph_btn {
   float: right;
   position: relative;
@@ -342,7 +347,7 @@ h1 {
   padding: 0 7px 0 0;
   font-size: var(--text-font-size);
 }
-.top_peers ul li:hover{
+.top_peers ul li:hover {
   color: var(--text-hover);
   cursor: pointer;
 }
@@ -479,10 +484,12 @@ a.overview__web:hover {
     border-radius: 10px;
     background-color: rgba(255, 255, 255, 0.12);
   }
-  .footer, .currency_display__item__industry, .currency_display__item__currency {
-    display: none
+  .footer,
+  .currency_display__item__industry,
+  .currency_display__item__currency {
+    display: none;
   }
-  .currency_display{
+  .currency_display {
     text-align: end;
   }
   .price_display__arrow_icon {
@@ -496,7 +503,7 @@ a.overview__web:hover {
   ::placeholder {
     font-weight: 300;
     font-size: 30px;
-    padding-left: 10px
+    padding-left: 10px;
   }
   .price_display h4 {
     font-size: 35px;
