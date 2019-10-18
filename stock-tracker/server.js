@@ -10,8 +10,8 @@ const server = http.createServer(app);
 const io = socketIo(server);
 const day = 86400000;
 const halfDay = day / 2;
-const HOST = "https://sandbox.iexapis.com";
-const TOKEN = "Tpk_139c39f1edae43fc8e5ab12451d30f4c";
+const HOST = "https://cloud.iexapis.com";
+const TOKEN = "sk_385fa432fa074e70afeed986ac084bd8";
 
 function callNowAndInterval(fn, interval, ...args) {
   // calls function with extra arguements passed and returns interval
@@ -30,7 +30,7 @@ io.on("connection", socket => {
     Object.values(intervals).forEach(clearInterval);
     intervals.stock = callNowAndInterval(
       getStockDataAndEmit,
-      5000,
+      10000,
       socket,
       stockSymbol
     );
@@ -157,7 +157,7 @@ const getChartDataAndEmit = async (socket, stockSymbol, chartTime) => {
 const getTopPeersAndEmit = async (socket, stockSymbol) => {
   try {
     const topPeers = await axios.get(
-      `${HOST}/stable/stock/${stockSymbol}/peers?token=${TOKEN}`
+      `https://sandbox.iexapis.com/stable/stock/${stockSymbol}/peers?token=Tpk_139c39f1edae43fc8e5ab12451d30f4c`
     );
     socket.emit("TopPeers", topPeers.data);
   } catch (error) {
