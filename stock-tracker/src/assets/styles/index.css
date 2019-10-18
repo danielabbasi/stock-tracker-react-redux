@@ -114,7 +114,7 @@ h5 {
 .search_display__suggestion_list {
   position: absolute;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
-  background-image: linear-gradient(to bottom, #001330, rgba(0, 8, 19, 0.8));
+  background-image: linear-gradient(to right, #001330, rgba(0, 8, 19, 0.8));
   list-style-type: none;
   z-index: 1;
   margin-top: 0px;
@@ -355,7 +355,7 @@ h1 {
 .footer {
   font-size: 8px;
   background-image: linear-gradient(
-    to bottom,
+    to right,
     var(--marine-blue),
     var(--primary-5)
   );
@@ -392,6 +392,19 @@ h1 {
   padding: 0 10px;
   margin: 6px;
 }
+.footer__mobile{
+  background-image: linear-gradient(
+    to right,
+    var(--marine-blue),
+    var(--primary-5)
+  );
+  flex: 0 0 auto;
+  text-align: right;
+}
+.footer__logo{
+  width: 90px;
+  padding-right: 20px;
+}
 .overview__company {
   font-size: 24px;
   font-weight: normal;
@@ -427,6 +440,11 @@ a.overview__web:hover {
 
 .chart__date {
   font-size: 5px;
+}
+@media (min-width: 426px){
+  .footer__mobile{
+    display: none
+  }
 }
 @media (max-width: 1024px) {
   .footer {
