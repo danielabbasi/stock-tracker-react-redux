@@ -95,9 +95,10 @@ const KeyStats = () => {
                   Dividend & Yield
                 </td>
                 <td className="keystats__grid__display1__value">
-                  {response
+                  {response.ytdChange !== undefined &&
+                  response.ytdChange !== "N/A"
                     ? Math.abs(response.ytdChange.toFixed(2)) + "%"
-                    : ""}
+                    : "N/A"}
                 </td>
               </tr>
             </tbody>
