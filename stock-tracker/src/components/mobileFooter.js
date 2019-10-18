@@ -1,6 +1,6 @@
 import React, { useCallback } from "react";
 import logo from "../assets/logo.png";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { addSymbolAction } from "../store/actions";
 
 const MobileFooter = () => {
