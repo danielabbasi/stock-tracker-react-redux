@@ -1,5 +1,6 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useCallback } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { addSymbolAction } from "../store/actions";
 import logo from "../assets/logo.png";
 import { Icon } from "antd";
 import "../assets/styles/Header.css";
@@ -11,6 +12,10 @@ const moment = require("moment");
 const Header = () => {
   const response = useSelector(state => state.response);
   const overview = useSelector(state => state.companyOverview);
+  const dispatch = useDispatch();
+  const addSymbol = useCallback(symbol => dispatch(addSymbolAction(symbol)), [
+    dispatch
+  ]);
   const changeNo =
     response.change === 0
       ? "0"
@@ -31,9 +36,12 @@ const Header = () => {
       ? sun
       : moon
     : "";
+  const onClick = () => {
+    addSymbol("");
+  };
   return (
     <div className="header">
-      <img className="header__logo" alt="logo" src={logo} />
+      <img onClick={onClick} className="header__logo" alt="logo" src={logo} />
       <div className="header__btns">
         <button className="header__btns__btn quotes_btn">QUOTES</button>
         <button className="header__btns__btn">MARKETS</button>

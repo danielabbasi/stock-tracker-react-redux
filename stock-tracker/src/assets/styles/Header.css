@@ -8,6 +8,7 @@
 }
 .header__logo {
   grid-area: header__logo;
+  cursor: pointer;
 }
 .header__btns {
   grid-area: header__btns;
