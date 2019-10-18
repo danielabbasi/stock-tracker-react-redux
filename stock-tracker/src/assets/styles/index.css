@@ -106,7 +106,7 @@ h5 {
 .search_display,
 .price_display {
   border-bottom: 2px solid var(--grid-header);
-  position: relative;
+  /* position: relative; */
 }
 .search_display__icon {
   color: var(--highlight-1);
@@ -114,7 +114,7 @@ h5 {
 .search_display__suggestion_list {
   position: absolute;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
-  background-image: linear-gradient(to bottom, #001330, rgba(0, 8, 19, 0.8));
+  background-image: linear-gradient(to right, #001330, rgba(0, 8, 19, 0.8));
   list-style-type: none;
   z-index: 1;
   margin-top: 0px;
@@ -309,6 +309,11 @@ h1 {
   flex-direction: column;
 }
 
+.responsive_chart {
+  min-height: 380px;
+  max-height: 380px;
+}
+
 .chart__graph_btn {
   float: right;
   position: relative;
@@ -342,7 +347,7 @@ h1 {
   padding: 0 7px 0 0;
   font-size: var(--text-font-size);
 }
-.top_peers ul li:hover{
+.top_peers ul li:hover {
   color: var(--text-hover);
   cursor: pointer;
 }
@@ -355,7 +360,7 @@ h1 {
 .footer {
   font-size: 8px;
   background-image: linear-gradient(
-    to bottom,
+    to right,
     var(--marine-blue),
     var(--primary-5)
   );
@@ -391,6 +396,20 @@ h1 {
 .footer2 {
   padding: 0 10px;
   margin: 6px;
+}
+.footer__mobile{
+  background-image: linear-gradient(
+    to right,
+    var(--marine-blue),
+    var(--primary-5)
+  );
+  flex: 0 0 auto;
+  text-align: right;
+}
+.footer__logo{
+  width: 90px;
+  padding-right: 20px;
+  cursor: pointer;
 }
 .overview__company {
   font-size: 24px;
@@ -428,6 +447,11 @@ a.overview__web:hover {
 .chart__date {
   font-size: 5px;
 }
+@media (min-width: 426px){
+  .footer__mobile{
+    display: none
+  }
+}
 @media (max-width: 1024px) {
   .footer {
     bottom: 0 !important;
@@ -451,11 +475,40 @@ a.overview__web:hover {
   }
 }
 @media (max-width: 425px) {
-  .header__btns__btn {
-    font-size: 5px;
+  h5 {
+    font-size: 5vw;
+  }
+  .search_display__search_bar {
+    width: 93%;
+    height: 36px;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.12);
+  }
+  .footer,
+  .currency_display__item__industry,
+  .currency_display__item__currency {
+    display: none;
+  }
+  .currency_display {
+    text-align: end;
+  }
+  .price_display__arrow_icon {
+    font-size: 15px;
+    top: -10px;
+  }
+  .price_display__small_icon {
+    font-size: 15px;
+    margin: 7px -5px 0;
+  }
+  ::placeholder {
+    font-weight: 300;
+    font-size: 30px;
+    padding-left: 10px;
+  }
+  .price_display h4 {
+    font-size: 35px;
   }
 }
-
 ::-webkit-scrollbar {
   width: 10px;
   background-color: var(--label);
@@ -472,8 +525,7 @@ a.overview__web:hover {
     color-stop(0.86, var(--primary-5))
   );
 }
-.error {
-}
+
 .error__message {
   color: #e95656;
   margin: 10% 0 0 3%;

@@ -104,7 +104,7 @@ const Chart = () => {
               MAX
             </button>
           </div>
-          <ResponsiveContainer minHeight="380px" maxHeight="380px">
+          <ResponsiveContainer className="responsive_chart">
             <AreaChart
               data={chartData}
               margin={{ top: 5, right: 20, left: 10, bottom: 5 }}
