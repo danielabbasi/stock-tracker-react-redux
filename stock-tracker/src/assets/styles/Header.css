@@ -30,7 +30,8 @@
     grid-template-areas:
       "header__logo header__btns"
       "search_display search_display"
-      "price_display currency_display";
+      ". currency_display"
+      "price_display price_display";
   }
   .footer,
   .header__btns,
@@ -45,14 +46,15 @@
     margin-top: 16px;
   }
   .price_display h4 {
-    font-size: 25px;
+    font-size: 35px;
   }
   .price_display__small_icon {
-    margin: -3px -5px 0;
+    margin: 5px -5px 0;
     font-size: 15px;
   }
   .price_display__arrow_icon {
-    font-size: 15px;
+    font-size: 17px;
+    margin: -15px 0px 0 0;
   }
   .search_display {
     grid-column: 1/-1;
