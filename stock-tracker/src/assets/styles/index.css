@@ -120,12 +120,12 @@ h1 {
   margin-block-start: 0.5em;
   margin-block-end: 0.5em;
 }
-.green {
+/* .green {
   color: var(--good);
 }
 .red {
   color: var(--bad);
-}
+} */
 
 @media (min-width: 426px) {
   .footer__mobile {
