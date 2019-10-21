@@ -35,7 +35,9 @@ const KeyStats = () => {
               <tr>
                 <td className="keystats__grid__display1__name">Day Range</td>
                 <td className="keystats__grid__display1__value">
-                  {response.dayRange}
+                  {response.high && response.low
+                    ? response.high + " - " + response.low
+                    : "N/A"}
                 </td>
               </tr>
               <tr>
@@ -63,7 +65,7 @@ const KeyStats = () => {
               <tr>
                 <td className="keystats__grid__display1__name">Open</td>
                 <td className="keystats__grid__display1__value">
-                  {response.open}
+                  {response.open ? response.open : "N/A"}
                 </td>
               </tr>
               <tr>
@@ -71,7 +73,9 @@ const KeyStats = () => {
                   52 Week Range
                 </td>
                 <td className="keystats__grid__display1__value">
-                  {response.week52Range}
+                  {response.week52High && response.week52Low
+                    ? response.week52High + " - " + response.week52Low
+                    : "N/A"}
                 </td>
               </tr>
               <tr>
