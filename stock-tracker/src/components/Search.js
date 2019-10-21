@@ -62,8 +62,8 @@ const Search = () => {
               key={data.symbol}
             >
               <td className="search_display__suggestion_list__item__symbol">{`${data.symbol} `}</td>
-              <td>{`${data.name}`}</td>
-              <td>{`${data.exchange}`}</td>
+              <td className="search_display__suggestion_list__item__name">{`${data.name}`}</td>
+              <td className="search_display__suggestion_list__item__exchange">{`${data.exchange}`}</td>
             </tr>
           );
         })

@@ -14,13 +14,23 @@
   width: 100%;
   font-size: 18px;
   padding: 0;
+  border-spacing: 18px 17px;
 }
 .search_display__suggestion_list__item {
-  padding: 0px 5px 2px 5px;
+  /* padding: 0px 5px 16px 5px; */
 }
 .search_display__suggestion_list__item__symbol {
   display: inline-block;
   color: var(--highlight-2);
+  padding: 5px;
+}
+.search_display__suggestion_list__item__exchange {
+  font-size: 14px;
+  opacity: 0.5;
+  text-align: center;
+  border-radius: 2px;
+  background-color: rgba(128, 180, 255, 0.13);
+  padding: 0px 15px;
 }
 .search_display__suggestion_list__item:hover {
   color: darkgoldenrod;
