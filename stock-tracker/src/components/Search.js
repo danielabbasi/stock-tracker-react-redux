@@ -63,6 +63,7 @@ const Search = () => {
             >
               <td className="search_display__suggestion_list__item__symbol">{`${data.symbol} `}</td>
               <td>{`${data.name}`}</td>
+              <td>{`${data.exchange}`}</td>
             </tr>
           );
         })
@@ -75,7 +76,7 @@ const Search = () => {
       <input
         className="search_display__search_bar"
         placeholder={
-          response ? `${response.companyName}(${response.symbol})` : ""
+          response ? `${response.companyName} (${response.symbol})` : ""
         }
         type="text"
         value={symbol}
