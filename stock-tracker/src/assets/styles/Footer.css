@@ -1,7 +1,7 @@
 .footer {
   font-size: 8px;
   background-image: linear-gradient(
-    to right,
+    to bottom,
     var(--marine-blue),
     var(--primary-5)
   );
@@ -13,12 +13,29 @@
 .footer1 {
   grid-area: footer1;
   font-size: 12px;
+  height: 15px;
+  font-family: Lato-Regular;
+  font-size: 12px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: var(--text-white);
 }
 .footer2 {
   grid-area: footer2;
-  letter-spacing: 1px;
+  height: 17px;
+  font-family: Lato-Regular;
   font-size: 14px;
-  letter-spacing: 3px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: var(--text-white);
 }
 .usMarket {
   grid-area: usMarket;
@@ -30,15 +47,28 @@
   font-size: 12px;
 }
 .footer__heading {
-  font-size: 14px;
-  font-family: Lato-Bold;
+  font-weight: bold;
+  padding: 0 8px;
+}
+.first_symbol{
+  padding-left: 0;
+}
+sup{
+  font-size: 10px;
+  object-fit: contain;
+  vertical-align: 30%;
+}
+sup .arrow{
+  width: 10px;
+  height: 10px;
+  vertical-align: -10%;
 }
 .footer1,
 .footer2 {
   padding: 0 10px;
-  margin: 6px;
+  margin: 8px;
 }
-.footer__mobile {
+/* .footer__mobile {
   background-image: linear-gradient(
     to right,
     var(--marine-blue),
@@ -46,11 +76,20 @@
   );
   flex: 0 0 auto;
   text-align: right;
-}
+} */
 .footer__logo {
   width: 90px;
   padding-right: 20px;
   cursor: pointer;
+}
+.green {
+  color: var(--good);
+}
+.red {
+  color: var(--bad);
+}
+.green, .red{
+  padding: 0 4px;
 }
 @media (max-width: 500px) {
   .footer {

@@ -121,12 +121,12 @@ h1 {
   margin-block-end: 0.5em;
   padding-bottom: 3px;
 }
-.green {
+/* .green {
   color: var(--good);
 }
 .red {
   color: var(--bad);
-}
+} */
 
 @media (min-width: 426px) {
   .footer__mobile {

@@ -8,11 +8,11 @@ const Footer = () => {
       <div className="usMarket">
         <p className="footer1">US MARKET</p>
         <p className="footer2">
-          <span className="footer__heading">NASDAQ </span>
+          <span className="footer__heading first_symbol">NASDAQ </span>
           <sup>$</sup>6,850.05
           <span className="green">
             <sup>
-              <Icon type="arrow-up"></Icon>
+              <Icon className="arrow" type="arrow-up"></Icon>
             </sup>
             72.89 | 1.08<sup>%</sup>
           </span>
@@ -20,7 +20,7 @@ const Footer = () => {
           <sup>$</sup>23,026.35
           <span className="green">
             <sup>
-              <Icon type="arrow-up"></Icon>
+              <Icon className="arrow" type="arrow-up"></Icon>
             </sup>
             168.89 | 0.7<sup>%</sup>
           </span>
@@ -28,7 +28,7 @@ const Footer = () => {
           <sup>$</sup>2,605.35
           <span className="green">
             <sup>
-              <Icon type="arrow-up"></Icon>
+              <Icon className="arrow" type="arrow-up"></Icon>
             </sup>
             23.35 | 0.94<sup>%</sup>
           </span>
@@ -37,11 +37,11 @@ const Footer = () => {
       <div className="favorites">
         <p className="footer1">FAVORITES</p>
         <p className="footer2">
-          <span className="footer__heading">MSFT </span>
+          <span className="footer__heading first_symbol">MSFT </span>
           <sup>$</sup>86.92
           <span className="green">
             <sup>
-              <Icon type="arrow-up"></Icon>
+              <Icon className="arrow" type="arrow-up"></Icon>
             </sup>
             1.91 | 2.25<sup>%</sup>
           </span>
@@ -49,7 +49,7 @@ const Footer = () => {
           <sup>$</sup>160.03
           <span className="red">
             <sup>
-              <Icon type="arrow-down"></Icon>
+              <Icon className="arrow" type="arrow-down"></Icon>
             </sup>
             2.94 | 1.88<sup>%</sup>
           </span>
@@ -57,7 +57,7 @@ const Footer = () => {
           <sup>$</sup>1,017.49
           <span className="green">
             <sup>
-              <Icon type="arrow-up"></Icon>
+              <Icon className="arrow" type="arrow-up"></Icon>
             </sup>
             15.97 | 1.59<sup>%</sup>
           </span>
