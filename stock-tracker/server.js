@@ -27,6 +27,7 @@ io.on("connection", socket => {
     getSearchInputAndFilter(socket, searchInput, stockCompanies);
   });
   socket.on("symbol", (stockSymbol, chartTime) => {
+    console.info("Stock Symbol Entered: " + stockSymbol);
     Object.values(intervals).forEach(clearInterval);
     intervals.stock = callNowAndInterval(
       getStockDataAndEmit,
@@ -182,7 +183,6 @@ const getStockDataAndEmit = async (socket, stockSymbol) => {
       epsPromise,
       dividendsPromise
     ]);
-    changeNullValues(res.data, eps.data);
     const currency =
       (dividends.data[0] && dividends.data[0].currency) || undefined; // if first arguement is trufy and second condition is trufy then set current, if not then set undefined
     const {
@@ -215,14 +215,12 @@ const getStockDataAndEmit = async (socket, stockSymbol) => {
       previousClose,
       high,
       low,
-      dayRange: low + "-" + high,
       previousVolume,
       marketCap,
       peRatio,
       open,
       week52High,
       week52Low,
-      week52Range: week52Low + "-" + week52High,
       avgTotalVolume,
       earningsPerShare: eps.data,
       ytdChange,
@@ -241,7 +239,6 @@ const getStockDataAndEmit = async (socket, stockSymbol) => {
 
 const getSearchInputAndFilter = async (socket, searchInput, stockCompanies) => {
   try {
-    console.log(searchInput);
     const companies = await stockCompanies;
     const c = companies.map(data => ({ symbol: data.symbol, name: data.name }));
     let suggestions = c
@@ -256,16 +253,4 @@ const getSearchInputAndFilter = async (socket, searchInput, stockCompanies) => {
   } catch (error) {
     console.error(`Search Error: ${error}`);
   }
-};
-
-const changeNullValues = data => {
-  Object.keys(data).forEach(key => {
-    if (data[key] === null) {
-      data[key] = "N/A";
-    } else if (data[key] === true) {
-      data[key] = "true";
-    } else if (data[key] === false) {
-      data[key] = "false";
-    }
-  });
 };
