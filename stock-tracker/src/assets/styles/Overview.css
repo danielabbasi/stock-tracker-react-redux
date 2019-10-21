@@ -1,7 +1,7 @@
 .overview p {
   margin: 0 0 10px 0;
 }
-.overview__web {
+a.overview__web {
   font-size: 14px;
   font-family: Lato-Italic;
   font-weight: normal;
@@ -9,9 +9,6 @@
   font-stretch: normal;
   line-height: normal;
   letter-spacing: normal;
-  color: var(--label);
-}
-a.overview__web {
   color: var(--label);
 }
 a.overview__web:hover {
