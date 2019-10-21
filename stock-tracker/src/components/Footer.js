@@ -1,5 +1,6 @@
 import React from "react";
 import { Icon } from "antd";
+import "../assets/styles/Footer.css";
 
 const Footer = () => {
   return (

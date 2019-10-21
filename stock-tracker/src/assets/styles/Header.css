@@ -25,6 +25,92 @@
 .price_display {
   grid-area: price_display;
 }
+.header__btns {
+  margin: 20px 0 0;
+  text-align: end;
+}
+.header__btns__btn {
+  color: white;
+  border: none;
+  background-color: inherit;
+  font-size: 18px;
+  font-family: Lato-Light;
+  margin: 0;
+  padding: 2px 10px;
+  border-radius: 10%;
+}
+
+.quotes_btn {
+  background-color: var(--highlight-2);
+  color: var(--text-white);
+}
+.header__logo {
+  width: 155px;
+}
+.price_display {
+  border-bottom: 2px solid var(--grid-header);
+}
+
+.price_display__small_icon {
+  font-size: 20px;
+  vertical-align: top;
+  margin: 10px -5px 0;
+}
+.price_display__arrow_icon {
+  font-size: 20px;
+  top: -8px;
+}
+.price_display {
+  text-align: end;
+  font-family: Lato-Light;
+}
+.price_display h4 {
+  display: inline-block;
+  margin: 0 10px;
+  font-size: 40px;
+  font-weight: 20;
+}
+.price_display p {
+  display: inline-block;
+}
+.price_display--increase {
+  color: var(--good);
+}
+.price_display--decrease {
+  color: var(--bad);
+}
+.currency_display {
+  margin-block-start: 10px;
+}
+.currency_display__item {
+  display: inline;
+  color: var(--text-white);
+  background-color: var(--grid-header);
+  border-radius: 5%;
+  margin: 5px;
+  padding: 3px;
+  font-size: 14px;
+}
+.market_status_display__real_time {
+  font-size: 14px;
+  color: var(--label);
+  display: inline;
+}
+.market_status_display__real_time__status {
+  display: inline;
+  font-family: Lato-Light;
+}
+.market_status_display {
+  text-align: end;
+  margin-block-start: 10px;
+  font-family: Lato-Regular;
+}
+
+.market_status__icon {
+  width: 20px;
+  display: inline-block;
+  padding: 0 5px;
+}
 @media (max-width: 500px) {
   .header {
     grid-template-areas:

@@ -2,6 +2,7 @@ import React, { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Loading from "./loading";
 import { addSymbolAction } from "../store/actions";
+import "../assets/styles/TopPeers.css";
 
 const TopPeers = () => {
   const peers = useSelector(state => state.topPeers);
@@ -14,7 +15,7 @@ const TopPeers = () => {
 
   const handleClick = data => () => {
     addSymbol(data);
-  }
+  };
 
   return (
     <div className="top_peers">
@@ -26,7 +27,9 @@ const TopPeers = () => {
       ) : (
         <ul>
           {peers.map((data, index) => (
-            <li onClick={handleClick(data)} key={index}>{data}</li>
+            <li onClick={handleClick(data)} key={index}>
+              {data}
+            </li>
           ))}
         </ul>
       )}
