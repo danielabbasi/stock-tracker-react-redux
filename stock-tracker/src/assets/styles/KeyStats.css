@@ -1,0 +1,40 @@
+.keystats__grid {
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-areas: "keystatsDisplay1 keystatsDisplay2";
+}
+.keystats__grid__display1 {
+  grid-area: keystatsDisplay1;
+  margin-right: 1em;
+  border-spacing: 0;
+}
+.keystats__grid__display2 {
+  grid-area: keystatsDisplay2;
+  margin-left: 1em;
+  border-spacing: 0;
+}
+@media (max-width: 1000px) {
+  .keystats__grid {
+    grid-template-areas:
+      "keystatsDisplay1"
+      "keystatsDisplay2";
+  }
+  .keystats__grid__display1,
+  .keystats__grid__display2 {
+    margin: 0;
+  }
+}
+
+.keystats__grid__display1__name {
+  color: var(--label);
+  border-bottom: solid 1px #54606d;
+  padding: 16px 0;
+  font-family: Lato-Light;
+  font-size: 14px;
+}
+.keystats__grid__display1__value {
+  text-align: end;
+  border-bottom: solid 1px #54606d;
+  padding: 0;
+  font-size: var(--text-font-size);
+}

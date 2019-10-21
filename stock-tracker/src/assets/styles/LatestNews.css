@@ -1,0 +1,21 @@
+.news_headline {
+  font-size: var(--text-font-size);
+  margin: 10px 0 0;
+}
+.news_time,
+.news_source {
+  display: inline;
+  color: var(--label);
+  font-size: 14px;
+  font-family: Lato-Light;
+  margin-right: 5px;
+}
+.news {
+  flex: 1 1 auto;
+}
+.latest_news__content {
+  overflow-y: auto;
+  font-size: var(--text-font-size);
+  display: flex;
+  flex-direction: column;
+}

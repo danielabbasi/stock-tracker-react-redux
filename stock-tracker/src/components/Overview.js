@@ -2,6 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import Loading from "./loading";
 import TopPeers from "./TopPeers";
+import "../assets/styles/Overview.css";
 
 const Overview = () => {
   const overview = useSelector(state => state.companyOverview);

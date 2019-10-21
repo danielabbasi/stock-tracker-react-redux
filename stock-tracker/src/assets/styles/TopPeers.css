@@ -1,0 +1,13 @@
+.top_peers ul {
+  list-style: none;
+  padding: 0;
+}
+.top_peers ul li {
+  display: inline;
+  padding: 0 7px 0 0;
+  font-size: var(--text-font-size);
+}
+.top_peers ul li:hover {
+  color: var(--text-hover);
+  cursor: pointer;
+}

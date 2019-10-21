@@ -13,6 +13,7 @@ import {
 } from "recharts";
 import { addChartTimeAction } from "../store/actions";
 import Loading from "./loading";
+import "../assets/styles/chart.css";
 
 const Chart = () => {
   const dispatch = useDispatch();
