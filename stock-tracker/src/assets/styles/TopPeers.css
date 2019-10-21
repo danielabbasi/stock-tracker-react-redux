@@ -6,6 +6,7 @@
   display: inline;
   padding: 0 7px 0 0;
   font-size: var(--text-font-size);
+  color: var(--label);
 }
 .top_peers ul li:hover {
   color: var(--text-hover);
