@@ -27,14 +27,14 @@
 
 .keystats__grid__display1__name {
   color: var(--label);
-  border-bottom: solid 1px #54606d;
+  border-bottom: solid 1px rgba(84, 96, 109, 0.5);
   padding: 16px 0;
   font-family: Lato-Light;
   font-size: 14px;
 }
 .keystats__grid__display1__value {
   text-align: end;
-  border-bottom: solid 1px #54606d;
+  border-bottom: solid 1px rgba(84, 96, 109, 0.5);
   padding: 0;
   font-size: var(--text-font-size);
 }
