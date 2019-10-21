@@ -32,8 +32,8 @@ const Search = () => {
     setSymbol(e.target.value);
     addSearchInput(e.target.value);
   };
-  const onClick = e => {
-    addSymbol(e.target.id);
+  const onClick = data => {
+    addSymbol(data.symbol);
     setOpen(false);
     setSymbol("");
   };
@@ -56,15 +56,14 @@ const Search = () => {
     suggestions.length > 0
       ? suggestions.map(data => {
           return (
-            <li
+            <tr
               className="search_display__suggestion_list__item"
-              onClick={onClick}
-              id={data.symbol}
+              onClick={() => onClick(data)} // have to use function to bind data
               key={data.symbol}
             >
-              <p className="search_display__suggestion_list__item__symbol">{`(${data.symbol}) `}</p>
-              {` ${data.name}`}
-            </li>
+              <td className="search_display__suggestion_list__item__symbol">{`${data.symbol} `}</td>
+              <td>{`${data.name}`}</td>
+            </tr>
           );
         })
       : "";
@@ -85,14 +84,14 @@ const Search = () => {
         onBlur={handleBlur}
         ref={searchRef}
       />
-      <ul
+      <table
         ref={dropdownRef}
         tabIndex="-1"
         className="search_display__suggestion_list"
         style={{ display: open ? "block" : "none" }}
       >
-        {suggestionItems}
-      </ul>
+        <tbody>{suggestionItems}</tbody>
+      </table>
     </div>
   );
 };

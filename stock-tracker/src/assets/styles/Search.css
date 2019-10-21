@@ -1,6 +1,5 @@
 .search_display {
   border-bottom: 2px solid var(--grid-header);
-  /* position: relative;  */
 }
 .search_display__icon {
   color: var(--highlight-1);
