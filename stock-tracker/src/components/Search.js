@@ -50,8 +50,8 @@ const Search = () => {
     });
   };
   useEffect(() => {
-    setOpen(suggestions !== 0);
-  }, [suggestions]);
+    setOpen(symbol !== "" && suggestions.length !== 0);
+  }, [suggestions, symbol]);
   const suggestionItems =
     suggestions.length > 0
       ? suggestions.map(data => {
