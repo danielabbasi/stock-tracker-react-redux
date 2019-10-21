@@ -1,5 +1,6 @@
 .header {
   display: grid;
+  position: relative;
   grid-template-columns: 2fr 1.5fr;
   grid-template-areas:
     "header__logo header__btns"
