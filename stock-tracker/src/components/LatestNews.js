@@ -11,7 +11,9 @@ const LatestNews = () => {
     <div className="news" key={index}>
       <p className={index === 0 ? "first_news news_headline" : "news_headline"}>
         {" "}
-        <a href={news.url}>{news.headline}</a>
+        <a rel="noopener noreferrer" href={news.url} target="_blank">
+          {news.headline}
+        </a>
       </p>
       <p className="news_time">{moment(news.datetime).fromNow()}</p>
       <p className="news_source">- {news.source}</p>
