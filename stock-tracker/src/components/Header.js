@@ -64,7 +64,7 @@ const Header = () => {
             className="price_display__arrow_icon"
             type={response.change < 0 ? "arrow-down" : "arrow-up"}
           />
-          {changeNo} <span className="header__price_display__separator">|</span>
+          {changeNo} <span className="separator">|</span>
         </h4>
         <h4
           className={

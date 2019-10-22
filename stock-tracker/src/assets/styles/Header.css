@@ -62,9 +62,6 @@
   top: -11px;
   position: relative;
 }
-.header__price_display__separator {
-  opacity: 0.5;
-}
 .price_display {
   text-align: end;
   font-family: Lato-Light;
@@ -80,7 +77,7 @@
 }
 .price_display--increase {
   color: var(--good);
-  
+
   margin: 0 10px 0 0 !important;
 }
 .price_display--decrease {
@@ -164,7 +161,6 @@
   .search_display__icon {
     font-size: 35px;
     padding: 0 7px 0 0;
-
   }
   input::placeholder {
     font-size: 30px;
