@@ -77,11 +77,13 @@
 }
 .price_display--increase {
   color: var(--good);
-
-  margin: 0 10px 0 0 !important;
+  margin: 0 2px 0 0 !important;
+  position: relative;
 }
 .price_display--decrease {
   color: var(--bad);
+  margin: 0 2px 0 0 !important;
+  position: relative;
 }
 .currency_display {
   margin-block-start: 10px;

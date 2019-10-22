@@ -52,13 +52,17 @@ const KeyStats = () => {
               <tr>
                 <td className="keystats__grid__display1__name">Volume</td>
                 <td className="keystats__grid__display1__value">
-                  {numberWithCommas(response.previousVolume)}
+                  {response.previousVolume
+                    ? numberWithCommas(response.previousVolume)
+                    : "N/A"}
                 </td>
               </tr>
               <tr>
                 <td className="keystats__grid__display1__name">Market Cap</td>
                 <td className="keystats__grid__display1__value">
-                  {numberWithCommas(response.marketCap)}
+                  {response.previousVolume
+                    ? numberWithCommas(response.marketCap)
+                    : "N/A"}
                 </td>
               </tr>
               <tr>
@@ -96,7 +100,9 @@ const KeyStats = () => {
                   Total Avg Volume
                 </td>
                 <td className="keystats__grid__display1__value">
-                  {numberWithCommas(response.avgTotalVolume)}
+                  {response.avgTotalVolume
+                    ? numberWithCommas(response.avgTotalVolume)
+                    : "N/A"}
                 </td>
               </tr>
               <tr>
@@ -104,7 +110,7 @@ const KeyStats = () => {
                   Earning Per Share
                 </td>
                 <td className="keystats__grid__display1__value">
-                  {earningsPShare}
+                  {earningsPShare ? earningsPShare : "N/A"}
                 </td>
               </tr>
               <tr>
