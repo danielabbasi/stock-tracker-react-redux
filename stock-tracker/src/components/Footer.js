@@ -14,7 +14,7 @@ const Footer = () => {
             <sup>
               <Icon className="arrow" type="arrow-up"></Icon>
             </sup>
-            72.89 | 1.08<sup>%</sup>
+            72.89 <span className="separator">|</span> 1.08<sup>%</sup>
           </span>
           <span className="footer__heading">DJIA </span>
           <sup>$</sup>23,026.35
@@ -22,7 +22,7 @@ const Footer = () => {
             <sup>
               <Icon className="arrow" type="arrow-up"></Icon>
             </sup>
-            168.89 | 0.7<sup>%</sup>
+            168.89 <span className="separator">|</span> 0.7<sup>%</sup>
           </span>
           <span className="footer__heading">S&P </span>
           <sup>$</sup>2,605.35
@@ -30,7 +30,7 @@ const Footer = () => {
             <sup>
               <Icon className="arrow" type="arrow-up"></Icon>
             </sup>
-            23.35 | 0.94<sup>%</sup>
+            23.35 <span className="separator">|</span> 0.94<sup>%</sup>
           </span>
         </p>
       </div>
@@ -43,7 +43,7 @@ const Footer = () => {
             <sup>
               <Icon className="arrow" type="arrow-up"></Icon>
             </sup>
-            1.91 | 2.25<sup>%</sup>
+            1.91 <span className="separator">|</span> 2.25<sup>%</sup>
           </span>
           <span className="footer__heading">AAPL </span>
           <sup>$</sup>160.03
@@ -51,7 +51,7 @@ const Footer = () => {
             <sup>
               <Icon className="arrow" type="arrow-down"></Icon>
             </sup>
-            2.94 | 1.88<sup>%</sup>
+            2.94 <span className="separator">|</span> 1.88<sup>%</sup>
           </span>
           <span className="footer__heading">GOOG </span>
           <sup>$</sup>1,017.49
@@ -59,7 +59,7 @@ const Footer = () => {
             <sup>
               <Icon className="arrow" type="arrow-up"></Icon>
             </sup>
-            15.97 | 1.59<sup>%</sup>
+            15.97 <span className="separator">|</span> 1.59<sup>%</sup>
           </span>
         </p>
       </div>
