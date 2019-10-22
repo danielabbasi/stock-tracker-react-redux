@@ -50,7 +50,7 @@ const Search = () => {
       }
     });
   };
-  const labelSymbol = response ? `(${response.symbol})` : ""
+  const labelSymbol = response ? ` (${response.symbol})` : "";
   useEffect(() => {
     setOpen(symbol !== "" && suggestions.length !== 0);
   }, [suggestions, symbol]);
@@ -73,19 +73,28 @@ const Search = () => {
   return (
     <div className="search_display">
       <div className="search_display__search_bar__wrapper">
-      <h5>
-        <Icon className="search_display__icon" type="search" />
-      </h5>
-      <input
-        id="search_display__search_bar"
-        type="text"
-        value={symbol}
-        onChange={onChange}
-        onKeyPress={handleSubmit}
-        onBlur={handleBlur}
-        ref={searchRef}
-      />
-      <label className="search_display__search_bar__label" for="search_display__search_bar"> {response.companyName}<span className="search_display__search_bar__label__symbol">{labelSymbol}</span></label>
+        <h5>
+          <Icon className="search_display__icon" type="search" />
+        </h5>
+        <input
+          id="search_display__search_bar"
+          type="text"
+          value={symbol}
+          onChange={onChange}
+          onKeyPress={handleSubmit}
+          onBlur={handleBlur}
+          ref={searchRef}
+        />
+        <label
+          className="search_display__search_bar__label"
+          for="search_display__search_bar"
+        >
+          {" "}
+          {response.companyName}
+          <span className="search_display__search_bar__label__symbol">
+            {labelSymbol}
+          </span>
+        </label>
       </div>
       <table
         ref={dropdownRef}
