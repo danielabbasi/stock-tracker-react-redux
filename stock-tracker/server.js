@@ -144,10 +144,18 @@ const getChartDataAndEmit = async (socket, stockSymbol, chartTime) => {
     const chartData = await axios.get(
       `${HOST}/stable/stock/${stockSymbol}/chart/${chartTime}?token=${TOKEN}`
     );
-    const chart = chartData.data.map(data => ({
-      close: data.close,
-      date: data.date
-    }));
+    let chart;
+    if (chartTime === "1D") {
+      chart = chartData.data.map(data => ({
+        close: data.close,
+        date: data.label
+      }));
+    } else {
+      chart = chartData.data.map(data => ({
+        close: data.close,
+        date: data.date
+      }));
+    }
     socket.emit("ChartData", chart);
   } catch (error) {
     socket.emit("ChartDataError", error);

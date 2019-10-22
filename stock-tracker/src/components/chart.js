@@ -14,6 +14,7 @@ import {
 import { addChartTimeAction } from "../store/actions";
 import Loading from "./loading";
 import "../assets/styles/chart.css";
+const moment = require("moment");
 
 const Chart = () => {
   const dispatch = useDispatch();
@@ -29,6 +30,24 @@ const Chart = () => {
       ? chartData[chartData.length - 1].close
       : "";
   const error = useSelector(state => state.error.chartData);
+  const formatDate = tickItem => {
+    switch (current) {
+      case "1D":
+        return tickItem;
+      case "5D":
+        return moment(tickItem).format("dddd");
+      case "1M":
+        return moment(tickItem).format("MMM Do");
+      case "1Y":
+        return moment(tickItem).format("MMM Do");
+      case "5Y":
+        return moment(tickItem).format("MMM DD, YYYY");
+      case "MAX":
+        return moment(tickItem).format("MMM DD, YYYY");
+      default:
+        return tickItem;
+    }
+  };
   return (
     <div className="chart">
       {error ? (
@@ -117,7 +136,11 @@ const Chart = () => {
                   <stop offset="95%" stopColor="#73b3ef" stopOpacity={0} />
                 </linearGradient>
               </defs>
-              <XAxis dataKey="date" />
+              <XAxis
+                interval="preserveStart"
+                tickFormatter={formatDate}
+                dataKey="date"
+              />
               <YAxis orientation="right" />
               <ReferenceLine
                 y={latestValue}
