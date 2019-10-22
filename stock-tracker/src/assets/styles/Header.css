@@ -80,6 +80,8 @@
 }
 .price_display--increase {
   color: var(--good);
+  
+  margin: 0 10px 0 0 !important;
 }
 .price_display--decrease {
   color: var(--bad);
@@ -98,12 +100,13 @@
 }
 .market_status_display__real_time {
   font-size: 14px;
-  color: var(--label);
+  color: var(--text-white);
+  font-family: Lato-Light;
   display: inline;
 }
 .market_status_display__real_time__status {
   display: inline;
-  font-family: Lato-Light;
+  font-family: Lato-Regular;
 }
 .market_status_display {
   text-align: end;
@@ -112,7 +115,7 @@
 }
 
 .market_status__icon {
-  width: 20px;
+  height: 0.7em;
   display: inline-block;
   padding: 0 5px;
 }
@@ -160,6 +163,8 @@
   }
   .search_display__icon {
     font-size: 35px;
+    padding: 0 7px 0 0;
+
   }
   input::placeholder {
     font-size: 30px;
