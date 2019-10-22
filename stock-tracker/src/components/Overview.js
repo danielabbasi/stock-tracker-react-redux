@@ -27,12 +27,14 @@ const Overview = () => {
         <Loading />
       ) : (
         <>
-          <h2 className={overview ? "overviewCompany" : "hidden"}>
+          <h2 className={overview ? "overview__company" : "hidden"}>
             {overview.companyName} ({overview.symbol})
           </h2>
           <p>
             {" "}
-            <a href={overview.website}>{website}</a>
+            <a className="overview__web" href={overview.website}>
+              {website}
+            </a>
           </p>
           <p className="overview__text">{description}</p>
           <TopPeers />

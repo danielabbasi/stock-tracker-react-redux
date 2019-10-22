@@ -47,50 +47,60 @@ const Header = () => {
         <button className="header__btns__btn">MARKETS</button>
         <button className="header__btns__btn">WATCHLIST</button>
       </div>
-        <Search />
-        <div className="price_display">
-          <p className="price_display__small_icon">{response ? "$" : ""}</p>
-          <h4>{response.latestPrice}</h4>
-          <h4
-            className={
-              response
-                ? response.change < 0
-                  ? "price_display--decrease"
-                  : "price_display--increase"
-                : "hidden"
-            }
-          >
-            <Icon
-              className="price_display__arrow_icon"
-              type={response.change < 0 ? "arrow-down" : "arrow-up"}
-            />
-            {changeNo} |
-          </h4>
-          <h4
-            className={
-              response
-                ? response.changePercent < 0
-                  ? "price_display--decrease"
-                  : "price_display--increase"
-                : "hidden"
-            }
-          >
-            {changePercentNo}
-          </h4>
-          <p
-            className={
-              response.changePercent < 0
-                ? "price_display__small_icon price_display--decrease"
-                : "price_display__small_icon price_display--increase"
-            }
-          >
-            {response ? "%" : ""}
-          </p>
-        </div>
+      <Search />
+      <div className="price_display">
+        <p className="price_display__small_icon">{response ? "$" : ""}</p>
+        <h4>{response.latestPrice}</h4>
+        <h4
+          className={
+            response
+              ? response.change < 0
+                ? "price_display--decrease"
+                : "price_display--increase"
+              : "hidden"
+          }
+        >
+          <Icon
+            className="price_display__arrow_icon"
+            type={response.change < 0 ? "arrow-down" : "arrow-up"}
+          />
+          {changeNo} <span className="separator">|</span>
+        </h4>
+        <h4
+          className={
+            response
+              ? response.changePercent < 0
+                ? "price_display--decrease"
+                : "price_display--increase"
+              : "hidden"
+          }
+        >
+          {changePercentNo}
+        </h4>
+        <p
+          className={
+            response.changePercent < 0
+              ? "price_display__small_icon price_display--decrease"
+              : "price_display__small_icon price_display--increase"
+          }
+        >
+          {response ? "%" : ""}
+        </p>
+      </div>
       <div className={response ? "currency_display" : "hidden"}>
-        <p className="currency_display__item currency_display__item__exchange">{overview.exchange}</p>
-        <p className="currency_display__item currency_display__item__industry">{overview.industry}</p>
-        <p className={response.currency ? "currency_display__item currency_display__item__currency" : "hidden"}>
+        <p className="currency_display__item currency_display__item__exchange">
+          {overview.exchange}
+        </p>
+        <p className="currency_display__item currency_display__item__industry">
+          {overview.industry}
+        </p>
+        <p
+          className={
+            response.currency
+              ? "currency_display__item currency_display__item__currency"
+              : "hidden"
+          }
+        >
           {response.currency}
         </p>
       </div>

@@ -80,11 +80,12 @@ server.listen(port, () => console.info(`server is listening on port: ${port}`));
 const getCompaniesFromAPI = async socket => {
   try {
     const res = await axios.get(
-      "https://api.iextrading.com/1.0/ref-data/symbols"
+      `${HOST}/stable/ref-data/symbols?token=${TOKEN}`
     );
     const companies = res.data.map(data => ({
       name: data.name,
-      symbol: data.symbol
+      symbol: data.symbol,
+      exchange: data.exchange
     }));
     socket.emit("companies", companies);
     return companies;
@@ -248,7 +249,11 @@ const getStockDataAndEmit = async (socket, stockSymbol) => {
 const getSearchInputAndFilter = async (socket, searchInput, stockCompanies) => {
   try {
     const companies = await stockCompanies;
-    const c = companies.map(data => ({ symbol: data.symbol, name: data.name }));
+    const c = companies.map(data => ({
+      symbol: data.symbol,
+      name: data.name,
+      exchange: data.exchange
+    }));
     let suggestions = c
       .filter(
         company =>

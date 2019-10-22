@@ -1,5 +1,6 @@
 .header {
   display: grid;
+  position: relative;
   grid-template-columns: 2fr 1.5fr;
   grid-template-areas:
     "header__logo header__btns"
@@ -35,7 +36,7 @@
   background-color: inherit;
   font-size: 18px;
   font-family: Lato-Light;
-  margin: 0;
+  margin: 0px 13px 0px 0px;
   padding: 2px 10px;
   border-radius: 10%;
 }
@@ -54,11 +55,12 @@
 .price_display__small_icon {
   font-size: 20px;
   vertical-align: top;
-  margin: 10px -5px 0;
+  margin: 6px -8px 0;
 }
 .price_display__arrow_icon {
   font-size: 20px;
-  top: -8px;
+  top: -11px;
+  position: relative;
 }
 .price_display {
   text-align: end;
@@ -75,9 +77,13 @@
 }
 .price_display--increase {
   color: var(--good);
+  margin: 0 2px 0 0 !important;
+  position: relative;
 }
 .price_display--decrease {
   color: var(--bad);
+  margin: 0 2px 0 0 !important;
+  position: relative;
 }
 .currency_display {
   margin-block-start: 10px;
@@ -93,12 +99,13 @@
 }
 .market_status_display__real_time {
   font-size: 14px;
-  color: var(--label);
+  color: var(--text-white);
+  font-family: Lato-Light;
   display: inline;
 }
 .market_status_display__real_time__status {
   display: inline;
-  font-family: Lato-Light;
+  font-family: Lato-Regular;
 }
 .market_status_display {
   text-align: end;
@@ -107,17 +114,38 @@
 }
 
 .market_status__icon {
-  width: 20px;
+  height: 0.7em;
   display: inline-block;
   padding: 0 5px;
 }
-@media (max-width: 500px) {
+@media(max-width: 768px){
   .header {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-areas:
-      "header__logo header__btns"
-      "search_display search_display"
-      ". currency_display"
-      "price_display price_display";
+      "header__logo header__btns header__btns header__btns"
+      "search_display search_display price_display price_display"
+      "currency_display currency_display currency_display market_status_display";
+  }
+  .market_status_display__real_time{
+    display: none
+  }
+  .price_display{
+    /* text-align: start; */
+  }
+  .price_display h4 {
+    font-size: 35px;
+  }
+  .currency_display__item{
+    margin: 6px;
+  }
+}
+@media (max-width: 588px) {
+  .header {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      "header__logo . "
+      "search_display price_display"
+      "currency_display market_status_display";
   }
   .footer,
   .header__btns,
@@ -126,13 +154,16 @@
   .currency_display__item__currency {
     display: none;
   }
-  .price_display {
+  .price_display{
+    position: absolute;
+    right: 0;
     border: none;
-    text-align: start;
-    margin-top: 16px;
+    top: 11px;
+    vertical-align: middle;
+
   }
-  .price_display h4 {
-    font-size: 35px;
+  .price_display h4{
+    font-size: 30px;
   }
   .price_display__small_icon {
     margin: 5px -5px 0;
@@ -145,21 +176,8 @@
   .search_display {
     grid-column: 1/-1;
   }
-  .currency_display__item__exchange {
-    float: right;
-    margin-right: 20px;
-  }
   .responsive_chart {
-    min-height: 200px;
+    min-width: 200px;
     max-height: 200px;
-  }
-  .search_display__icon {
-    font-size: 35px;
-  }
-  input::placeholder {
-    font-size: 30px;
-  }
-  input {
-    font-size: 30px;
   }
 }
