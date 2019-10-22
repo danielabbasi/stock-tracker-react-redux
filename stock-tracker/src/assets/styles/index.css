@@ -86,17 +86,7 @@ a:hover {
   text-decoration: none;
 }
 
-input {
-  background: inherit;
-  font-size: 40px;
-  font-family: Lato-Light;
-  font-weight: 300;
-  color: white;
-  margin-left: 5%;
-  border: none;
-  height: 100%;
-  width: 90%;
-}
+
 
 h5 {
   display: inline;

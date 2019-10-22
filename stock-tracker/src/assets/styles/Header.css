@@ -161,15 +161,4 @@
     min-height: 200px;
     max-height: 200px;
   }
-  .search_display__icon {
-    font-size: 35px;
-    padding: 0 7px 0 0;
-
-  }
-  input::placeholder {
-    font-size: 30px;
-  }
-  input {
-    font-size: 30px;
-  }
 }
