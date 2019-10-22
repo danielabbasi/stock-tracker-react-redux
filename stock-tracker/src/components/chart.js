@@ -41,7 +41,7 @@ const Chart = () => {
       case "1Y":
         return moment(tickItem).format("MMM Do");
       case "5Y":
-        return moment(tickItem).format("MMM DD, YYYY");
+        return moment(tickItem).format("MMM, YYYY");
       case "MAX":
         return moment(tickItem).format("MMM DD, YYYY");
       default:
@@ -148,10 +148,10 @@ const Chart = () => {
                 label={{
                   position: "right",
                   value: latestValue,
-                  fill: "orange",
+                  fill: "var(--bad)",
                   fontSize: 14
                 }}
-                stroke="orange"
+                stroke="var(--bad)"
                 strokeDasharray="3 3"
               />
               <Label value={latestValue} stroke="black" position="right" />
