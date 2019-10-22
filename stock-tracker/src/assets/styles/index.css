@@ -86,14 +86,6 @@ a:hover {
   text-decoration: none;
 }
 
-
-
-h5 {
-  display: inline;
-  color: var(--heading-color);
-  font-size: 1.7vw;
-}
-
 .hidden {
   display: none !important;
 }
