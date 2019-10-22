@@ -50,7 +50,11 @@ h5 {
 }
 
 .search_display__search_bar__label{
-
+  display: inline-block;
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
   position: absolute;
   left: 30px;
   font-weight: 300;
@@ -80,4 +84,9 @@ input {
 
 input[type="text"]:focus +label{
   opacity:0
+}
+@media(max-width: 768px){
+  .search_display__search_bar__label__symbol{
+    display: none;
+  }
 }

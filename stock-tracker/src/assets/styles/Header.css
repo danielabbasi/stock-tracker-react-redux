@@ -118,13 +118,34 @@
   display: inline-block;
   padding: 0 5px;
 }
-@media (max-width: 500px) {
+@media(max-width: 768px){
   .header {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-areas:
-      "header__logo header__btns"
-      "search_display search_display"
-      ". currency_display"
-      "price_display price_display";
+      "header__logo header__btns header__btns header__btns"
+      "search_display search_display price_display price_display"
+      "currency_display currency_display currency_display market_status_display";
+  }
+  .market_status_display__real_time{
+    display: none
+  }
+  .price_display{
+    /* text-align: start; */
+  }
+  .price_display h4 {
+    font-size: 35px;
+  }
+  .currency_display__item{
+    margin: 6px;
+  }
+}
+@media (max-width: 588px) {
+  .header {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      "header__logo . "
+      "search_display price_display"
+      "currency_display market_status_display";
   }
   .footer,
   .header__btns,
@@ -133,13 +154,16 @@
   .currency_display__item__currency {
     display: none;
   }
-  .price_display {
+  .price_display{
+    position: absolute;
+    right: 0;
     border: none;
-    text-align: start;
-    margin-top: 16px;
+    top: 11px;
+    vertical-align: middle;
+
   }
-  .price_display h4 {
-    font-size: 35px;
+  .price_display h4{
+    font-size: 30px;
   }
   .price_display__small_icon {
     margin: 5px -5px 0;
@@ -152,12 +176,8 @@
   .search_display {
     grid-column: 1/-1;
   }
-  .currency_display__item__exchange {
-    float: right;
-    margin-right: 20px;
-  }
   .responsive_chart {
-    min-height: 200px;
+    min-width: 200px;
     max-height: 200px;
   }
 }

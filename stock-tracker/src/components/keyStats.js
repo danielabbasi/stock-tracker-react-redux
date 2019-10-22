@@ -60,7 +60,7 @@ const KeyStats = () => {
               <tr>
                 <td className="keystats__grid__display1__name">Market Cap</td>
                 <td className="keystats__grid__display1__value">
-                  {response.previousVolume
+                  {response.marketCap
                     ? numberWithCommas(response.marketCap)
                     : "N/A"}
                 </td>
@@ -118,8 +118,7 @@ const KeyStats = () => {
                   Dividend & Yield
                 </td>
                 <td className="keystats__grid__display1__value">
-                  {response.ytdChange !== undefined &&
-                  response.ytdChange !== "N/A"
+                  {response.ytdChange
                     ? Math.abs(response.ytdChange.toFixed(2)) + "%"
                     : "N/A"}
                 </td>

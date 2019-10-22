@@ -47,7 +47,7 @@
   font-size: 12px;
 }
 .footer__heading {
-  font-weight: bold;
+  font-family: Lato-Bold;
   padding: 0 8px;
 }
 .first_symbol{
@@ -68,15 +68,6 @@ sup .arrow{
   padding: 0 10px;
   margin: 8px;
 }
-/* .footer__mobile {
-  background-image: linear-gradient(
-    to right,
-    var(--marine-blue),
-    var(--primary-5)
-  );
-  flex: 0 0 auto;
-  text-align: right;
-} */
 .footer__logo {
   width: 90px;
   padding-right: 20px;
@@ -95,11 +86,11 @@ sup .arrow{
   .footer{
     display: block
   }
-  .usMarket{
+  .favorites{
     display: none;
   }
 }
-@media (max-width: 500px) {
+@media (max-width: 588px) {
   .footer {
     display: none;
   }

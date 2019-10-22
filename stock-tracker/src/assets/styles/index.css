@@ -106,61 +106,6 @@ h1 {
 .separator {
   opacity: 0.5;
 }
-
-/* @media (max-width: 1024px) {
-  .footer {
-    bottom: 0 !important;
-    position: sticky;
-    margin: 0 -10px -10px -10px;
-  }
-}
-@media (max-width: 768px) {
-  .price_display h4 {
-    margin: 0 7px;
-    font-size: 16px;
-  }
-  .market_status_display__real_time {
-    font-size: 8px;
-  }
-  .keystats {
-    margin-right: 0px !important;
-  }
-} */
-/* @media (max-width: 425px) {
-  h5 {
-    font-size: 5vw;
-  }
-  .search_display__search_bar {
-    width: 93%;
-    height: 36px;
-    border-radius: 10px;
-    background-color: rgba(255, 255, 255, 0.12);
-  }
-  .footer,
-  .currency_display__item__industry,
-  .currency_display__item__currency {
-    display: none;
-  }
-  .currency_display {
-    text-align: end;
-  }
-  .price_display__arrow_icon {
-    font-size: 15px;
-    top: -10px;
-  }
-  .price_display__small_icon {
-    font-size: 15px;
-    margin: 7px -5px 0;
-  }
-  ::placeholder {
-    font-weight: 300;
-    font-size: 30px;
-    padding-left: 10px;
-  }
-  .price_display h4 {
-    font-size: 35px;
-  }
-} */
 ::-webkit-scrollbar {
   width: 10px;
   background-color: var(--primary-1);
@@ -173,4 +118,19 @@ h1 {
 .error__message {
   color: #e95656;
   margin: 10% 0 0 3%;
+}
+
+@media(max-width: 768px){
+  .wrapper{
+    padding: 0 40px !important;
+  }
+  .keystats{
+    margin: 0 !important;
+  }
+}
+@media(max-width: 588px){
+  .wrapper{
+    padding: 0 7px !important;
+  }
+
 }
