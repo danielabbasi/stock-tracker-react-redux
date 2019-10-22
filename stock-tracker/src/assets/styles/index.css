@@ -107,12 +107,7 @@ h1 {
   opacity: 0.5;
 }
 
-@media (min-width: 426px) {
-  .footer__mobile {
-    display: none;
-  }
-}
-@media (max-width: 1024px) {
+/* @media (max-width: 1024px) {
   .footer {
     bottom: 0 !important;
     position: sticky;
@@ -120,9 +115,6 @@ h1 {
   }
 }
 @media (max-width: 768px) {
-  ::placeholder {
-    font-size: 16px;
-  }
   .price_display h4 {
     margin: 0 7px;
     font-size: 16px;
@@ -133,8 +125,8 @@ h1 {
   .keystats {
     margin-right: 0px !important;
   }
-}
-@media (max-width: 425px) {
+} */
+/* @media (max-width: 425px) {
   h5 {
     font-size: 5vw;
   }
@@ -168,7 +160,7 @@ h1 {
   .price_display h4 {
     font-size: 35px;
   }
-}
+} */
 ::-webkit-scrollbar {
   width: 10px;
   background-color: var(--primary-1);

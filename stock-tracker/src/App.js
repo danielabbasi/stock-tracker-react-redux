@@ -5,7 +5,6 @@ import Chart from "./components/chart";
 import LatestNews from "./components/LatestNews";
 import Overview from "./components/Overview";
 import Footer from "./components/Footer";
-import MobileFooter from "./components/mobileFooter"
 import "./assets/styles/App.css";
 import { useSelector } from "react-redux";
 
@@ -24,8 +23,7 @@ function App() {
           </>
         )}
       </div>
-      {symbol !== "" && <Footer />}
-      <MobileFooter/>
+      <Footer />
     </>
   );
 }

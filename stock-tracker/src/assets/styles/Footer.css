@@ -91,6 +91,14 @@ sup .arrow{
 .green, .red{
   padding: 0 4px;
 }
+@media(max-width: 768px){
+  .footer{
+    display: block
+  }
+  .usMarket{
+    display: none;
+  }
+}
 @media (max-width: 500px) {
   .footer {
     display: none;
