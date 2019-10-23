@@ -7,7 +7,8 @@
   );
   display: grid;
   grid-template-areas: "usMarket favorites";
-  flex: 0 0 auto;
+  padding: 4px 0 11px 0;
+  height: fit-content;
 }
 
 .footer1 {
@@ -48,8 +49,9 @@
 }
 .footer__heading {
   font-family: Lato-Bold;
-  padding: 0 8px;
+  padding: 0 5px 0 19px;
 }
+
 .first_symbol{
   padding-left: 0;
 }

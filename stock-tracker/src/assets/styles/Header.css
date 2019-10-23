@@ -30,21 +30,25 @@
   margin: 20px 0 0;
   text-align: end;
 }
+.header__btns__btn:last-child {
+  margin-right: 0;
+}
+.header__btns__btn--active{
+  border-radius: 3px;
+  background-color: var(--highlight-2) !important;
+  padding: 6px
+}
 .header__btns__btn {
-  color: white;
+  margin: 0 20px;
+  display: inline;
+  font-weight: 300;
+  color: var(--text-white);
   border: none;
   background-color: inherit;
   font-size: 18px;
   font-family: Lato-Light;
-  margin: 0px 13px 0px 0px;
-  padding: 2px 10px;
-  border-radius: 10%;
 }
 
-.quotes_btn {
-  background-color: var(--highlight-2);
-  color: var(--text-white);
-}
 .header__logo {
   width: 155px;
 }
@@ -97,10 +101,17 @@
   padding: 3px;
   font-size: 14px;
 }
-.market_status_display__real_time {
+.market_status_display__real_time {  
+  opacity: 0.8;
+  font-family: Lato-regular;
   font-size: 14px;
+  font-weight: 300;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: right;
   color: var(--text-white);
-  font-family: Lato-Light;
   display: inline;
 }
 .market_status_display__real_time__status {
@@ -118,19 +129,28 @@
   display: inline-block;
   padding: 0 5px;
 }
+@media(min-width:1010px){
+  .header {
+    grid-template-columns: 1fr 1fr 0.5fr 1fr 1fr;
+    grid-template-areas:
+      "header__logo header__btns header__btns header__btns header__btns"
+      "search_display search_display price_display price_display price_display"
+      "currency_display currency_display currency_display market_status_display market_status_display";
+  }
+}
 @media(max-width: 768px){
   .header {
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 0.5fr 1fr 1fr;
     grid-template-areas:
-      "header__logo header__btns header__btns header__btns"
-      "search_display search_display price_display price_display"
-      "currency_display currency_display currency_display market_status_display";
+      "header__logo header__btns header__btns header__btns header__btns"
+      "search_display search_display price_display price_display price_display"
+      "currency_display currency_display currency_display currency_display market_status_display";
   }
   .market_status_display__real_time{
     display: none
   }
   .price_display{
-    /* text-align: start; */
+    text-align: end;
   }
   .price_display h4 {
     font-size: 35px;
@@ -144,7 +164,7 @@
     grid-template-columns: 1fr 1fr;
     grid-template-areas:
       "header__logo . "
-      "search_display price_display"
+      "search_display price_display" 
       "currency_display market_status_display";
   }
   .footer,
@@ -160,7 +180,7 @@
     border: none;
     top: 11px;
     vertical-align: middle;
-
+    width: max-content;
   }
   .price_display h4{
     font-size: 30px;
@@ -179,5 +199,19 @@
   .responsive_chart {
     min-width: 200px;
     max-height: 200px;
+  }
+}
+@media (max-width: 522px){
+  .header {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      "header__logo . "
+      "price_display price_display"
+      "search_display search_display" 
+      "currency_display market_status_display";
+  }
+  .price_display{
+    position: absolute;
+    top: -54px
   }
 }
