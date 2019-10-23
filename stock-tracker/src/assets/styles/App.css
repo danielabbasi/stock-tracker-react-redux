@@ -74,4 +74,7 @@ body {
       "overview overview overview"
       "toppeers toppeers toppeers";
   }
+  .keystats{
+    margin: 0
+  }
 }
