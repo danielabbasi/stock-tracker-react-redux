@@ -28,7 +28,7 @@ const Header = () => {
     : "";
   const formatedTime = moment(response.latestUpdate).format("hh:mm A");
   const realTimeDisplay = response
-    ? `Real time price as of ${response.latestTime} ${formatedTime} EST`
+    ? `Real-Time price as of ${response.latestTime} ${formatedTime} EST`
     : "";
 
   const statusIcon = response
