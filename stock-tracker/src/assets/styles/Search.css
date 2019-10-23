@@ -1,16 +1,17 @@
 .search_display {
   border-bottom: 2px solid var(--grid-header);
+  margin-bottom: 8px;
 }
 .search_display__icon {
   color: var(--highlight-1);
   padding: 0 7px 0 0;
   position: absolute;
-    top: 15px;
+  top: 15px;
 }
 h5 {
   display: inline;
   color: var(--heading-color);
-  font-size: 25px
+  font-size: 25px;
 }
 
 .search_display__suggestion_list {
@@ -46,10 +47,9 @@ h5 {
   cursor: pointer;
 }
 #search_display__search_bar {
-
 }
 
-.search_display__search_bar__label{
+.search_display__search_bar__label {
   display: inline-block;
   width: 100%;
   overflow: hidden;
@@ -63,10 +63,10 @@ h5 {
   font-family: Lato-Light;
   font-weight: 300;
 }
-.search_display__search_bar__wrapper{
-position: relative;
+.search_display__search_bar__wrapper {
+  position: relative;
 }
-.search_display__search_bar__label__symbol{
+.search_display__search_bar__label__symbol {
   color: var(--label);
   opacity: 0.5;
 }
@@ -82,11 +82,11 @@ input {
   width: 90%;
 }
 
-input[type="text"]:focus +label{
-  opacity:0
+input[type="text"]:focus + label {
+  opacity: 0;
 }
-@media(max-width: 768px){
-  .search_display__search_bar__label__symbol{
+@media (max-width: 768px) {
+  .search_display__search_bar__label__symbol {
     display: none;
   }
 }
