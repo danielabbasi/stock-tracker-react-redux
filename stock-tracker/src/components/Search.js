@@ -84,6 +84,7 @@ const Search = () => {
           onKeyPress={handleSubmit}
           onBlur={handleBlur}
           ref={searchRef}
+          autoComplete="off"
         />
         <label
           className="search_display__search_bar__label"
