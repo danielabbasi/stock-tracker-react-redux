@@ -16,7 +16,7 @@ a.overview__web:hover {
 }
 .overview__text {
   font-size: var(--text-font-size);
-  height: 130px;
+  max-height: 300px;
   overflow-y: auto;
 }
 

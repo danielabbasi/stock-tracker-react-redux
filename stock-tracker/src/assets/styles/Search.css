@@ -75,15 +75,18 @@ input {
   font-size: 40px;
   font-family: Lato-Light;
   font-weight: 300;
-  color: white;
+  color: rgba(255, 255, 255, 0);
   margin-left: 25px;
   border: none;
   height: 100%;
   width: 90%;
 }
 
-input[type="text"]:focus +label{
-  opacity:0
+input[type="text"]:focus {
+  color: #ffffff;
+}
+input[type="text"]:focus + label{
+  display: none;
 }
 @media(max-width: 768px){
   .search_display__search_bar__label__symbol{
