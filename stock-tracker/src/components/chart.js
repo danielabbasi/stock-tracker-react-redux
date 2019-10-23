@@ -140,8 +140,15 @@ const Chart = () => {
                 interval="preserveStart"
                 tickFormatter={formatDate}
                 dataKey="date"
+                className="chart_axis"
+                tick={{ fill: "#ffffff" }}
+                // stroke="white"
               />
-              <YAxis orientation="right" />
+              <YAxis
+                tick={{ fill: "#ffffff" }}
+                tickFormatter={tick => tick.toFixed(2)}
+                orientation="right"
+              />
               <ReferenceLine
                 y={latestValue}
                 isFront={true}

@@ -52,15 +52,15 @@
   padding: 0 5px 0 19px;
 }
 
-.first_symbol{
+.first_symbol {
   padding-left: 0;
 }
-sup{
+sup {
   font-size: 10px;
   object-fit: contain;
   vertical-align: 30%;
 }
-sup .arrow{
+sup .arrow {
   width: 10px;
   height: 10px;
   vertical-align: -10%;
@@ -81,14 +81,15 @@ sup .arrow{
 .red {
   color: var(--bad);
 }
-.green, .red{
+.green,
+.red {
   padding: 0 4px;
 }
-@media(max-width: 768px){
-  .footer{
-    display: block
+@media (max-width: 768px) {
+  .footer {
+    display: block;
   }
-  .favorites{
+  .favorites {
     display: none;
   }
 }

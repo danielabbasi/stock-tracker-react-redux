@@ -43,7 +43,9 @@ const Header = () => {
     <div className="header">
       <img onClick={onClick} className="header__logo" alt="logo" src={logo} />
       <div className="header__btns">
-          <button className="header__btns__btn header__btns__btn--active">QUOTES</button>
+        <button className="header__btns__btn header__btns__btn--active">
+          QUOTES
+        </button>
         <button className="header__btns__btn">MARKETS</button>
         <button className="header__btns__btn">WATCHLIST</button>
       </div>

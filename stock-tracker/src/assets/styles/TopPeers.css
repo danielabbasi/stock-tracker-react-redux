@@ -3,8 +3,8 @@
   padding: 0;
 }
 .top_peers ul li {
-  display: inline;
-  padding: 0 7px 0 0;
+  display: inline-block;
+  padding: 0 19px 0 0;
   font-size: var(--text-font-size);
   color: var(--label);
 }

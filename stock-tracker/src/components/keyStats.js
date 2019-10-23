@@ -44,7 +44,7 @@ const KeyStats = () => {
                 <td className="keystats__grid__display1__value">
                   {response.high && response.low
                     ? Math.abs(response.high.toFixed(2)) +
-                      " - " +
+                      "-" +
                       Math.abs(response.low.toFixed(2))
                     : "N/A"}
                 </td>
@@ -90,7 +90,7 @@ const KeyStats = () => {
                 <td className="keystats__grid__display1__value">
                   {response.week52High && response.week52Low
                     ? Math.abs(response.week52High.toFixed(2)) +
-                      " - " +
+                      "-" +
                       Math.abs(response.week52Low.toFixed(2))
                     : "N/A"}
                 </td>

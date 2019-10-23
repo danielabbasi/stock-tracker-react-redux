@@ -33,10 +33,10 @@
 .header__btns__btn:last-child {
   margin-right: 0;
 }
-.header__btns__btn--active{
+.header__btns__btn--active {
   border-radius: 3px;
   background-color: var(--highlight-2) !important;
-  padding: 6px
+  padding: 6px;
 }
 .header__btns__btn {
   margin: 0 20px;
@@ -60,15 +60,17 @@
   font-size: 20px;
   vertical-align: top;
   margin: 6px -8px 0;
+  top: 7px;
 }
 .price_display__arrow_icon {
   font-size: 20px;
-  top: -11px;
+  top: -8px;
   position: relative;
 }
 .price_display {
   text-align: end;
   font-family: Lato-Light;
+  margin-bottom: 8px;
 }
 .price_display h4 {
   display: inline-block;
@@ -98,10 +100,12 @@
   background-color: var(--grid-header);
   border-radius: 5%;
   margin: 5px;
-  padding: 3px;
+  padding: 5px 12px;
+  text-align: center;
+  align-content: center;
   font-size: 14px;
 }
-.market_status_display__real_time {  
+.market_status_display__real_time {
   opacity: 0.8;
   font-family: Lato-regular;
   font-size: 14px;
@@ -129,7 +133,7 @@
   display: inline-block;
   padding: 0 5px;
 }
-@media(min-width:1010px){
+@media (min-width: 1010px) {
   .header {
     grid-template-columns: 1fr 1fr 0.5fr 1fr 1fr;
     grid-template-areas:
@@ -138,7 +142,7 @@
       "currency_display currency_display currency_display market_status_display market_status_display";
   }
 }
-@media(max-width: 768px){
+@media (max-width: 768px) {
   .header {
     grid-template-columns: 1fr 1fr 0.5fr 1fr 1fr;
     grid-template-areas:
@@ -146,16 +150,16 @@
       "search_display search_display price_display price_display price_display"
       "currency_display currency_display currency_display currency_display market_status_display";
   }
-  .market_status_display__real_time{
-    display: none
+  .market_status_display__real_time {
+    display: none;
   }
-  .price_display{
+  .price_display {
     text-align: end;
   }
   .price_display h4 {
     font-size: 35px;
   }
-  .currency_display__item{
+  .currency_display__item {
     margin: 6px;
   }
 }
@@ -164,7 +168,7 @@
     grid-template-columns: 1fr 1fr;
     grid-template-areas:
       "header__logo . "
-      "search_display price_display" 
+      "search_display price_display"
       "currency_display market_status_display";
   }
   .footer,
@@ -174,7 +178,7 @@
   .currency_display__item__currency {
     display: none;
   }
-  .price_display{
+  .price_display {
     position: absolute;
     right: 0;
     border: none;
@@ -182,7 +186,7 @@
     vertical-align: middle;
     width: max-content;
   }
-  .price_display h4{
+  .price_display h4 {
     font-size: 30px;
   }
   .price_display__small_icon {
@@ -201,17 +205,17 @@
     max-height: 200px;
   }
 }
-@media (max-width: 522px){
+@media (max-width: 522px) {
   .header {
     grid-template-columns: 1fr 1fr;
     grid-template-areas:
       "header__logo . "
       "price_display price_display"
-      "search_display search_display" 
+      "search_display search_display"
       "currency_display market_status_display";
   }
-  .price_display{
+  .price_display {
     position: absolute;
-    top: -54px
+    top: -54px;
   }
 }

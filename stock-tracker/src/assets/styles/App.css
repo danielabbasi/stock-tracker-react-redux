@@ -29,7 +29,7 @@ body {
 
 .keystats {
   grid-area: keystats;
-  margin: 0 38px 0 0;
+  margin: 12px 38px 0 0;
 }
 
 .header {
@@ -38,6 +38,7 @@ body {
 
 .chart {
   grid-area: chart;
+  margin: 13px 0 0 0;
 }
 
 .latestnews {
@@ -45,10 +46,12 @@ body {
   max-height: 400px;
   display: flex;
   flex-direction: column;
+  margin: 8px 0 0 0;
 }
 
 .overview {
   grid-area: overview;
+  margin: 12px 0 0 0;
 }
 
 .top_peers {
