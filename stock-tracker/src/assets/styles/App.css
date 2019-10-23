@@ -56,12 +56,6 @@ body {
   grid-area: toppeers;
   margin-top: 20px;
 }
-
-@media (max-width: 1024px) {
-  .wrapper {
-    margin: 0;
-  }
-}
 @media (max-width: 1024px) {
   .wrapper {
     grid-template-areas:
@@ -71,5 +65,9 @@ body {
       "keystats keystats keystats"
       "overview overview overview"
       "toppeers toppeers toppeers";
+    margin: 0;
+  }
+  .keystats {
+    margin: 0;
   }
 }

@@ -124,9 +124,6 @@ h1 {
   .wrapper {
     padding: 0 40px !important;
   }
-  .keystats {
-    margin: 0 !important;
-  }
 }
 @media (max-width: 588px) {
   .wrapper {
