@@ -31,7 +31,7 @@
   --primary-3: #021025;
   --marine-blue: #00265d;
   --primary-5: #00204f;
-  --highlight-2: #0068ff;
+  --highlight-2: #0066ff86;
 }
 
 #root {
@@ -120,17 +120,16 @@ h1 {
   margin: 10% 0 0 3%;
 }
 
-@media(max-width: 768px){
-  .wrapper{
+@media (max-width: 768px) {
+  .wrapper {
     padding: 0 40px !important;
   }
-  .keystats{
+  .keystats {
     margin: 0 !important;
   }
 }
-@media(max-width: 588px){
-  .wrapper{
+@media (max-width: 588px) {
+  .wrapper {
     padding: 0 7px !important;
   }
-
 }

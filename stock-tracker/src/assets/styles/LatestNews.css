@@ -16,6 +16,5 @@
 .latest_news__content {
   overflow-y: auto;
   font-size: var(--text-font-size);
-  display: flex;
-  flex-direction: column;
+  display: block;
 }

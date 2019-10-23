@@ -28,7 +28,7 @@ const Header = () => {
     : "";
   const formatedTime = moment(response.latestUpdate).format("hh:mm A");
   const realTimeDisplay = response
-    ? `Real time price as of ${response.latestTime} ${formatedTime}`
+    ? `Real time price as of ${response.latestTime} ${formatedTime} EST`
     : "";
 
   const statusIcon = response
@@ -43,7 +43,9 @@ const Header = () => {
     <div className="header">
       <img onClick={onClick} className="header__logo" alt="logo" src={logo} />
       <div className="header__btns">
-        <button className="header__btns__btn quotes_btn">QUOTES</button>
+        <button className="header__btns__btn header__btns__btn--active">
+          QUOTES
+        </button>
         <button className="header__btns__btn">MARKETS</button>
         <button className="header__btns__btn">WATCHLIST</button>
       </div>

@@ -7,7 +7,8 @@
   );
   display: grid;
   grid-template-areas: "usMarket favorites";
-  flex: 0 0 auto;
+  padding: 4px 0 11px 0;
+  height: fit-content;
 }
 
 .footer1 {
@@ -48,17 +49,18 @@
 }
 .footer__heading {
   font-family: Lato-Bold;
-  padding: 0 8px;
+  padding: 0 5px 0 19px;
 }
-.first_symbol{
+
+.first_symbol {
   padding-left: 0;
 }
-sup{
+sup {
   font-size: 10px;
   object-fit: contain;
   vertical-align: 30%;
 }
-sup .arrow{
+sup .arrow {
   width: 10px;
   height: 10px;
   vertical-align: -10%;
@@ -79,14 +81,15 @@ sup .arrow{
 .red {
   color: var(--bad);
 }
-.green, .red{
+.green,
+.red {
   padding: 0 4px;
 }
-@media(max-width: 768px){
-  .footer{
-    display: block
+@media (max-width: 768px) {
+  .footer {
+    display: block;
   }
-  .favorites{
+  .favorites {
     display: none;
   }
 }
