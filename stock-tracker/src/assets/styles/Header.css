@@ -1,11 +1,10 @@
 .header {
   display: grid;
   position: relative;
-  grid-template-columns: 2fr 1.5fr;
   grid-template-areas:
-    "header__logo header__btns"
-    "search_display price_display"
-    "currency_display market_status_display";
+    "header__logo header__btns header__btns"
+    "search_display search_display price_display"
+    "currency_display currency_display market_status_display";
 }
 .header__logo {
   grid-area: header__logo;
@@ -22,6 +21,7 @@
 }
 .search_display {
   grid-area: search_display;
+  grid-column: 2fr;
 }
 .price_display {
   grid-area: price_display;
@@ -95,15 +95,18 @@
   margin-block-start: 10px;
 }
 .currency_display__item {
-  display: inline;
+  list-style-type: none;
   color: var(--text-white);
   background-color: var(--grid-header);
   border-radius: 5%;
   margin: 5px;
   padding: 5px 12px;
-  text-align: center;
-  align-content: center;
   font-size: 14px;
+  float: left;
+}
+ul {
+  margin: 0;
+  padding: 0;
 }
 .market_status_display__real_time {
   opacity: 0.8;
@@ -133,87 +136,30 @@
   display: inline-block;
   padding: 0 5px;
 }
-@media (min-width: 1010px) {
-  .header {
-    grid-template-columns: 1fr 1fr 0.5fr 1fr 1fr;
-    grid-template-areas:
-      "header__logo header__btns header__btns header__btns header__btns"
-      "search_display search_display price_display price_display price_display"
-      "currency_display currency_display currency_display market_status_display market_status_display";
-  }
-}
-@media (max-width: 768px) {
-  .header {
-    grid-template-columns: 1fr 1fr 0.5fr 1fr 1fr;
-    grid-template-areas:
-      "header__logo header__btns header__btns header__btns header__btns"
-      "search_display search_display price_display price_display price_display"
-      "currency_display currency_display currency_display currency_display market_status_display";
-  }
-  .market_status_display__real_time {
-    display: none;
-  }
+@media (max-width: 1050px) {
   .price_display {
-    text-align: end;
-  }
-  .price_display h4 {
-    font-size: 35px;
-  }
-  .currency_display__item {
-    margin: 6px;
-  }
-}
-@media (max-width: 588px) {
-  .header {
-    grid-template-columns: 1fr 1fr;
-    grid-template-areas:
-      "header__logo . "
-      "search_display price_display"
-      "currency_display market_status_display";
-  }
-  .footer,
-  .header__btns,
-  .market_status_display{
-    display: none;
-  }
-  .price_display {
-    position: absolute;
-    right: 0;
+    grid-row: 2;
+    grid-column: 1/-1;
     border: none;
-    top: 11px;
-    vertical-align: middle;
-    width: max-content;
-  }
-  .price_display h4 {
-    font-size: 30px;
-  }
-  .price_display__small_icon {
-    margin: 5px -5px 0;
-    font-size: 15px;
-  }
-  .price_display__arrow_icon {
-    font-size: 17px;
-    margin: -15px 0px 0 0;
   }
   .search_display {
     grid-column: 1/-1;
+    grid-row: 3;
   }
-  .responsive_chart {
-    min-width: 200px;
-    max-height: 200px;
+  .currency_display {
+    grid-row: 4;
+  }
+  .market_status_display {
+    grid-row: 4;
   }
 }
-@media (max-width: 522px) {
-  .header {
-    grid-template-columns: 1fr 1fr;
-    grid-template-areas:
-      "header__logo . "
-      "price_display price_display"
-      "search_display search_display"
-      "currency_display market_status_display";
+@media (max-width: 768px) {
+  .market_status_display__real_time {
+    display: none;
   }
-  .price_display {
-    position: absolute;
-    top: -54px;
+}
+@media (max-width: 675px) {
+  .header__btns {
+    display: none;
   }
 }

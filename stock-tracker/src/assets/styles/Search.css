@@ -51,7 +51,6 @@ h5 {
 
 .search_display__search_bar__label {
   display: inline-block;
-  width: 100%;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -62,6 +61,7 @@ h5 {
   color: var(--text-white);
   font-family: Lato-Light;
   font-weight: 300;
+  width: calc(100% - 30px);
 }
 .search_display__search_bar__wrapper {
   position: relative;
@@ -85,7 +85,7 @@ input {
 input[type="text"]:focus {
   color: #ffffff;
 }
-input[type="text"]:focus + label{
+input[type="text"]:focus + label {
   display: none;
 }
 @media (max-width: 768px) {

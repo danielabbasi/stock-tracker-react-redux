@@ -11,7 +11,7 @@
   margin-right: 5px;
 }
 .news {
-  flex: 1 1 auto;
+  margin: 18px 0;
 }
 .latest_news__content {
   overflow-y: auto;

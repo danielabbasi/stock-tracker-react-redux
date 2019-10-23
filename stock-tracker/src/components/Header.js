@@ -90,21 +90,23 @@ const Header = () => {
         </p>
       </div>
       <div className={response ? "currency_display" : "hidden"}>
-        <p className="currency_display__item currency_display__item__exchange">
-          {overview.exchange}
-        </p>
-        <p className="currency_display__item currency_display__item__industry">
-          {overview.industry}
-        </p>
-        <p
-          className={
-            response.currency
-              ? "currency_display__item currency_display__item__currency"
-              : "hidden"
-          }
-        >
-          {response.currency}
-        </p>
+        <ul>
+          <li className="currency_display__item currency_display__item__exchange">
+            {overview.exchange}
+          </li>
+          <li className="currency_display__item currency_display__item__industry">
+            {overview.industry}
+          </li>
+          <li
+            className={
+              response.currency
+                ? "currency_display__item currency_display__item__currency"
+                : "hidden"
+            }
+          >
+            {response.currency}
+          </li>
+        </ul>
       </div>
       <div className="market_status_display">
         <p className="market_status_display__real_time">{realTimeDisplay}</p>
