@@ -209,9 +209,7 @@ ul {
   }
   .footer,
   .header__btns,
-  .market_status_display,
-  .currency_display__item__industry,
-  .currency_display__item__currency {
+  .market_status_display{
     display: none;
   }
   .price_display {
