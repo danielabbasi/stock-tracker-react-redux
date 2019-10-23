@@ -1,11 +1,10 @@
 .header {
   display: grid;
   position: relative;
-  grid-template-columns: 2fr 1.5fr;
   grid-template-areas:
-    "header__logo header__btns"
-    "search_display price_display"
-    "currency_display market_status_display";
+    "header__logo header__btns header__btns"
+    "search_display search_display price_display"
+    "currency_display currency_display market_status_display";
 }
 .header__logo {
   grid-area: header__logo;
@@ -22,6 +21,7 @@
 }
 .search_display {
   grid-area: search_display;
+  grid-column: 2fr;
 }
 .price_display {
   grid-area: price_display;
@@ -30,21 +30,25 @@
   margin: 20px 0 0;
   text-align: end;
 }
+.header__btns__btn:last-child {
+  margin-right: 0;
+}
+.header__btns__btn--active {
+  border-radius: 3px;
+  background-color: var(--highlight-2) !important;
+  padding: 6px;
+}
 .header__btns__btn {
-  color: white;
+  margin: 0 20px;
+  display: inline;
+  font-weight: 300;
+  color: var(--text-white);
   border: none;
   background-color: inherit;
   font-size: 18px;
   font-family: Lato-Light;
-  margin: 0px 13px 0px 0px;
-  padding: 2px 10px;
-  border-radius: 10%;
 }
 
-.quotes_btn {
-  background-color: var(--highlight-2);
-  color: var(--text-white);
-}
 .header__logo {
   width: 155px;
 }
@@ -56,15 +60,17 @@
   font-size: 20px;
   vertical-align: top;
   margin: 6px -8px 0;
+  top: 7px;
 }
 .price_display__arrow_icon {
   font-size: 20px;
-  top: -11px;
+  top: -8px;
   position: relative;
 }
 .price_display {
   text-align: end;
   font-family: Lato-Light;
+  margin-bottom: 8px;
 }
 .price_display h4 {
   display: inline-block;
@@ -89,18 +95,30 @@
   margin-block-start: 10px;
 }
 .currency_display__item {
-  display: inline;
+  list-style-type: none;
   color: var(--text-white);
   background-color: var(--grid-header);
   border-radius: 5%;
   margin: 5px;
-  padding: 3px;
+  padding: 5px 12px;
   font-size: 14px;
+  float: left;
+}
+ul {
+  margin: 0;
+  padding: 0;
 }
 .market_status_display__real_time {
+  opacity: 0.8;
+  font-family: Lato-regular;
   font-size: 14px;
+  font-weight: 300;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: right;
   color: var(--text-white);
-  font-family: Lato-Light;
   display: inline;
 }
 .market_status_display__real_time__status {
@@ -118,66 +136,30 @@
   display: inline-block;
   padding: 0 5px;
 }
-@media(max-width: 768px){
-  .header {
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-template-areas:
-      "header__logo header__btns header__btns header__btns"
-      "search_display search_display price_display price_display"
-      "currency_display currency_display currency_display market_status_display";
-  }
-  .market_status_display__real_time{
-    display: none
-  }
-  .price_display{
-    /* text-align: start; */
-  }
-  .price_display h4 {
-    font-size: 35px;
-  }
-  .currency_display__item{
-    margin: 6px;
-  }
-}
-@media (max-width: 588px) {
-  .header {
-    grid-template-columns: 1fr 1fr;
-    grid-template-areas:
-      "header__logo . "
-      "search_display price_display"
-      "currency_display market_status_display";
-  }
-  .footer,
-  .header__btns,
-  .market_status_display,
-  .currency_display__item__industry,
-  .currency_display__item__currency {
-    display: none;
-  }
-  .price_display{
-    position: absolute;
-    right: 0;
+@media (max-width: 1050px) {
+  .price_display {
+    grid-row: 2;
+    grid-column: 1/-1;
     border: none;
-    top: 11px;
-    vertical-align: middle;
-
-  }
-  .price_display h4{
-    font-size: 30px;
-  }
-  .price_display__small_icon {
-    margin: 5px -5px 0;
-    font-size: 15px;
-  }
-  .price_display__arrow_icon {
-    font-size: 17px;
-    margin: -15px 0px 0 0;
   }
   .search_display {
     grid-column: 1/-1;
+    grid-row: 3;
   }
-  .responsive_chart {
-    min-width: 200px;
-    max-height: 200px;
+  .currency_display {
+    grid-row: 4;
+  }
+  .market_status_display {
+    grid-row: 4;
+  }
+}
+@media (max-width: 768px) {
+  .market_status_display__real_time {
+    display: none;
+  }
+}
+@media (max-width: 675px) {
+  .header__btns {
+    display: none;
   }
 }

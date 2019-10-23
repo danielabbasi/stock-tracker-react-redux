@@ -14,18 +14,26 @@
 .chart__graph_btn--inactive {
   background: none;
   color: var(--label);
+  font-family: Lato-Light;
   border: none;
 }
 
 .chart__graph_btn--inactive:hover {
   color: white;
+  font-family: Lato-Light;
 }
 
 .chart__graph_btn--active {
   background: none;
   color: white;
   border: none;
+  font-family: Lato-Light;
 }
 .chart__date {
   font-size: 5px;
+}
+.recharts-cartesian-axis-tick {
+  font-size: 10px;
+  font-family: Lato-Light;
+  opacity: 0.6;
 }

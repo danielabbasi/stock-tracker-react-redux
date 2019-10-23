@@ -29,7 +29,7 @@ body {
 
 .keystats {
   grid-area: keystats;
-  margin: 0 38px 0 0;
+  margin: 12px 38px 0 0;
 }
 
 .header {
@@ -38,28 +38,23 @@ body {
 
 .chart {
   grid-area: chart;
+  margin: 13px 0 0 0;
 }
 
 .latestnews {
   grid-area: latestnews;
   max-height: 400px;
-  display: flex;
-  flex-direction: column;
+  margin: 8px 0 0 0;
 }
 
 .overview {
   grid-area: overview;
+  margin: 12px 0 0 0;
 }
 
 .top_peers {
   grid-area: toppeers;
   margin-top: 20px;
-}
-
-@media (max-width: 1024px) {
-  .wrapper {
-    margin: 0;
-  }
 }
 @media (max-width: 1024px) {
   .wrapper {
@@ -70,5 +65,12 @@ body {
       "keystats keystats keystats"
       "overview overview overview"
       "toppeers toppeers toppeers";
+    margin: 0;
+  }
+  .keystats {
+    margin: 0;
+  }
+  .keystats{
+    margin: 0
   }
 }

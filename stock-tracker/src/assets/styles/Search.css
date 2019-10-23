@@ -1,16 +1,17 @@
 .search_display {
   border-bottom: 2px solid var(--grid-header);
+  margin-bottom: 8px;
 }
 .search_display__icon {
   color: var(--highlight-1);
   padding: 0 7px 0 0;
   position: absolute;
-    top: 15px;
+  top: 15px;
 }
 h5 {
   display: inline;
   color: var(--heading-color);
-  font-size: 25px
+  font-size: 25px;
 }
 
 .search_display__suggestion_list {
@@ -46,12 +47,10 @@ h5 {
   cursor: pointer;
 }
 #search_display__search_bar {
-
 }
 
-.search_display__search_bar__label{
+.search_display__search_bar__label {
   display: inline-block;
-  width: 100%;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -62,11 +61,12 @@ h5 {
   color: var(--text-white);
   font-family: Lato-Light;
   font-weight: 300;
+  width: calc(100% - 30px);
 }
-.search_display__search_bar__wrapper{
-position: relative;
+.search_display__search_bar__wrapper {
+  position: relative;
 }
-.search_display__search_bar__label__symbol{
+.search_display__search_bar__label__symbol {
   color: var(--label);
   opacity: 0.5;
 }
@@ -75,18 +75,21 @@ input {
   font-size: 40px;
   font-family: Lato-Light;
   font-weight: 300;
-  color: white;
+  color: rgba(255, 255, 255, 0);
   margin-left: 25px;
   border: none;
   height: 100%;
   width: 90%;
 }
 
-input[type="text"]:focus +label{
-  opacity:0
+input[type="text"]:focus {
+  color: #ffffff;
 }
-@media(max-width: 768px){
-  .search_display__search_bar__label__symbol{
+input[type="text"]:focus + label {
+  display: none;
+}
+@media (max-width: 768px) {
+  .search_display__search_bar__label__symbol {
     display: none;
   }
 }

@@ -28,7 +28,7 @@ const Header = () => {
     : "";
   const formatedTime = moment(response.latestUpdate).format("hh:mm A");
   const realTimeDisplay = response
-    ? `Real time price as of ${response.latestTime} ${formatedTime}`
+    ? `Real-Time Price as of ${response.latestTime} ${formatedTime} EST`
     : "";
 
   const statusIcon = response
@@ -43,7 +43,9 @@ const Header = () => {
     <div className="header">
       <img onClick={onClick} className="header__logo" alt="logo" src={logo} />
       <div className="header__btns">
-        <button className="header__btns__btn quotes_btn">QUOTES</button>
+        <button className="header__btns__btn header__btns__btn--active">
+          QUOTES
+        </button>
         <button className="header__btns__btn">MARKETS</button>
         <button className="header__btns__btn">WATCHLIST</button>
       </div>
@@ -88,21 +90,23 @@ const Header = () => {
         </p>
       </div>
       <div className={response ? "currency_display" : "hidden"}>
-        <p className="currency_display__item currency_display__item__exchange">
-          {overview.exchange}
-        </p>
-        <p className="currency_display__item currency_display__item__industry">
-          {overview.industry}
-        </p>
-        <p
-          className={
-            response.currency
-              ? "currency_display__item currency_display__item__currency"
-              : "hidden"
-          }
-        >
-          {response.currency}
-        </p>
+        <ul>
+          <li className="currency_display__item currency_display__item__exchange">
+            {overview.exchange}
+          </li>
+          <li className="currency_display__item currency_display__item__industry">
+            {overview.industry}
+          </li>
+          <li
+            className={
+              response.currency
+                ? "currency_display__item currency_display__item__currency"
+                : "hidden"
+            }
+          >
+            {response.currency}
+          </li>
+        </ul>
       </div>
       <div className="market_status_display">
         <p className="market_status_display__real_time">{realTimeDisplay}</p>
