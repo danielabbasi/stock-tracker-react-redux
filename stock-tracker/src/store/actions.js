@@ -61,8 +61,7 @@ export const addSuggestionsAction = suggestions => ({
 
 export const initialStartupAction = () => ({ type: INITIAL_STARTUP });
 
-export const getErrorsAction = (requestName, message) => ({ 
+export const getErrorsAction = (requestName) => ({ 
   type: REQUEST_ERROR,
-  payload: {requestName, message}
+  payload: {requestName}
 })
-//message is not used
