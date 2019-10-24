@@ -8,14 +8,7 @@ const Overview = () => {
   const overview = useSelector(state => state.companyOverview);
   const loading = useSelector(state => state.loading);
   const error = useSelector(state => state.error.companyOverview);
-
-  const description =
-    overview.description === "0"
-      ? "No company description to display"
-      : overview.description;
-  const website =
-    overview.website === "0" ? "No website to display" : overview.website;
-
+  
   return (
     <div className="overview">
       <h1>COMPANY OVERVIEW</h1>
@@ -33,10 +26,10 @@ const Overview = () => {
           <p>
             {" "}
             <a className="overview__web" href={overview.website}>
-              {website}
+              {overview.website}
             </a>
           </p>
-          <p className="overview__text">{description}</p>
+          <p className="overview__text">{overview.description}</p>
           <TopPeers />
         </>
       )}
