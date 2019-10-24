@@ -10,9 +10,31 @@ import {
   ADD_SEARCH_INPUT,
   ADD_SUGGESTIONS,
   REQUEST_ERROR
-} from "./actionTypes"
+} from "./actionTypes";
 
-export default function reducer(state, action) {
+const initialState = {
+  response: false,
+  symbol: "",
+  companies: false,
+  latestNews: [],
+  chartData: [],
+  chartTime: "1Y",
+  companyOverview: false,
+  topPeers: [],
+  loading: 0,
+  searchInput: "",
+  suggestions: false,
+  error: {
+    stockData: false,
+    companies: false,
+    companyOverview: false,
+    latestNews: false,
+    chartData: false,
+    topPeers: false
+  }
+};
+
+export default function reducer(state = initialState, action) {
   switch (action.type) {
     case ADD_RESPONSE:
       return {
@@ -84,13 +106,13 @@ export default function reducer(state, action) {
         suggestions: action.payload
       };
     case REQUEST_ERROR: {
-      return ({
+      return {
         ...state,
         error: {
           ...state.error,
           [action.payload.requestName]: true
         }
-      })
+      };
     }
     default:
       return state;

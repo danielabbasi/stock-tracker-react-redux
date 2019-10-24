@@ -25,6 +25,10 @@ IO.on("connection", socket => {
     getSearchInputAndFilter(socket, searchInput, stockCompanies);
   });
   socket.on("symbol", (stockSymbol, chartTime) => {
+    if (stockSymbol === "") {
+      Object.values(intervals).forEach(clearInterval);
+      return;
+    }
     console.info("Stock Symbol Entered: " + stockSymbol);
     Object.values(intervals).forEach(clearInterval);
     intervals.stock = callNowAndInterval(
