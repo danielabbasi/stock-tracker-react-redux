@@ -15,28 +15,6 @@ import {
 const io = require("socket.io-client");
 const socket = io(`http://${window.location.hostname}:5000`);
 
-const initialState = {
-  response: false,
-  symbol: "",
-  companies: false,
-  latestNews: [],
-  chartData: [],
-  chartTime: "1Y",
-  companyOverview: false,
-  topPeers: [],
-  loading: 0,
-  searchInput: "",
-  suggestions: false,
-  error: {
-    stockData: false,
-    companies: false,
-    companyOverview: false,
-    latestNews: false,
-    chartData: false,
-    topPeers: false
-  }
-};
-
 const stockMiddleware = store => next => action => {
   const result = next(action);
   if (action.type === "ADD_SYMBOL") {
@@ -105,7 +83,7 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 export const store = createStore(
   reducer,
-  initialState,
+  undefined,
   composeEnhancers(applyMiddleware(initialStartupMiddlware, stockMiddleware))
 );
 

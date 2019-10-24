@@ -55,21 +55,20 @@ const Search = () => {
     setOpen(symbol !== "" && suggestions.length !== 0);
   }, [suggestions, symbol]);
   const suggestionItems =
-    suggestions.length > 0
-      ? suggestions.map(data => {
-          return (
-            <tr
-              className="search_display__suggestion_list__item"
-              onClick={() => onClick(data)} // have to use function to bind data
-              key={data.symbol}
-            >
-              <td className="search_display__suggestion_list__item__symbol">{`${data.symbol} `}</td>
-              <td className="search_display__suggestion_list__item__name">{`${data.name}`}</td>
-              <td className="search_display__suggestion_list__item__exchange">{`${data.exchange}`}</td>
-            </tr>
-          );
-        })
-      : "";
+    suggestions.length > 0 &&
+    suggestions.map(data => {
+      return (
+        <tr
+          className="search_display__suggestion_list__item"
+          onClick={() => onClick(data)} // have to use function to bind data
+          key={data.symbol}
+        >
+          <td className="search_display__suggestion_list__item__symbol">{`${data.symbol} `}</td>
+          <td className="search_display__suggestion_list__item__name">{`${data.name}`}</td>
+          <td className="search_display__suggestion_list__item__exchange">{`${data.exchange}`}</td>
+        </tr>
+      );
+    });
   return (
     <div className="search_display">
       <div className="search_display__search_bar__wrapper">
@@ -88,7 +87,7 @@ const Search = () => {
         />
         <label
           className="search_display__search_bar__label"
-          for="search_display__search_bar"
+          htmlFor="search_display__search_bar"
         >
           {" "}
           {response.companyName}
