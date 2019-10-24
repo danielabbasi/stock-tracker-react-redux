@@ -2,14 +2,12 @@ const express = require("express");
 const http = require("http");
 const socketIo = require("socket.io");
 const axios = require("axios");
-const port = process.env.PORT || 5000;
-const index = require("./test.js");
 const app = express();
-app.use(index);
+const port = process.env.PORT || 5000;
 const server = http.createServer(app);
-const io = socketIo(server);
-const day = 86400000;
-const halfDay = day / 2;
+const IO = socketIo(server);
+const DAY_IN_MS = 86400000;
+const HALF_DAY = DAY_IN_MS / 2;
 const HOST = "https://sandbox.iexapis.com";
 const TOKEN = "Tpk_139c39f1edae43fc8e5ab12451d30f4c";
 
@@ -19,7 +17,7 @@ function callNowAndInterval(fn, interval, ...args) {
   return setInterval(() => fn(...args), interval);
 }
 
-io.on("connection", socket => {
+IO.on("connection", socket => {
   const intervals = {};
   console.info("New client connected");
   const stockCompanies = getCompaniesFromAPI(socket);
@@ -37,26 +35,26 @@ io.on("connection", socket => {
     );
     intervals.overview = callNowAndInterval(
       getCompanyOverviewAndEmit,
-      day,
+      DAY_IN_MS,
       socket,
       stockSymbol
     );
     intervals.news = callNowAndInterval(
       getNewsDataAndEmit,
-      day,
+      DAY_IN_MS,
       socket,
       stockSymbol
     );
     intervals.chartData = callNowAndInterval(
       getChartDataAndEmit,
-      halfDay,
+      HALF_DAY,
       socket,
       stockSymbol,
       chartTime
     );
     intervals.peers = callNowAndInterval(
       getTopPeersAndEmit,
-      day,
+      DAY_IN_MS,
       socket,
       stockSymbol
     );
@@ -65,7 +63,7 @@ io.on("connection", socket => {
     clearInterval(intervals.chartData);
     intervals.chartData = callNowAndInterval(
       getChartDataAndEmit,
-      halfDay,
+      HALF_DAY,
       socket,
       stockSymbol,
       chartTime
@@ -249,19 +247,20 @@ const getStockDataAndEmit = async (socket, stockSymbol) => {
 const getSearchInputAndFilter = async (socket, searchInput, stockCompanies) => {
   try {
     const companies = await stockCompanies;
-    const c = companies.map(data => ({
+    const suggestedCompanies = companies.filter(
+      company =>
+        company.symbol.toLowerCase().indexOf(searchInput.toLowerCase()) !==
+          -1 ||
+        company.name.toLowerCase().indexOf(searchInput.toLowerCase()) !== -1
+    )
+    .slice(0, 10);
+
+    const suggestions = suggestedCompanies.map(data => ({
       symbol: data.symbol,
       name: data.name,
       exchange: data.exchange
     }));
-    let suggestions = c
-      .filter(
-        company =>
-          company.symbol.toLowerCase().indexOf(searchInput.toLowerCase()) !==
-            -1 ||
-          company.name.toLowerCase().indexOf(searchInput.toLowerCase()) !== -1
-      )
-      .slice(0, 10);
+      
     socket.emit("suggestions", suggestions);
   } catch (error) {
     console.error(`Search Error: ${error}`);
