@@ -1,11 +1,19 @@
-const axios = require("axios");;
-const HOST = require('../server')
-const TOKEN = require('../server')
+const axios = require("axios");
+const { HOST, TOKEN } = require("./constants");
 
 const getCompanyOverviewAndEmit = async (socket, stockSymbol) => {
   try {
-    const companyOverview = await axios.get(`${HOST}/stable/stock/${stockSymbol}/company?token=${TOKEN}`);
-    const { companyName, symbol, exchange, industry, website, description } = companyOverview.data;
+    const companyOverview = await axios.get(
+      `${HOST}/stable/stock/${stockSymbol}/company?token=${TOKEN}`
+    );
+    const {
+      companyName,
+      symbol,
+      exchange,
+      industry,
+      website,
+      description
+    } = companyOverview.data;
     const overview = {
       companyName,
       symbol,
@@ -15,8 +23,7 @@ const getCompanyOverviewAndEmit = async (socket, stockSymbol) => {
       description
     };
     socket.emit("CompanyOverview", overview);
-  }
-  catch (error) {
+  } catch (error) {
     socket.emit("CompanyOverviewError", error);
     console.error(`Company Overview Error: ${error}`);
   }

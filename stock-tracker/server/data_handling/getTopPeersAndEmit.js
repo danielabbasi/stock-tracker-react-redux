@@ -1,13 +1,13 @@
 const axios = require("axios");
-const HOST = require('../server')
-const TOKEN = require('../server')
+const { HOST, TOKEN } = require("./constants");
 
 const getTopPeersAndEmit = async (socket, stockSymbol) => {
   try {
-    const topPeers = await axios.get(`${HOST}/stable/stock/${stockSymbol}/peers?token=${TOKEN}`);
+    const topPeers = await axios.get(
+      `${HOST}/stable/stock/${stockSymbol}/peers?token=${TOKEN}`
+    );
     socket.emit("TopPeers", topPeers.data);
-  }
-  catch (error) {
+  } catch (error) {
     socket.emit("TopPeersError", error);
     console.error(`Top Peers Error: ${error}`);
   }

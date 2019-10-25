@@ -1,9 +1,11 @@
 const axios = require("axios");
-const {HOST, TOKEN} = require('../server')
+const { HOST, TOKEN } = require("./constants");
 
-const getCompaniesFromAPI = async (socket) => {
+const getCompaniesFromAPI = async socket => {
   try {
-    const res = await axios.get(`${HOST}/stable/ref-data/symbols?token=${TOKEN}`);
+    const res = await axios.get(
+      `${HOST}/stable/ref-data/symbols?token=${TOKEN}`
+    );
     const companies = res.data.map(data => ({
       name: data.name,
       symbol: data.symbol,
@@ -11,8 +13,7 @@ const getCompaniesFromAPI = async (socket) => {
     }));
     socket.emit("companies", companies);
     return companies;
-  }
-  catch (error) {
+  } catch (error) {
     socket.emit("CompaniesError", error);
     console.error(`Companies Error: ${error}`);
   }
