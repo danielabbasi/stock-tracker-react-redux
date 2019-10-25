@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 const { HANDLE_DATA } = require("./data_handling/handleData");
 const express = require("express");
 const http = require("http");

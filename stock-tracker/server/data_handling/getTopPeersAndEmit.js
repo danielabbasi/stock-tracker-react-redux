@@ -1,5 +1,6 @@
 const axios = require("axios");
-const { HOST, TOKEN } = require("./constants");
+const HOST = require("./constants");
+const TOKEN = process.env.TOKEN;
 
 const getTopPeersAndEmit = async (socket, stockSymbol) => {
   try {
