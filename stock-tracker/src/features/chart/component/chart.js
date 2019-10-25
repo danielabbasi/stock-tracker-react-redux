@@ -11,9 +11,9 @@ import {
   XAxis,
   YAxis
 } from "recharts";
-import { addChartTimeAction } from "../store/actions";
-import Loading from "./loading";
-import "../assets/styles/chart.css";
+import { addChartTimeAction } from "../../../store/actions";
+import Loading from "../../loading/component/loading";
+import "./chart.css";
 const moment = require("moment");
 
 const Chart = () => {

@@ -1,12 +1,12 @@
 import React, { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addSymbolAction } from "../store/actions";
+import { addSymbolAction } from "../../../store/actions";
 import logo from "../assets/logo.png";
 import { Icon } from "antd";
-import "../assets/styles/Header.css";
+import "./Header.css";
 import sun from "../assets/sun.png";
 import moon from "../assets/moon.png";
-import Search from "./Search";
+import Search from "../../search/component/Search";
 const moment = require("moment");
 
 const Header = () => {

@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import Loading from "./loading";
-import "../assets/styles/LatestNews.css";
+import Loading from "../../loading/component/loading";
+import "./LatestNews.css";
 const moment = require("moment");
 
 const LatestNews = () => {
