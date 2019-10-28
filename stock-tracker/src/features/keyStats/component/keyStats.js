@@ -6,7 +6,7 @@ import "./KeyStats.css";
 const KeyStats = () => {
   const response = useSelector(state => state.keyStats.response);
   const loading = useSelector(state => state.loading);
-  const error = useSelector(state => state.error.stockData);
+  const error = useSelector(state => state.error.error.stockData);
 
   const earningsPShare =
     typeof response.earningsPerShare === "object"

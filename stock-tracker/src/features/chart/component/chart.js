@@ -29,7 +29,7 @@ const Chart = () => {
     chartData[chartData.length - 1] !== undefined
       ? chartData[chartData.length - 1].close
       : "";
-  const error = useSelector(state => state.error.chartData);
+  const error = useSelector(state => state.error.error.chartData);
   const formatDate = tickItem => {
     switch (current) {
       case "1D":

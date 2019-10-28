@@ -1,6 +1,6 @@
 import { createStore, applyMiddleware, compose } from "redux";
 import { rootReducer } from "./rootReducer";
-import { addCompaniesAction, initialStartupAction } from "./actions";
+import { addCompaniesAction } from "./actions";
 import { addChartDataAction } from "../features/chart/redux/actions";
 import { getErrorsAction } from "../features/error/redux/actions";
 import { addCompanyOverviewAction } from "../features/overview/redux/actions";
@@ -15,7 +15,34 @@ const socket = io(`http://${window.location.hostname}:5000`);
 const stockMiddleware = store => next => action => {
   const result = next(action);
   if (action.type === "ADD_SYMBOL") {
-    socket.emit("symbol", store.getState().symbol, store.getState().chartTime);
+    socket.emit(
+      "symbol",
+      store.getState().search.symbol,
+      store.getState().chart.chartTime
+    );
+  } else if (action.type === "ADD_CHARTTIME") {
+    socket.emit(
+      "chartTime",
+      store.getState().symbol,
+      store.getState().chartTime
+    );
+    store.dispatch(addChartDataAction(store.getState().chartData));
+  } else if (action.type === "ADD_SEARCH_INPUT") {
+    console.log(store.getState().search.searchInput);
+    socket.emit("search", store.getState().search.searchInput);
+    socket.on("suggestions", suggestions => {
+      store.dispatch(addSuggestionsAction(suggestions));
+    });
+  }
+  return result;
+};
+
+const initialStartupMiddlware = store => next => action => {
+  if (action.type === "INITIAL_STARTUP") {
+    console.log("Application has started ");
+    socket.on("companies", companies => {
+      store.dispatch(addCompaniesAction(companies));
+    });
     socket.on("StockData", data => {
       store.dispatch(addResponseAction(data));
     });
@@ -49,29 +76,6 @@ const stockMiddleware = store => next => action => {
     socket.on("TopPeersError", error => {
       store.dispatch(getErrorsAction("topPeers", error));
     });
-  } else if (action.type === "ADD_CHARTTIME") {
-    socket.emit(
-      "chartTime",
-      store.getState().symbol,
-      store.getState().chartTime
-    );
-    store.dispatch(addChartDataAction(store.getState().chartData));
-  } else if (action.type === "ADD_SEARCH_INPUT") {
-    console.log(store.getState().searchInput);
-    socket.emit("search", store.getState().searchInput);
-    socket.on("suggestions", suggestions => {
-      store.dispatch(addSuggestionsAction(suggestions));
-    });
-  }
-  return result;
-};
-
-const initialStartupMiddlware = store => next => action => {
-  if (action.type === "INITIAL_STARTUP") {
-    console.log("Application has started ");
-    socket.on("companies", companies => {
-      store.dispatch(addCompaniesAction(companies));
-    });
   }
   const result = next(action);
   return result;
@@ -84,5 +88,3 @@ export const store = createStore(
   undefined,
   composeEnhancers(applyMiddleware(initialStartupMiddlware, stockMiddleware))
 );
-
-store.dispatch(initialStartupAction());
