@@ -21,7 +21,7 @@ const LatestNews = () => {
     </div>
   ));
 
-  const errorValue = useSelector(state => state.reducer.error.latestNews);
+  const errorValue = useSelector(state => state.error.error.latestNews);
   const error = loading <= 0 && !latestNews.length ? true : errorValue;
 
   return (

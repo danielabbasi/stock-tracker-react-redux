@@ -1,6 +1,6 @@
 import React, { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addSymbolAction } from "../../../store/actions";
+import { addSymbolAction } from "../../search/redux/actions";
 import logo from "../assets/logo.png";
 import { Icon } from "antd";
 import "./Header.css";
@@ -10,8 +10,8 @@ import Search from "../../search/component/Search";
 const moment = require("moment");
 
 const Header = () => {
-  const response = useSelector(state => state.response);
-  const overview = useSelector(state => state.companyOverview);
+  const response = useSelector(state => state.keyStats.response);
+  const overview = useSelector(state => state.overview.companyOverview);
   const dispatch = useDispatch();
   const addSymbol = useCallback(symbol => dispatch(addSymbolAction(symbol)), [
     dispatch

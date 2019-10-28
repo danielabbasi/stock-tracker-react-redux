@@ -1,16 +1,13 @@
 import { createStore, applyMiddleware, compose } from "redux";
-import {rootReducer} from "./rootReducer"
-import {
-  addResponseAction,
-  addCompaniesAction,
-  addLatestNewsAction,
-  initialStartupAction,
-  addCompanyOverviewAction,
-  addTopPeersAction,
-  addSuggestionsAction,
-} from "./actions";
-import {addChartDataAction} from "../features/chart/redux/actions"
-import {getErrorsAction} from "../features/error/redux/actions"
+import { rootReducer } from "./rootReducer";
+import { addCompaniesAction, initialStartupAction } from "./actions";
+import { addChartDataAction } from "../features/chart/redux/actions";
+import { getErrorsAction } from "../features/error/redux/actions";
+import { addCompanyOverviewAction } from "../features/overview/redux/actions";
+import { addLatestNewsAction } from "../features/latestNews/redux/actions";
+import { addResponseAction } from "../features/keyStats/redux/actions";
+import { addTopPeersAction } from "../features/topPeers/redux/actions";
+import { addSuggestionsAction } from "../features/search/redux/actions";
 
 const io = require("socket.io-client");
 const socket = io(`http://${window.location.hostname}:5000`);
@@ -60,6 +57,7 @@ const stockMiddleware = store => next => action => {
     );
     store.dispatch(addChartDataAction(store.getState().chartData));
   } else if (action.type === "ADD_SEARCH_INPUT") {
+    console.log(store.getState().searchInput);
     socket.emit("search", store.getState().searchInput);
     socket.on("suggestions", suggestions => {
       store.dispatch(addSuggestionsAction(suggestions));

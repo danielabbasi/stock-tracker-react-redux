@@ -1,7 +1,7 @@
 import React, { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Loading from "../../loading/component/loading";
-import { addSymbolAction } from "../../../store/actions";
+import { addSymbolAction } from "../../search/redux/actions";
 import "./TopPeers.css";
 
 const TopPeers = () => {
