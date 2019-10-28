@@ -11,7 +11,7 @@ import {
   XAxis,
   YAxis
 } from "recharts";
-import { addChartTimeAction } from "../redux/actions";
+import { setChartTimeAction } from "../redux/actions";
 import Loading from "../../loading/component/loading";
 import "./chart.css";
 const moment = require("moment");
@@ -22,7 +22,7 @@ const Chart = () => {
   const loading = useSelector(state => state.chart.loading);
   const [current, setCurrent] = useState("1Y");
   const onClick = e => {
-    dispatch(addChartTimeAction(e.target.value));
+    dispatch(setChartTimeAction(e.target.value));
     setCurrent(e.target.value);
   };
   const latestValue =
@@ -52,7 +52,7 @@ const Chart = () => {
     <div className="chart">
       {error ? (
         <p className="error__message">Error: Chart data can not be displayed</p>
-      ) : loading === true && !chartData.length ? (
+      ) : loading ? (
         <Loading />
       ) : (
         <>

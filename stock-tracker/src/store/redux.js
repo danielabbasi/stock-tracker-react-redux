@@ -1,12 +1,14 @@
 import { createStore, applyMiddleware, compose } from "redux";
 import { rootReducer } from "./rootReducer";
-import { addCompaniesAction } from "./actions";
 import {
-  addChartDataAction,
+  setChartDataAction,
   setChartLoadingAction
 } from "../features/chart/redux/actions";
 import { getErrorsAction } from "../features/error/redux/actions";
-import { addCompanyOverviewAction } from "../features/overview/redux/actions";
+import {
+  setCompanyOverviewAction,
+  setLoadingOverviewAction
+} from "../features/overview/redux/actions";
 import {
   setLatestNewsAction,
   setLoadingNewsAction
@@ -15,8 +17,11 @@ import {
   setResponseAction,
   setLoadingKeyStatsAction
 } from "../features/keyStats/redux/actions";
-import { addTopPeersAction } from "../features/topPeers/redux/actions";
-import { addSuggestionsAction } from "../features/search/redux/actions";
+import {
+  addTopPeersAction,
+  setLoadingPeersAction
+} from "../features/topPeers/redux/actions";
+import { setSuggestionsAction } from "../features/search/redux/actions";
 import {
   ADD_SYMBOL,
   ADD_SEARCH_INPUT
@@ -39,6 +44,8 @@ const stockMiddleware = store => next => action => {
     store.dispatch(setChartLoadingAction());
     store.dispatch(setLoadingKeyStatsAction());
     store.dispatch(setLoadingNewsAction());
+    store.dispatch(setLoadingOverviewAction());
+    store.dispatch(setLoadingPeersAction());
   } else if (action.type === SET_CHART_TIME) {
     socket.emit(
       "chartTime",
@@ -49,7 +56,7 @@ const stockMiddleware = store => next => action => {
     console.log(store.getState().search.searchInput);
     socket.emit("search", store.getState().search.searchInput);
     socket.on("suggestions", suggestions => {
-      store.dispatch(addSuggestionsAction(suggestions));
+      store.dispatch(setSuggestionsAction(suggestions));
     });
   }
   return result;
@@ -58,20 +65,17 @@ const stockMiddleware = store => next => action => {
 const initialStartupMiddlware = store => next => action => {
   if (action.type === INITIAL_STARTUP) {
     console.log("Application has started ");
-    socket.on("companies", companies => {
-      store.dispatch(addCompaniesAction(companies));
-    });
     socket.on("StockData", data => {
       store.dispatch(setResponseAction(data));
     });
     socket.on("CompanyOverview", overview => {
-      store.dispatch(addCompanyOverviewAction(overview));
+      store.dispatch(setCompanyOverviewAction(overview));
     });
     socket.on("LatestNews", news => {
       store.dispatch(setLatestNewsAction(news));
     });
     socket.on("ChartData", chartData => {
-      store.dispatch(addChartDataAction(chartData));
+      store.dispatch(setChartDataAction(chartData));
     });
     socket.on("TopPeers", peers => {
       store.dispatch(addTopPeersAction(peers));

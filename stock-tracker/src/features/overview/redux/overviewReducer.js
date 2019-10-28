@@ -1,21 +1,22 @@
-import { ADD_COMPANY_OVERVIEW } from "./actionTypes";
-import { RESET } from "../../../store/actionTypes";
+import { ADD_COMPANY_OVERVIEW, SET_LOADING_OVERVIEW } from "./actionTypes";
 
 const initialState = {
-  companyOverview: false
+  companyOverview: false,
+  loading: false
 };
 
 export const overviewReducer = (state = initialState, action) => {
   switch (action.type) {
+    case SET_LOADING_OVERVIEW:
+      return {
+        ...initialState,
+        loading: true
+      };
     case ADD_COMPANY_OVERVIEW:
       return {
         ...state,
         companyOverview: action.payload,
-        loading: state.loading - 1
-      };
-    case RESET:
-      return {
-        ...initialState
+        loading: false
       };
     default:
       return state;

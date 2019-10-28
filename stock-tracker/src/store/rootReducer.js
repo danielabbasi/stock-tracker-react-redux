@@ -7,15 +7,12 @@ import { overviewReducer } from "../features/overview/redux/overviewReducer";
 import { searchReducer } from "../features/search/redux/searchReducer";
 import { peersReducer } from "../features/topPeers/redux/peersReducer";
 
-import { reducer } from "./reducer";
-
 export const rootReducer = combineReducers({
-    reducer: reducer, 
-    chart: chartReducer, 
-    error: errorReducer, 
-    keyStats: keyStatsReducer,
-    news: newsReducer,
-    overview: overviewReducer,
-    search: searchReducer,
-    peers: peersReducer
-})
+  chart: chartReducer,
+  error: errorReducer,
+  keyStats: keyStatsReducer,
+  news: newsReducer,
+  overview: overviewReducer,
+  search: searchReducer,
+  peers: peersReducer
+});

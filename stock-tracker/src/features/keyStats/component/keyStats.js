@@ -23,7 +23,7 @@ const KeyStats = () => {
       <h1>KEY STATS</h1>
       {error ? (
         <p className="error__message">Error: Key stats can not be displayed</p>
-      ) : loading === true && !response ? (
+      ) : loading ? (
         <Loading />
       ) : (
         <div className="keystats__grid">

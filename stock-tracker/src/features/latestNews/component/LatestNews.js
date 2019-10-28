@@ -30,7 +30,7 @@ const LatestNews = () => {
         <p className="error__message">
           Error: Latest news can not be displayed
         </p>
-      ) : loading === true ? (
+      ) : loading ? (
         <Loading />
       ) : (
         newsDisplay

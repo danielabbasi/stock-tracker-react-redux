@@ -1,6 +1,8 @@
-import { ADD_COMPANY_OVERVIEW } from "./actionTypes"
+import { ADD_COMPANY_OVERVIEW, SET_LOADING_OVERVIEW } from "./actionTypes";
 
-export const addCompanyOverviewAction = companyOverview => ({
-    type: ADD_COMPANY_OVERVIEW,
-    payload: companyOverview
-  });
+export const setCompanyOverviewAction = companyOverview => ({
+  type: ADD_COMPANY_OVERVIEW,
+  payload: companyOverview
+});
+
+export const setLoadingOverviewAction = () => ({ type: SET_LOADING_OVERVIEW });

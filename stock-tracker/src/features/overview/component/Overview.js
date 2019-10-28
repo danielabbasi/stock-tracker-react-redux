@@ -6,7 +6,7 @@ import "./Overview.css";
 
 const Overview = () => {
   const overview = useSelector(state => state.overview.companyOverview);
-  const loading = useSelector(state => state.loading);
+  const loading = useSelector(state => state.overview.loading);
   const error = useSelector(state => state.error.error.companyOverview);
 
   return (
@@ -16,7 +16,7 @@ const Overview = () => {
         <p className="error__message">
           Error: Company overview can not be displayed
         </p>
-      ) : loading > 0 && !overview ? (
+      ) : loading ? (
         <Loading />
       ) : (
         <>

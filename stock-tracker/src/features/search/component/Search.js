@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addSymbolAction, addSearchInputAction } from "../redux/actions";
+import { setSymbolAction, setSearchInputAction } from "../redux/actions";
 import { Icon } from "antd";
 import "./Search.css";
 
@@ -11,11 +11,11 @@ const Search = () => {
   const searchRef = useRef(null);
   const dispatch = useDispatch();
 
-  const addSymbol = useCallback(symbol => dispatch(addSymbolAction(symbol)), [
+  const addSymbol = useCallback(symbol => dispatch(setSymbolAction(symbol)), [
     dispatch
   ]);
   const addSearchInput = useCallback(
-    searchInput => dispatch(addSearchInputAction(searchInput)),
+    searchInput => dispatch(setSearchInputAction(searchInput)),
     [dispatch]
   );
   const suggestions = useSelector(state => state.search.suggestions);

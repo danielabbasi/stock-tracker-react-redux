@@ -1,1 +1,2 @@
 export const ADD_TOP_PEERS = "ADD_TOP_PEERS";
+export const SET_LOADING_PEERS = "SET_LOADING_PEERS";

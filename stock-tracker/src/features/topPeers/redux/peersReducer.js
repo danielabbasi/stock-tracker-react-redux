@@ -1,20 +1,22 @@
-import { ADD_TOP_PEERS } from "./actionTypes";
-import { RESET } from "../../../store/actionTypes";
+import { ADD_TOP_PEERS, SET_LOADING_PEERS } from "./actionTypes";
 
 const initialState = {
-  topPeers: []
+  topPeers: [],
+  loading: false
 };
 
 export const peersReducer = (state = initialState, action) => {
   switch (action.type) {
+    case SET_LOADING_PEERS:
+      return {
+        ...initialState,
+        loading: true
+      };
     case ADD_TOP_PEERS:
       return {
         ...state,
-        topPeers: action.payload
-      };
-    case RESET:
-      return {
-        ...initialState
+        topPeers: action.payload,
+        loading: false
       };
     default:
       return state;
