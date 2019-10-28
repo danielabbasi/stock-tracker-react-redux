@@ -1,16 +1,16 @@
 import { createStore, applyMiddleware, compose } from "redux";
-import rootReducer from "./rootReducer"
+import {rootReducer} from "./rootReducer"
 import {
   addResponseAction,
   addCompaniesAction,
-  addChartDataAction,
   addLatestNewsAction,
   initialStartupAction,
   addCompanyOverviewAction,
   addTopPeersAction,
   addSuggestionsAction,
-  getErrorsAction
 } from "./actions";
+import {addChartDataAction} from "../features/chart/redux/actions"
+import {getErrorsAction} from "../features/error/redux/actions"
 
 const io = require("socket.io-client");
 const socket = io(`http://${window.location.hostname}:5000`);

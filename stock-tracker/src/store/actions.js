@@ -3,14 +3,11 @@ import {
   ADD_SYMBOL,
   ADD_COMPANIES,
   ADD_COMPANY_OVERVIEW,
-  ADD_CHARTDATA,
   ADD_NEWS,
-  ADD_CHARTTIME,
   ADD_TOP_PEERS,
   ADD_SEARCH_INPUT,
   ADD_SUGGESTIONS,
   INITIAL_STARTUP,
-  REQUEST_ERROR
 } from "./actionTypes"
 
 export const addResponseAction = response => ({
@@ -33,18 +30,9 @@ export const addCompanyOverviewAction = companyOverview => ({
   payload: companyOverview
 });
 
-export const addChartDataAction = chartData => ({
-  type: ADD_CHARTDATA,
-  payload: chartData
-});
-
 export const addLatestNewsAction = latestNews => ({
   type: ADD_NEWS,
   payload: latestNews
-});
-export const addChartTimeAction = chartTime => ({
-  type: ADD_CHARTTIME,
-  payload: chartTime
 });
 export const addTopPeersAction = topPeers => ({
   type: ADD_TOP_PEERS,
@@ -61,7 +49,3 @@ export const addSuggestionsAction = suggestions => ({
 
 export const initialStartupAction = () => ({ type: INITIAL_STARTUP });
 
-export const getErrorsAction = (requestName) => ({ 
-  type: REQUEST_ERROR,
-  payload: {requestName}
-})

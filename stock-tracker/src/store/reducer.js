@@ -3,13 +3,10 @@ import {
   ADD_SYMBOL,
   ADD_COMPANIES,
   ADD_COMPANY_OVERVIEW,
-  ADD_CHARTDATA,
   ADD_NEWS,
-  ADD_CHARTTIME,
   ADD_TOP_PEERS,
   ADD_SEARCH_INPUT,
   ADD_SUGGESTIONS,
-  REQUEST_ERROR
 } from "./actionTypes";
 
 const initialState = {
@@ -17,24 +14,14 @@ const initialState = {
   symbol: "",
   companies: false,
   latestNews: [],
-  chartData: [],
-  chartTime: "1Y",
   companyOverview: false,
   topPeers: [],
   loading: 0,
   searchInput: "",
   suggestions: false,
-  error: {
-    stockData: false,
-    companies: false,
-    companyOverview: false,
-    latestNews: false,
-    chartData: false,
-    topPeers: false
-  }
 };
 
-const reducer = (state = initialState, action) => {
+export const reducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_RESPONSE:
       return {
@@ -52,14 +39,6 @@ const reducer = (state = initialState, action) => {
         chartData: [],
         companyOverview: false,
         topPeers: [],
-        error: {
-          stockData: false,
-          companies: false,
-          companyOverview: false,
-          latestNews: false,
-          chartData: false,
-          topPeers: false
-        }
       };
     case ADD_COMPANIES:
       return {
@@ -72,22 +51,11 @@ const reducer = (state = initialState, action) => {
         companyOverview: action.payload,
         loading: state.loading - 1
       };
-    case ADD_CHARTDATA:
-      return {
-        ...state,
-        chartData: action.payload,
-        loading: state.loading - 1
-      };
     case ADD_NEWS:
       return {
         ...state,
         latestNews: action.payload,
         loading: state.loading - 1
-      };
-    case ADD_CHARTTIME:
-      return {
-        ...state,
-        chartTime: action.payload
       };
     case ADD_TOP_PEERS:
       return {
@@ -105,18 +73,7 @@ const reducer = (state = initialState, action) => {
         ...state,
         suggestions: action.payload
       };
-    case REQUEST_ERROR: {
-      return {
-        ...state,
-        error: {
-          ...state.error,
-          [action.payload.requestName]: true
-        }
-      };
-    }
     default:
       return state;
   }
 }
-
-export default reducer

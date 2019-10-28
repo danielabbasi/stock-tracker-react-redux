@@ -11,14 +11,14 @@ import {
   XAxis,
   YAxis
 } from "recharts";
-import { addChartTimeAction } from "../../../store/actions";
+import { addChartTimeAction } from "../redux/actions";
 import Loading from "../../loading/component/loading";
 import "./chart.css";
 const moment = require("moment");
 
 const Chart = () => {
   const dispatch = useDispatch();
-  const chartData = useSelector(state => state.chartData);
+  const chartData = useSelector(state => state.chart.chartData);
   const loading = useSelector(state => state.loading);
   const [current, setCurrent] = useState("1Y");
   const onClick = e => {

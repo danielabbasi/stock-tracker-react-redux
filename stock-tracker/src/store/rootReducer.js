@@ -1,8 +1,7 @@
 import { combineReducers } from "redux";
-// import { chartReducer } from "../features/chart/redux/chartReducer";
+import { chartReducer } from "../features/chart/redux/chartReducer";
+import { errorReducer } from "../features/error/redux/errorReducer"
+
 import { reducer } from "./reducer";
 
-const rootReducer = combineReducers({reducer: reducer})
-
-
- export default rootReducer
+export const rootReducer = combineReducers({reducer: reducer, chart: chartReducer, error: errorReducer})

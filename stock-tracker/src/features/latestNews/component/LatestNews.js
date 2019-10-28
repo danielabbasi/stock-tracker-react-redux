@@ -5,7 +5,7 @@ import "./LatestNews.css";
 const moment = require("moment");
 
 const LatestNews = () => {
-  const latestNews = useSelector(state => state.latestNews);
+  const latestNews = useSelector(state => state.reducer.latestNews);
   const loading = useSelector(state => state.loading);
   const newsDisplay = latestNews.map((news, index) => (
     <div className="news" key={index}>
@@ -21,7 +21,7 @@ const LatestNews = () => {
     </div>
   ));
 
-  const errorValue = useSelector(state => state.error.latestNews);
+  const errorValue = useSelector(state => state.reducer.error.latestNews);
   const error = loading <= 0 && !latestNews.length ? true : errorValue;
 
   return (
