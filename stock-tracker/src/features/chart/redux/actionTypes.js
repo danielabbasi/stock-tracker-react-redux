@@ -1,0 +1,2 @@
+export const ADD_CHARTDATA = "ADD_CHARTDATA";
+export const ADD_CHARTTIME = "ADD_CHARTTIME";
