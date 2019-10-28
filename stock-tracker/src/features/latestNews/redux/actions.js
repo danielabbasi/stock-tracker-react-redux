@@ -1,6 +1,8 @@
-import { ADD_NEWS } from "./actionTypes"
+import { SET_NEWS, SET_LOADING_NEWS } from "./actionTypes";
 
-export const addLatestNewsAction = latestNews => ({
-    type: ADD_NEWS,
-    payload: latestNews
-  });
+export const setLatestNewsAction = latestNews => ({
+  type: SET_NEWS,
+  payload: latestNews
+});
+
+export const setLoadingNewsAction = () => ({ type: SET_LOADING_NEWS });

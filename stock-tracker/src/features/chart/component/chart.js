@@ -19,7 +19,7 @@ const moment = require("moment");
 const Chart = () => {
   const dispatch = useDispatch();
   const chartData = useSelector(state => state.chart.chartData);
-  const loading = useSelector(state => state.loading);
+  const loading = useSelector(state => state.chart.loading);
   const [current, setCurrent] = useState("1Y");
   const onClick = e => {
     dispatch(addChartTimeAction(e.target.value));
@@ -52,7 +52,7 @@ const Chart = () => {
     <div className="chart">
       {error ? (
         <p className="error__message">Error: Chart data can not be displayed</p>
-      ) : loading > 0 && !chartData.length ? (
+      ) : loading === true && !chartData.length ? (
         <Loading />
       ) : (
         <>

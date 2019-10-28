@@ -5,7 +5,7 @@ import "./KeyStats.css";
 
 const KeyStats = () => {
   const response = useSelector(state => state.keyStats.response);
-  const loading = useSelector(state => state.loading);
+  const loading = useSelector(state => state.keyStats.loading);
   const error = useSelector(state => state.error.error.stockData);
 
   const earningsPShare =
@@ -23,7 +23,7 @@ const KeyStats = () => {
       <h1>KEY STATS</h1>
       {error ? (
         <p className="error__message">Error: Key stats can not be displayed</p>
-      ) : loading > 0 && !response ? (
+      ) : loading === true && !response ? (
         <Loading />
       ) : (
         <div className="keystats__grid">

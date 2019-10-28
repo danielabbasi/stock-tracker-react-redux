@@ -1,2 +1,3 @@
-export const ADD_CHARTDATA = "ADD_CHARTDATA";
-export const ADD_CHARTTIME = "ADD_CHARTTIME";
+export const SET_CHART_DATA = "SET_CHART_DATA";
+export const SET_CHART_TIME = "SET_CHART_TIME";
+export const LOADING_CHART = "LOADING_CHART";

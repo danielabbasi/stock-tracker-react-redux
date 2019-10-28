@@ -6,7 +6,7 @@ const moment = require("moment");
 
 const LatestNews = () => {
   const latestNews = useSelector(state => state.news.latestNews);
-  const loading = useSelector(state => state.loading);
+  const loading = useSelector(state => state.news.loading);
   const newsDisplay = latestNews.map((news, index) => (
     <div className="news" key={index}>
       <p className={index === 0 ? "first_news news_headline" : "news_headline"}>
@@ -21,8 +21,7 @@ const LatestNews = () => {
     </div>
   ));
 
-  const errorValue = useSelector(state => state.error.error.latestNews);
-  const error = loading <= 0 && !latestNews.length ? true : errorValue;
+  const error = useSelector(state => state.error.error.latestNews);
 
   return (
     <div className="latestnews">
@@ -31,7 +30,7 @@ const LatestNews = () => {
         <p className="error__message">
           Error: Latest news can not be displayed
         </p>
-      ) : loading > 0 && !latestNews.length ? (
+      ) : loading === true ? (
         <Loading />
       ) : (
         newsDisplay

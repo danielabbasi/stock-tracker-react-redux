@@ -1,33 +1,51 @@
 import { createStore, applyMiddleware, compose } from "redux";
 import { rootReducer } from "./rootReducer";
 import { addCompaniesAction } from "./actions";
-import { addChartDataAction } from "../features/chart/redux/actions";
+import {
+  addChartDataAction,
+  setChartLoadingAction
+} from "../features/chart/redux/actions";
 import { getErrorsAction } from "../features/error/redux/actions";
 import { addCompanyOverviewAction } from "../features/overview/redux/actions";
-import { addLatestNewsAction } from "../features/latestNews/redux/actions";
-import { addResponseAction } from "../features/keyStats/redux/actions";
+import {
+  setLatestNewsAction,
+  setLoadingNewsAction
+} from "../features/latestNews/redux/actions";
+import {
+  setResponseAction,
+  setLoadingKeyStatsAction
+} from "../features/keyStats/redux/actions";
 import { addTopPeersAction } from "../features/topPeers/redux/actions";
 import { addSuggestionsAction } from "../features/search/redux/actions";
+import {
+  ADD_SYMBOL,
+  ADD_SEARCH_INPUT
+} from "../features/search/redux/actionTypes";
+import { SET_CHART_TIME } from "../features/chart/redux/actionTypes";
+import { INITIAL_STARTUP } from "../store/actionTypes";
 
-const io = require("socket.io-client");
+import io from "socket.io-client";
+
 const socket = io(`http://${window.location.hostname}:5000`);
 
 const stockMiddleware = store => next => action => {
   const result = next(action);
-  if (action.type === "ADD_SYMBOL") {
+  if (action.type === ADD_SYMBOL) {
     socket.emit(
       "symbol",
       store.getState().search.symbol,
       store.getState().chart.chartTime
     );
-  } else if (action.type === "ADD_CHARTTIME") {
+    store.dispatch(setChartLoadingAction());
+    store.dispatch(setLoadingKeyStatsAction());
+    store.dispatch(setLoadingNewsAction());
+  } else if (action.type === SET_CHART_TIME) {
     socket.emit(
       "chartTime",
-      store.getState().symbol,
-      store.getState().chartTime
+      store.getState().search.symbol,
+      store.getState().chart.chartTime
     );
-    store.dispatch(addChartDataAction(store.getState().chartData));
-  } else if (action.type === "ADD_SEARCH_INPUT") {
+  } else if (action.type === ADD_SEARCH_INPUT) {
     console.log(store.getState().search.searchInput);
     socket.emit("search", store.getState().search.searchInput);
     socket.on("suggestions", suggestions => {
@@ -38,19 +56,19 @@ const stockMiddleware = store => next => action => {
 };
 
 const initialStartupMiddlware = store => next => action => {
-  if (action.type === "INITIAL_STARTUP") {
+  if (action.type === INITIAL_STARTUP) {
     console.log("Application has started ");
     socket.on("companies", companies => {
       store.dispatch(addCompaniesAction(companies));
     });
     socket.on("StockData", data => {
-      store.dispatch(addResponseAction(data));
+      store.dispatch(setResponseAction(data));
     });
     socket.on("CompanyOverview", overview => {
       store.dispatch(addCompanyOverviewAction(overview));
     });
     socket.on("LatestNews", news => {
-      store.dispatch(addLatestNewsAction(news));
+      store.dispatch(setLatestNewsAction(news));
     });
     socket.on("ChartData", chartData => {
       store.dispatch(addChartDataAction(chartData));
