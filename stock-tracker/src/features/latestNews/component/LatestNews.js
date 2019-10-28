@@ -5,7 +5,7 @@ import "./LatestNews.css";
 const moment = require("moment");
 
 const LatestNews = () => {
-  const latestNews = useSelector(state => state.reducer.latestNews);
+  const latestNews = useSelector(state => state.news.latestNews);
   const loading = useSelector(state => state.loading);
   const newsDisplay = latestNews.map((news, index) => (
     <div className="news" key={index}>

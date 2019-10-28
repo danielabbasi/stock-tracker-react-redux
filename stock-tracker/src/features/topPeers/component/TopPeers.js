@@ -5,7 +5,7 @@ import { addSymbolAction } from "../../../store/actions";
 import "./TopPeers.css";
 
 const TopPeers = () => {
-  const peers = useSelector(state => state.topPeers);
+  const peers = useSelector(state => state.peers.topPeers);
   const loading = useSelector(state => state.loading);
   const error = useSelector(state => state.error.topPeers);
   const dispatch = useDispatch();

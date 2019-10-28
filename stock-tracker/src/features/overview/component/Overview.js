@@ -5,7 +5,7 @@ import TopPeers from "../../topPeers/component/TopPeers";
 import "./Overview.css";
 
 const Overview = () => {
-  const overview = useSelector(state => state.companyOverview);
+  const overview = useSelector(state => state.overview.companyOverview);
   const loading = useSelector(state => state.loading);
   const error = useSelector(state => state.error.companyOverview);
   

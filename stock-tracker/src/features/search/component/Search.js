@@ -18,8 +18,8 @@ const Search = () => {
     searchInput => dispatch(addSearchInputAction(searchInput)),
     [dispatch]
   );
-  const suggestions = useSelector(state => state.suggestions);
-  const response = useSelector(state => state.response);
+  const suggestions = useSelector(state => state.search.suggestions);
+  const response = useSelector(state => state.keyStats.response);
   const handleSubmit = e => {
     if (e.key === "Enter") {
       e.preventDefault();
