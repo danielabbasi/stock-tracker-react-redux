@@ -1,8 +1,13 @@
-import { ADD_TOP_PEERS, SET_LOADING_PEERS } from "./actionTypes";
+import {
+  ADD_TOP_PEERS,
+  SET_LOADING_PEERS,
+  SET_ERROR_PEERS
+} from "./actionTypes";
 
 const initialState = {
   topPeers: [],
-  loading: false
+  loading: false,
+  error: false
 };
 
 export const peersReducer = (state = initialState, action) => {
@@ -16,6 +21,13 @@ export const peersReducer = (state = initialState, action) => {
       return {
         ...state,
         topPeers: action.payload,
+        loading: false,
+        error: false
+      };
+    case SET_ERROR_PEERS:
+      return {
+        ...state,
+        error: true,
         loading: false
       };
     default:

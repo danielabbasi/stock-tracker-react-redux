@@ -6,13 +6,7 @@ import "./KeyStats.css";
 const KeyStats = () => {
   const response = useSelector(state => state.keyStats.response);
   const loading = useSelector(state => state.keyStats.loading);
-  const error = useSelector(state => state.error.error.stockData);
-
-  const earningsPShare =
-    typeof response.earningsPerShare === "object"
-      ? "N/A"
-      : // ? Object.values(response.earningsPerShare)
-        response.earningsPerShare;
+  const error = useSelector(state => state.keyStats.error);
 
   function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -110,7 +104,7 @@ const KeyStats = () => {
                   Earning Per Share
                 </td>
                 <td className="keystats__grid__display1__value">
-                  {earningsPShare ? earningsPShare : "N/A"}
+                  {response.earningsPShare ? response.earningsPShare : "N/A"}
                 </td>
               </tr>
               <tr>

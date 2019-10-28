@@ -1,9 +1,15 @@
-import { SET_CHART_DATA, SET_CHART_TIME, LOADING_CHART } from "./actionTypes";
+import {
+  SET_CHART_DATA,
+  SET_CHART_TIME,
+  LOADING_CHART,
+  SET_ERROR_CHART
+} from "./actionTypes";
 
 const initialState = {
   chartData: [],
   chartTime: "1Y",
-  loading: false
+  loading: false,
+  error: false
 };
 
 export const chartReducer = (state = initialState, action) => {
@@ -24,6 +30,12 @@ export const chartReducer = (state = initialState, action) => {
         ...initialState,
         chartTime: action.payload,
         loading: true
+      };
+    case SET_ERROR_CHART:
+      return {
+        ...state,
+        error: true,
+        loading: false
       };
     default:
       return state;

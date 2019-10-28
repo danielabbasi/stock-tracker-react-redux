@@ -1,4 +1,9 @@
-import { SET_CHART_DATA, SET_CHART_TIME, LOADING_CHART } from "./actionTypes";
+import {
+  SET_CHART_DATA,
+  SET_CHART_TIME,
+  LOADING_CHART,
+  SET_ERROR_CHART
+} from "./actionTypes";
 
 export const setChartDataAction = chartData => ({
   type: SET_CHART_DATA,
@@ -13,3 +18,5 @@ export const setChartTimeAction = chartTime => ({
 export const setChartLoadingAction = () => ({
   type: LOADING_CHART
 });
+
+export const setChartErrorAction = () => ({ type: SET_ERROR_CHART });

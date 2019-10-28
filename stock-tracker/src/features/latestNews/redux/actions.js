@@ -1,4 +1,4 @@
-import { SET_NEWS, SET_LOADING_NEWS } from "./actionTypes";
+import { SET_NEWS, SET_LOADING_NEWS, SET_ERROR_NEWS } from "./actionTypes";
 
 export const setLatestNewsAction = latestNews => ({
   type: SET_NEWS,
@@ -6,3 +6,5 @@ export const setLatestNewsAction = latestNews => ({
 });
 
 export const setLoadingNewsAction = () => ({ type: SET_LOADING_NEWS });
+
+export const setErrorNewsAction = () => ({ type: SET_ERROR_NEWS });

@@ -7,7 +7,7 @@ import "./TopPeers.css";
 const TopPeers = () => {
   const peers = useSelector(state => state.peers.topPeers);
   const loading = useSelector(state => state.peers.loading);
-  const error = useSelector(state => state.error.error.topPeers);
+  const error = useSelector(state => state.peers.error);
   const dispatch = useDispatch();
   const addSymbol = useCallback(symbol => dispatch(setSymbolAction(symbol)), [
     dispatch

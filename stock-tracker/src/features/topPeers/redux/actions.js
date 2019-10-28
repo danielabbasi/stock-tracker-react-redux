@@ -1,4 +1,8 @@
-import { ADD_TOP_PEERS, SET_LOADING_PEERS } from "./actionTypes";
+import {
+  ADD_TOP_PEERS,
+  SET_LOADING_PEERS,
+  SET_ERROR_PEERS
+} from "./actionTypes";
 
 export const addTopPeersAction = topPeers => ({
   type: ADD_TOP_PEERS,
@@ -6,3 +10,5 @@ export const addTopPeersAction = topPeers => ({
 });
 
 export const setLoadingPeersAction = () => ({ type: SET_LOADING_PEERS });
+
+export const setErrorPeersAction = () => ({ type: SET_ERROR_PEERS });

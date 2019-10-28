@@ -1,8 +1,13 @@
-import { SET_RESPONSE, SET_LOADING_KEYSTATS } from "./actionTypes";
+import {
+  SET_RESPONSE,
+  SET_LOADING_KEYSTATS,
+  SET_ERROR_KEYSTATS
+} from "./actionTypes";
 
 const initialState = {
   response: false,
-  loading: false
+  loading: false,
+  error: false
 };
 
 export const keyStatsReducer = (state = initialState, action) => {
@@ -16,6 +21,13 @@ export const keyStatsReducer = (state = initialState, action) => {
       return {
         ...state,
         response: action.payload,
+        loading: false,
+        error: false
+      };
+    case SET_ERROR_KEYSTATS:
+      return {
+        ...state,
+        error: true,
         loading: false
       };
     default:

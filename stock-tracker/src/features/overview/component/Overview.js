@@ -7,7 +7,7 @@ import "./Overview.css";
 const Overview = () => {
   const overview = useSelector(state => state.overview.companyOverview);
   const loading = useSelector(state => state.overview.loading);
-  const error = useSelector(state => state.error.error.companyOverview);
+  const error = useSelector(state => state.overview.error);
 
   return (
     <div className="overview">

@@ -2,24 +2,28 @@ import { createStore, applyMiddleware, compose } from "redux";
 import { rootReducer } from "./rootReducer";
 import {
   setChartDataAction,
-  setChartLoadingAction
+  setChartLoadingAction,
+  setChartErrorAction
 } from "../features/chart/redux/actions";
-import { getErrorsAction } from "../features/error/redux/actions";
 import {
   setCompanyOverviewAction,
-  setLoadingOverviewAction
+  setLoadingOverviewAction,
+  setErrorOverviewAction
 } from "../features/overview/redux/actions";
 import {
   setLatestNewsAction,
-  setLoadingNewsAction
+  setLoadingNewsAction,
+  setErrorNewsAction
 } from "../features/latestNews/redux/actions";
 import {
   setResponseAction,
-  setLoadingKeyStatsAction
+  setLoadingKeyStatsAction,
+  setErrorKeyStatsAction
 } from "../features/keyStats/redux/actions";
 import {
   addTopPeersAction,
-  setLoadingPeersAction
+  setLoadingPeersAction,
+  setErrorPeersAction
 } from "../features/topPeers/redux/actions";
 import { setSuggestionsAction } from "../features/search/redux/actions";
 import {
@@ -53,7 +57,6 @@ const stockMiddleware = store => next => action => {
       store.getState().chart.chartTime
     );
   } else if (action.type === ADD_SEARCH_INPUT) {
-    console.log(store.getState().search.searchInput);
     socket.emit("search", store.getState().search.searchInput);
     socket.on("suggestions", suggestions => {
       store.dispatch(setSuggestionsAction(suggestions));
@@ -81,22 +84,22 @@ const initialStartupMiddlware = store => next => action => {
       store.dispatch(addTopPeersAction(peers));
     });
     socket.on("StockError", error => {
-      store.dispatch(getErrorsAction("stockData", error));
+      store.dispatch(setErrorKeyStatsAction("stockData", error));
     });
-    socket.on("CompaniesError", error => {
-      store.dispatch(getErrorsAction("companies", error));
-    });
+    // socket.on("CompaniesError", error => {
+    //   store.dispatch(getErrorsAction("companies", error));
+    // });
     socket.on("CompanyOverviewError", error => {
-      store.dispatch(getErrorsAction("companyOverview", error));
+      store.dispatch(setErrorOverviewAction("companyOverview", error));
     });
     socket.on("LatestNewsError", error => {
-      store.dispatch(getErrorsAction("latestNews", error));
+      store.dispatch(setErrorNewsAction("latestNews", error));
     });
     socket.on("ChartDataError", error => {
-      store.dispatch(getErrorsAction("chartData", error));
+      store.dispatch(setChartErrorAction("chartData", error));
     });
     socket.on("TopPeersError", error => {
-      store.dispatch(getErrorsAction("topPeers", error));
+      store.dispatch(setErrorPeersAction("topPeers", error));
     });
   }
   const result = next(action);

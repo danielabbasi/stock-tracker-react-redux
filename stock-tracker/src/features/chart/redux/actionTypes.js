@@ -1,3 +1,4 @@
 export const SET_CHART_DATA = "SET_CHART_DATA";
 export const SET_CHART_TIME = "SET_CHART_TIME";
 export const LOADING_CHART = "LOADING_CHART";
+export const SET_ERROR_CHART = "SET_ERROR_CHART";

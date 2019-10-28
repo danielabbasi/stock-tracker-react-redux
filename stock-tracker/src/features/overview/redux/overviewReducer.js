@@ -1,8 +1,13 @@
-import { ADD_COMPANY_OVERVIEW, SET_LOADING_OVERVIEW } from "./actionTypes";
+import {
+  ADD_COMPANY_OVERVIEW,
+  SET_LOADING_OVERVIEW,
+  SET_ERROR_OVERVIEW
+} from "./actionTypes";
 
 const initialState = {
   companyOverview: false,
-  loading: false
+  loading: false,
+  error: false
 };
 
 export const overviewReducer = (state = initialState, action) => {
@@ -16,6 +21,12 @@ export const overviewReducer = (state = initialState, action) => {
       return {
         ...state,
         companyOverview: action.payload,
+        loading: false
+      };
+    case SET_ERROR_OVERVIEW:
+      return {
+        ...state,
+        error: true,
         loading: false
       };
     default:
