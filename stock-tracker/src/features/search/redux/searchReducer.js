@@ -1,5 +1,4 @@
 import { ADD_SYMBOL, ADD_SEARCH_INPUT, ADD_SUGGESTIONS } from "./actionTypes";
-import { RESET } from "../../../store/actionTypes";
 
 const initialState = {
   symbol: "",
@@ -23,10 +22,6 @@ export const searchReducer = (state = initialState, action) => {
       return {
         ...state,
         suggestions: action.payload
-      };
-    case RESET:
-      return {
-        ...initialState
       };
     default:
       return state;
