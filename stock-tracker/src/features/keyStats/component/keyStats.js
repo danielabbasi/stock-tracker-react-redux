@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import Loading from "./loading";
-import "../assets/styles/KeyStats.css";
+import Loading from "../../loading/component/loading";
+import "./KeyStats.css";
 
 const KeyStats = () => {
   const response = useSelector(state => state.response);

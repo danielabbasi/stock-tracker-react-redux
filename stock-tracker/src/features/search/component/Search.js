@@ -1,8 +1,8 @@
 import React, { useState, useCallback, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addSymbolAction, addSearchInputAction } from "../store/actions";
+import { addSymbolAction, addSearchInputAction } from "../../../store/actions";
 import { Icon } from "antd";
-import "../assets/styles/Search.css";
+import "./Search.css";
 
 const Search = () => {
   const [symbol, setSymbol] = useState("");
