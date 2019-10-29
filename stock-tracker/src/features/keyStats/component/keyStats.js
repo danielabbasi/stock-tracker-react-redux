@@ -4,15 +4,9 @@ import Loading from "../../loading/component/loading";
 import "./KeyStats.css";
 
 const KeyStats = () => {
-  const response = useSelector(state => state.response);
-  const loading = useSelector(state => state.loading);
-  const error = useSelector(state => state.error.stockData);
-
-  const earningsPShare =
-    typeof response.earningsPerShare === "object"
-      ? "N/A"
-      : // ? Object.values(response.earningsPerShare)
-        response.earningsPerShare;
+  const response = useSelector(state => state.keyStats.response);
+  const loading = useSelector(state => state.keyStats.loading);
+  const error = useSelector(state => state.keyStats.error);
 
   function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -23,7 +17,7 @@ const KeyStats = () => {
       <h1>KEY STATS</h1>
       {error ? (
         <p className="error__message">Error: Key stats can not be displayed</p>
-      ) : loading > 0 && !response ? (
+      ) : loading ? (
         <Loading />
       ) : (
         <div className="keystats__grid">
@@ -110,7 +104,7 @@ const KeyStats = () => {
                   Earning Per Share
                 </td>
                 <td className="keystats__grid__display1__value">
-                  {earningsPShare ? earningsPShare : "N/A"}
+                  {response.earningsPShare ? response.earningsPShare : "N/A"}
                 </td>
               </tr>
               <tr>

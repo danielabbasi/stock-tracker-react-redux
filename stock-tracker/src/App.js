@@ -9,7 +9,7 @@ import "./assets/styles/App.css";
 import { useSelector } from "react-redux";
 
 function App() {
-  const symbol = useSelector(state => state.symbol);
+  const symbol = useSelector(state => state.search.symbol);
   return (
     <>
       <div className="wrapper">

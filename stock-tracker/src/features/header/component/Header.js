@@ -1,6 +1,6 @@
 import React, { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addSymbolAction } from "../../../store/actions";
+import { setSymbolAction } from "../../search/redux/actions";
 import logo from "../assets/logo.png";
 import { Icon } from "antd";
 import "./Header.css";
@@ -10,25 +10,23 @@ import Search from "../../search/component/Search";
 const moment = require("moment");
 
 const Header = () => {
-  const response = useSelector(state => state.response);
-  const overview = useSelector(state => state.companyOverview);
+  const response = useSelector(state => state.keyStats.response);
+  const overview = useSelector(state => state.overview.companyOverview);
   const dispatch = useDispatch();
-  const addSymbol = useCallback(symbol => dispatch(addSymbolAction(symbol)), [
+  const addSymbol = useCallback(symbol => dispatch(setSymbolAction(symbol)), [
     dispatch
   ]);
-  const changeNo =
-    response.change === 0
-      ? "0"
-      : Math.abs(Math.round(response.change * 100) / 100);
-  const changePercentNo = Math.abs((response.changePercent * 100).toFixed(2));
   const marketStatus = response
     ? response.isUSMarketOpen
       ? "Market Open"
       : "Market Closed"
     : "";
-  const formatedTime = moment(response.latestUpdate).format("hh:mm A");
   const realTimeDisplay = response
-    ? `Real-Time Price as of ${response.latestTime} ${formatedTime} EST`
+    ? `Real-Time Price as of ${response.latestTime} ${
+        response.latestUpdate
+          ? moment(response.latestUpdate).format("hh:mm A")
+          : ""
+      } EST`
     : "";
 
   const statusIcon = response
@@ -52,7 +50,7 @@ const Header = () => {
       <Search />
       <div className="price_display">
         <p className="price_display__small_icon">{response ? "$" : ""}</p>
-        <h4>{response.latestPrice}</h4>
+        <h4>{response ? response.latestPrice : ""}</h4>
         <h4
           className={
             response
@@ -66,7 +64,8 @@ const Header = () => {
             className="price_display__arrow_icon"
             type={response.change < 0 ? "arrow-down" : "arrow-up"}
           />
-          {changeNo} <span className="separator">|</span>
+          {response.change ? Math.abs(response.change.toFixed(2)) : ""}{" "}
+          <span className="separator">|</span>
         </h4>
         <h4
           className={
@@ -77,7 +76,9 @@ const Header = () => {
               : "hidden"
           }
         >
-          {changePercentNo}
+          {response.changePercent
+            ? Math.abs(response.changePercent.toFixed(2))
+            : ""}
         </h4>
         <p
           className={
