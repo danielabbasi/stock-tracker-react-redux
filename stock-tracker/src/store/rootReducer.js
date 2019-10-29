@@ -1,8 +1,16 @@
-// import { combineReducers } from "redux";
-// import reducer from "./reducer"
-// import errorReducer from "./errorsReducer"
+import { combineReducers } from "redux";
+import { chartReducer } from "../features/chart/redux/chartReducer";
+import { keyStatsReducer } from "../features/keyStats/redux/keyStatsReducer";
+import { newsReducer } from "../features/latestNews/redux/newsReducer";
+import { overviewReducer } from "../features/overview/redux/overviewReducer";
+import { searchReducer } from "../features/search/redux/searchReducer";
+import { peersReducer } from "../features/topPeers/redux/peersReducer";
 
-// export default combineReducers({
-//     reducer,
-//     errorReducer
-// })
+export const rootReducer = combineReducers({
+  chart: chartReducer,
+  keyStats: keyStatsReducer,
+  news: newsReducer,
+  overview: overviewReducer,
+  search: searchReducer,
+  peers: peersReducer
+});

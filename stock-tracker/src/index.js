@@ -1,4 +1,5 @@
 import React from "react";
+import { initialStartupAction } from "./store/actions";
 import ReactDOM from "react-dom";
 import "./assets/styles/index.css";
 import App from "./App";
@@ -10,7 +11,8 @@ ReactDOM.render(
   <Provider store={store}>
     <App />
   </Provider>,
-  document.getElementById("root")
+  document.getElementById("root"),
+  () => store.dispatch(initialStartupAction())
 );
 
 // If you want your app to work offline and load faster, you can change

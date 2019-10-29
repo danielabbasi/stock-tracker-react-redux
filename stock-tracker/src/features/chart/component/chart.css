@@ -1,0 +1,39 @@
+.responsive_chart {
+  min-height: 380px;
+  max-height: 380px;
+}
+
+.chart__graph_btn {
+  float: right;
+  position: relative;
+  margin-right: 6%;
+  font-family: Lato-Light;
+  font-size: 12px;
+  z-index: 1;
+}
+.chart__graph_btn--inactive {
+  background: none;
+  color: var(--label);
+  font-family: Lato-Light;
+  border: none;
+}
+
+.chart__graph_btn--inactive:hover {
+  color: white;
+  font-family: Lato-Light;
+}
+
+.chart__graph_btn--active {
+  background: none;
+  color: white;
+  border: none;
+  font-family: Lato-Light;
+}
+.chart__date {
+  font-size: 5px;
+}
+.recharts-cartesian-axis-tick {
+  font-size: 10px;
+  font-family: Lato-Light;
+  opacity: 0.6;
+}

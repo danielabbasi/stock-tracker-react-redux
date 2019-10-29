@@ -1,16 +1,15 @@
 import React from "react";
-import Header from "./components/Header";
-import KeyStats from "./components/keyStats";
-import Chart from "./components/chart";
-import LatestNews from "./components/LatestNews";
-import Overview from "./components/Overview";
-import Footer from "./components/Footer";
-import MobileFooter from "./components/mobileFooter"
+import Header from "./features/header/component/Header";
+import KeyStats from "./features/keyStats/component/keyStats";
+import Chart from "./features/chart/component/chart";
+import LatestNews from "./features/latestNews/component/LatestNews";
+import Overview from "./features/overview/component/Overview";
+import Footer from "./features/footer/component/Footer";
 import "./assets/styles/App.css";
 import { useSelector } from "react-redux";
 
 function App() {
-  const symbol = useSelector(state => state.symbol);
+  const symbol = useSelector(state => state.search.symbol);
   return (
     <>
       <div className="wrapper">
@@ -24,8 +23,7 @@ function App() {
           </>
         )}
       </div>
-      {symbol !== "" && <Footer />}
-      <MobileFooter/>
+      <Footer />
     </>
   );
 }

@@ -1,0 +1,94 @@
+.footer {
+  font-size: 8px;
+  background-image: linear-gradient(
+    to bottom,
+    var(--marine-blue),
+    var(--primary-5)
+  );
+  display: grid;
+  grid-template-areas: "usMarket favorites";
+  padding: 4px 0 11px 0;
+  height: fit-content;
+}
+
+.footer1 {
+  grid-area: footer1;
+  font-size: 12px;
+  height: 15px;
+  font-family: Lato-Regular;
+  font-size: 12px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: var(--text-white);
+}
+.footer2 {
+  grid-area: footer2;
+  height: 17px;
+  font-family: Lato-Regular;
+  font-size: 14px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: var(--text-white);
+}
+.usMarket {
+  grid-area: usMarket;
+  font-size: 12px;
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+.favorites {
+  grid-area: favorites;
+  font-size: 12px;
+}
+.footer__heading {
+  font-family: Lato-Bold;
+  padding-right: 9px;
+}
+.percentage {
+  padding-right: 15px;
+}
+sup {
+  font-size: 10px;
+  object-fit: contain;
+  vertical-align: 30%;
+}
+sup .arrow {
+  width: 10px;
+  height: 10px;
+  vertical-align: -10%;
+}
+.footer1,
+.footer2 {
+  padding: 0 10px;
+  margin: 8px;
+}
+.green {
+  color: var(--good);
+}
+.red {
+  color: var(--bad);
+}
+.green,
+.red {
+  padding: 0 4px;
+}
+@media (max-width: 768px) {
+  .footer {
+    display: block;
+  }
+  .favorites {
+    display: none;
+  }
+}
+@media (max-width: 588px) {
+  .footer {
+    display: none;
+  }
+}
