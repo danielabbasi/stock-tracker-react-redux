@@ -1,5 +1,3 @@
-import { INITIAL_STARTUP, RESET } from "./actionTypes";
+import { INITIAL_STARTUP } from "./actionTypes";
 
 export const initialStartupAction = () => ({ type: INITIAL_STARTUP });
-
-export const resetAction = () => ({ type: RESET });

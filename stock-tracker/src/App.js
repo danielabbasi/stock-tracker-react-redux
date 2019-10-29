@@ -7,7 +7,6 @@ import Overview from "./features/overview/component/Overview";
 import Footer from "./features/footer/component/Footer";
 import "./assets/styles/App.css";
 import { useSelector } from "react-redux";
-import TopPeers from "./features/topPeers/component/TopPeers";
 
 function App() {
   const symbol = useSelector(state => state.search.symbol);
@@ -21,7 +20,6 @@ function App() {
             <KeyStats />
             <LatestNews />
             <Overview />
-            <TopPeers />
           </>
         )}
       </div>

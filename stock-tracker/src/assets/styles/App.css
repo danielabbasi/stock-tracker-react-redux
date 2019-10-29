@@ -7,8 +7,7 @@
   grid-template-areas:
     "header header header"
     "chart chart latestnews"
-    "keystats keystats overview"
-    ". . toppeers";
+    "keystats keystats overview";
   max-width: 1500px;
   margin: 0 auto;
   flex: 1 1;
@@ -55,6 +54,7 @@ body {
 
 .top_peers {
   grid-area: toppeers;
+  margin-top: 20px;
 }
 @media (max-width: 1024px) {
   .wrapper {
@@ -70,7 +70,7 @@ body {
   .keystats {
     margin: 0;
   }
-  .keystats{
-    margin: 0
+  .keystats {
+    margin: 0;
   }
 }
