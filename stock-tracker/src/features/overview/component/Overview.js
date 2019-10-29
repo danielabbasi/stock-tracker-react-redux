@@ -2,6 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import Loading from "../../loading/component/loading";
 import TopPeers from "../../topPeers/component/TopPeers";
+import ErrorMessage from "../../error/error";
 import "./Overview.css";
 
 const Overview = () => {
@@ -13,9 +14,7 @@ const Overview = () => {
     <div className="overview">
       <h1>COMPANY OVERVIEW</h1>
       {error ? (
-        <p className="error__message">
-          Error: Company overview can not be displayed
-        </p>
+        <ErrorMessage feature={"Company Overview"} />
       ) : loading ? (
         <Loading />
       ) : (

@@ -1,6 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import Loading from "../../loading/component/loading";
+import ErrorMessage from "../../error/error";
 import "./KeyStats.css";
 
 const KeyStats = () => {
@@ -16,7 +17,7 @@ const KeyStats = () => {
     <div className="keystats">
       <h1>KEY STATS</h1>
       {error ? (
-        <p className="error__message">Error: Key stats can not be displayed</p>
+        <ErrorMessage feature={"Key stats"} />
       ) : loading ? (
         <Loading />
       ) : (
