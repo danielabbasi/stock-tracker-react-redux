@@ -1,6 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import Loading from "../../loading/component/loading";
+import ErrorMessage from "../../error/error";
 import "./LatestNews.css";
 const moment = require("moment");
 
@@ -26,14 +27,14 @@ const LatestNews = () => {
     <div className="latestnews">
       <h1>LATEST NEWS</h1>
       {error ? (
-        <p className="error__message">
-          Error: Latest news can not be displayed
-        </p>
+        <ErrorMessage feature={"Latest News"} />
+        
       ) : loading ? (
         <Loading />
       ) : (
         newsDisplay
-      )}
+      )
+      }
     </div>
   );
 };

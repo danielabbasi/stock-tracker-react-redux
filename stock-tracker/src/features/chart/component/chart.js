@@ -13,6 +13,7 @@ import {
 } from "recharts";
 import { setChartTimeAction } from "../redux/actions";
 import Loading from "../../loading/component/loading";
+import ErrorMessage from "../../error/error";
 import "./chart.css";
 const moment = require("moment");
 
@@ -51,7 +52,7 @@ const Chart = () => {
   return (
     <div className="chart">
       {error ? (
-        <p className="error__message">Error: Chart data can not be displayed</p>
+        <ErrorMessage feature={"Chart data"} />
       ) : loading ? (
         <Loading />
       ) : (
