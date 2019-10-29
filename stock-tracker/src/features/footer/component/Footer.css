@@ -49,11 +49,10 @@
 }
 .footer__heading {
   font-family: Lato-Bold;
-  padding: 0 5px 0 19px;
+  padding-right: 9px;
 }
-
-.first_symbol {
-  padding-left: 0;
+.percentage {
+  padding-right: 15px;
 }
 sup {
   font-size: 10px;
@@ -69,11 +68,6 @@ sup .arrow {
 .footer2 {
   padding: 0 10px;
   margin: 8px;
-}
-.footer__logo {
-  width: 90px;
-  padding-right: 20px;
-  cursor: pointer;
 }
 .green {
   color: var(--good);

@@ -1,6 +1,6 @@
 import React from "react";
-import { Icon } from "antd";
 import "./Footer.css";
+import FooterItem from "./FooterItem";
 
 const Footer = () => {
   return (
@@ -8,59 +8,53 @@ const Footer = () => {
       <div className="usMarket">
         <p className="footer1">US MARKET</p>
         <p className="footer2">
-          <span className="footer__heading first_symbol">NASDAQ </span>
-          <sup>$</sup>6,850.05
-          <span className="green">
-            <sup>
-              <Icon className="arrow" type="arrow-up"></Icon>
-            </sup>
-            72.89 <span className="separator">|</span> 1.08<sup>%</sup>
-          </span>
-          <span className="footer__heading">DJIA </span>
-          <sup>$</sup>23,026.35
-          <span className="green">
-            <sup>
-              <Icon className="arrow" type="arrow-up"></Icon>
-            </sup>
-            168.89 <span className="separator">|</span> 0.7<sup>%</sup>
-          </span>
-          <span className="footer__heading">S&P </span>
-          <sup>$</sup>2,605.35
-          <span className="green">
-            <sup>
-              <Icon className="arrow" type="arrow-up"></Icon>
-            </sup>
-            23.35 <span className="separator">|</span> 0.94<sup>%</sup>
-          </span>
+          <FooterItem
+            exchange="NASDAQ"
+            currency="$"
+            price={6850.05}
+            changePrice={-72.89}
+            changePercentage={1.08}
+          />
+          <FooterItem
+            exchange="DJIA"
+            currency="$"
+            price={23026.35}
+            changePrice={165.89}
+            changePercentage={0.7}
+          />
+          <FooterItem
+            exchange="S&P"
+            currency="$"
+            price={2605.35}
+            changePrice={23.35}
+            changePercentage={0.94}
+          />
         </p>
       </div>
       <div className="favorites">
         <p className="footer1">FAVORITES</p>
         <p className="footer2">
-          <span className="footer__heading first_symbol">MSFT </span>
-          <sup>$</sup>86.92
-          <span className="green">
-            <sup>
-              <Icon className="arrow" type="arrow-up"></Icon>
-            </sup>
-            1.91 <span className="separator">|</span> 2.25<sup>%</sup>
-          </span>
-          <span className="footer__heading">AAPL </span>
-          <sup>$</sup>160.03
-          <span className="red">
-            <sup>
-              <Icon className="arrow" type="arrow-down"></Icon>
-            </sup>
-            2.94 <span className="separator">|</span> 1.88<sup>%</sup>
-          </span>
-          <span className="footer__heading">GOOG </span>
-          <sup>$</sup>1,017.49
-          <span className="green">
-            <sup>
-              <Icon className="arrow" type="arrow-up"></Icon>
-            </sup>
-            15.97 <span className="separator">|</span> 1.59<sup>%</sup>
-          </span>
+          <FooterItem
+            exchange="MSFT"
+            currency="$"
+            price={86.92}
+            changePrice={1.91}
+            changePercentage={2.25}
+          />
+          <FooterItem
+            exchange="AAPL"
+            currency="$"
+            price={160.03}
+            changePrice={-2.94}
+            changePercentage={1.88}
+          />
+          <FooterItem
+            exchange="GOOG"
+            currency="$"
+            price={1017.49}
+            changePrice={15.97}
+            changePercentage={1.59}
+          />
         </p>
       </div>
     </div>
