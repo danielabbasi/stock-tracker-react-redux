@@ -55,6 +55,7 @@ body {
 
 .top_peers {
   grid-area: toppeers;
+  margin-top: -65px;
 }
 @media (max-width: 1024px) {
   .wrapper {
