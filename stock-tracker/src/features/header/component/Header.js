@@ -4,10 +4,8 @@ import { setSymbolAction } from "../../search/redux/actions";
 import logo from "../assets/logo.png";
 import { Icon } from "antd";
 import "./Header.css";
-import sun from "../assets/sun.png";
-import moon from "../assets/moon.png";
 import Search from "../../search/component/Search";
-const moment = require("moment");
+import MarketStatus from "./marketStatus"
 
 const Header = () => {
   const response = useSelector(state => state.keyStats.response);
@@ -16,24 +14,6 @@ const Header = () => {
   const addSymbol = useCallback(symbol => dispatch(setSymbolAction(symbol)), [
     dispatch
   ]);
-  const marketStatus = response
-    ? response.isUSMarketOpen
-      ? "Market Open"
-      : "Market Closed"
-    : "";
-  const realTimeDisplay = response
-    ? `Real-Time Price as of ${response.latestTime} ${
-        response.latestUpdate
-          ? moment(response.latestUpdate).format("hh:mm A")
-          : ""
-      } EST`
-    : "";
-
-  const statusIcon = response
-    ? marketStatus === "Market Open"
-      ? sun
-      : moon
-    : "";
   const onClick = () => {
     addSymbol("");
   };
@@ -109,13 +89,7 @@ const Header = () => {
           </li>
         </ul>
       </div>
-      <div className="market_status_display">
-        <p className="market_status_display__real_time">{realTimeDisplay}</p>
-        <img className="market_status__icon" src={statusIcon} />
-        <p className="market_status_display__real_time__status">
-          {marketStatus}
-        </p>
-      </div>
+      <MarketStatus />
     </div>
   );
 };
