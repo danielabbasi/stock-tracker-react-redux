@@ -2,6 +2,7 @@ import React, { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Loading from "../../loading/component/loading";
 import { setSymbolAction } from "../../search/redux/actions";
+import ErrorMessage from "../../error/error";
 import "./TopPeers.css";
 
 const TopPeers = () => {
@@ -21,7 +22,7 @@ const TopPeers = () => {
     <div className="top_peers">
       <h1>TOP PEERS</h1>
       {error ? (
-        <p className="error__message">Error: Top peers can not be displayed</p>
+       <ErrorMessage feature={"Top peers"} />
       ) : loading ? (
         <Loading />
       ) : (

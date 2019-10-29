@@ -29,7 +29,6 @@ const Overview = () => {
             </a>
           </p>
           <p className="overview__text">{overview.description}</p>
-          <TopPeers />
         </>
       )}
     </div>
