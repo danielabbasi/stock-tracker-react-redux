@@ -11,7 +11,7 @@ const createSocketService = () => {
     return socket || (socket = io(SERVER));
   }
 
-  const getSocketSubscription = (event, fn) => {
+  const createSocketSubscription = (event, fn) => {
     if (!socket) {
       throw new Error("You forgot to call `create`!");
     }
@@ -20,7 +20,7 @@ const createSocketService = () => {
     return () => socket.off(fn);
   };
 
-  return { create, getSocketSubscription };
+  return { create, createSocketSubscription };
 };
 
 export const socketService = createSocketService();
