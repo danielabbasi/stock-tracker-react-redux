@@ -12,9 +12,7 @@ import { SET_CHART_TIME } from "../features/chart/redux/actionTypes";
 import { INITIAL_STARTUP } from "./actionTypes";
 import { getTopSubscription } from "./subscriptions";
 
-export const searchMiddleware = ({
-  socketService
-}) => store => next => action => {
+export const searchMiddleware = socketService => store => next => action => {
   const result = next(action);
   if (action.type === ADD_SYMBOL) {
     socketService
@@ -38,9 +36,7 @@ export const searchMiddleware = ({
   return result;
 };
 
-export const chartMiddleware = ({
-  socketService
-}) => store => next => action => {
+export const chartMiddleware = socketService => store => next => action => {
   const result = next(action);
   if (action.type === SET_CHART_TIME) {
     socketService
@@ -54,9 +50,7 @@ export const chartMiddleware = ({
   return result;
 };
 
-export const initialStartupMiddlware = ({
-  socketService
-}) => store => next => action => {
+export const initialStartupMiddlware = socketService => store => next => action => {
   if (action.type === INITIAL_STARTUP) {
     console.info("Application has started ");
     getTopSubscription(store.dispatch);

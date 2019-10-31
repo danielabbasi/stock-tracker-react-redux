@@ -22,7 +22,6 @@ import { setSuggestionsAction } from "../features/search/redux/actions";
 import { socketService } from "../socket";
 
 export const getTopSubscription = dispatch => {
-  const socket = socketService.create();
   const unsubscribeFns = [
     ["StockData", setResponseAction],
     ["CompanyOverview", setCompanyOverviewAction],
@@ -39,7 +38,7 @@ export const getTopSubscription = dispatch => {
     ["ChartDataError", error => setChartErrorAction("chartData", error)],
     ["TopPeersError", error => setErrorPeersAction("topPeers", error)]
   ].map(([event, actionCreator]) =>
-    socketService.getSocketSubscription(socket, event, payload =>
+    socketService.getSocketSubscription(event, payload =>
       dispatch(actionCreator(payload))
     )
   );
