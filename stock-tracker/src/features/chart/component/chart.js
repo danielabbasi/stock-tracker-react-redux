@@ -14,6 +14,7 @@ import {
 import { setChartTimeAction } from "../index";
 import Loading from "../../loading/component/loading";
 import ErrorMessage from "../../error/error";
+import { ChartButton } from "./chartButton";
 import "./chart.css";
 const moment = require("moment");
 
@@ -58,72 +59,12 @@ export const Chart = () => {
       ) : (
         <>
           <div className="chart__graph_btn">
-            <button
-              className={
-                current === "1D"
-                  ? "chart__graph_btn--active"
-                  : "chart__graph_btn--inactive"
-              }
-              value="1D"
-              onClick={onClick}
-            >
-              1D
-            </button>
-            <button
-              className={
-                current === "5D"
-                  ? "chart__graph_btn--active"
-                  : "chart__graph_btn--inactive"
-              }
-              value="5D"
-              onClick={onClick}
-            >
-              5D
-            </button>
-            <button
-              className={
-                current === "1M"
-                  ? "chart__graph_btn--active"
-                  : "chart__graph_btn--inactive"
-              }
-              value="1M"
-              onClick={onClick}
-            >
-              1M
-            </button>
-            <button
-              className={
-                current === "1Y"
-                  ? "chart__graph_btn--active"
-                  : "chart__graph_btn--inactive"
-              }
-              value="1Y"
-              onClick={onClick}
-            >
-              1Y
-            </button>
-            <button
-              className={
-                current === "5Y"
-                  ? "chart__graph_btn--active"
-                  : "chart__graph_btn--inactive"
-              }
-              value="5Y"
-              onClick={onClick}
-            >
-              5Y
-            </button>
-            <button
-              className={
-                current === "MAX"
-                  ? "chart__graph_btn--active"
-                  : "chart__graph_btn--inactive"
-              }
-              value="MAX"
-              onClick={onClick}
-            >
-              MAX
-            </button>
+            <ChartButton current={current} range="1D" onClick={onClick} />
+            <ChartButton current={current} range="5D" onClick={onClick} />
+            <ChartButton current={current} range="1M" onClick={onClick} />
+            <ChartButton current={current} range="1Y" onClick={onClick} />
+            <ChartButton current={current} range="5Y" onClick={onClick} />
+            <ChartButton current={current} range="MAX" onClick={onClick} />
           </div>
           <ResponsiveContainer className="responsive_chart">
             <AreaChart
