@@ -29,7 +29,7 @@ import {
   ADD_SEARCH_INPUT
 } from "../features/search/redux/actionTypes";
 import { SET_CHART_TIME } from "../features/chart/redux/actionTypes";
-import { INITIAL_STARTUP } from "../store/actionTypes";
+import { INITIAL_STARTUP } from "./actionTypes";
 
 export const searchMiddleware = socketService => store => next => action => {
   const result = next(action);
