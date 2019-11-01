@@ -11,13 +11,13 @@ import {
   XAxis,
   YAxis
 } from "recharts";
-import { setChartTimeAction } from "../redux/actions";
+import { setChartTimeAction } from "../index";
 import Loading from "../../loading/component/loading";
 import ErrorMessage from "../../error/error";
 import "./chart.css";
 const moment = require("moment");
 
-const Chart = () => {
+export const Chart = () => {
   const dispatch = useDispatch();
   const chartData = useSelector(state => state.chart.chartData);
   const loading = useSelector(state => state.chart.loading);
@@ -179,4 +179,3 @@ const Chart = () => {
     </div>
   );
 };
-export default Chart;

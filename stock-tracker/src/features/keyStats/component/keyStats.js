@@ -4,7 +4,7 @@ import Loading from "../../loading/component/loading";
 import ErrorMessage from "../../error/error";
 import "./KeyStats.css";
 
-const KeyStats = () => {
+export const KeyStats = () => {
   const response = useSelector(state => state.keyStats.response);
   const loading = useSelector(state => state.keyStats.loading);
   const error = useSelector(state => state.keyStats.error);
@@ -125,5 +125,3 @@ const KeyStats = () => {
     </div>
   );
 };
-
-export default KeyStats;

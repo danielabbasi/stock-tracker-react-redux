@@ -1,11 +1,11 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import Loading from "../../loading/component/loading";
-import TopPeers from "../../topPeers/component/TopPeers";
+import { TopPeers } from "../../topPeers";
 import ErrorMessage from "../../error/error";
 import "./Overview.css";
 
-const Overview = () => {
+export const Overview = () => {
   const overview = useSelector(state => state.overview.companyOverview);
   const loading = useSelector(state => state.overview.loading);
   const error = useSelector(state => state.overview.error);
@@ -35,5 +35,3 @@ const Overview = () => {
     </div>
   );
 };
-
-export default Overview;

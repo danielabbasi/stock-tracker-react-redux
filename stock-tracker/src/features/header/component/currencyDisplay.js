@@ -1,32 +1,29 @@
 import React from "react";
 import { useSelector } from "react-redux";
 
-const CurrencyDisplay = () => {
+export const CurrencyDisplay = () => {
+  const response = useSelector(state => state.keyStats.response);
+  const overview = useSelector(state => state.overview.companyOverview);
 
-    const response = useSelector(state => state.keyStats.response);
-    const overview = useSelector(state => state.overview.companyOverview);
-
-    return (
-        <div className={response ? "currency_display" : "hidden"}>
-        <ul>
-          <li className="currency_display__item currency_display__item__exchange">
-            {overview.exchange}
-          </li>
-          <li className="currency_display__item currency_display__item__industry">
-            {overview.industry}
-          </li>
-          <li
-            className={
-              response.currency
-                ? "currency_display__item currency_display__item__currency"
-                : "hidden"
-            }
-          >
-            {response.currency}
-          </li>
-        </ul>
-      </div>
-    )
-}
-
-export default CurrencyDisplay
+  return (
+    <div className={response ? "currency_display" : "hidden"}>
+      <ul>
+        <li className="currency_display__item currency_display__item__exchange">
+          {overview.exchange}
+        </li>
+        <li className="currency_display__item currency_display__item__industry">
+          {overview.industry}
+        </li>
+        <li
+          className={
+            response.currency
+              ? "currency_display__item currency_display__item__currency"
+              : "hidden"
+          }
+        >
+          {response.currency}
+        </li>
+      </ul>
+    </div>
+  );
+};

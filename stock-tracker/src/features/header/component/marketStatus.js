@@ -4,11 +4,10 @@ import sun from "../assets/sun.png";
 import moon from "../assets/moon.png";
 const moment = require("moment");
 
-const MarketStatus = () => {
+export const MarketStatus = () => {
+  const response = useSelector(state => state.keyStats.response);
 
-    const response = useSelector(state => state.keyStats.response);
-
-    const marketStat = response
+  const marketStat = response
     ? response.isUSMarketOpen
       ? "Market Open"
       : "Market Closed"
@@ -20,22 +19,17 @@ const MarketStatus = () => {
           : ""
       } EST`
     : "";
-    const statusIcon = response
+  const statusIcon = response
     ? marketStat === "Market Open"
       ? sun
       : moon
     : "";
 
-    return (
+  return (
     <div className="market_status_display">
-        <p className="market_status_display__real_time">{realTimeDisplay}</p>
-        <img className="market_status__icon" src={statusIcon} />
-        <p className="market_status_display__real_time__status">
-          {marketStat}
-        </p>
-      </div>
-    )
-
-}
-
-export default MarketStatus
+      <p className="market_status_display__real_time">{realTimeDisplay}</p>
+      <img className="market_status__icon" src={statusIcon} />
+      <p className="market_status_display__real_time__status">{marketStat}</p>
+    </div>
+  );
+};

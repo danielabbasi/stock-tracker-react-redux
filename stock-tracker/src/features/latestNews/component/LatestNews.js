@@ -5,7 +5,7 @@ import ErrorMessage from "../../error/error";
 import "./LatestNews.css";
 const moment = require("moment");
 
-const LatestNews = () => {
+export const LatestNews = () => {
   const latestNews = useSelector(state => state.news.latestNews);
   const loading = useSelector(state => state.news.loading);
   const error = useSelector(state => state.news.error);
@@ -28,15 +28,11 @@ const LatestNews = () => {
       <h1>LATEST NEWS</h1>
       {error ? (
         <ErrorMessage feature={"Latest News"} />
-        
       ) : loading ? (
         <Loading />
       ) : (
         newsDisplay
-      )
-      }
+      )}
     </div>
   );
 };
-
-export default LatestNews;
