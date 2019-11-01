@@ -15,13 +15,12 @@ const getSearchInputAndFilter = async (socket, input, stockCompanies) => {
     }));
 
     suggestions.sort((a, b) => {
-      // returns an array of matched symbols to search input (symbols which start with the search input)
-      const aStart = a.symbol.match(new RegExp("^" + searchInput, "i")) || [];
-      const bStart = b.symbol.match(new RegExp("^" + searchInput, "i")) || [];
-
-      // put symbols with the shortest length at a lower index of the list (first)
-      if (aStart.length !== bStart.length) return bStart.length - aStart.length;
-      // put into alphabetical order
+      const aIdx = a.symbol.toLowerCase().indexOf(searchInput);
+      const bIdx = b.symbol.toLowerCase().indexOf(searchInput);
+      if (aIdx === -1) return 1;
+      if (bIdx === -1) return -1;
+      if (a.symbol.length !== b.symbol.length)
+        return a.symbol.length - b.symbol.length;
       else return a.symbol > b.symbol ? 1 : -1;
     });
     const autocomplete = suggestions.slice(0, 10);
