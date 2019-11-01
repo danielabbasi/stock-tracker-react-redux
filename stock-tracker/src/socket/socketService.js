@@ -17,7 +17,7 @@ const createSocketService = () => {
     }
 
     socket.on(event, fn);
-    return () => socket.off(fn);
+    return () => socket.off(event, fn);
   };
 
   return { create, createSocketSubscription };
