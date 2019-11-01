@@ -19,9 +19,10 @@ const getSearchInputAndFilter = async (socket, input, stockCompanies) => {
       const bIdx = b.symbol.toLowerCase().indexOf(searchInput);
       if (aIdx === -1) return 1;
       if (bIdx === -1) return -1;
-      if (a.symbol.length !== b.symbol.length)
+      if (a.symbol.length !== b.symbol.length) {
         return a.symbol.length - b.symbol.length;
-      else return a.symbol > b.symbol ? 1 : -1;
+      }
+      return a.symbol > b.symbol ? 1 : -1;
     };
     suggestions.sort(sortByLength);
     const autocomplete = suggestions.slice(0, 10);
