@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import sun from "../assets/sun.png";
 import moon from "../assets/moon.png";
-const moment = require("moment");
+import moment from "moment";
 
 export const MarketStatus = () => {
   const response = useSelector(state => state.keyStats.response);
