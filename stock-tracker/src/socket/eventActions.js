@@ -1,16 +1,4 @@
-import {
-  STOCK_DATA,
-  COMPANY_OVERVIEW,
-  LATEST_NEWS,
-  SUGGESTIONS,
-  CHART_DATA,
-  TOP_PEERS,
-  COMPANY_OVERVIEW_ERROR,
-  LATEST_NEWS_ERROR,
-  CHART_DATA_ERROR,
-  TOP_PEERS_ERROR,
-  STOCK_ERROR
-} from "./eventTypes";
+import * as EventType from "./eventTypes";
 import { setChartDataAction, setChartErrorAction } from "../features/chart";
 import {
   setCompanyOverviewAction,
@@ -28,18 +16,24 @@ import { addTopPeersAction, setErrorPeersAction } from "../features/topPeers";
 import { setSuggestionsAction } from "../features/search";
 
 export const eventActions = [
-  [STOCK_DATA, setResponseAction],
-  [COMPANY_OVERVIEW, setCompanyOverviewAction],
-  [LATEST_NEWS, setLatestNewsAction],
-  [SUGGESTIONS, setSuggestionsAction],
-  [CHART_DATA, setChartDataAction],
-  [TOP_PEERS, addTopPeersAction],
-  [STOCK_ERROR, error => setErrorKeyStatsAction("stockData", error)],
+  [EventType.STOCK_DATA, setResponseAction],
+  [EventType.COMPANY_OVERVIEW, setCompanyOverviewAction],
+  [EventType.LATEST_NEWS, setLatestNewsAction],
+  [EventType.SUGGESTIONS, setSuggestionsAction],
+  [EventType.CHART_DATA, setChartDataAction],
+  [EventType.TOP_PEERS, addTopPeersAction],
+  [EventType.STOCK_ERROR, error => setErrorKeyStatsAction("stockData", error)],
   [
-    COMPANY_OVERVIEW_ERROR,
+    EventType.COMPANY_OVERVIEW_ERROR,
     error => setErrorOverviewAction("companiesOverview", error)
   ],
-  [LATEST_NEWS_ERROR, error => setErrorNewsAction("latestNews", error)],
-  [CHART_DATA_ERROR, error => setChartErrorAction("chartData", error)],
-  [TOP_PEERS_ERROR, error => setErrorPeersAction("topPeers", error)]
+  [
+    EventType.LATEST_NEWS_ERROR,
+    error => setErrorNewsAction("latestNews", error)
+  ],
+  [
+    EventType.CHART_DATA_ERROR,
+    error => setChartErrorAction("chartData", error)
+  ],
+  [EventType.TOP_PEERS_ERROR, error => setErrorPeersAction("topPeers", error)]
 ];
