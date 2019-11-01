@@ -1,12 +1,12 @@
 import React from "react";
-import Header from "./features/header/component/Header";
-import KeyStats from "./features/keyStats/component/keyStats";
-import Chart from "./features/chart/component/chart";
-import LatestNews from "./features/latestNews/component/LatestNews";
-import Overview from "./features/overview/component/Overview";
-import Footer from "./features/footer/component/Footer";
-import "./assets/styles/App.css";
 import { useSelector } from "react-redux";
+import { Header } from "./features/header";
+import { KeyStats } from "./features/keyStats";
+import { Chart } from "./features/chart/component/chart";
+import { LatestNews } from "./features/latestNews";
+import { Overview } from "./features/overview";
+import { Footer } from "./features/footer";
+import "./assets/styles/App.css";
 
 function App() {
   const symbol = useSelector(state => state.search.symbol);

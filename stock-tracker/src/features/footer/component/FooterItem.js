@@ -2,7 +2,7 @@ import React from "react";
 import { Icon } from "antd";
 import "./Footer.css";
 
-const FooterItem = ({
+export const FooterItem = ({
   exchange,
   currency,
   price,
@@ -27,4 +27,3 @@ const FooterItem = ({
     </>
   );
 };
-export default FooterItem;

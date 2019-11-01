@@ -1,5 +1,5 @@
 import { INITIAL_STARTUP } from "./actionTypes";
-import { createSocketSubscriptions } from "./subscriptions";
+import { createSocketSubscriptions } from "../socket/subscriptions";
 
 export const initialStartupMiddlware = ({
   socketService
@@ -8,6 +8,5 @@ export const initialStartupMiddlware = ({
     console.info("Application has started ");
     createSocketSubscriptions(store.dispatch);
   }
-  const result = next(action);
-  return result;
+  return next(action);
 };

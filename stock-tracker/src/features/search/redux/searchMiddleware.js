@@ -1,8 +1,8 @@
-import { setChartLoadingAction } from "../../chart/redux/actions";
-import { setLoadingOverviewAction } from "../../overview/redux/actions";
-import { setLoadingNewsAction } from "../../latestNews/redux/actions";
-import { setLoadingKeyStatsAction } from "../../keyStats/redux/actions";
-import { setLoadingPeersAction } from "../../topPeers/redux/actions";
+import { setChartLoadingAction } from "../../chart";
+import { setLoadingOverviewAction } from "../../overview";
+import { setLoadingNewsAction } from "../../latestNews";
+import { setLoadingKeyStatsAction } from "../../keyStats";
+import { setLoadingPeersAction } from "../../topPeers";
 import { setSuggestionsAction } from "./actions";
 import { ADD_SYMBOL, ADD_SEARCH_INPUT } from "./actionTypes";
 import {
@@ -14,27 +14,19 @@ import {
 export const searchMiddleware = ({
   socketService
 }) => store => next => action => {
-  const result = next(action);
+  const socket = socketService.create();
   if (action.type === ADD_SYMBOL) {
-    socketService
-      .create()
-      .emit(
-        SYMBOL_INPUT,
-        store.getState().search.symbol,
-        store.getState().chart.chartTime
-      );
+    socket.emit(SYMBOL_INPUT, action.payload, store.getState().chart.chartTime);
     store.dispatch(setChartLoadingAction());
     store.dispatch(setLoadingKeyStatsAction());
     store.dispatch(setLoadingNewsAction());
     store.dispatch(setLoadingOverviewAction());
     store.dispatch(setLoadingPeersAction());
   } else if (action.type === ADD_SEARCH_INPUT) {
-    socketService
-      .create()
-      .emit(SEARCH_INPUT, store.getState().search.searchInput);
-    socketService.create().on(SUGGESTIONS, suggestions => {
+    socket.emit(SEARCH_INPUT, action.payload);
+    socketService.createSocketSubscription(SUGGESTIONS, suggestions => {
       store.dispatch(setSuggestionsAction(suggestions));
     });
   }
-  return result;
+  return next(action);
 };

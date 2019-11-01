@@ -4,7 +4,7 @@ import { setSymbolAction, setSearchInputAction } from "../redux/actions";
 import { Icon } from "antd";
 import "./Search.css";
 
-const Search = () => {
+export const Search = () => {
   const [symbol, setSymbol] = useState("");
   const [open, setOpen] = useState(false);
   const dropdownRef = useRef(null);
@@ -107,4 +107,3 @@ const Search = () => {
     </div>
   );
 };
-export default Search;

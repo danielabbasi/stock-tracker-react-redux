@@ -1,8 +1,8 @@
 import React from "react";
 import "./Footer.css";
-import FooterItem from "./FooterItem";
+import { FooterItem } from "./FooterItem";
 
-const Footer = () => {
+export const Footer = () => {
   return (
     <div className="footer">
       <div className="usMarket">
@@ -60,4 +60,3 @@ const Footer = () => {
     </div>
   );
 };
-export default Footer;
