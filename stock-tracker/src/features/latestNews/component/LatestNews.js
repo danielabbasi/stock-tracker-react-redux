@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import Loading from "../../loading/component/loading";
 import ErrorMessage from "../../error/error";
 import "./LatestNews.css";
-const moment = require("moment");
+import moment from "moment";
 
 export const LatestNews = () => {
   const latestNews = useSelector(state => state.news.latestNews);

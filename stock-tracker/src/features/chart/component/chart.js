@@ -16,7 +16,7 @@ import Loading from "../../loading/component/loading";
 import ErrorMessage from "../../error/error";
 import { ChartButton } from "./chartButton";
 import "./chart.css";
-const moment = require("moment");
+import moment from "moment";
 
 export const Chart = () => {
   const dispatch = useDispatch();
