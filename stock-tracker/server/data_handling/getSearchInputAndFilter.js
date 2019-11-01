@@ -14,7 +14,7 @@ const getSearchInputAndFilter = async (socket, input, stockCompanies) => {
       exchange: data.exchange
     }));
 
-    suggestions.sort((a, b) => {
+    const sortByLength = (a, b) => {
       const aIdx = a.symbol.toLowerCase().indexOf(searchInput);
       const bIdx = b.symbol.toLowerCase().indexOf(searchInput);
       if (aIdx === -1) return 1;
@@ -22,7 +22,8 @@ const getSearchInputAndFilter = async (socket, input, stockCompanies) => {
       if (a.symbol.length !== b.symbol.length)
         return a.symbol.length - b.symbol.length;
       else return a.symbol > b.symbol ? 1 : -1;
-    });
+    };
+    suggestions.sort(sortByLength);
     const autocomplete = suggestions.slice(0, 10);
 
     socket.emit("suggestions", autocomplete);
@@ -30,4 +31,5 @@ const getSearchInputAndFilter = async (socket, input, stockCompanies) => {
     console.error(`Search Error: ${error}`);
   }
 };
+
 exports.getSearchInputAndFilter = getSearchInputAndFilter;
