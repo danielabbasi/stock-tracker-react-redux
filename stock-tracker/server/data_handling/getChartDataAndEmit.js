@@ -1,5 +1,5 @@
 const axios = require("axios");
-const HOST = require("./constants");
+const { HOST, CHART_DATA } = require("./constants");
 const TOKEN = process.env.TOKEN;
 
 const getChartDataAndEmit = async (socket, stockSymbol, chartTime) => {
@@ -19,9 +19,9 @@ const getChartDataAndEmit = async (socket, stockSymbol, chartTime) => {
         date: data.date
       }));
     }
-    socket.emit("ChartData", { data: chart });
+    socket.emit(CHART_DATA, { data: chart });
   } catch (error) {
-    socket.emit("ChartData", { isError: true });
+    socket.emit(CHART_DATA, { isError: true });
     console.error(`Chart Data Error: ${error}`);
   }
 };
