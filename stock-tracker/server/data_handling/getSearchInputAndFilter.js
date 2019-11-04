@@ -27,8 +27,9 @@ const getSearchInputAndFilter = async (socket, input, stockCompanies) => {
     suggestions.sort(sortByLength);
     const autocomplete = suggestions.slice(0, 10);
 
-    socket.emit("suggestions", autocomplete);
+    socket.emit("suggestions", { data: autocomplete });
   } catch (error) {
+    socket.emit("suggestions", { isError: true });
     console.error(`Search Error: ${error}`);
   }
 };
