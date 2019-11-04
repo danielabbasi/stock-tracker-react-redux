@@ -24,7 +24,12 @@ export const Overview = () => {
           </h2>
           <p>
             {" "}
-            <a className="overview__web" href={overview.website}>
+            <a
+              rel="noopener noreferrer"
+              className="overview__web"
+              href={overview.website}
+              target="_blank"
+            >
               {overview.website}
             </a>
           </p>
