@@ -4,15 +4,26 @@ import {
   LOADING_CHART,
   SET_ERROR_CHART
 } from "./actionTypes";
+import { ChartActions, ChartData } from "./actions";
+import { Reducer } from "redux";
 
+interface ChartState {
+  chartData: ChartData | boolean;
+  chartTime: string;
+  loading: boolean;
+  error: boolean;
+}
 const initialState = {
-  chartData: [],
+  chartData: false,
   chartTime: "1Y",
   loading: false,
   error: false
 };
 
-export const chartReducer = (state = initialState, action) => {
+export const chartReducer: Reducer<ChartState, ChartActions> = (
+  state = initialState,
+  action
+): ChartState => {
   switch (action.type) {
     case LOADING_CHART:
       return {
