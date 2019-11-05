@@ -1,5 +1,5 @@
 const axios = require("axios");
-const HOST = require("./constants");
+const { HOST, LATEST_NEWS } = require("./constants");
 const TOKEN = process.env.TOKEN;
 
 const getNewsDataAndEmit = async (socket, stockSymbol) => {
@@ -13,9 +13,9 @@ const getNewsDataAndEmit = async (socket, stockSymbol) => {
       source: data.source,
       url: data.url
     }));
-    socket.emit("LatestNews", { data: news });
+    socket.emit(LATEST_NEWS, { data: news });
   } catch (error) {
-    socket.emit("LatestNews", { isError: true });
+    socket.emit(LATEST_NEWS, { isError: true });
     console.error(`News Error: ${error}`);
   }
 };

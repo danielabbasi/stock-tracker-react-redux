@@ -6,10 +6,10 @@ export const createSocketSubscriptions = dispatch => {
   const unsubscribeSockets = eventActions.map(
     ([event, actionCreator, errorActionCreator]) =>
       socketService.createSocketSubscription(event, payload => {
-        if (payload.data) {
-          dispatch(actionCreator(payload.data));
-        } else {
+        if (payload.isError) {
           dispatch(errorActionCreator(payload.isError));
+        } else {
+          dispatch(actionCreator(payload.data));
         }
       })
   );

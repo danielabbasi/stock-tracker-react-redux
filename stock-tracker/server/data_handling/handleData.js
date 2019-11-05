@@ -1,10 +1,10 @@
-const {getSearchInputAndFilter} = require("./getSearchInputAndFilter")
-const {getStockDataAndEmit} = require("./getStockDataAndEmit")
-const {getTopPeersAndEmit} = require("./getTopPeersAndEmit")
-const {getChartDataAndEmit} = require("./getChartDataAndEmit")
-const {getNewsDataAndEmit} = require("./getNewsDataAndEmit")
-const {getCompanyOverviewAndEmit} = require("./getCompanyOverviewAndEmit")
-const {getCompaniesFromAPI} = require("./getCompaniesFromAPI")
+const { getSearchInputAndFilter } = require("./getSearchInputAndFilter");
+const { getStockDataAndEmit } = require("./getStockDataAndEmit");
+const { getTopPeersAndEmit } = require("./getTopPeersAndEmit");
+const { getChartDataAndEmit } = require("./getChartDataAndEmit");
+const { getNewsDataAndEmit } = require("./getNewsDataAndEmit");
+const { getCompanyOverviewAndEmit } = require("./getCompanyOverviewAndEmit");
+const { getCompaniesFromAPI } = require("./getCompaniesFromAPI");
 const DAY_IN_MS = 86400000;
 const HALF_DAY = DAY_IN_MS / 2;
 
@@ -13,7 +13,7 @@ function callNowAndInterval(fn, interval, ...args) {
   return setInterval(() => fn(...args), interval);
 }
 
-const HANDLE_DATA = (socket) => {
+const HANDLE_DATA = socket => {
   const intervals = {};
   console.info("New client connected");
   const stockCompanies = getCompaniesFromAPI(socket);

@@ -1,5 +1,5 @@
 const axios = require("axios");
-const HOST = require("./constants");
+const { HOST, STOCK_DATA } = require("./constants");
 const TOKEN = process.env.TOKEN;
 
 const getStockDataAndEmit = async (socket, stockSymbol) => {
@@ -65,9 +65,9 @@ const getStockDataAndEmit = async (socket, stockSymbol) => {
       isUSMarketOpen
     };
     console.info("Stock data is being sent");
-    socket.emit("StockData", { data: stockData }); // Emitting a new message. It will be consumed by the client
+    socket.emit(STOCK_DATA, { data: stockData }); // Emitting a new message. It will be consumed by the client
   } catch (error) {
-    socket.emit("StockData", { isError: true });
+    socket.emit(STOCK_DATA, { isError: true });
     console.error(`Stock Error: ${error}`);
   }
 };
