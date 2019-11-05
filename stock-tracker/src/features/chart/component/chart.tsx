@@ -17,21 +17,28 @@ import ErrorMessage from "../../error/error";
 import { ChartButton } from "./chartButton";
 import "./chart.css";
 import moment from "moment";
+import { ChartState } from "../redux/chartReducer";
 
 export const Chart = () => {
   const dispatch = useDispatch();
-  const chartData = useSelector((state: any) => state.chart.chartData);
-  const loading = useSelector((state: any) => state.chart.loading);
+  const chartData = useSelector(
+    (state: { chart: ChartState }) => state.chart.chartData
+  );
+  const loading = useSelector(
+    (state: { chart: ChartState }) => state.chart.loading
+  );
   const [current, setCurrent] = useState("1Y");
   const onClick: React.MouseEventHandler<HTMLButtonElement> = e => {
     dispatch(setChartTimeAction(e.currentTarget.value));
     setCurrent(e.currentTarget.value);
   };
   const latestValue =
-    chartData[chartData.length - 1] !== undefined
+    Array.isArray(chartData) && chartData[chartData.length - 1] !== undefined
       ? chartData[chartData.length - 1].close
       : "";
-  const error = useSelector((state: any) => state.chart.error);
+  const error = useSelector(
+    (state: { chart: ChartState }) => state.chart.error
+  );
   const formatDate = (tickItem: string) => {
     switch (current) {
       case "1D":
@@ -68,7 +75,7 @@ export const Chart = () => {
           </div>
           <ResponsiveContainer className="responsive_chart">
             <AreaChart
-              data={chartData}
+              data={Array.isArray(chartData) ? chartData : undefined}
               margin={{ top: 5, right: 20, left: 10, bottom: 5 }}
             >
               <CartesianGrid stroke="#f5f5f5" opacity="0.25" />
@@ -83,7 +90,6 @@ export const Chart = () => {
                 tickFormatter={formatDate}
                 dataKey="date"
                 tick={{ fill: "#ffffff" }}
-                // stroke="white"
               />
               <YAxis
                 tick={{ fill: "#ffffff" }}
