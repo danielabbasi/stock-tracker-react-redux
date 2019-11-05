@@ -13,7 +13,7 @@ interface ChartState {
   loading: boolean;
   error: boolean;
 }
-const initialState = {
+const initialState: ChartState = {
   chartData: false,
   chartTime: "1Y",
   loading: false,
@@ -23,7 +23,7 @@ const initialState = {
 export const chartReducer: Reducer<ChartState, ChartActions> = (
   state = initialState,
   action
-): ChartState => {
+) => {
   switch (action.type) {
     case LOADING_CHART:
       return {
