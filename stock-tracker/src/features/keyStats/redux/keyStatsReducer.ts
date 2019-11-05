@@ -7,13 +7,13 @@ import { Reducer } from "redux";
 import { ResponseData, KeyStatsActions } from "./actions";
 
 export interface KeyStatsState {
-  response: ResponseData | boolean;
+  response: ResponseData | undefined;
   loading: boolean;
   error: boolean;
 }
 
 const initialState: KeyStatsState = {
-  response: false,
+  response: undefined,
   loading: false,
   error: false
 };
