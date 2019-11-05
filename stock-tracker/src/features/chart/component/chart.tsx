@@ -21,24 +21,21 @@ import { ChartState } from "../redux/chartReducer";
 
 export const Chart = () => {
   const dispatch = useDispatch();
-  const chartData = useSelector(
-    (state: { chart: ChartState }) => state.chart.chartData
-  );
-  const loading = useSelector(
-    (state: { chart: ChartState }) => state.chart.loading
+  const { chartData, loading, error } = useSelector(
+    (state: { chart: ChartState }) => state.chart
   );
   const [current, setCurrent] = useState("1Y");
+
   const onClick: React.MouseEventHandler<HTMLButtonElement> = e => {
     dispatch(setChartTimeAction(e.currentTarget.value));
     setCurrent(e.currentTarget.value);
   };
+
   const latestValue =
     Array.isArray(chartData) && chartData[chartData.length - 1] !== undefined
       ? chartData[chartData.length - 1].close
       : "";
-  const error = useSelector(
-    (state: { chart: ChartState }) => state.chart.error
-  );
+
   const formatDate = (tickItem: string) => {
     switch (current) {
       case "1D":
@@ -57,6 +54,7 @@ export const Chart = () => {
         return tickItem;
     }
   };
+
   return (
     <div className="chart">
       {error ? (
