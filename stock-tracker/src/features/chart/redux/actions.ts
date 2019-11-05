@@ -14,7 +14,7 @@ export interface ChartData {
 
 export type SetChartData = ActionWithPayload<
   constants.SET_CHART_DATA,
-  ChartData
+  ChartData[]
 >;
 
 export type SetChartTime = ActionWithPayload<constants.SET_CHART_TIME, string>;
@@ -29,7 +29,7 @@ export type ChartActions =
   | SetChartError
   | SetChartTime;
 
-export const setChartDataAction = (chartData: ChartData): SetChartData => ({
+export const setChartDataAction = (chartData: ChartData[]): SetChartData => ({
   type: SET_CHART_DATA,
   payload: chartData
 });

@@ -7,13 +7,13 @@ import {
 import { ChartActions, ChartData } from "./actions";
 import { Reducer } from "redux";
 
-interface ChartState {
-  chartData: ChartData | boolean;
+export interface ChartState {
+  chartData: ChartData[] | boolean;
   chartTime: string;
   loading: boolean;
   error: boolean;
 }
-const initialState: ChartState = {
+export const initialState: ChartState = {
   chartData: false,
   chartTime: "1Y",
   loading: false,
