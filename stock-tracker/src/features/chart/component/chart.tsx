@@ -17,22 +17,26 @@ import ErrorMessage from "../../error/error";
 import { ChartButton } from "./chartButton";
 import "./chart.css";
 import moment from "moment";
+import { ChartState } from "../redux/chartReducer";
 
 export const Chart = () => {
   const dispatch = useDispatch();
-  const chartData = useSelector(state => state.chart.chartData);
-  const loading = useSelector(state => state.chart.loading);
+  const { chartData, loading, error } = useSelector(
+    (state: { chart: ChartState }) => state.chart
+  );
   const [current, setCurrent] = useState("1Y");
-  const onClick = e => {
-    dispatch(setChartTimeAction(e.target.value));
-    setCurrent(e.target.value);
+
+  const onClick: React.MouseEventHandler<HTMLButtonElement> = e => {
+    dispatch(setChartTimeAction(e.currentTarget.value));
+    setCurrent(e.currentTarget.value);
   };
+
   const latestValue =
-    chartData[chartData.length - 1] !== undefined
+    Array.isArray(chartData) && chartData[chartData.length - 1] !== undefined
       ? chartData[chartData.length - 1].close
       : "";
-  const error = useSelector(state => state.chart.error);
-  const formatDate = tickItem => {
+
+  const formatDate = (tickItem: string) => {
     switch (current) {
       case "1D":
         return tickItem;
@@ -50,6 +54,7 @@ export const Chart = () => {
         return tickItem;
     }
   };
+
   return (
     <div className="chart">
       {error ? (
@@ -68,7 +73,7 @@ export const Chart = () => {
           </div>
           <ResponsiveContainer className="responsive_chart">
             <AreaChart
-              data={chartData}
+              data={Array.isArray(chartData) ? chartData : undefined}
               margin={{ top: 5, right: 20, left: 10, bottom: 5 }}
             >
               <CartesianGrid stroke="#f5f5f5" opacity="0.25" />
@@ -82,9 +87,7 @@ export const Chart = () => {
                 interval="preserveStart"
                 tickFormatter={formatDate}
                 dataKey="date"
-                className="chart_axis"
                 tick={{ fill: "#ffffff" }}
-                // stroke="white"
               />
               <YAxis
                 tick={{ fill: "#ffffff" }}
@@ -94,16 +97,12 @@ export const Chart = () => {
               <ReferenceLine
                 y={latestValue}
                 isFront={true}
-                label={{
-                  position: "right",
-                  value: latestValue,
-                  fill: "var(--bad)",
-                  fontSize: 14
-                }}
+                label={
+                  <Label value={latestValue} stroke="black" position="right" />
+                }
                 stroke="var(--bad)"
                 strokeDasharray="3 3"
               />
-              <Label value={latestValue} stroke="black" position="right" />
               <Tooltip />
               <Area
                 type="monotone"
