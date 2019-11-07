@@ -18,7 +18,7 @@ export const KeyStats = () => {
     <div className="keystats">
       <h1>KEY STATS</h1>
       {error ? (
-        <ErrorMessage feature={"Key stats"} />
+        <ErrorMessage feature="Key stats" />
       ) : loading ? (
         <Loading />
       ) : (
