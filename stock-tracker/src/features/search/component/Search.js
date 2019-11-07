@@ -90,7 +90,7 @@ export const Search = () => {
           htmlFor="search_display__search_bar"
         >
           {" "}
-          {response.companyName}
+          {response && response.companyName}
           <span className="search_display__search_bar__label__symbol">
             {labelSymbol}
           </span>
