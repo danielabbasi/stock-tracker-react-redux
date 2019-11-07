@@ -28,4 +28,4 @@ const createSocketService = () => {
 
 export const socketService = createSocketService();
 
-export type SocketServce = typeof socketService;
+export type SocketService = typeof socketService;

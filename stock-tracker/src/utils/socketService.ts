@@ -1,5 +1,5 @@
-import { SocketServce } from "../socket/socketService";
+import { SocketService } from "../socket/socketService";
 
 export type SocketDependency = {
-  socketService: SocketServce;
+  socketService: SocketService;
 };
