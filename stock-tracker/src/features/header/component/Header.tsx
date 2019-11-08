@@ -12,9 +12,10 @@ import {
 
 export const Header = () => {
   const dispatch = useDispatch();
-  const addSymbol = useCallback(symbol => dispatch(setSymbolAction(symbol)), [
-    dispatch
-  ]);
+  const addSymbol = useCallback(
+    (symbol: string) => dispatch(setSymbolAction(symbol)),
+    [dispatch]
+  );
   const onClick = () => {
     addSymbol("");
   };
