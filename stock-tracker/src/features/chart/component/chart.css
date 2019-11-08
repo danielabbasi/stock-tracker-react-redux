@@ -39,6 +39,7 @@
 }
 
 .chart__label {
-  stroke: orange;
+  stroke: var(--bad);
   font-size: 10px;
+  font-family: Lato-Light;
 }

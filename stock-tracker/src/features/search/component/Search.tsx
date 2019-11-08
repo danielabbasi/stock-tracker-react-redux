@@ -52,8 +52,8 @@ export const Search = () => {
     addSearchInput(e.target.value);
   };
 
-  const onClick = (data: SearchData) => {
-    addSymbol(data.symbol);
+  const onClick = (suggestionRow: SearchData) => {
+    addSymbol(suggestionRow.symbol);
     setOpen(false);
     setSymbol("");
   };
