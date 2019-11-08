@@ -37,3 +37,9 @@
   font-family: Lato-Light;
   opacity: 0.6;
 }
+
+.chart__label {
+  stroke: var(--bad);
+  font-size: 10px;
+  font-family: Lato-Light;
+}
