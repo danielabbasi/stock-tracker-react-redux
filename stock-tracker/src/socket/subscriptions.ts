@@ -1,11 +1,7 @@
 import { socketService } from ".";
 import { eventActions } from "./eventActions";
 import { Dispatch } from "redux";
-
-type Payload = {
-  isError: boolean;
-  data: any;
-};
+import { Payload } from "../utils/payload";
 
 export const createSocketSubscriptions = (dispatch: Dispatch) => {
   socketService.create();

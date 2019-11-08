@@ -7,9 +7,10 @@ import { LatestNews } from "./features/latestNews";
 import { Overview } from "./features/overview";
 import { Footer } from "./features/footer";
 import "./assets/styles/App.css";
+import { AppState } from "./store/rootReducer";
 
-function App() {
-  const symbol = useSelector(state => state.search.symbol);
+const App = () => {
+  const symbol = useSelector((state: AppState) => state.search.symbol);
   return (
     <>
       <div className="wrapper">
@@ -26,5 +27,5 @@ function App() {
       <Footer />
     </>
   );
-}
+};
 export default App;
