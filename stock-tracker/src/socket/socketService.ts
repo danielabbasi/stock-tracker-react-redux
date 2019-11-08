@@ -5,13 +5,16 @@ const PORT = 5000;
 const SERVER = `${HOST}:${PORT}`;
 
 const createSocketService = () => {
-  let socket;
+  let socket: SocketIOClient.Socket;
 
   function create() {
     return socket || (socket = io(SERVER));
   }
 
-  const createSocketSubscription = (event, fn) => {
+  const createSocketSubscription = (
+    event: string,
+    fn: (payload: any) => void
+  ) => {
     if (!socket) {
       throw new Error("You forgot to call `create`!");
     }
@@ -24,3 +27,5 @@ const createSocketService = () => {
 };
 
 export const socketService = createSocketService();
+
+export type SocketService = typeof socketService;
