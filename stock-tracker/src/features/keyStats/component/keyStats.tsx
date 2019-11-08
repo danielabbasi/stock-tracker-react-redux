@@ -5,14 +5,18 @@ import ErrorMessage from "../../error/error";
 import "./KeyStats.css";
 import { AppState } from "../../../store/rootReducer";
 
+const numberWithCommas = (stats: number) => {
+  return stats.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+};
+
+const twoDecimalPlaces = (stats: number) => {
+  return Math.abs(stats).toFixed(2);
+};
+
 export const KeyStats = () => {
   const { response, loading, error } = useSelector(
     (state: AppState) => state.keyStats
   );
-
-  function numberWithCommas(x: number) {
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-  }
 
   return (
     <div className="keystats">
@@ -31,7 +35,7 @@ export const KeyStats = () => {
                 </td>
                 <td className="keystats__grid__display1__value">
                   {response && response.previousClose
-                    ? Math.abs(response.previousClose).toFixed(2)
+                    ? twoDecimalPlaces(response.previousClose)
                     : "N/A"}
                 </td>
               </tr>
@@ -39,9 +43,9 @@ export const KeyStats = () => {
                 <td className="keystats__grid__display1__name">Day Range</td>
                 <td className="keystats__grid__display1__value">
                   {response && response.high && response.low
-                    ? Math.abs(response.high).toFixed(2) +
+                    ? twoDecimalPlaces(response.high) +
                       "-" +
-                      Math.abs(response.low).toFixed(2)
+                      twoDecimalPlaces(response.low)
                     : "N/A"}
                 </td>
               </tr>
@@ -65,7 +69,7 @@ export const KeyStats = () => {
                 <td className="keystats__grid__display1__name">P/E Ratio</td>
                 <td className="keystats__grid__display1__value">
                   {response && response.peRatio
-                    ? Math.abs(response.peRatio).toFixed(2)
+                    ? twoDecimalPlaces(response.peRatio)
                     : "N/A"}
                 </td>
               </tr>
@@ -77,7 +81,7 @@ export const KeyStats = () => {
                 <td className="keystats__grid__display1__name">Open</td>
                 <td className="keystats__grid__display1__value">
                   {response && response.open
-                    ? Math.abs(response.open).toFixed(2)
+                    ? twoDecimalPlaces(response.open)
                     : "N/A"}
                 </td>
               </tr>
@@ -87,9 +91,9 @@ export const KeyStats = () => {
                 </td>
                 <td className="keystats__grid__display1__value">
                   {response && response.week52High && response.week52Low
-                    ? Math.abs(response.week52High).toFixed(2) +
+                    ? twoDecimalPlaces(response.week52High) +
                       "-" +
-                      Math.abs(response.week52Low).toFixed(2)
+                      twoDecimalPlaces(response.week52Low)
                     : "N/A"}
                 </td>
               </tr>
@@ -109,7 +113,7 @@ export const KeyStats = () => {
                 </td>
                 <td className="keystats__grid__display1__value">
                   {response && response.earningsPerShare
-                    ? response.earningsPerShare
+                    ? twoDecimalPlaces(response.earningsPerShare)
                     : "N/A"}
                 </td>
               </tr>
@@ -119,7 +123,7 @@ export const KeyStats = () => {
                 </td>
                 <td className="keystats__grid__display1__value">
                   {response && response.ytdChange
-                    ? Math.abs(response.ytdChange).toFixed(2) + "%"
+                    ? twoDecimalPlaces(response.ytdChange) + "%"
                     : "N/A"}
                 </td>
               </tr>

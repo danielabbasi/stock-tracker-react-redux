@@ -17,12 +17,12 @@ import ErrorMessage from "../../error/error";
 import { ChartButton } from "./chartButton";
 import "./chart.css";
 import moment from "moment";
-import { ChartState } from "../redux/chartReducer";
+import { AppState } from "../../../store/rootReducer";
 
 export const Chart = () => {
   const dispatch = useDispatch();
   const { chartData, loading, error } = useSelector(
-    (state: { chart: ChartState }) => state.chart
+    (state: AppState) => state.chart
   );
   const [current, setCurrent] = useState("1Y");
 
