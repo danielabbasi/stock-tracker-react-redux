@@ -12,10 +12,10 @@ export const CurrencyDisplay = () => {
     <div className={response ? "currency_display" : "hidden"}>
       <ul>
         <li className="currency_display__item currency_display__item__exchange">
-          {overview.exchange}
+          {overview && overview.exchange}
         </li>
         <li className="currency_display__item currency_display__item__industry">
-          {overview.industry}
+          {overview && overview.industry}
         </li>
         <li
           className={
