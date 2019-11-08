@@ -6,7 +6,11 @@ import {
 } from "./actionTypes";
 import { ActionWithPayload, Action } from "../../../utils/actions";
 
-export type Suggestions = string[];
+export type SearchData = {
+  symbol: string;
+  name: string;
+  exchange: string;
+};
 
 export type SetSymbol = ActionWithPayload<typeof ADD_SYMBOL, string>;
 
@@ -24,11 +28,11 @@ export const setSearchInputAction = (searchInput: string): SetSearchInput => ({
 
 export type SetSuggestions = ActionWithPayload<
   typeof ADD_SUGGESTIONS,
-  Suggestions
+  SearchData[]
 >;
 
 export const setSuggestionsAction = (
-  suggestions: Suggestions
+  suggestions: SearchData[]
 ): SetSuggestions => ({
   type: ADD_SUGGESTIONS,
   payload: suggestions

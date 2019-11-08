@@ -4,20 +4,20 @@ import {
   ADD_SUGGESTIONS,
   SET_ERROR_SEARCH
 } from "./actionTypes";
-import { Suggestions, SearchActions } from "./actions";
+import { SearchData, SearchActions } from "./actions";
 import { Reducer } from "redux";
 
 export type SearchState = {
   symbol: string;
   searchInput: string;
-  suggestions: Suggestions;
+  suggestions?: SearchData[];
   error: boolean;
 };
 
 const initialState: SearchState = {
   symbol: "",
   searchInput: "",
-  suggestions: [],
+  suggestions: undefined,
   error: false
 };
 

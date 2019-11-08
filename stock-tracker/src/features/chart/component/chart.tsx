@@ -98,7 +98,11 @@ export const Chart = () => {
                 y={latestValue}
                 isFront={true}
                 label={
-                  <Label value={latestValue} stroke="black" position="right" />
+                  <Label
+                    value={latestValue}
+                    className="chart__label"
+                    position="right"
+                  />
                 }
                 stroke="var(--bad)"
                 strokeDasharray="3 3"
