@@ -5,12 +5,12 @@ import ErrorMessage from "../../error/error";
 import "./KeyStats.css";
 import { AppState } from "../../../store/rootReducer";
 
-const numberWithCommas = (x: number) => {
-  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+const numberWithCommas = (stats: number) => {
+  return stats.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 };
 
-const twoDecimalPlaces = (y: number) => {
-  return Math.abs(y).toFixed(2);
+const twoDecimalPlaces = (stats: number) => {
+  return Math.abs(stats).toFixed(2);
 };
 
 export const KeyStats = () => {
