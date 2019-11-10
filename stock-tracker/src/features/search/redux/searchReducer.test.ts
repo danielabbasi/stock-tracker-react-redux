@@ -20,18 +20,6 @@ const setupInitialState = (): SearchState => ({
 });
 
 describe("testing Search Reducer", () => {
-  // describe("when given an unknown/invalid action", () => {
-  //   let initialState: SearchState;
-  //   let newState: SearchState;
-  //   beforeAll(() => {
-  //     initialState = setupInitialState();
-  //     const action = { type: "UNKOWN_ACTION" };
-  //     newState = searchReducer(initialState, action);
-  //   });
-  //   it("should not change the initial state", () => {
-  //     expect(newState).toBe(initialState);
-  //   });
-  // });
   describe("when given an ADD_SYMBOL action", () => {
     let initialState: SearchState;
     let newState: SearchState;

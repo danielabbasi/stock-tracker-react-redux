@@ -9,18 +9,6 @@ const setupInitialState = (): LatestNewsState => ({
 });
 
 describe("testing News Reducer", () => {
-  // describe("when given an unknown/invalid action", () => {
-  //   let initialState: LatestNewsState;
-  //   let newState: LatestNewsState;
-  //   beforeAll(() => {
-  //     initialState = setupInitialState();
-  //     const action = { type: "UNKNOWN_ACTION" };
-  //     newState = newsReducer(initialState, action);
-  //   });
-  //   it("should not change the initial state", () => {
-  //     expect(newState).toBe(initialState);
-  //   });
-  // });
   describe('when given the "SET_NEWS" action', () => {
     let initialState: LatestNewsState;
     let newState: LatestNewsState;

@@ -20,18 +20,6 @@ const setupInitialState = (): ChartState => ({
 });
 
 describe("testing chart reducer", () => {
-  // describe("when given unknown/invalid action", () => {
-  //   let initialState: ChartState;
-  //   let newState: ChartState;
-  //   beforeAll(() => {
-  //     initialState = setupInitialState();
-  //     const action = { type: "UNKNOWN_ACTION" };
-  //     newState = chartReducer(initialState, action);
-  //   });
-  //   it("should not change the initial state", () => {
-  //     expect(newState).toBe(initialState);
-  //   });
-  // });
   describe("when given SET_CHART_DATA action", () => {
     let initialState: ChartState;
     let newState: ChartState;

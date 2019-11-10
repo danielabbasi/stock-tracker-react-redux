@@ -13,18 +13,6 @@ const setupInitialState = (): TopPeersState => ({
 });
 
 describe("testing Company Overview Reducer", () => {
-  // describe("when given an unknown/invalid action", () => {
-  //   let initialState: TopPeersState;
-  //   let newState: TopPeersState;
-  //   beforeAll(() => {
-  //     initialState = setupInitialState();
-  //     const action = { type: "UNKNOWN_ACTION" };
-  //     newState = peersReducer(initialState, action);
-  //   });
-  //   it("should not change the initial state", () => {
-  //     expect(newState).toBe(initialState);
-  //   });
-  // });
   describe('when given the "ADD_TOP_PEERS" action', () => {
     let initialState: TopPeersState;
     let newState: TopPeersState;

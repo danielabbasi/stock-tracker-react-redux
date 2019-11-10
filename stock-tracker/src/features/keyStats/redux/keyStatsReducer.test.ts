@@ -13,18 +13,6 @@ const setupInitialState = (): KeyStatsState => ({
 });
 
 describe("testing keyStats Reducer", () => {
-  // describe("when given an unknown/invalid action", () => {
-  //   let initialState: KeyStatsState;
-  //   let newState: KeyStatsState;
-  //   beforeAll(() => {
-  //     initialState = setupInitialState();
-  //     const action = { type: "UNKNOWN_ACTION" };
-  //     newState = keyStatsReducer(initialState, action);
-  //   });
-  //   it("should not change the initial state", () => {
-  //     expect(newState).toBe(initialState);
-  //   });
-  // });
   describe('when given the "ADD_RESPONSE" action', () => {
     let initialState: KeyStatsState;
     let newState: KeyStatsState;

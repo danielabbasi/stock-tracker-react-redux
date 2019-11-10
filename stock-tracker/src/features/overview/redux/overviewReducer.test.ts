@@ -17,18 +17,6 @@ const setupInitialState = (): CompanyOverviewState => ({
 });
 
 describe("testing Company Overview Reducer", () => {
-  // describe("when given an unknown/invalid action", () => {
-  //   let initialState: CompanyOverviewState;
-  //   let newState: CompanyOverviewState;
-  //   beforeAll(() => {
-  //     initialState = setupInitialState();
-  //     const action = { type: "UNKNOWN_ACTION" };
-  //     newState = overviewReducer(initialState, action);
-  //   });
-  //   it("should not change the initial state", () => {
-  //     expect(newState).toBe(initialState);
-  //   });
-  // });
   describe('when given the "ADD_COMPANY_OVERVIEW" action', () => {
     let initialState: CompanyOverviewState;
     let newState: CompanyOverviewState;
