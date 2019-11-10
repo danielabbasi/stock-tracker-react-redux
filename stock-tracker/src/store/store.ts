@@ -11,7 +11,9 @@ const middleware = [
   chartMiddleware({ socketService })
 ];
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+// only using any here cause it is a one off! Don't moan
+const composeEnhancers =
+  (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 export const store = createStore(
   rootReducer,
