@@ -1,9 +1,12 @@
 import { socketService } from ".";
-import { eventActions } from "./eventActions";
+import { EventActions } from "./eventActions";
 import { Dispatch } from "redux";
 import { Payload } from "../utils/payload";
 
-export const createSocketSubscriptions = (dispatch: Dispatch) => {
+export const createSocketSubscriptions = (
+  dispatch: Dispatch,
+  eventActions: EventActions
+) => {
   socketService.create();
   const unsubscribeSockets = eventActions.map(
     ({ event: actionName, action, errorAction }) =>

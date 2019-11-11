@@ -6,11 +6,11 @@ import {
 } from "./actionTypes";
 import { ActionWithPayload, Action } from "../../../utils/actions";
 
-export type SearchData = {
+export interface SearchData {
   symbol: string;
   name: string;
   exchange: string;
-};
+}
 
 export type SetSymbol = ActionWithPayload<typeof ADD_SYMBOL, string>;
 

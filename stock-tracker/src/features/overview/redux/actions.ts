@@ -5,14 +5,14 @@ import {
 } from "./actionTypes";
 import { ActionWithPayload, Action } from "../../../utils/actions";
 
-export type CompanyOverviewData = {
+export interface CompanyOverviewData {
   companyName: string;
   symbol: string;
   exchange: string;
   industry: string;
   website: string;
   description: string;
-};
+}
 
 export type SetCompanyOverview = ActionWithPayload<
   ADD_COMPANY_OVERVIEW,

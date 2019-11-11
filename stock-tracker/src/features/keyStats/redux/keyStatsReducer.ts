@@ -18,10 +18,10 @@ const initialState: KeyStatsState = {
   error: false
 };
 
-export const keyStatsReducer: Reducer<KeyStatsState, KeyStatsActions> = (
-  state = initialState,
-  action
-) => {
+export const keyStatsReducer: Reducer<
+  Readonly<KeyStatsState>,
+  KeyStatsActions
+> = (state = initialState, action) => {
   switch (action.type) {
     case SET_LOADING_KEYSTATS:
       return {

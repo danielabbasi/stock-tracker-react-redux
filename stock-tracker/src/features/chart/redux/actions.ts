@@ -5,23 +5,24 @@ import {
   SET_ERROR_CHART
 } from "./actionTypes";
 import { Action, ActionWithPayload } from "../../../utils/actions";
-import * as constants from "./actionTypes";
 
 export interface ChartData {
   close: number;
   date: string;
 }
 
+export type ChartTimes = "1D" | "5D" | "1M" | "1Y" | "5Y" | "MAX";
+
 export type SetChartData = ActionWithPayload<
-  constants.SET_CHART_DATA,
+  typeof SET_CHART_DATA,
   ChartData[]
 >;
 
-export type SetChartTime = ActionWithPayload<constants.SET_CHART_TIME, string>;
+export type SetChartTime = ActionWithPayload<typeof SET_CHART_TIME, ChartTimes>;
 
-export type SetChartLoading = Action<constants.LOADING_CHART>;
+export type SetChartLoading = Action<typeof LOADING_CHART>;
 
-export type SetChartError = Action<constants.SET_ERROR_CHART>;
+export type SetChartError = Action<typeof SET_ERROR_CHART>;
 
 export type ChartActions =
   | SetChartLoading
@@ -34,7 +35,7 @@ export const setChartDataAction = (chartData: ChartData[]): SetChartData => ({
   payload: chartData
 });
 
-export const setChartTimeAction = (chartTime: string): SetChartTime => ({
+export const setChartTimeAction = (chartTime: ChartTimes): SetChartTime => ({
   type: SET_CHART_TIME,
   payload: chartTime
 });

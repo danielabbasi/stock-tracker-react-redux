@@ -4,7 +4,6 @@ import {
   SET_ERROR_KEYSTATS
 } from "./actionTypes";
 import { Action, ActionWithPayload } from "../../../utils/actions";
-import * as constants from "./actionTypes";
 
 export interface ResponseData {
   latestPrice: number;
@@ -30,22 +29,19 @@ export interface ResponseData {
   isUSMarketOpen: boolean;
 }
 
-export type SetResponse = ActionWithPayload<
-  constants.SET_RESPONSE,
-  ResponseData
->;
+export type SetResponse = ActionWithPayload<typeof SET_RESPONSE, ResponseData>;
 
 export const setResponseAction = (response: ResponseData): SetResponse => ({
   type: SET_RESPONSE,
   payload: response
 });
 
-export type SetLoadingKeyStats = Action<constants.SET_LOADING_KEYSTATS>;
+export type SetLoadingKeyStats = Action<typeof SET_LOADING_KEYSTATS>;
 export const setLoadingKeyStatsAction = (): SetLoadingKeyStats => ({
   type: SET_LOADING_KEYSTATS
 });
 
-export type SetErrorKeyStats = Action<constants.SET_ERROR_KEYSTATS>;
+export type SetErrorKeyStats = Action<typeof SET_ERROR_KEYSTATS>;
 export const setErrorKeyStatsAction = (): SetErrorKeyStats => ({
   type: SET_ERROR_KEYSTATS
 });

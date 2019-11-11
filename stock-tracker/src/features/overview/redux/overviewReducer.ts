@@ -19,7 +19,7 @@ const initialState: CompanyOverviewState = {
 };
 
 export const overviewReducer: Reducer<
-  CompanyOverviewState,
+  Readonly<CompanyOverviewState>,
   CompanyOverviewActions
 > = (state = initialState, action) => {
   switch (action.type) {

@@ -18,17 +18,18 @@ import { ChartButton } from "./chartButton";
 import "./chart.css";
 import moment from "moment";
 import { AppState } from "../../../store/rootReducer";
+import { ChartTimes } from "../redux/actions";
 
 export const Chart: FC = () => {
   const dispatch = useDispatch();
   const { chartData, loading, error } = useSelector(
     (state: AppState) => state.chart
   );
-  const [current, setCurrent] = useState("1Y");
+  const [current, setCurrent] = useState<ChartTimes>("1Y");
 
   const onClick: React.MouseEventHandler<HTMLButtonElement> = e => {
-    dispatch(setChartTimeAction(e.currentTarget.value));
-    setCurrent(e.currentTarget.value);
+    setCurrent(e.currentTarget.value as ChartTimes);
+    dispatch(setChartTimeAction(e.currentTarget.value as ChartTimes));
   };
 
   const latestValue =
