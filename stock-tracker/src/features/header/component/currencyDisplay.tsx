@@ -1,8 +1,8 @@
-import React from "react";
+import React, { FC } from "react";
 import { useSelector } from "react-redux";
 import { AppState } from "../../../store/rootReducer";
 
-export const CurrencyDisplay = () => {
+export const CurrencyDisplay: FC = () => {
   const response = useSelector((state: AppState) => state.keyStats.response);
   const overview = useSelector(
     (state: AppState) => state.overview.companyOverview

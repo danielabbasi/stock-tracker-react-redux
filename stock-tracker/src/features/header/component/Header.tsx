@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, FC } from "react";
 import { useDispatch } from "react-redux";
 import { setSymbolAction, Search } from "../../search";
 import logo from "../assets/logo.png";
@@ -10,13 +10,13 @@ import {
   HeaderButtons
 } from "../index";
 
-export const Header = () => {
+export const Header: FC = () => {
   const dispatch = useDispatch();
   const addSymbol = useCallback(
     (symbol: string) => dispatch(setSymbolAction(symbol)),
     [dispatch]
   );
-  const onClick = () => {
+  const onClick: React.MouseEventHandler<HTMLImageElement> = () => {
     addSymbol("");
   };
   return (

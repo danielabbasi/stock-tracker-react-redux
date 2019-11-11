@@ -1,7 +1,7 @@
 import React from "react";
 import "./loading.css";
 
-const Loading = () => {
+export const Loading = () => {
   return (
     <div>
       <div className="lds-ripple">
@@ -11,5 +11,3 @@ const Loading = () => {
     </div>
   );
 };
-
-export default Loading;
