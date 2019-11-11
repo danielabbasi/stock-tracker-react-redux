@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   Area,
@@ -12,14 +12,14 @@ import {
   YAxis
 } from "recharts";
 import { setChartTimeAction } from "../index";
-import Loading from "../../loading/component/loading";
+import { Loading } from "../../loading/component/loading";
 import ErrorMessage from "../../error/error";
 import { ChartButton } from "./chartButton";
 import "./chart.css";
 import moment from "moment";
 import { AppState } from "../../../store/rootReducer";
 
-export const Chart = () => {
+export const Chart: FC = () => {
   const dispatch = useDispatch();
   const { chartData, loading, error } = useSelector(
     (state: AppState) => state.chart

@@ -1,6 +1,6 @@
-import React from "react";
+import React, { FC } from "react";
 import { useSelector } from "react-redux";
-import Loading from "../../loading/component/loading";
+import { Loading } from "../../loading/component/loading";
 import ErrorMessage from "../../error/error";
 import "./KeyStats.css";
 import { AppState } from "../../../store/rootReducer";
@@ -13,7 +13,7 @@ const twoDecimalPlaces = (stats: number) => {
   return Math.abs(stats).toFixed(2);
 };
 
-export const KeyStats = () => {
+export const KeyStats: FC = () => {
   const { response, loading, error } = useSelector(
     (state: AppState) => state.keyStats
   );

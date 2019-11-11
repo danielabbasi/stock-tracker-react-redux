@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC } from "react";
 import { Icon } from "antd";
 import "./Footer.css";
 
@@ -10,13 +10,13 @@ type FooterProps = {
   changePercentage: number;
 };
 
-export const FooterItem = ({
+export const FooterItem: FC<FooterProps> = ({
   exchange,
   currency,
   price,
   changePrice,
   changePercentage
-}: FooterProps) => {
+}) => {
   const changeIcon = changePrice > 0 ? "arrow-up" : "arrow-down";
   const changeColour = changePrice > 0 ? "green" : "red";
   return (

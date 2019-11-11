@@ -1,12 +1,16 @@
-import React from "react";
+import React, { FC } from "react";
 
-type ChartButton = {
+type ChartButtonProps = {
   current: string;
   range: string;
   onClick: React.MouseEventHandler<HTMLButtonElement>;
 };
 
-export const ChartButton = ({ current, range, onClick }: ChartButton) => {
+export const ChartButton: FC<ChartButtonProps> = ({
+  current,
+  range,
+  onClick
+}) => {
   return (
     <button
       className={

@@ -3,7 +3,8 @@ import React, {
   useCallback,
   useEffect,
   useRef,
-  KeyboardEventHandler
+  KeyboardEventHandler,
+  FC
 } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -15,7 +16,7 @@ import { Icon } from "antd";
 import "./Search.css";
 import { AppState } from "../../../store/rootReducer";
 
-export const Search = () => {
+export const Search: FC = () => {
   const suggestions = useSelector(
     (state: AppState) => state.search.suggestions
   );

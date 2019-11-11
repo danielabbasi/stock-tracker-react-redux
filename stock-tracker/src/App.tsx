@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC } from "react";
 import { useSelector } from "react-redux";
 import { Header } from "./features/header";
 import { KeyStats } from "./features/keyStats";
@@ -9,7 +9,7 @@ import { Footer } from "./features/footer";
 import "./assets/styles/App.css";
 import { AppState } from "./store/rootReducer";
 
-const App = () => {
+export const App: FC = () => {
   const symbol = useSelector((state: AppState) => state.search.symbol);
   return (
     <>
@@ -28,4 +28,3 @@ const App = () => {
     </>
   );
 };
-export default App;
