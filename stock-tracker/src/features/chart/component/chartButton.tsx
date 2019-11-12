@@ -1,9 +1,10 @@
 import React, { FC } from "react";
+import { ChartTimes } from "../redux/actions";
 
 type ChartButtonProps = {
   current: string;
-  range: string;
-  onClick: React.MouseEventHandler<HTMLButtonElement>;
+  range: ChartTimes;
+  onClick: <K extends ChartTimes>(chartTime: K) => void;
 };
 
 export const ChartButton: FC<ChartButtonProps> = ({
@@ -19,7 +20,7 @@ export const ChartButton: FC<ChartButtonProps> = ({
           : "chart__graph_btn--inactive"
       }
       value={range}
-      onClick={onClick}
+      onClick={() => onClick(range)}
     >
       {range}
     </button>

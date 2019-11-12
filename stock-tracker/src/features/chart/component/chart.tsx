@@ -27,15 +27,15 @@ export const Chart: FC = () => {
   );
   const [current, setCurrent] = useState<ChartTimes>("1Y");
 
-  const onClick: React.MouseEventHandler<HTMLButtonElement> = e => {
-    setCurrent(e.currentTarget.value as ChartTimes);
-    dispatch(setChartTimeAction(e.currentTarget.value as ChartTimes));
-  };
-
   const latestValue =
     Array.isArray(chartData) && chartData[chartData.length - 1] !== undefined
       ? chartData[chartData.length - 1].close
       : "";
+
+  const chartTimeClick = <K extends ChartTimes>(chartTime: K) => {
+    setCurrent(chartTime);
+    dispatch(setChartTimeAction(chartTime));
+  };
 
   const formatDate = (tickItem: string) => {
     switch (current) {
@@ -65,12 +65,36 @@ export const Chart: FC = () => {
       ) : (
         <>
           <div className="chart__graph_btn">
-            <ChartButton current={current} range="1D" onClick={onClick} />
-            <ChartButton current={current} range="5D" onClick={onClick} />
-            <ChartButton current={current} range="1M" onClick={onClick} />
-            <ChartButton current={current} range="1Y" onClick={onClick} />
-            <ChartButton current={current} range="5Y" onClick={onClick} />
-            <ChartButton current={current} range="MAX" onClick={onClick} />
+            <ChartButton
+              current={current}
+              range="1D"
+              onClick={chartTimeClick}
+            />
+            <ChartButton
+              current={current}
+              range="5D"
+              onClick={chartTimeClick}
+            />
+            <ChartButton
+              current={current}
+              range="1M"
+              onClick={chartTimeClick}
+            />
+            <ChartButton
+              current={current}
+              range="1Y"
+              onClick={chartTimeClick}
+            />
+            <ChartButton
+              current={current}
+              range="5Y"
+              onClick={chartTimeClick}
+            />
+            <ChartButton
+              current={current}
+              range="MAX"
+              onClick={chartTimeClick}
+            />
           </div>
           <ResponsiveContainer className="responsive_chart">
             <AreaChart
