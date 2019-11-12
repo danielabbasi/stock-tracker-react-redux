@@ -34,7 +34,7 @@ export const Chart: FC = () => {
       ? chartData[chartData.length - 1].close
       : "";
 
-  const chartTimeClick = <CT extends ChartTime>(chartTime: CT) => {
+  const chartTimeClick = (chartTime: ChartTime) => {
     setCurrent(chartTime);
     dispatch(setChartTimeAction(chartTime));
   };
