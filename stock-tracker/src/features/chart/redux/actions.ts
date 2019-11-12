@@ -11,14 +11,14 @@ export interface ChartData {
   date: string;
 }
 
-export type ChartTimes = "1D" | "5D" | "1M" | "1Y" | "5Y" | "MAX";
+export type ChartTime = "1D" | "5D" | "1M" | "1Y" | "5Y" | "MAX";
 
 export type SetChartData = ActionWithPayload<
   typeof SET_CHART_DATA,
   ChartData[]
 >;
 
-export type SetChartTime = ActionWithPayload<typeof SET_CHART_TIME, ChartTimes>;
+export type SetChartTime = ActionWithPayload<typeof SET_CHART_TIME, ChartTime>;
 
 export type SetChartLoading = Action<typeof LOADING_CHART>;
 
@@ -35,7 +35,7 @@ export const setChartDataAction = (chartData: ChartData[]): SetChartData => ({
   payload: chartData
 });
 
-export const setChartTimeAction = (chartTime: ChartTimes): SetChartTime => ({
+export const setChartTimeAction = (chartTime: ChartTime): SetChartTime => ({
   type: SET_CHART_TIME,
   payload: chartTime
 });

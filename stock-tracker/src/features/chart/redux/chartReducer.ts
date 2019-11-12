@@ -4,12 +4,12 @@ import {
   LOADING_CHART,
   SET_ERROR_CHART
 } from "./actionTypes";
-import { ChartActions, ChartData, ChartTimes } from "./actions";
+import { ChartActions, ChartData, ChartTime } from "./actions";
 import { Reducer } from "redux";
 
 export interface ChartState {
   chartData: ChartData[];
-  chartTime: ChartTimes;
+  chartTime: ChartTime;
   loading: boolean;
   error: boolean;
 }

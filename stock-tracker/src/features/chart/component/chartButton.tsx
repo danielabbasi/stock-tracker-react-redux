@@ -1,13 +1,13 @@
 import React, { FC } from "react";
-import { ChartTimes } from "../redux/actions";
+import { ChartTime } from "../redux/actions";
 
-type ChartButtonProps = {
-  current: string;
-  range: ChartTimes;
-  onClick: <K extends ChartTimes>(chartTime: K) => void;
+type ChartButtonProps<CT extends ChartTime> = {
+  current: ChartTime;
+  range: CT;
+  onClick: (chartTime: CT) => void;
 };
 
-export const ChartButton: FC<ChartButtonProps> = ({
+export const ChartButton: FC<ChartButtonProps<ChartTime>> = ({
   current,
   range,
   onClick

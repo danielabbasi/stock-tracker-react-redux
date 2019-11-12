@@ -18,22 +18,23 @@ import { ChartButton } from "./chartButton";
 import "./chart.css";
 import moment from "moment";
 import { AppState } from "../../../store/rootReducer";
-import { ChartTimes } from "../redux/actions";
+import { ChartTime } from "../redux/actions";
+
+const chartRanges: ChartTime[] = ["1D", "5D", "1M", "1Y", "5Y", "MAX"];
 
 export const Chart: FC = () => {
   const dispatch = useDispatch();
   const { chartData, loading, error } = useSelector(
     (state: AppState) => state.chart
   );
-  const [current, setCurrent] = useState<ChartTimes>("1Y");
-  const chartRanges: ChartTimes[] = ["1D", "5D", "1M", "1Y", "5Y", "MAX"];
+  const [current, setCurrent] = useState<ChartTime>("1Y");
 
   const latestValue =
     Array.isArray(chartData) && chartData[chartData.length - 1] !== undefined
       ? chartData[chartData.length - 1].close
       : "";
 
-  const chartTimeClick = <K extends ChartTimes>(chartTime: K) => {
+  const chartTimeClick = <CT extends ChartTime>(chartTime: CT) => {
     setCurrent(chartTime);
     dispatch(setChartTimeAction(chartTime));
   };
@@ -57,10 +58,6 @@ export const Chart: FC = () => {
     }
   };
 
-  const chartButtons = chartRanges.map(range => (
-    <ChartButton current={current} range={range} onClick={chartTimeClick} />
-  ));
-
   return (
     <div className="chart">
       {error ? (
@@ -69,7 +66,15 @@ export const Chart: FC = () => {
         <Loading />
       ) : (
         <>
-          <div className="chart__graph_btn">{chartButtons}</div>
+          <div className="chart__graph_btn">
+            {chartRanges.map(range => (
+              <ChartButton
+                current={current}
+                range={range}
+                onClick={chartTimeClick}
+              />
+            ))}
+          </div>
           <ResponsiveContainer className="responsive_chart">
             <AreaChart
               data={Array.isArray(chartData) ? chartData : undefined}
