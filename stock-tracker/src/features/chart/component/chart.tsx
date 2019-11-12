@@ -26,6 +26,7 @@ export const Chart: FC = () => {
     (state: AppState) => state.chart
   );
   const [current, setCurrent] = useState<ChartTimes>("1Y");
+  const chartRanges: ChartTimes[] = ["1D", "5D", "1M", "1Y", "5Y", "MAX"];
 
   const latestValue =
     Array.isArray(chartData) && chartData[chartData.length - 1] !== undefined
@@ -56,6 +57,10 @@ export const Chart: FC = () => {
     }
   };
 
+  const chartButtons = chartRanges.map(range => (
+    <ChartButton current={current} range={range} onClick={chartTimeClick} />
+  ));
+
   return (
     <div className="chart">
       {error ? (
@@ -64,38 +69,7 @@ export const Chart: FC = () => {
         <Loading />
       ) : (
         <>
-          <div className="chart__graph_btn">
-            <ChartButton
-              current={current}
-              range="1D"
-              onClick={chartTimeClick}
-            />
-            <ChartButton
-              current={current}
-              range="5D"
-              onClick={chartTimeClick}
-            />
-            <ChartButton
-              current={current}
-              range="1M"
-              onClick={chartTimeClick}
-            />
-            <ChartButton
-              current={current}
-              range="1Y"
-              onClick={chartTimeClick}
-            />
-            <ChartButton
-              current={current}
-              range="5Y"
-              onClick={chartTimeClick}
-            />
-            <ChartButton
-              current={current}
-              range="MAX"
-              onClick={chartTimeClick}
-            />
-          </div>
+          <div className="chart__graph_btn">{chartButtons}</div>
           <ResponsiveContainer className="responsive_chart">
             <AreaChart
               data={Array.isArray(chartData) ? chartData : undefined}
