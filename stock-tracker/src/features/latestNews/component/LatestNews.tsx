@@ -1,10 +1,10 @@
 import React, { FC } from "react";
 import { useSelector } from "react-redux";
 import { Loading } from "../../loading/component/loading";
-import ErrorMessage from "../../error/error";
+import { ErrorMessage } from "../../error/error";
 import "./LatestNews.css";
 import moment from "moment";
-import { AppState } from "../../../store/rootReducer";
+import { AppState } from "store/rootReducer";
 
 export const LatestNews: FC = () => {
   const { latestNews, loading, error } = useSelector(

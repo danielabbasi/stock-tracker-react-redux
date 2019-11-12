@@ -1,6 +1,4 @@
-import { AppState } from "../store/rootReducer";
-
-export type Payload = {
+export type ApiPayload = {
   isError: boolean;
-  data: AppState;
+  data: any;
 };

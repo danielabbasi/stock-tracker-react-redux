@@ -13,28 +13,31 @@ import {
 } from "recharts";
 import { setChartTimeAction } from "../index";
 import { Loading } from "../../loading/component/loading";
-import ErrorMessage from "../../error/error";
+import { ErrorMessage } from "../../error/error";
 import { ChartButton } from "./chartButton";
 import "./chart.css";
 import moment from "moment";
-import { AppState } from "../../../store/rootReducer";
+import { AppState } from "store/rootReducer";
+import { ChartTime } from "../redux/actions";
+
+const chartRanges: ChartTime[] = ["1D", "5D", "1M", "1Y", "5Y", "MAX"];
 
 export const Chart: FC = () => {
   const dispatch = useDispatch();
   const { chartData, loading, error } = useSelector(
     (state: AppState) => state.chart
   );
-  const [current, setCurrent] = useState("1Y");
-
-  const onClick: React.MouseEventHandler<HTMLButtonElement> = e => {
-    dispatch(setChartTimeAction(e.currentTarget.value));
-    setCurrent(e.currentTarget.value);
-  };
+  const [current, setCurrent] = useState<ChartTime>("1Y");
 
   const latestValue =
     Array.isArray(chartData) && chartData[chartData.length - 1] !== undefined
       ? chartData[chartData.length - 1].close
       : "";
+
+  const chartTimeClick = (chartTime: ChartTime) => {
+    setCurrent(chartTime);
+    dispatch(setChartTimeAction(chartTime));
+  };
 
   const formatDate = (tickItem: string) => {
     switch (current) {
@@ -64,12 +67,13 @@ export const Chart: FC = () => {
       ) : (
         <>
           <div className="chart__graph_btn">
-            <ChartButton current={current} range="1D" onClick={onClick} />
-            <ChartButton current={current} range="5D" onClick={onClick} />
-            <ChartButton current={current} range="1M" onClick={onClick} />
-            <ChartButton current={current} range="1Y" onClick={onClick} />
-            <ChartButton current={current} range="5Y" onClick={onClick} />
-            <ChartButton current={current} range="MAX" onClick={onClick} />
+            {chartRanges.map(range => (
+              <ChartButton
+                current={current}
+                range={range}
+                onClick={chartTimeClick}
+              />
+            ))}
           </div>
           <ResponsiveContainer className="responsive_chart">
             <AreaChart

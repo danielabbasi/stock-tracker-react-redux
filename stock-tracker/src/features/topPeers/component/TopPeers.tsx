@@ -2,9 +2,9 @@ import React, { useCallback, FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Loading } from "../../loading/component/loading";
 import { setSymbolAction } from "../../search/redux/actions";
-import ErrorMessage from "../../error/error";
+import { ErrorMessage } from "../../error/error";
 import "./TopPeers.css";
-import { AppState } from "../../../store/rootReducer";
+import { AppState } from "store/rootReducer";
 
 export const TopPeers: FC = () => {
   const { topPeers, loading, error } = useSelector(

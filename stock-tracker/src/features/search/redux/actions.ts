@@ -4,13 +4,13 @@ import {
   ADD_SUGGESTIONS,
   SET_ERROR_SEARCH
 } from "./actionTypes";
-import { ActionWithPayload, Action } from "../../../utils/actions";
+import { ActionWithPayload, Action } from "utils/actions";
 
-export type SearchData = {
+export interface SearchData {
   symbol: string;
   name: string;
   exchange: string;
-};
+}
 
 export type SetSymbol = ActionWithPayload<typeof ADD_SYMBOL, string>;
 

@@ -14,14 +14,47 @@ import {
 } from "../features/keyStats";
 import { addTopPeersAction, setErrorPeersAction } from "../features/topPeers";
 import { setSuggestionsAction, setErrorSearchAction } from "../features/search";
-import { AnyAction } from "redux";
+import { ActionCreator } from "redux";
+import { SetChartData, SetChartError } from "features/chart/redux/actions";
+import {
+  SetCompanyOverview,
+  SetErrorCompanyOverview
+} from "features/overview/redux/actions";
+import { SetLatestNews, SetErrorNews } from "features/latestNews/redux/actions";
+import { SetResponse, SetErrorKeyStats } from "features/keyStats/redux/actions";
+import { SetSuggestions, SetSearchError } from "features/search/redux/actions";
+import { SetTopPeers, SetErrorPeers } from "features/topPeers/redux/actions";
 
-type EventActions = EventAction[];
+export type EventActions = EventAction[];
+
+export type Actions =
+  | SetChartData
+  | SetCompanyOverview
+  | SetLatestNews
+  | SetResponse
+  | SetSuggestions
+  | SetTopPeers;
+
+export type ErrorActions =
+  | SetChartError
+  | SetErrorCompanyOverview
+  | SetErrorNews
+  | SetErrorKeyStats
+  | SetSearchError
+  | SetErrorPeers;
+
+export type Events =
+  | typeof EventType.CHART_DATA
+  | typeof EventType.COMPANY_OVERVIEW
+  | typeof EventType.LATEST_NEWS
+  | typeof EventType.STOCK_DATA
+  | typeof EventType.SUGGESTIONS
+  | typeof EventType.TOP_PEERS;
 
 type EventAction = {
-  event: string;
-  action: (input: any) => AnyAction;
-  errorAction: (input: boolean) => AnyAction;
+  event: Events;
+  action: ActionCreator<Actions>;
+  errorAction: ActionCreator<ErrorActions>;
 };
 
 export const eventActions: EventActions = [

@@ -1,9 +1,9 @@
 import React, { FC } from "react";
 import { useSelector } from "react-redux";
 import { Loading } from "../../loading/component/loading";
-import ErrorMessage from "../../error/error";
+import { ErrorMessage } from "../../error/error";
 import "./KeyStats.css";
-import { AppState } from "../../../store/rootReducer";
+import { AppState } from "store/rootReducer";
 
 const numberWithCommas = (stats: number) => {
   return stats.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");

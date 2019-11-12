@@ -1,5 +1,5 @@
 import io from "socket.io-client";
-import { Payload } from "../utils/payload";
+import { ApiPayload } from "utils/payload";
 
 const HOST = window.location.hostname;
 const PORT = 5000;
@@ -14,7 +14,7 @@ const createSocketService = () => {
 
   const createSocketSubscription = (
     event: string,
-    fn: (payload: Payload) => void
+    fn: (payload: ApiPayload) => void
   ) => {
     if (!socket) {
       throw new Error("You forgot to call `create`!");

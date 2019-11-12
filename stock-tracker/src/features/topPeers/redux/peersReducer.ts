@@ -18,7 +18,7 @@ const initialState: TopPeersState = {
   error: false
 };
 
-export const peersReducer: Reducer<TopPeersState, TopPeersActions> = (
+export const peersReducer: Reducer<Readonly<TopPeersState>, TopPeersActions> = (
   state = initialState,
   action
 ) => {

@@ -14,7 +14,7 @@ const initialState: LatestNewsState = {
   error: false
 };
 
-export const newsReducer: Reducer<LatestNewsState, NewsActions> = (
+export const newsReducer: Reducer<Readonly<LatestNewsState>, NewsActions> = (
   state = initialState,
   action
 ) => {

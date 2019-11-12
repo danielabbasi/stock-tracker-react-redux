@@ -21,7 +21,7 @@ const initialState: SearchState = {
   error: false
 };
 
-export const searchReducer: Reducer<SearchState, SearchActions> = (
+export const searchReducer: Reducer<Readonly<SearchState>, SearchActions> = (
   state = initialState,
   action
 ) => {

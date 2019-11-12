@@ -4,9 +4,10 @@ import { initialStartupMiddlware } from "./initialStartupMiddleware";
 import { searchMiddleware } from "../features/search";
 import { chartMiddleware } from "../features/chart";
 import { socketService } from "../socket";
+import { eventActions } from "../socket/eventActions";
 
 const middleware = [
-  initialStartupMiddlware({ socketService }),
+  initialStartupMiddlware({ socketService, eventActions }),
   searchMiddleware({ socketService }),
   chartMiddleware({ socketService })
 ];
