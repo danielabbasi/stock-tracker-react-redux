@@ -12,9 +12,14 @@ const middleware = [
   chartMiddleware({ socketService })
 ];
 
-// only using any here cause it is a one off! Don't moan
-const composeEnhancers =
-  (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+// Module augmentation - Redux devtools extension compose exists in a dev environment when using Redux DevTools
+declare global {
+  interface Window {
+    __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
+  }
+}
+
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 export const store = createStore(
   rootReducer,

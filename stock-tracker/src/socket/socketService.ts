@@ -1,6 +1,6 @@
 import io from "socket.io-client";
 import { ApiPayload } from "utils/payload";
-import { Events } from "./eventActions";
+import { EventActionsMap } from "./eventActions";
 
 const HOST = window.location.hostname;
 const PORT = 5000;
@@ -13,9 +13,9 @@ const createSocketService = () => {
     return socket || (socket = io(SERVER));
   }
 
-  const createSocketSubscription = (
-    event: Events,
-    fn: (payload: ApiPayload) => void
+  const createSocketSubscription = <E extends keyof EventActionsMap>(
+    event: E,
+    fn: (payload: ApiPayload<EventActionsMap[E]["payload"]>) => void
   ) => {
     if (!socket) {
       throw new Error("You forgot to call `create`!");

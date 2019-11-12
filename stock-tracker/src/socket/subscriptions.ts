@@ -1,7 +1,6 @@
-import { socketService } from ".";
+import { socketService } from "./socketService";
 import { EventActions, ApplicationActions } from "./eventActions";
 import { Dispatch } from "redux";
-import { ApiPayload } from "utils/payload";
 
 export const createSocketSubscriptions = (
   dispatch: Dispatch<ApplicationActions>,
@@ -10,7 +9,7 @@ export const createSocketSubscriptions = (
   socketService.create();
   const unsubscribeSockets = eventActions.map(
     ({ event, action, errorAction }) =>
-      socketService.createSocketSubscription(event, (payload: ApiPayload) => {
+      socketService.createSocketSubscription(event, payload => {
         if (payload.isError) {
           dispatch(errorAction(payload.isError));
         } else {
