@@ -14,7 +14,7 @@ import {
 } from "../redux/actions";
 import { Icon } from "antd";
 import "./Search.css";
-import { AppState } from "../../../store/rootReducer";
+import { AppState } from "store/rootReducer";
 
 export const Search: FC = () => {
   const suggestions = useSelector(

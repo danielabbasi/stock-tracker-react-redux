@@ -4,7 +4,7 @@ import {
   LOADING_CHART,
   SET_ERROR_CHART
 } from "./actionTypes";
-import { Action, ActionWithPayload } from "../../../utils/actions";
+import { Action, ActionWithPayload } from "utils/actions";
 
 export interface ChartData {
   close: number;

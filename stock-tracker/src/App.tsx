@@ -7,7 +7,7 @@ import { LatestNews } from "./features/latestNews";
 import { Overview } from "./features/overview";
 import { Footer } from "./features/footer";
 import "./assets/styles/App.css";
-import { AppState } from "./store/rootReducer";
+import { AppState } from "store/rootReducer";
 
 export const App: FC = () => {
   const symbol = useSelector((state: AppState) => state.search.symbol);

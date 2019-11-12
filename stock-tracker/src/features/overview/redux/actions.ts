@@ -3,7 +3,7 @@ import {
   SET_LOADING_OVERVIEW,
   SET_ERROR_OVERVIEW
 } from "./actionTypes";
-import { ActionWithPayload, Action } from "../../../utils/actions";
+import { ActionWithPayload, Action } from "utils/actions";
 
 export interface CompanyOverviewData {
   companyName: string;
@@ -15,7 +15,7 @@ export interface CompanyOverviewData {
 }
 
 export type SetCompanyOverview = ActionWithPayload<
-  ADD_COMPANY_OVERVIEW,
+  typeof ADD_COMPANY_OVERVIEW,
   CompanyOverviewData
 >;
 
@@ -26,13 +26,13 @@ export const setCompanyOverviewAction = (
   payload: companyOverview
 });
 
-export type SetLoadingCompanyOverview = Action<SET_LOADING_OVERVIEW>;
+export type SetLoadingCompanyOverview = Action<typeof SET_LOADING_OVERVIEW>;
 
 export const setLoadingOverviewAction = (): SetLoadingCompanyOverview => ({
   type: SET_LOADING_OVERVIEW
 });
 
-export type SetErrorCompanyOverview = Action<SET_ERROR_OVERVIEW>;
+export type SetErrorCompanyOverview = Action<typeof SET_ERROR_OVERVIEW>;
 
 export const setErrorOverviewAction = (): SetErrorCompanyOverview => ({
   type: SET_ERROR_OVERVIEW

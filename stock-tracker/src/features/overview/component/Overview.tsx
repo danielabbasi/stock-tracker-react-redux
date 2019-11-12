@@ -2,9 +2,9 @@ import React, { FC } from "react";
 import { useSelector } from "react-redux";
 import { Loading } from "../../loading/component/loading";
 import { TopPeers } from "../../topPeers";
-import ErrorMessage from "../../error/error";
+import { ErrorMessage } from "../../error/error";
 import "./Overview.css";
-import { AppState } from "../../../store/rootReducer";
+import { AppState } from "store/rootReducer";
 
 export const Overview: FC = () => {
   const { companyOverview, loading, error } = useSelector(

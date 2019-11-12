@@ -1,7 +1,7 @@
 import { socketService } from ".";
 import { EventActions } from "./eventActions";
 import { Dispatch } from "redux";
-import { ApiPayload } from "../utils/payload";
+import { ApiPayload } from "utils/payload";
 
 export const createSocketSubscriptions = (
   dispatch: Dispatch,

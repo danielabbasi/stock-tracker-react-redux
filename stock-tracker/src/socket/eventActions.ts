@@ -15,24 +15,15 @@ import {
 import { addTopPeersAction, setErrorPeersAction } from "../features/topPeers";
 import { setSuggestionsAction, setErrorSearchAction } from "../features/search";
 import { ActionCreator } from "redux";
-import { SetChartData, SetChartError } from "../features/chart/redux/actions";
+import { SetChartData, SetChartError } from "features/chart/redux/actions";
 import {
   SetCompanyOverview,
   SetErrorCompanyOverview
-} from "../features/overview/redux/actions";
-import {
-  SetLatestNews,
-  SetErrorNews
-} from "../features/latestNews/redux/actions";
-import {
-  SetResponse,
-  SetErrorKeyStats
-} from "../features/keyStats/redux/actions";
-import {
-  SetSuggestions,
-  SetSearchError
-} from "../features/search/redux/actions";
-import { SetTopPeers, SetErrorPeers } from "../features/topPeers/redux/actions";
+} from "features/overview/redux/actions";
+import { SetLatestNews, SetErrorNews } from "features/latestNews/redux/actions";
+import { SetResponse, SetErrorKeyStats } from "features/keyStats/redux/actions";
+import { SetSuggestions, SetSearchError } from "features/search/redux/actions";
+import { SetTopPeers, SetErrorPeers } from "features/topPeers/redux/actions";
 
 export type EventActions = EventAction[];
 

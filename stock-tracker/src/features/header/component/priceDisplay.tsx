@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import { useSelector } from "react-redux";
 import { Icon } from "antd";
-import { AppState } from "../../../store/rootReducer";
+import { AppState } from "store/rootReducer";
 
 export const PriceDisplay: FC = () => {
   const response = useSelector((state: AppState) => state.keyStats.response);

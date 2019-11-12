@@ -3,7 +3,7 @@ import {
   SET_LOADING_KEYSTATS,
   SET_ERROR_KEYSTATS
 } from "./actionTypes";
-import { Action, ActionWithPayload } from "../../../utils/actions";
+import { Action, ActionWithPayload } from "utils/actions";
 
 export interface ResponseData {
   latestPrice: number;

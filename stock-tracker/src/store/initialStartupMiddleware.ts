@@ -1,9 +1,9 @@
 import { INITIAL_STARTUP } from "./actionTypes";
 import { createSocketSubscriptions } from "../socket/subscriptions";
-import { SocketDependency } from "../utils/socketService";
+import { SocketDependency } from "utils/socketService";
 import { Middleware } from "redux";
 import { AppState } from "./rootReducer";
-import { EventActions } from "../socket/eventActions";
+import { EventActions } from "socket/eventActions";
 
 type StartupMiddlewareDependencies = SocketDependency & {
   eventActions: EventActions;

@@ -4,12 +4,10 @@ type ErrorProps = {
   feature: string;
 };
 
-const ErrorMessage: FC<ErrorProps> = ({ feature }) => {
+export const ErrorMessage: FC<ErrorProps> = ({ feature }) => {
   return (
     <div>
       <p className="error__message">Error: {feature} can not be displayed</p>
     </div>
   );
 };
-
-export default ErrorMessage;

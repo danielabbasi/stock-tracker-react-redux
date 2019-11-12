@@ -13,11 +13,11 @@ import {
 } from "recharts";
 import { setChartTimeAction } from "../index";
 import { Loading } from "../../loading/component/loading";
-import ErrorMessage from "../../error/error";
+import { ErrorMessage } from "../../error/error";
 import { ChartButton } from "./chartButton";
 import "./chart.css";
 import moment from "moment";
-import { AppState } from "../../../store/rootReducer";
+import { AppState } from "store/rootReducer";
 import { ChartTime } from "../redux/actions";
 
 const chartRanges: ChartTime[] = ["1D", "5D", "1M", "1Y", "5Y", "MAX"];

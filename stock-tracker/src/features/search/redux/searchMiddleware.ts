@@ -5,9 +5,9 @@ import { setLoadingKeyStatsAction } from "../../keyStats";
 import { setLoadingPeersAction } from "../../topPeers";
 import { ADD_SYMBOL, ADD_SEARCH_INPUT } from "./actionTypes";
 import { SYMBOL_INPUT, SEARCH_INPUT } from "../../../socket/eventTypes";
-import { SocketDependency } from "../../../utils/socketService";
+import { SocketDependency } from "utils/socketService";
 import { Middleware } from "redux";
-import { AppState } from "../../../store/rootReducer";
+import { AppState } from "store/rootReducer";
 
 export const searchMiddleware = ({
   socketService

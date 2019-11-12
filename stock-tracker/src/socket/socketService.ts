@@ -1,5 +1,5 @@
 import io from "socket.io-client";
-import { ApiPayload } from "../utils/payload";
+import { ApiPayload } from "utils/payload";
 
 const HOST = window.location.hostname;
 const PORT = 5000;

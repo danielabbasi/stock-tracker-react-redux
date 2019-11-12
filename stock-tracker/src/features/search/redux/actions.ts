@@ -4,7 +4,7 @@ import {
   ADD_SUGGESTIONS,
   SET_ERROR_SEARCH
 } from "./actionTypes";
-import { ActionWithPayload, Action } from "../../../utils/actions";
+import { ActionWithPayload, Action } from "utils/actions";
 
 export interface SearchData {
   symbol: string;

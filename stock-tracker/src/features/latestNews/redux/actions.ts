@@ -1,5 +1,5 @@
 import { SET_NEWS, SET_LOADING_NEWS, SET_ERROR_NEWS } from "./actionTypes";
-import { ActionWithPayload, Action } from "../../../utils/actions";
+import { ActionWithPayload, Action } from "utils/actions";
 
 export interface LatestNews {
   headline: string;
