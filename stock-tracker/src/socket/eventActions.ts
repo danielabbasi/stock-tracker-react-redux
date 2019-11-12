@@ -43,6 +43,8 @@ export type ErrorActions =
   | SetSearchError
   | SetErrorPeers;
 
+export type ApplicationActions = Actions | ErrorActions;
+
 export type Events =
   | typeof EventType.CHART_DATA
   | typeof EventType.COMPANY_OVERVIEW
