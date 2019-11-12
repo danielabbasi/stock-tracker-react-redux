@@ -1,5 +1,6 @@
 import io from "socket.io-client";
 import { ApiPayload } from "utils/payload";
+import { Events } from "./eventActions";
 
 const HOST = window.location.hostname;
 const PORT = 5000;
@@ -13,7 +14,7 @@ const createSocketService = () => {
   }
 
   const createSocketSubscription = (
-    event: string,
+    event: Events,
     fn: (payload: ApiPayload) => void
   ) => {
     if (!socket) {
