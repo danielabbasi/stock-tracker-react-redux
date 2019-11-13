@@ -4,6 +4,7 @@ import { Loading } from "../../loading/component/loading";
 import { ErrorMessage } from "../../error/error";
 import "./KeyStats.css";
 import { AppState } from "store/rootReducer";
+import { KeyStatsRow } from "./keyStatsRow";
 
 const numberWithCommas = (stats: number) => {
   return stats.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -17,6 +18,46 @@ export const KeyStats: FC = () => {
   const { response, loading, error } = useSelector(
     (state: AppState) => state.keyStats
   );
+  const keyStatsData = {
+    "Previous Close":
+      response && response.previousClose
+        ? twoDecimalPlaces(response.previousClose)
+        : "N/A",
+    "Day Range":
+      response && response.high && response.low
+        ? `${twoDecimalPlaces(response.high)}-${twoDecimalPlaces(response.low)}`
+        : "N/A",
+    Volume:
+      response && response.previousVolume
+        ? numberWithCommas(response.previousVolume)
+        : "N/A",
+    "Market Cap":
+      response && response.marketCap
+        ? numberWithCommas(response.marketCap)
+        : "N/A",
+    "P/E Ratio":
+      response && response.peRatio ? twoDecimalPlaces(response.peRatio) : "N/A",
+
+    Open: response && response.open ? twoDecimalPlaces(response.open) : "N/A",
+    "52 Week Range":
+      response && response.week52High && response.week52Low
+        ? `${twoDecimalPlaces(response.week52High)}-${twoDecimalPlaces(
+            response.week52Low
+          )}`
+        : "N/A",
+    "Total Avg Volume":
+      response && response.avgTotalVolume
+        ? numberWithCommas(response.avgTotalVolume)
+        : "N/A",
+    "Earning Per Share":
+      response && response.earningsPerShare
+        ? twoDecimalPlaces(response.earningsPerShare)
+        : "N/A",
+    "Dividend & Yield":
+      response && response.ytdChange
+        ? `${twoDecimalPlaces(response.ytdChange)}%`
+        : "N/A"
+  };
 
   return (
     <div className="keystats">
@@ -26,107 +67,12 @@ export const KeyStats: FC = () => {
       ) : loading ? (
         <Loading />
       ) : (
-        <div className="keystats__grid">
-          <table className="keystats__grid__display1">
+        <div className="keystats__display">
+          <table className="keystats__display__table">
             <tbody>
-              <tr>
-                <td className="keystats__grid__display1__name">
-                  Previous Close
-                </td>
-                <td className="keystats__grid__display1__value">
-                  {response && response.previousClose
-                    ? twoDecimalPlaces(response.previousClose)
-                    : "N/A"}
-                </td>
-              </tr>
-              <tr>
-                <td className="keystats__grid__display1__name">Day Range</td>
-                <td className="keystats__grid__display1__value">
-                  {response && response.high && response.low
-                    ? twoDecimalPlaces(response.high) +
-                      "-" +
-                      twoDecimalPlaces(response.low)
-                    : "N/A"}
-                </td>
-              </tr>
-              <tr>
-                <td className="keystats__grid__display1__name">Volume</td>
-                <td className="keystats__grid__display1__value">
-                  {response && response.previousVolume
-                    ? numberWithCommas(response.previousVolume)
-                    : "N/A"}
-                </td>
-              </tr>
-              <tr>
-                <td className="keystats__grid__display1__name">Market Cap</td>
-                <td className="keystats__grid__display1__value">
-                  {response && response.marketCap
-                    ? numberWithCommas(response.marketCap)
-                    : "N/A"}
-                </td>
-              </tr>
-              <tr>
-                <td className="keystats__grid__display1__name">P/E Ratio</td>
-                <td className="keystats__grid__display1__value">
-                  {response && response.peRatio
-                    ? twoDecimalPlaces(response.peRatio)
-                    : "N/A"}
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          <table className="keystats__grid__display2">
-            <tbody>
-              <tr>
-                <td className="keystats__grid__display1__name">Open</td>
-                <td className="keystats__grid__display1__value">
-                  {response && response.open
-                    ? twoDecimalPlaces(response.open)
-                    : "N/A"}
-                </td>
-              </tr>
-              <tr>
-                <td className="keystats__grid__display1__name">
-                  52 Week Range
-                </td>
-                <td className="keystats__grid__display1__value">
-                  {response && response.week52High && response.week52Low
-                    ? twoDecimalPlaces(response.week52High) +
-                      "-" +
-                      twoDecimalPlaces(response.week52Low)
-                    : "N/A"}
-                </td>
-              </tr>
-              <tr>
-                <td className="keystats__grid__display1__name">
-                  Total Avg Volume
-                </td>
-                <td className="keystats__grid__display1__value">
-                  {response && response.avgTotalVolume
-                    ? numberWithCommas(response.avgTotalVolume)
-                    : "N/A"}
-                </td>
-              </tr>
-              <tr>
-                <td className="keystats__grid__display1__name">
-                  Earning Per Share
-                </td>
-                <td className="keystats__grid__display1__value">
-                  {response && response.earningsPerShare
-                    ? twoDecimalPlaces(response.earningsPerShare)
-                    : "N/A"}
-                </td>
-              </tr>
-              <tr>
-                <td className="keystats__grid__display1__name">
-                  Dividend & Yield
-                </td>
-                <td className="keystats__grid__display1__value">
-                  {response && response.ytdChange
-                    ? twoDecimalPlaces(response.ytdChange) + "%"
-                    : "N/A"}
-                </td>
-              </tr>
+              {Object.entries(keyStatsData).map(([key, value]) => (
+                <KeyStatsRow label={key} value={value} />
+              ))}
             </tbody>
           </table>
         </div>
