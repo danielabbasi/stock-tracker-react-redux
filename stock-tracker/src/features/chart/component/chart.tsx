@@ -29,13 +29,11 @@ const formatDateXAxis = (tickItem: string, current: ChartTime) => {
     case "5D":
       return moment(tickItem).format("dddd");
     case "1M":
-      return moment(tickItem).format("MMM Do");
     case "1Y":
       return moment(tickItem).format("MMM Do");
     case "5Y":
-      return moment(tickItem).format("MMM, YYYY");
     case "MAX":
-      return moment(tickItem).format("MMM DD, YYYY");
+      return moment(tickItem).format("MMM, YYYY");
     default:
       return tickItem;
   }
