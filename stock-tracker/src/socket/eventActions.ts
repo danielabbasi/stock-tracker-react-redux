@@ -46,71 +46,50 @@ import {
   TopPeers
 } from "features/topPeers/redux/actions";
 
-export type EventActions = EventAction<Events>[];
-
-export type Actions =
-  | SetChartData
-  | SetCompanyOverview
-  | SetLatestNews
-  | SetResponse
-  | SetSuggestions
-  | SetTopPeers;
-
-export type ErrorActions =
-  | SetChartError
-  | SetErrorCompanyOverview
-  | SetErrorNews
-  | SetErrorKeyStats
-  | SetSearchError
-  | SetErrorPeers;
-
-export type ApplicationActions = Actions | ErrorActions;
-
-export type Events =
-  | typeof EventType.CHART_DATA
-  | typeof EventType.COMPANY_OVERVIEW
-  | typeof EventType.LATEST_NEWS
-  | typeof EventType.STOCK_DATA
-  | typeof EventType.SUGGESTIONS
-  | typeof EventType.TOP_PEERS;
-
-export type EventActionsMap = {
+export type Events = {
   [EventType.CHART_DATA]: {
     payload: ChartData[];
-    action: ActionCreator<SetChartData>;
-    errorAction: ActionCreator<SetChartError>;
+    action: SetChartData;
+    errorAction: SetChartError;
   };
   [EventType.COMPANY_OVERVIEW]: {
     payload: CompanyOverviewData;
-    action: ActionCreator<SetCompanyOverview>;
-    errorAction: ActionCreator<SetErrorCompanyOverview>;
+    action: SetCompanyOverview;
+    errorAction: SetErrorCompanyOverview;
   };
   [EventType.LATEST_NEWS]: {
     payload: LatestNews;
-    action: ActionCreator<SetLatestNews>;
-    errorAction: ActionCreator<SetErrorNews>;
+    action: SetLatestNews;
+    errorAction: SetErrorNews;
   };
   [EventType.STOCK_DATA]: {
     payload: ResponseData;
-    action: ActionCreator<SetResponse>;
-    errorAction: ActionCreator<SetErrorKeyStats>;
+    action: SetResponse;
+    errorAction: SetErrorKeyStats;
   };
   [EventType.SUGGESTIONS]: {
     payload: SearchData;
-    action: ActionCreator<SetSuggestions>;
-    errorAction: ActionCreator<SetSearchError>;
+    action: SetSuggestions;
+    errorAction: SetSearchError;
   };
   [EventType.TOP_PEERS]: {
     payload: TopPeers;
-    action: ActionCreator<SetTopPeers>;
-    errorAction: ActionCreator<SetErrorPeers>;
+    action: SetTopPeers;
+    errorAction: SetErrorPeers;
   };
 };
-export type EventAction<E extends keyof EventActionsMap> = {
+
+type Actions = Events[keyof Events]["action"];
+type ErrorActions = Events[keyof Events]["errorAction"];
+export type ApplicationActions = Actions | ErrorActions;
+
+export type EventAction<E extends keyof Events> = {
   event: E;
-  action: EventActionsMap[E]["action"];
-  errorAction: EventActionsMap[E]["errorAction"];
+  action: ActionCreator<Events[E]["action"]>;
+  errorAction: ActionCreator<Events[E]["errorAction"]>;
 };
+
+export type EventActions = EventAction<keyof Events>[];
 
 export const eventActions: EventActions = [
   {
