@@ -22,6 +22,23 @@ import { ChartTime } from "../redux/actions";
 
 const chartRanges: ChartTime[] = ["1D", "5D", "1M", "1Y", "5Y", "MAX"];
 
+const formatDateXAxis = (tickItem: string, current: ChartTime) => {
+  switch (current) {
+    case "1D":
+      return tickItem;
+    case "5D":
+      return moment(tickItem).format("dddd");
+    case "1M":
+    case "1Y":
+      return moment(tickItem).format("MMM Do");
+    case "5Y":
+    case "MAX":
+      return moment(tickItem).format("MMM, YYYY");
+    default:
+      return tickItem;
+  }
+};
+
 export const Chart: FC = () => {
   const dispatch = useDispatch();
   const { chartData, loading, error } = useSelector(
@@ -37,25 +54,6 @@ export const Chart: FC = () => {
   const chartTimeClick = (chartTime: ChartTime) => {
     setCurrent(chartTime);
     dispatch(setChartTimeAction(chartTime));
-  };
-
-  const formatDate = (tickItem: string) => {
-    switch (current) {
-      case "1D":
-        return tickItem;
-      case "5D":
-        return moment(tickItem).format("dddd");
-      case "1M":
-        return moment(tickItem).format("MMM Do");
-      case "1Y":
-        return moment(tickItem).format("MMM Do");
-      case "5Y":
-        return moment(tickItem).format("MMM, YYYY");
-      case "MAX":
-        return moment(tickItem).format("MMM DD, YYYY");
-      default:
-        return tickItem;
-    }
   };
 
   return (
@@ -89,7 +87,7 @@ export const Chart: FC = () => {
               </defs>
               <XAxis
                 interval="preserveStart"
-                tickFormatter={formatDate}
+                tickFormatter={tickItem => formatDateXAxis(tickItem, current)}
                 dataKey="date"
                 tick={{ fill: "#ffffff" }}
               />
