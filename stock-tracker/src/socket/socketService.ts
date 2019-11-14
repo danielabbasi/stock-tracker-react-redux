@@ -13,9 +13,9 @@ const createSocketService = () => {
     return socket || (socket = io(SERVER));
   }
 
-  const createSocketSubscription = (
-    event: Events,
-    fn: (payload: ApiPayload) => void
+  const createSocketSubscription = <E extends keyof Events>(
+    event: E,
+    fn: (payload: ApiPayload<Events[E]["payload"]>) => void
   ) => {
     if (!socket) {
       throw new Error("You forgot to call `create`!");

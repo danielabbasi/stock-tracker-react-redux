@@ -1,4 +1,4 @@
-export type ApiPayload = {
+export type ApiPayload<DataType> = {
   isError: boolean;
-  data: any;
+  data: DataType;
 };

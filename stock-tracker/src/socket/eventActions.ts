@@ -15,49 +15,81 @@ import {
 import { addTopPeersAction, setErrorPeersAction } from "../features/topPeers";
 import { setSuggestionsAction, setErrorSearchAction } from "../features/search";
 import { ActionCreator } from "redux";
-import { SetChartData, SetChartError } from "features/chart/redux/actions";
+import {
+  SetChartData,
+  SetChartError,
+  ChartData
+} from "features/chart/redux/actions";
 import {
   SetCompanyOverview,
-  SetErrorCompanyOverview
+  SetErrorCompanyOverview,
+  CompanyOverviewData
 } from "features/overview/redux/actions";
-import { SetLatestNews, SetErrorNews } from "features/latestNews/redux/actions";
-import { SetResponse, SetErrorKeyStats } from "features/keyStats/redux/actions";
-import { SetSuggestions, SetSearchError } from "features/search/redux/actions";
-import { SetTopPeers, SetErrorPeers } from "features/topPeers/redux/actions";
+import {
+  SetLatestNews,
+  SetErrorNews,
+  LatestNews
+} from "features/latestNews/redux/actions";
+import {
+  SetResponse,
+  SetErrorKeyStats,
+  ResponseData
+} from "features/keyStats/redux/actions";
+import {
+  SetSuggestions,
+  SetSearchError,
+  SearchData
+} from "features/search/redux/actions";
+import {
+  SetTopPeers,
+  SetErrorPeers,
+  TopPeers
+} from "features/topPeers/redux/actions";
 
-export type EventActions = EventAction[];
+export type Events = {
+  [EventType.CHART_DATA]: {
+    payload: ChartData[];
+    action: SetChartData;
+    errorAction: SetChartError;
+  };
+  [EventType.COMPANY_OVERVIEW]: {
+    payload: CompanyOverviewData;
+    action: SetCompanyOverview;
+    errorAction: SetErrorCompanyOverview;
+  };
+  [EventType.LATEST_NEWS]: {
+    payload: LatestNews;
+    action: SetLatestNews;
+    errorAction: SetErrorNews;
+  };
+  [EventType.STOCK_DATA]: {
+    payload: ResponseData;
+    action: SetResponse;
+    errorAction: SetErrorKeyStats;
+  };
+  [EventType.SUGGESTIONS]: {
+    payload: SearchData;
+    action: SetSuggestions;
+    errorAction: SetSearchError;
+  };
+  [EventType.TOP_PEERS]: {
+    payload: TopPeers;
+    action: SetTopPeers;
+    errorAction: SetErrorPeers;
+  };
+};
 
-export type Actions =
-  | SetChartData
-  | SetCompanyOverview
-  | SetLatestNews
-  | SetResponse
-  | SetSuggestions
-  | SetTopPeers;
-
-export type ErrorActions =
-  | SetChartError
-  | SetErrorCompanyOverview
-  | SetErrorNews
-  | SetErrorKeyStats
-  | SetSearchError
-  | SetErrorPeers;
-
+type Actions = Events[keyof Events]["action"];
+type ErrorActions = Events[keyof Events]["errorAction"];
 export type ApplicationActions = Actions | ErrorActions;
 
-export type Events =
-  | typeof EventType.CHART_DATA
-  | typeof EventType.COMPANY_OVERVIEW
-  | typeof EventType.LATEST_NEWS
-  | typeof EventType.STOCK_DATA
-  | typeof EventType.SUGGESTIONS
-  | typeof EventType.TOP_PEERS;
-
-type EventAction = {
-  event: Events;
-  action: ActionCreator<Actions>;
-  errorAction: ActionCreator<ErrorActions>;
+export type EventAction<E extends keyof Events> = {
+  event: E;
+  action: ActionCreator<Events[E]["action"]>;
+  errorAction: ActionCreator<Events[E]["errorAction"]>;
 };
+
+export type EventActions = EventAction<keyof Events>[];
 
 export const eventActions: EventActions = [
   {
