@@ -1,5 +1,5 @@
 const axios = require("axios");
-const HOST = require("./constants");
+const { HOST } = require("./constants");
 const TOKEN = process.env.TOKEN;
 
 const getCompaniesFromAPI = async socket => {
