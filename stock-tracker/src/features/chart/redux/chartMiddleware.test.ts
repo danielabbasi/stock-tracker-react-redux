@@ -36,27 +36,28 @@ describe("Testing the Chart Middleware", () => {
     next = jest.fn();
   });
 
-  it("should call emit and next functions and not dispatch", () => {
-    chartMiddleware(mockSocket)(store)(next)({
-      type: SET_CHART_TIME
+  describe("when being called with the SET_CHART_TIME action", () => {
+    it("should call emit and next functions and not dispatch", () => {
+      action = {
+        type: SET_CHART_TIME,
+        payload: "1Y"
+      };
+      chartMiddleware(mockSocket)(store)(next)(action);
+      expect(emit).toHaveBeenCalled();
+      expect(next).toHaveBeenCalled();
+      expect(next).toHaveBeenCalledWith(action);
+      expect(dispatch).toHaveBeenCalledTimes(0);
     });
-    expect(emit).toHaveBeenCalled();
-    expect(next).toHaveBeenCalled();
-    expect(dispatch).toHaveBeenCalledTimes(0);
-  });
 
-  it("with correct symbol and payload", () => {
-    const chartTime = "chartTime";
-    action = {
-      type: SET_CHART_TIME,
-      payload: "1Y"
-    };
-    chartMiddleware(mockSocket)(store)(next)(action);
+    it("with correct symbol and payload", () => {
+      const chartTime = "chartTime";
+      chartMiddleware(mockSocket)(store)(next)(action);
 
-    expect(emit).toHaveBeenCalledWith(
-      chartTime,
-      store.getState().search.symbol,
-      action.payload
-    );
+      expect(emit).toHaveBeenCalledWith(
+        chartTime,
+        store.getState().search.symbol,
+        action.payload
+      );
+    });
   });
 });

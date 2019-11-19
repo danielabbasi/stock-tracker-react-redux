@@ -49,6 +49,7 @@ describe("Testing Search Middleware", () => {
       searchMiddleware(mockSocket)(store)(next)(action);
       expect(emit).toHaveBeenCalledTimes(1);
       expect(next).toHaveBeenCalledTimes(1);
+      expect(next).toHaveBeenCalledWith(action);
       expect(dispatch).toHaveBeenCalledTimes(5);
     });
     it("should call emit with the correct data", () => {
