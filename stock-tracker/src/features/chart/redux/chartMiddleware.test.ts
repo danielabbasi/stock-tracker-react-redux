@@ -1,18 +1,19 @@
 import { Dispatch, Store } from "redux";
 import { AppState } from "store/rootReducer";
 import { SET_CHART_TIME } from "./actionTypes";
-import { chartMiddleware, SocketS } from "./chartMiddleware";
-import { CHART_TIME } from "socket/eventTypes";
+import { chartMiddleware, SocketServiceDependency } from "./chartMiddleware";
 
 describe("Testing the Chart Middleware", () => {
-  let mockSocket: SocketS;
-  let store: Store<Pick<AppState, "search">>;
+  let mockSocket: SocketServiceDependency;
+  let store: Pick<Store<Pick<AppState, "search">>, "getState" | "dispatch">;
   let next: Dispatch;
   let emit: jest.Mock;
-  let action;
+  let action: { type: string; payload: string };
+  let dispatch: jest.Mock;
 
   beforeEach(() => {
     emit = jest.fn();
+    dispatch = jest.fn();
 
     mockSocket = {
       socketService: {
@@ -25,28 +26,34 @@ describe("Testing the Chart Middleware", () => {
     store = {
       getState: () => ({
         search: { symbol: "AAPL", error: false, searchInput: "" }
-      })
-    } as Store<Pick<AppState, "search">>;
+      }),
+      dispatch
+    };
 
     next = jest.fn();
   });
 
-  test("Should call emit and next functions", () => {
+  test("should call emit and next functions", () => {
     chartMiddleware(mockSocket)(store)(next)({
       type: SET_CHART_TIME
     });
     expect(emit).toHaveBeenCalled();
     expect(next).toHaveBeenCalled();
+    expect(dispatch).toHaveBeenCalledTimes(0);
   });
 
   test("with correct symbol and payload", () => {
+    const chartTime = "chartTime";
     action = {
       type: SET_CHART_TIME,
       payload: "1Y"
     };
     chartMiddleware(mockSocket)(store)(next)(action);
 
-    expect(emit).toHaveBeenCalledWith(action);
-    // expect(emit).toStrictEqual("1Y")
+    expect(emit).toHaveBeenCalledWith(
+      chartTime,
+      store.getState().search.symbol,
+      action.payload
+    );
   });
 });
