@@ -1,10 +1,13 @@
 import { Dispatch, Store } from "redux";
 import { AppState } from "store/rootReducer";
 import { SET_CHART_TIME } from "./actionTypes";
-import { chartMiddleware, SocketServiceDependency } from "./chartMiddleware";
+import {
+  chartMiddleware,
+  ChartSocketServiceDependency
+} from "./chartMiddleware";
 
 describe("Testing the Chart Middleware", () => {
-  let mockSocket: SocketServiceDependency;
+  let mockSocket: ChartSocketServiceDependency;
   let store: Pick<Store<Pick<AppState, "search">>, "getState" | "dispatch">;
   let next: Dispatch;
   let emit: jest.Mock;
@@ -33,7 +36,7 @@ describe("Testing the Chart Middleware", () => {
     next = jest.fn();
   });
 
-  test("should call emit and next functions", () => {
+  it("should call emit and next functions and not dispatch", () => {
     chartMiddleware(mockSocket)(store)(next)({
       type: SET_CHART_TIME
     });
@@ -42,7 +45,7 @@ describe("Testing the Chart Middleware", () => {
     expect(dispatch).toHaveBeenCalledTimes(0);
   });
 
-  test("with correct symbol and payload", () => {
+  it("with correct symbol and payload", () => {
     const chartTime = "chartTime";
     action = {
       type: SET_CHART_TIME,

@@ -5,7 +5,7 @@ import { AppState } from "store/rootReducer";
 
 type SearchState = Pick<AppState, "search">;
 
-export interface SocketServiceDependency {
+export interface ChartSocketServiceDependency {
   socketService: {
     create: () => {
       emit: (type: string, store: string, actionPL: string) => void;
@@ -15,7 +15,7 @@ export interface SocketServiceDependency {
 
 export const chartMiddleware = ({
   socketService
-}: SocketServiceDependency): Middleware<
+}: ChartSocketServiceDependency): Middleware<
   {},
   SearchState
 > => store => next => action => {
