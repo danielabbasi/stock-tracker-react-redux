@@ -1,4 +1,4 @@
-import React, { useState, FC } from "react";
+import React, { FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   Area,
@@ -41,10 +41,9 @@ const formatDateXAxis = (tickItem: string, current: ChartTime) => {
 
 export const Chart: FC = () => {
   const dispatch = useDispatch();
-  const { chartData, loading, error } = useSelector(
+  const { chartData, chartTime, loading, error } = useSelector(
     (state: AppState) => state.chart
   );
-  const [current, setCurrent] = useState<ChartTime>("1Y");
 
   const latestValue =
     Array.isArray(chartData) && chartData[chartData.length - 1] !== undefined
@@ -52,7 +51,6 @@ export const Chart: FC = () => {
       : "";
 
   const chartTimeClick = (chartTime: ChartTime) => {
-    setCurrent(chartTime);
     dispatch(setChartTimeAction(chartTime));
   };
 
@@ -67,7 +65,7 @@ export const Chart: FC = () => {
           <div className="chart__graph_btn">
             {chartRanges.map(range => (
               <ChartButton
-                current={current}
+                current={chartTime}
                 range={range}
                 onClick={chartTimeClick}
               />
@@ -87,7 +85,7 @@ export const Chart: FC = () => {
               </defs>
               <XAxis
                 interval="preserveStart"
-                tickFormatter={tickItem => formatDateXAxis(tickItem, current)}
+                tickFormatter={tickItem => formatDateXAxis(tickItem, chartTime)}
                 dataKey="date"
                 tick={{ fill: "#ffffff" }}
               />

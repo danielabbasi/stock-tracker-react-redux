@@ -10,3 +10,4 @@ export {
   setLoadingNewsAction
 } from "./redux/actions";
 export { LatestNews } from "./component/LatestNews";
+export { newsMiddleware } from "./redux/newsMiddleware";

@@ -10,3 +10,4 @@ export {
 } from "./redux/actions";
 export { peersReducer } from "./redux/peersReducer";
 export { TopPeers } from "./component/TopPeers";
+export { peersMiddleware } from "./redux/peersMiddleware";

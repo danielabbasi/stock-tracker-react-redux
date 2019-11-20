@@ -2,8 +2,9 @@ import { SET_CHART_TIME } from "./actionTypes";
 import { CHART_DATA } from "../../../socket/eventTypes";
 import { Middleware } from "redux";
 import { AppState } from "store/rootReducer";
+import { ADD_SYMBOL } from "../../search/redux/actionTypes";
 
-type SearchState = Pick<AppState, "search">;
+type SearchState = Pick<AppState, "search" | "chart">;
 
 export interface ChartSocketServiceDependency {
   socketService: {
@@ -19,10 +20,12 @@ export const chartMiddleware = ({
   {},
   SearchState
 > => store => next => action => {
+  const socket = socketService.create();
+  if (action.type === ADD_SYMBOL) {
+    socket.emit(CHART_DATA, action.payload, store.getState().chart.chartTime);
+  }
   if (action.type === SET_CHART_TIME) {
-    socketService
-      .create()
-      .emit(CHART_DATA, store.getState().search.symbol, action.payload);
+    socket.emit(CHART_DATA, store.getState().search.symbol, action.payload);
   }
   return next(action);
 };

@@ -38,7 +38,7 @@ export const chartReducer: Reducer<Readonly<ChartState>, ChartActions> = (
       };
     case SET_CHART_TIME:
       return {
-        ...initialState,
+        ...state,
         chartTime: action.payload,
         loading: true
       };

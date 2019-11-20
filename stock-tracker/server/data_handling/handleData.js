@@ -36,6 +36,7 @@ const HANDLE_DATA = socket => {
       return;
     }
     clearInterval(intervals.chartData);
+    console.log(chartTime);
     intervals.chartData = callNowAndInterval(
       getChartDataAndEmit,
       HALF_DAY,
