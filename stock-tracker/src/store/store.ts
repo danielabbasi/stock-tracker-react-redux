@@ -7,13 +7,17 @@ import { socketService } from "../socket";
 import { eventActions } from "../socket/eventActions";
 import { peersMiddleware } from "../features/topPeers";
 import { newsMiddleware } from "../features/latestNews";
+import { overviewMiddleware } from "../features/overview";
+import { keyStatsMiddleware } from "../features/keyStats";
 
 const middleware = [
   initialStartupMiddlware({ socketService, eventActions }),
   searchMiddleware({ socketService }),
   chartMiddleware({ socketService }),
   peersMiddleware({ socketService }),
-  newsMiddleware({ socketService })
+  newsMiddleware({ socketService }),
+  overviewMiddleware({ socketService }),
+  keyStatsMiddleware({ socketService })
 ];
 
 // Module augmentation - Redux devtools extension compose exists in a dev environment when using Redux DevTools

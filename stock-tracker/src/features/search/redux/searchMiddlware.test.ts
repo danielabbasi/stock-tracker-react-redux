@@ -41,25 +41,22 @@ describe("Testing Search Middleware", () => {
   });
 
   describe("when called with a ADD_SYMBOL action", () => {
-    it("should call the emit, next and dispatch functions", () => {
+    it("should call the next function with action", () => {
       action = {
         type: ADD_SYMBOL,
         payload: "AAPL"
       };
       searchMiddleware(mockSocket)(store)(next)(action);
-      expect(emit).toHaveBeenCalledTimes(1);
       expect(next).toHaveBeenCalledTimes(1);
       expect(next).toHaveBeenCalledWith(action);
+    });
+    it("should call dispatch 5 times", () => {
+      searchMiddleware(mockSocket)(store)(next)(action);
       expect(dispatch).toHaveBeenCalledTimes(5);
     });
-    it("should call emit with the correct data", () => {
-      const SYMBOL_INPUT = "symbol";
+    it("should not call the emit function", () => {
       searchMiddleware(mockSocket)(store)(next)(action);
-      expect(emit).toHaveBeenCalledWith(
-        SYMBOL_INPUT,
-        action.payload,
-        store.getState().chart.chartTime
-      );
+      expect(emit).toHaveBeenCalledTimes(0);
     });
     it("should call dispatch with the correct actions", () => {
       searchMiddleware(mockSocket)(store)(next)(action);
@@ -72,20 +69,23 @@ describe("Testing Search Middleware", () => {
   });
 
   describe("when called with a ADD_SEARCH_INPUT action", () => {
-    it("should call the emit and next function", () => {
+    it("should call the emit function", () => {
       action = {
         type: ADD_SEARCH_INPUT,
         payload: "A"
       };
       searchMiddleware(mockSocket)(store)(next)(action);
       expect(emit).toHaveBeenCalledTimes(1);
-      expect(next).toHaveBeenCalledTimes(1);
-      expect(next).toHaveBeenCalledWith(action);
     });
-    it("should call emit with the correct data", () => {
+    it("with the correct data", () => {
       const SEARCH_INPUT = "search";
       searchMiddleware(mockSocket)(store)(next)(action);
-      expect(emit).toHaveBeenCalledWith(SEARCH_INPUT, action.payload);
+      expect(emit).toHaveBeenCalledWith(SEARCH_INPUT, "A");
+    });
+    it("should call the next function with action", () => {
+      searchMiddleware(mockSocket)(store)(next)(action);
+      expect(next).toHaveBeenCalledTimes(1);
+      expect(next).toHaveBeenCalledWith(action);
     });
   });
 });

@@ -10,3 +10,4 @@ export {
 } from "./redux/actions";
 export { keyStatsReducer } from "./redux/keyStatsReducer";
 export { KeyStats } from "./component/keyStats";
+export { keyStatsMiddleware } from "./redux/keyStatsMiddleware";

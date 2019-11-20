@@ -10,3 +10,4 @@ export {
   setLoadingOverviewAction
 } from "./redux/actions";
 export { Overview } from "./component/Overview";
+export { overviewMiddleware } from "./redux/overviewMiddleware";
