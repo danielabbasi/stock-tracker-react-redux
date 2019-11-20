@@ -12,10 +12,9 @@ const getCompaniesFromAPI = async socket => {
       symbol: data.symbol,
       exchange: data.exchange
     }));
-    socket.emit("companies", companies);
     return companies;
   } catch (error) {
-    socket.emit("CompaniesError", error);
+    // TODO: handle company failure
     console.error(`Companies Error: ${error}`);
   }
 };

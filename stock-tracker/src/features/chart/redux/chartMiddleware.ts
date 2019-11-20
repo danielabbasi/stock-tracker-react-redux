@@ -1,5 +1,5 @@
 import { SET_CHART_TIME } from "./actionTypes";
-import { CHART_TIME } from "../../../socket/eventTypes";
+import { CHART_DATA } from "../../../socket/eventTypes";
 import { Middleware } from "redux";
 import { AppState } from "store/rootReducer";
 
@@ -22,7 +22,7 @@ export const chartMiddleware = ({
   if (action.type === SET_CHART_TIME) {
     socketService
       .create()
-      .emit(CHART_TIME, store.getState().search.symbol, action.payload);
+      .emit(CHART_DATA, store.getState().search.symbol, action.payload);
   }
   return next(action);
 };

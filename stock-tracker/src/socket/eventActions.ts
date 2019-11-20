@@ -67,7 +67,7 @@ export type Events = {
     action: SetResponse;
     errorAction: SetErrorKeyStats;
   };
-  [EventType.SUGGESTIONS]: {
+  [EventType.SEARCH_INPUT]: {
     payload: SearchData;
     action: SetSuggestions;
     errorAction: SetSearchError;
@@ -113,7 +113,7 @@ export const eventActions: EventActions = [
     errorAction: setErrorKeyStatsAction
   },
   {
-    event: EventType.SUGGESTIONS,
+    event: EventType.SEARCH_INPUT,
     action: setSuggestionsAction,
     errorAction: setErrorSearchAction
   },

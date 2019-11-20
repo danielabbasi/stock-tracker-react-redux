@@ -5,6 +5,14 @@ const { getChartDataAndEmit } = require("./getChartDataAndEmit");
 const { getNewsDataAndEmit } = require("./getNewsDataAndEmit");
 const { getCompanyOverviewAndEmit } = require("./getCompanyOverviewAndEmit");
 const { getCompaniesFromAPI } = require("./getCompaniesFromAPI");
+const {
+  SEARCH_INPUT,
+  TOP_PEERS,
+  STOCK_DATA,
+  LATEST_NEWS,
+  CHART_DATA,
+  COMPANY_OVERVIEW
+} = require("./constants");
 const DAY_IN_MS = 86400000;
 const HALF_DAY = DAY_IN_MS / 2;
 
@@ -17,49 +25,16 @@ const HANDLE_DATA = socket => {
   const intervals = {};
   console.info("New client connected");
   const stockCompanies = getCompaniesFromAPI(socket);
-  socket.on("search", searchInput => {
+
+  socket.on(SEARCH_INPUT, searchInput => {
     getSearchInputAndFilter(socket, searchInput, stockCompanies);
   });
-  socket.on("symbol", (stockSymbol, chartTime) => {
+
+  socket.on(CHART_DATA, (stockSymbol, chartTime) => {
     if (stockSymbol === "") {
-      Object.values(intervals).forEach(clearInterval);
+      clearInterval(intervals.chartData);
       return;
     }
-    console.info("Stock Symbol Entered: " + stockSymbol);
-    Object.values(intervals).forEach(clearInterval);
-    intervals.stock = callNowAndInterval(
-      getStockDataAndEmit,
-      10000,
-      socket,
-      stockSymbol
-    );
-    intervals.overview = callNowAndInterval(
-      getCompanyOverviewAndEmit,
-      DAY_IN_MS,
-      socket,
-      stockSymbol
-    );
-    intervals.news = callNowAndInterval(
-      getNewsDataAndEmit,
-      DAY_IN_MS,
-      socket,
-      stockSymbol
-    );
-    intervals.chartData = callNowAndInterval(
-      getChartDataAndEmit,
-      HALF_DAY,
-      socket,
-      stockSymbol,
-      chartTime
-    );
-    intervals.peers = callNowAndInterval(
-      getTopPeersAndEmit,
-      DAY_IN_MS,
-      socket,
-      stockSymbol
-    );
-  });
-  socket.on("chartTime", (stockSymbol, chartTime) => {
     clearInterval(intervals.chartData);
     intervals.chartData = callNowAndInterval(
       getChartDataAndEmit,
@@ -69,9 +44,67 @@ const HANDLE_DATA = socket => {
       chartTime
     );
   });
+
+  socket.on(STOCK_DATA, stockSymbol => {
+    if (stockSymbol === "") {
+      clearInterval(intervals.stock);
+      return;
+    }
+    clearInterval(intervals.stock);
+    intervals.stock = callNowAndInterval(
+      getStockDataAndEmit,
+      10000,
+      socket,
+      stockSymbol
+    );
+  });
+
+  socket.on(TOP_PEERS, stockSymbol => {
+    if (stockSymbol === "") {
+      clearInterval(intervals.peers);
+      return;
+    }
+    clearInterval(intervals.peers);
+    intervals.peers = callNowAndInterval(
+      getTopPeersAndEmit,
+      DAY_IN_MS,
+      socket,
+      stockSymbol
+    );
+  });
+
+  socket.on(LATEST_NEWS, stockSymbol => {
+    if (stockSymbol === "") {
+      clearInterval(intervals.news);
+      return;
+    }
+    clearInterval(intervals.news);
+    intervals.news = callNowAndInterval(
+      getNewsDataAndEmit,
+      DAY_IN_MS,
+      socket,
+      stockSymbol
+    );
+  });
+
+  socket.on(COMPANY_OVERVIEW, stockSymbol => {
+    if (stockSymbol === "") {
+      clearInterval(intervals.overview);
+      return;
+    }
+    clearInterval(intervals.overview);
+    intervals.overview = callNowAndInterval(
+      getCompanyOverviewAndEmit,
+      DAY_IN_MS,
+      socket,
+      stockSymbol
+    );
+  });
+
   socket.on("disconnect", () => {
     Object.values(intervals).forEach(clearInterval);
     console.info("Client disconnected");
   });
 };
+
 exports.HANDLE_DATA = HANDLE_DATA;
