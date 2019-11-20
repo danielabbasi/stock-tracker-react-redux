@@ -80,6 +80,7 @@ describe("Testing Search Middleware", () => {
       searchMiddleware(mockSocket)(store)(next)(action);
       expect(emit).toHaveBeenCalledTimes(1);
       expect(next).toHaveBeenCalledTimes(1);
+      expect(next).toHaveBeenCalledWith(action);
     });
     it("should call emit with the correct data", () => {
       const SEARCH_INPUT = "search";

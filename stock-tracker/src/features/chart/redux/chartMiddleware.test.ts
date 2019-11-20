@@ -43,8 +43,8 @@ describe("Testing the Chart Middleware", () => {
         payload: "1Y"
       };
       chartMiddleware(mockSocket)(store)(next)(action);
-      expect(emit).toHaveBeenCalled();
-      expect(next).toHaveBeenCalled();
+      expect(emit).toHaveBeenCalledTimes(1);
+      expect(next).toHaveBeenCalledTimes(1);
       expect(next).toHaveBeenCalledWith(action);
       expect(dispatch).toHaveBeenCalledTimes(0);
     });
