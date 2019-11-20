@@ -2,11 +2,23 @@ import { SET_CHART_TIME } from "./actionTypes";
 import { CHART_TIME } from "../../../socket/eventTypes";
 import { Middleware } from "redux";
 import { AppState } from "store/rootReducer";
-import { SocketDependency } from "utils/socketService";
+
+type SearchState = Pick<AppState, "search">;
+
+export interface ChartSocketServiceDependency {
+  socketService: {
+    create: () => {
+      emit: (type: string, store: string, actionPL: string) => void;
+    };
+  };
+}
 
 export const chartMiddleware = ({
   socketService
-}: SocketDependency): Middleware<{}, AppState> => store => next => action => {
+}: ChartSocketServiceDependency): Middleware<
+  {},
+  SearchState
+> => store => next => action => {
   if (action.type === SET_CHART_TIME) {
     socketService
       .create()
