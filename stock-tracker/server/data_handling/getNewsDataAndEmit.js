@@ -1,8 +1,6 @@
 const axios = require("axios");
-const { HOST, LATEST_NEWS } = require("./constants");
-const TOKEN = process.env.TOKEN;
 
-const getNewsDataAndEmit = async (socket, stockSymbol) => {
+const getNewsDataAndEmit = (HOST, TOKEN) => async stockSymbol => {
   try {
     const latestNews = await axios.get(
       `${HOST}/stable/stock/${stockSymbol}/news/last/5?token=${TOKEN}`
@@ -13,10 +11,10 @@ const getNewsDataAndEmit = async (socket, stockSymbol) => {
       source: data.source,
       url: data.url
     }));
-    socket.emit(LATEST_NEWS, { data: news });
+    return { isError: false, payload: news };
   } catch (error) {
-    socket.emit(LATEST_NEWS, { isError: true });
     console.error(`News Error: ${error}`);
+    return { isError: true };
   }
 };
 

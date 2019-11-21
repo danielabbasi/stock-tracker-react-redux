@@ -1,8 +1,6 @@
 const axios = require("axios");
-const { HOST, COMPANY_OVERVIEW } = require("./constants");
-const TOKEN = process.env.TOKEN;
 
-const getCompanyOverviewAndEmit = async (socket, stockSymbol) => {
+const getCompanyOverviewAndEmit = (HOST, TOKEN) => async stockSymbol => {
   try {
     const companyOverview = await axios.get(
       `${HOST}/stable/stock/${stockSymbol}/company?token=${TOKEN}`
@@ -23,10 +21,10 @@ const getCompanyOverviewAndEmit = async (socket, stockSymbol) => {
       website,
       description
     };
-    socket.emit(COMPANY_OVERVIEW, { data: overview });
+    return { isError: false, data: overview };
   } catch (error) {
-    socket.emit(COMPANY_OVERVIEW, { isError: true });
     console.error(`Company Overview Error: ${error}`);
+    return { isError: true };
   }
 };
 

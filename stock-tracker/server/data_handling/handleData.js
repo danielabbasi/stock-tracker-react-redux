@@ -11,8 +11,10 @@ const {
   STOCK_DATA,
   LATEST_NEWS,
   CHART_DATA,
-  COMPANY_OVERVIEW
+  COMPANY_OVERVIEW,
+  HOST
 } = require("./constants");
+const TOKEN = process.env.TOKEN;
 const DAY_IN_MS = 86400000;
 const HALF_DAY = DAY_IN_MS / 2;
 
@@ -20,6 +22,9 @@ function callNowAndInterval(fn, interval, ...args) {
   fn(...args);
   return setInterval(() => fn(...args), interval);
 }
+
+const getNewsData = getNewsDataAndEmit(HOST, TOKEN);
+const getCompanyOverviewData = getCompanyOverviewAndEmit(HOST, TOKEN);
 
 const HANDLE_DATA = socket => {
   const intervals = {};
@@ -74,32 +79,23 @@ const HANDLE_DATA = socket => {
     );
   });
 
-  socket.on(LATEST_NEWS, stockSymbol => {
-    if (stockSymbol === "") {
-      clearInterval(intervals.news);
-      return;
+  socket.on(LATEST_NEWS, async stockSymbol => {
+    try {
+      const news = await getNewsData(stockSymbol);
+      socket.emit("getNewsResult", { isError: false, data: news });
+    } catch (error) {
+      socket.emit("getNewsResult", { isError: true });
     }
-    clearInterval(intervals.news);
-    intervals.news = callNowAndInterval(
-      getNewsDataAndEmit,
-      DAY_IN_MS,
-      socket,
-      stockSymbol
-    );
   });
 
-  socket.on(COMPANY_OVERVIEW, stockSymbol => {
-    if (stockSymbol === "") {
-      clearInterval(intervals.overview);
-      return;
+  socket.on(COMPANY_OVERVIEW, async stockSymbol => {
+    try {
+      const overview = await getCompanyOverviewData(stockSymbol);
+      socket.emit("getOverviewResult", { isError: false, data: overview });
+    } catch (error) {
+      console.error("Error: " + error);
+      socket.emit("getOverviewResult", { isError: true });
     }
-    clearInterval(intervals.overview);
-    intervals.overview = callNowAndInterval(
-      getCompanyOverviewAndEmit,
-      DAY_IN_MS,
-      socket,
-      stockSymbol
-    );
   });
 
   socket.on("disconnect", () => {
