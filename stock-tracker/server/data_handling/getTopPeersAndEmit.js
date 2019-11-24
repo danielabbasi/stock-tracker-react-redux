@@ -1,17 +1,15 @@
 const axios = require("axios");
-const { HOST, TOP_PEERS } = require("./constants");
-const TOKEN = process.env.TOKEN;
 
-const getTopPeersAndEmit = async (socket, stockSymbol) => {
+const requestTopPeersPromise = (HOST, TOKEN) => async stockSymbol => {
   try {
     const topPeers = await axios.get(
       `${HOST}/stable/stock/${stockSymbol}/peers?token=${TOKEN}`
     );
-    socket.emit(TOP_PEERS, { data: topPeers.data });
+    return { isError: false, payload: topPeers.data };
   } catch (error) {
-    socket.emit(TOP_PEERS, { isError: true });
     console.error(`Top Peers Error: ${error}`);
+    return { isError: true };
   }
 };
 
-exports.getTopPeersAndEmit = getTopPeersAndEmit;
+exports.requestTopPeersPromise = requestTopPeersPromise;

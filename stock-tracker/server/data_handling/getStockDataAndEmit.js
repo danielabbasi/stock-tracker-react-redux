@@ -1,8 +1,6 @@
 const axios = require("axios");
-const { HOST, STOCK_DATA } = require("./constants");
-const TOKEN = process.env.TOKEN;
 
-const getStockDataAndEmit = async (socket, stockSymbol) => {
+const requestStockDataPromise = (HOST, TOKEN) => async stockSymbol => {
   try {
     const resPromise = axios.get(
       `${HOST}/stable/stock/${stockSymbol}/quote?token=${TOKEN}`
@@ -65,11 +63,11 @@ const getStockDataAndEmit = async (socket, stockSymbol) => {
       isUSMarketOpen
     };
     console.info("Stock data is being sent");
-    socket.emit(STOCK_DATA, { data: stockData }); // Emitting a new message. It will be consumed by the client
+    return { isError: false, payload: stockData }; // Emitting a new message. It will be consumed by the client
   } catch (error) {
-    socket.emit(STOCK_DATA, { isError: true });
     console.error(`Stock Error: ${error}`);
+    return { isError: true };
   }
 };
 
-exports.getStockDataAndEmit = getStockDataAndEmit;
+exports.requestStockDataPromise = requestStockDataPromise;

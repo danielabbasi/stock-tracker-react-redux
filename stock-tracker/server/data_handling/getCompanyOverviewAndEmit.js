@@ -1,6 +1,6 @@
 const axios = require("axios");
 
-const getCompanyOverviewAndEmit = (HOST, TOKEN) => async stockSymbol => {
+const requestCompanyOverviewPromise = (HOST, TOKEN) => async stockSymbol => {
   try {
     const companyOverview = await axios.get(
       `${HOST}/stable/stock/${stockSymbol}/company?token=${TOKEN}`
@@ -21,11 +21,11 @@ const getCompanyOverviewAndEmit = (HOST, TOKEN) => async stockSymbol => {
       website,
       description
     };
-    return { isError: false, data: overview };
+    return { isError: false, payload: overview };
   } catch (error) {
     console.error(`Company Overview Error: ${error}`);
     return { isError: true };
   }
 };
 
-exports.getCompanyOverviewAndEmit = getCompanyOverviewAndEmit;
+exports.requestCompanyOverviewPromise = requestCompanyOverviewPromise;

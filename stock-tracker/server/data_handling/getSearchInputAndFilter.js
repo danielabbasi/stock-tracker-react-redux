@@ -1,6 +1,7 @@
-const { SEARCH_INPUT } = require("./constants");
-
-const getSearchInputAndFilter = async (socket, input, stockCompanies) => {
+const requestSearchInputAndCreateSuggestions = async (
+  input,
+  stockCompanies
+) => {
   try {
     const companies = await stockCompanies;
     const searchInput = input.toLowerCase();
@@ -29,11 +30,11 @@ const getSearchInputAndFilter = async (socket, input, stockCompanies) => {
     suggestions.sort(sortByLength);
     const autocomplete = suggestions.slice(0, 10);
 
-    socket.emit(SEARCH_INPUT, { data: autocomplete });
+    return { isError: false, payload: autocomplete };
   } catch (error) {
-    socket.emit(SEARCH_INPUT, { isError: true });
     console.error(`Search Error: ${error}`);
+    return { isError: true };
   }
 };
 
-exports.getSearchInputAndFilter = getSearchInputAndFilter;
+exports.requestSearchInputAndCreateSuggestions = requestSearchInputAndCreateSuggestions;

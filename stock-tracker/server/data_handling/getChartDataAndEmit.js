@@ -1,8 +1,9 @@
 const axios = require("axios");
-const { HOST, CHART_DATA } = require("./constants");
-const TOKEN = process.env.TOKEN;
 
-const getChartDataAndEmit = async (socket, stockSymbol, chartTime) => {
+const requestChartDataPromise = (HOST, TOKEN) => async (
+  stockSymbol,
+  chartTime
+) => {
   try {
     const chartData = await axios.get(
       `${HOST}/stable/stock/${stockSymbol}/chart/${chartTime}?token=${TOKEN}`
@@ -19,11 +20,11 @@ const getChartDataAndEmit = async (socket, stockSymbol, chartTime) => {
         date: data.date
       }));
     }
-    socket.emit(CHART_DATA, { data: chart });
+    return { isError: false, payload: chart };
   } catch (error) {
-    socket.emit(CHART_DATA, { isError: true });
     console.error(`Chart Data Error: ${error}`);
+    return { isError: true };
   }
 };
 
-exports.getChartDataAndEmit = getChartDataAndEmit;
+exports.requestChartDataPromise = requestChartDataPromise;

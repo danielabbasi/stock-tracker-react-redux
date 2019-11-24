@@ -1,6 +1,6 @@
 const axios = require("axios");
 
-const getNewsDataAndEmit = (HOST, TOKEN) => async stockSymbol => {
+const requestNewsDataPromise = (HOST, TOKEN) => async stockSymbol => {
   try {
     const latestNews = await axios.get(
       `${HOST}/stable/stock/${stockSymbol}/news/last/5?token=${TOKEN}`
@@ -18,4 +18,4 @@ const getNewsDataAndEmit = (HOST, TOKEN) => async stockSymbol => {
   }
 };
 
-exports.getNewsDataAndEmit = getNewsDataAndEmit;
+exports.requestNewsDataPromise = requestNewsDataPromise;
