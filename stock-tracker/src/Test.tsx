@@ -14,6 +14,7 @@ import { ChartData } from "features/chart/redux/actions";
 import { TopPeers } from "features/topPeers/redux/actions";
 import { ResponseData } from "features/keyStats/redux/actions";
 import { SearchData } from "features/search/redux/actions";
+import uuid from "uuid/v4";
 
 interface StockAPI {
   getNews: (stockSymbol: string) => Promise<LatestNews>;
@@ -35,86 +36,97 @@ type Success<T> = {
 
 type Result<T> = Error | Success<T>;
 
-class StockService implements StockAPI {
-  constructor(private socket: SocketIOClient.Socket) {}
+type RpcClient = <Payload, A>(topic: string, ...args: A[]) => Promise<Payload>;
 
-  private createFeatureID(feature: string) {
-    return feature + Math.abs(Math.random() * 1000).toFixed(0);
-  }
-
-  private rpc<Payload, A>(feature: string, topic: string, ...args: A[]) {
-    return new Promise<Payload>((resolve, reject) => {
-      const replyTo = this.createFeatureID(feature);
-      this.socket.emit(topic, replyTo, ...args);
-      this.socket.on(replyTo, (payload: Result<Payload>) => {
-        this.socket.off(replyTo);
-        if (payload.isError) {
-          reject(payload.isError);
-        } else {
-          resolve(payload.data);
-        }
-      });
+const createRpcClient = (
+  socket: Pick<SocketIOClient.Socket, "emit" | "on" | "off">,
+  createCorrelation = uuid,
+  promiseTimeout: any = timeoutPromise2
+) => <Payload, A>(topic: string, ...args: A[]) => {
+  const r = new Promise<Payload>((resolve, reject) => {
+    const replyTo = topic + createCorrelation();
+    socket.emit(topic, replyTo, ...args);
+    socket.on(replyTo, (payload: Result<Payload>) => {
+      console.info("socket on " + replyTo);
+      socket.off(replyTo);
+      console.info("socket off " + replyTo);
+      payload.isError ? reject(payload.isError) : resolve(payload.data);
     });
-  }
+  });
+  return promiseTimeout(5000, r);
+};
 
-  getNews(stockSymbol: string) {
-    return this.rpc<LatestNews, string>("News", LATEST_NEWS, stockSymbol);
-  }
+const stockService: (rpc: RpcClient) => StockAPI = rpc => ({
+  getNews: (stockSymbol: string) =>
+    rpc<LatestNews, string>(LATEST_NEWS, stockSymbol),
 
-  getCompanyOverview(stockSymbol: string) {
-    return this.rpc<CompanyOverviewData, string>(
-      "Overview",
-      COMPANY_OVERVIEW,
-      stockSymbol
-    );
-  }
+  getCompanyOverview: (stockSymbol: string) =>
+    rpc<CompanyOverviewData, string>(COMPANY_OVERVIEW, stockSymbol),
 
-  getChartData(stockSymbol: string, chartTime: string) {
-    return this.rpc<ChartData, string>(
-      "Chart",
-      CHART_DATA,
-      stockSymbol,
-      chartTime
-    );
-  }
+  getChartData: (stockSymbol: string, chartTime: string) =>
+    rpc<ChartData, string>(CHART_DATA, stockSymbol, chartTime),
 
-  getPeersData(stockSymbol: string) {
-    return this.rpc<TopPeers, string>("Peers", TOP_PEERS, stockSymbol);
-  }
+  getPeersData: (stockSymbol: string) =>
+    rpc<TopPeers, string>(TOP_PEERS, stockSymbol),
 
-  getKeyStats(stockSymbol: string) {
-    return this.rpc<ResponseData, string>("KeyStats", STOCK_DATA, stockSymbol);
-  }
+  getKeyStats: (stockSymbol: string) =>
+    rpc<ResponseData, string>(STOCK_DATA, stockSymbol),
 
-  getSuggestions(searchInput: string) {
-    return this.rpc<SearchData, string>(
-      "Suggestions",
-      SEARCH_INPUT,
-      searchInput
-    );
-  }
-}
+  getSuggestions: (searchInput: string) =>
+    rpc<SearchData, string>(SEARCH_INPUT, searchInput)
+});
 
-const service = new StockService(socketService.create());
+const timeoutPromise2 = <T extends unknown>(
+  time: number,
+  promise: Promise<T>
+) => {
+  const timeout = new Promise((_, reject) => {
+    const id = setTimeout(() => {
+      clearTimeout(id);
+      reject("Promise timed out in " + time + "ms");
+    }, time);
+  });
+  return Promise.race([promise, timeout]);
+};
+
+const rpcClient = createRpcClient(socketService.create());
+const service = stockService(rpcClient);
 
 export const Rig = () => {
   useEffect(() => {
-    // service
-    //   .getNews("AAPL")
-    //   .then(console.log)
-    //   .catch(console.log);
-    // service
-    //   .getCompanyOverview("AAPL")
-    //   .then(console.log)
-    //   .catch(console.log);
-    //   service
-    //   .getChartData("AAPL", "1Y")
-    //   .then(console.log)
-    //   .catch(console.log);
     service
-      .getSuggestions("AA")
+      .getNews("AAPL")
       .then(console.log)
       .catch(console.log);
+    // service
+    //   .getCompanyOverview("AAPL")
+    //   .then(data => console.log("Overview " + data))
+    //   .catch(console.log);
+    // service
+    //   .getChartData("AAPL", "1Y")
+    //   .then(data => console.log("Chart " + data))
+    //   .catch(console.log);
+    // service
+    //   .getSuggestions("AA")
+    //   .then(data => console.log("Suggestions " + data))
+    //   .catch(console.log);
+    // service
+    //   .getPeersData("AAPL")
+    //   .then(data => console.log("Peers " + data))
+    //   .catch(console.log);
+    // service
+    //   .getKeyStats("AAPL")
+    //   .then(data => console.log("KeyStats " + data))
+    //   .catch(console.log);
+    // timeoutPromise2(
+    //   2000,
+    //   service
+    //     .getPeersData("AAPL")
+    //     .then(data => console.log("Peers " + data))
+    //     .catch(console.log)
+    // )
+    //   .then(console.log)
+    //   .catch(console.log);
   }, []);
   return <div>HELLO WORLD</div>;
 };

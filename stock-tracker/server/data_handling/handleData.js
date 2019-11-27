@@ -70,7 +70,9 @@ const HANDLE_DATA = socket => {
   });
 
   socket.on(LATEST_NEWS, async (replyTo, stockSymbol) => {
-    rpc(socket, getNewsData(stockSymbol), replyTo);
+    setTimeout(() => {
+      rpc(socket, getNewsData(stockSymbol), replyTo);
+    }, 4000);
   });
 
   socket.on(COMPANY_OVERVIEW, async (replyTo, stockSymbol) => {
