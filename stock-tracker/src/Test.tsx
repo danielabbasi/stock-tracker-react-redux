@@ -36,16 +36,24 @@ type Success<T> = {
 
 type Result<T> = Error | Success<T>;
 
-type RpcClient = <Payload, A>(topic: string, ...args: A[]) => Promise<Payload>;
+export type RpcClient = <Payload, A>(
+  topic: string,
+  ...args: A[]
+) => Promise<Payload>;
 
-const createRpcClient = (
+export const createRpcClient = (
   socket: Pick<SocketIOClient.Socket, "emit" | "on" | "off">,
-  createCorrelation = uuid,
-  promiseTimeout: any = timeoutPromise2
+  createCorrelation = uuid
+  // promiseTimeout: any = timeoutPromise2
 ) => <Payload, A>(topic: string, ...args: A[]) => {
-  const r = new Promise<Payload>((resolve, reject) => {
+  return new Promise<Payload>((resolve, reject) => {
     const replyTo = topic + createCorrelation();
     socket.emit(topic, replyTo, ...args);
+    const timeout = setTimeout(() => {
+      clearTimeout(timeout);
+      socket.off(replyTo);
+      reject("Promise took too long");
+    }, 5000);
     socket.on(replyTo, (payload: Result<Payload>) => {
       console.info("socket on " + replyTo);
       socket.off(replyTo);
@@ -53,7 +61,7 @@ const createRpcClient = (
       payload.isError ? reject(payload.isError) : resolve(payload.data);
     });
   });
-  return promiseTimeout(5000, r);
+  // return promiseTimeout(5000, r);
 };
 
 const stockService: (rpc: RpcClient) => StockAPI = rpc => ({
